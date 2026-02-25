@@ -1,2 +1,2 @@
 == 3D Reconstruction
-3D reconstruction is the step where we triangulate our 3D motion trajectories from our 2D keypoints. Utilizing our camera intrinsics and extrinsics that we calculated in our calibration step, we turn the 2D keypoints (calculated by our pose estimation tracker) per camera into 3D points. gf
+3D reconstruction is the step where we triangulate our 3D motion trajectories from our 2D keypoints. Utilizing our camera intrinsics and extrinsics that we calculated in our calibration step, we turn the 2D keypoints (calculated by our pose estimation tracker) per camera into 3D points. 
