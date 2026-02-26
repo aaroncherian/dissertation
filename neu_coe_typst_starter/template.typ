@@ -15,7 +15,7 @@
   field: none,
   submit_date: none,
 ) = {
-  set par(first-line-indent: (amount: 0pt, all: true), leading: 1.0em, spacing: 0em)
+  set par(first-line-indent: (amount: 0pt, all: false), spacing: 1em)
   set page(footer: none)
   align(center)[
     #v(1.6in)
@@ -84,12 +84,12 @@
 
   set par(
     justify: true,
-    leading: 1.37em,
-    spacing: 1.37em,
-    first-line-indent: (amount: 0.5in, all: true),
+    leading: 1.25em,
+    spacing: 2.0em,
+    first-line-indent: (amount: 0pt, all: true),
   )
 
-  set block(spacing: 0.65em)
+  set block(spacing: 0em)
 
   // Heading numbering
   set heading(numbering: "1.1.1")
@@ -122,6 +122,12 @@
     #text(weight: "bold")[#counter(heading).display("1.1.1") #h(0.5em) #it.body]
     #v(0.25em)
   ]
+
+  show figure: it => {
+    v(1.5em)
+    it
+    v(1.0em)
+  }
 
   // Figure captions (single-spaced, slightly smaller)
   show figure.caption: it => [

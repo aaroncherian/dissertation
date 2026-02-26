@@ -30,4 +30,9 @@ Write your acknowledgments here.
 // --- Main matter (arabic numerals) ---
 #begin-mainmatter()
 
-#include "chapters/ch1_freemocap.typ"
+#include "chapters/ch1_intro.typ"
+#include "chapters/ch2_freemocap.typ"
+#include "chapters/ch_balance.typ"
+
+
+#bibliography("references.bib", style: "nature")
