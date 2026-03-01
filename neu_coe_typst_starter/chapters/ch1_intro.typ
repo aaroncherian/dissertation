@@ -1,3 +1,3 @@
-Introduction
+= Introduction
 
 #include "introduction/introduction.typ"

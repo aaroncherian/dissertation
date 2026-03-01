@@ -12,6 +12,10 @@ FreeMoCap using a MediaPipe backend was able to accurately capture both the rela
 === FMC-MediaPipe Accuracy and Sensitivity
 FMC-MediaPipe is pretty accurate.
 
+#figure(
+  image("com_path_length_agreement_ba.svg", width: 100%),
+  caption: [Placeholder agreement]
+) <fig-path-length-agreement>
 FMC-MediaPipe is also pretty sensitive. 
 
 #figure(
