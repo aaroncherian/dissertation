@@ -1,8 +1,10 @@
 == Introduction
-Human movement is an adaptive, complex mechanism, and quantitative motion analysis helps us find measurable terms (i.e. joint kinematics, gait parameters, acceleration profiles) from this complexity. Many of us, whether we realize it or not, are already familiar with some form of quantitative motion analysis (e.g. if you are in the habit of looking at your daily step count on your phone). Researchers and clinicians often make use of quantitative motion analysis as well, though often at more detailed levels with more sophisticated equipment. In writing the chapters of this dissertation, there emerged a common theme that seems apt to name at the start: the ability to obtain quantitative kinematic data would benefit a great many fields, but the tools that would allow this to be done at a widespread scale remain out of reach of many practitioners. The following chapters span the development and validation of one potential solution to make motion analysis accessible to all. 
+Human movement is an adaptive complex mechanism, and quantitative motion analysis helps us find measurable terms (i.e. joint kinematics, gait parameters, acceleration profiles) from this complexity. Many of us, whether we realize it or not, are already familiar with some form of quantitative motion analysis. Smartphones use gyroscopes and accelerometers to return gait parameters such as step count and even gait asymmetry. Smartwatches and fitness devices can return combined measurements of gait, heart rate, and oxygenation. The way each of these parameters asre used often depends on the person. Some are more casual with it. Others make it an integral part of their health monitoring. 
+
+Researchers and clinicians often make use of quantitative motion analysis as well, though often at more detailed levels with more sophisticated equipment. In writing the chapters of this dissertation, there emerged a common theme that seems apt to name at the start: the ability to obtain quantitative kinematic data would benefit a great many fields, but the tools that would allow this to be done at a widespread scale remain out of reach of many practitioners. The following chapters span the development and validation of one potential solution to make motion analysis accessible to all. 
 
 == Quantitative motion analysis in research
-Quantitative motion analysis is critical to furthering understanding of the biomechanics of human movement. From understanding more about the gait cycle to examining athletic performance, laboratories tend to employ sophisticated equipment, such as force place and instrumented treadmills, to accurate measure human movement.
+Quantitative motion analysis is critical to furthering understanding of the biomechanics of human movement. From understanding more about the gait cycle to examining athletic performance, laboratories tend to employ sophisticated equipment such as force place and instrumented treadmills to accurately measure human movement.
 
 *Marker-based motion capture*
 
@@ -11,7 +13,6 @@ Quantitative motion analysis is critical to furthering understanding of the biom
  *Limitations of marker-based motion capture*
 
 From an accuracy standpoint, marker-based systems are prone to soft tissue artifacts - where the movement of the skin relative to bone introduces error into marker trajectories and subsequent kinematic tracking @camomillaHumanMovementAnalysis2017. Additionally, exact placement of markers on anatomical landmarks requires training and the experience level of the researcher can impact the reliability and accuracy of marker placement @sinclairInfluenceTesterExperience2014. Beyond accuracy, marker-based motion capture can affect the kind of research being carried out. Involved preparation and setup time can limit sample sizes of research studies. 
-
 
 *Marker based motion capture is not well-suited to capture activities of daily living* 
 
@@ -29,10 +30,15 @@ For clinicians, quantifying movement can inform diagnosis, understanding of dise
 
 *Current methods of clinical motion analysis are largely observational*
 
- Many clinicians tend to use subjective methods to analyze patient motion, often involving self-reporting or observation @sharmaFactorsInfluencingClinical2024. LOOK FOR SOME TESTS. The Berg Balance Scale @bergMeasuringBalanceElderly1989 for example, a test that assesses dynamic and static balance which has been used in assessing stroke patients, as well as predicting fall risk, involves grading 14 tasks on a 5-point scale dependent on factors such as dependence on external supervision or assistance and time to complete the task @mirandaBergBalanceTesting2026. Another example is the Tinetti test @tinettiPerformanceOrientedAssessmentMobility1986 which assesses both posture and gait to identify fall risk in populations such as the elderly, stroke, and PD patients. 
+ Many clinicians tend to use subjective methods to analyze patient motion, often involving self-reporting or observation @sharmaFactorsInfluencingClinical2024. The Berg Balance Scale @bergMeasuringBalanceElderly1989 for example, a test that assesses dynamic and static balance which has been used in assessing stroke patients, as well as predicting fall risk, involves grading 14 tasks on a 5-point scale dependent on factors such as dependence on external supervision or assistance and time to complete the task @mirandaBergBalanceTesting2026. Another example is the Tinetti test @tinettiPerformanceOrientedAssessmentMobility1986 which assesses both posture and gait to identify fall risk in populations such as the elderly, stroke, and PD patients. 
  
  However, while observational analysis can be reliable, accuracy can be dependant on a variety of factors, such as clinician experience @nishiguchiReliabilityValidityGait2012 and movement observed @maclachlanOBSERVERRATINGTHREEDIMENSIONAL2015. 
 
+*Quantitative methods in clinical analysis*
+
+
+
+https://pmc.ncbi.nlm.nih.gov/articles/PMC6615543/ - talks about being able to use smartphones in place of stopwatches so patients can test themselves
 
 
 STATEMENT ABOUT QUANTITATIVE METHODS THEY DO USE (goniometers etc.) 
