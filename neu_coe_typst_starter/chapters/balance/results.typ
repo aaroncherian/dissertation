@@ -31,4 +31,4 @@ FMC-MediaPipe tracked within-subject changes in COM path length across different
   caption: [Placeholder sensitivity],
 ) <fig-path-length-sensitivity>
 
-#include "path_length_sensitivity_table.typ"  
+#include "path_length_sensitivity_table.typ"   
