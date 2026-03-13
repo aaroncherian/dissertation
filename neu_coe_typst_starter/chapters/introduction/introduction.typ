@@ -1,5 +1,5 @@
 == Introduction
-Human movement is an adaptive complex mechanism. Quantitative motion analysis helps us find measurable terms (i.e. joint kinematics, gait parameters, acceleration profiles) from this complexity. Quantiative motion analysis is embedded into our daily lives and many of us are familiar with some form of it, whether we realize or not. Smartphones use gyroscopes and accelerometers to return gait parameters such as step count. Smartwatches and fitness devices can return combined measurements of gait, heart rate, and oxygenation. 
+Most of us are familiar with quantitative motion analysis, whether we realize it or not. If you've ever checked your step count on your phone, that's quantitative motion analysis coming from the accelerators and gyrscopes in your phone. Human movement is an adaptive, complex mechanism, and quantitative motion analysis finds measurable terms (i.e. joint kinematics, gait parameters, acceleration profiles) from this complexity. 
 
 Researchers and clinicians often make use of quantitative motion analysis as well, though often at more detailed levels with more sophisticated equipment. The following sections examine the use of quantitative motion analysis in both research and clinical work and existing gaps. 
 
