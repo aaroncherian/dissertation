@@ -1,3 +1,8 @@
+
+== The Microsoft Kinect: A case study in accessibility
+
+To examine the potential impact that an affordable, 
+
 == Introduction
 
 Recent advances in computer vision have facilitated the development of software that can reconstruct motion data using only RGB cameras - eliminating the need for specialized hardware and marker placement. This method of reconstruction is known as markerless motion capture. Some of the earliest methods for markerless motion capture from the early 2000's operated by trying to find the body through motion, using optical flow tracking and model fitting to help reconstruct data @marzani3DMarkerfreeSystem2001@calaisNewTrendsMarkerfree2000. 
