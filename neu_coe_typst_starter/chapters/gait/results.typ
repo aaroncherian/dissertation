@@ -21,4 +21,12 @@
 
 #include "tables/trajectory_rmse_tables.typ"
 
+#figure(
+  image("figures/gait_events_histogram.svg", width: 100%),
+  caption:  [Histogram of heel strike and toe-off timing differences from freemocap backends and the reference system ]
+)
 
+#figure(
+  image("figures/ba_gait_phases.svg", width: 100%),
+  caption:  [Histogram of heel strike and toe-off timing differences from freemocap backends and the reference system ]
+)
