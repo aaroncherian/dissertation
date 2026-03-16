@@ -32,6 +32,15 @@ Speed had little impact on trajectory error in the ML direction. Across the AP d
 
 #include "tables/trajectory_rmse_z.typ"
 
+#figure(
+  image("figures/joint_angles_with_spm.svg")
+)
+
+#include "tables/joint_angle_rmse_table.typ"
+
+
+
+
 [Heel strike]
    MediaPipe: μ=+8.6±15.5
    RTMPose: μ=+4.7±13.8
@@ -46,15 +55,3 @@ Speed had little impact on trajectory error in the ML direction. Across the AP d
   image("figures/gait_events_histogram.svg", width: 100%),
   caption:  [Histogram of heel strike and toe-off timing differences from freemocap backends and the reference system ]
 )
-
-
-// #figure(
-//   image("figures/ba_gait_phases.svg", ),
-//   caption:  [BA of gait]
-// )
-
-#figure(
-  image("figures/joint_angles_with_spm.svg")
-)
-
-#include "tables/joint_angle_rmse_table.typ"
