@@ -2,6 +2,14 @@
 
 === Trajectories 
 
+Overall, trajectory error was lowest across the ML direction. The hip was was generally the hardest joint to track, with errors approaching \~20mm in AP and vertical dimensions across all joints. 
+
+Generally RTMPose produced the lowest RMSE, particularly for the vertical axis of the ankle with an RMSE of  \~7mm. Difference in tracked hip trajectories between RTMPose and MediaPipe across axes was minimal. As a whole, ViTPose error was highest, particularly in the vertical axis where consistent underestimation of the trajectory can be seen.
+
+Speed had little impact on trajectory error in the ML direction. Across the AP direction, knee error for RTMPose and ViTPose tended to decrease with higher speed, while MediaPipe remained consistent. For all three trackers, error generally increased for the more distal joints (ankle and toe) as speed increased. In the vertical axis, trajectory error increased across speeds for the knee and toe. 
+
+
+
 #figure(
   image("figures/trajectories_x.svg", width: 100%),
   caption: [Placeholder center of mass path length caption. EO = Eyes Open; EC = Eyes Closed; S = Solid Ground; F = Foam Pad],
