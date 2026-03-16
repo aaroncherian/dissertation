@@ -7,11 +7,14 @@
   caption: [Placeholder center of mass path length caption. EO = Eyes Open; EC = Eyes Closed; S = Solid Ground; F = Foam Pad],
 ) <fig-traj-x>
 
+#include "tables/trajectory_rmse_x.typ"
+
 #figure(
   image("figures/trajectories_y.svg", width: 100%),
   caption: [Placeholder center of mass path length caption. EO = Eyes Open; EC = Eyes Closed; S = Solid Ground; F = Foam Pad],
 ) <fig-traj-y>
 
+#include "tables/trajectory_rmse_y.typ"
 
 #figure(
   image("figures/trajectories_z.svg", width: 100%),
@@ -19,8 +22,7 @@
 ) <fig-traj-z>
 
 
-
-#include "tables/trajectory_rmse_tables.typ"
+#include "tables/trajectory_rmse_z.typ"
 
 [Heel strike]
    MediaPipe: μ=+8.6±15.5
