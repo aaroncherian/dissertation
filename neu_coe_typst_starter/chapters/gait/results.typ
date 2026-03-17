@@ -72,9 +72,11 @@ In contrast to the systematic widening observed for spatial parameters, limits o
   )
  <fig-gait-ba>
 
+Spatial scaling factors from spatial alignment reveal that MediaPipe and RTMPose produce 3D reconstructions closely matching the reference system (median for both ≈ 1.00; ranges 0.98-1.01 and 0.99-1.01 respectively) (@fig-scaling). ViTPose exhibited spatial contraction, with a median scaling factor of 0.98 (range: 0.96 - 0.98), indicated that ViTPose reconstructions were approximately 2-3% smaller than the marker-based reference. This pattern was consistent across all participants. 
+
 
  #figure(
-  image("figures/scaling_factor_boxplot.svg"),
+  image("figures/scaling_factor_boxplot.svg", width: 80%),
   caption: [placeholder]
  )
  <fig-scaling>
