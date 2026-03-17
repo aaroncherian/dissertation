@@ -62,6 +62,16 @@
   counter(page).update(1)
 }
 
+// Appendix state
+#let in-appendix = state("in-appendix", false)
+
+// Switch to appendix mode (letter-numbered chapters, reset counter)
+#let begin-appendix() = {
+  pagebreak()
+  in-appendix.update(true)
+  counter(heading).update(0)
+}
+
 // -------------------
 // Main template wrapper — applies all styling to the document body
 // -------------------
@@ -95,33 +105,48 @@
   set heading(numbering: "1.1.1")
 
   // Chapter headings (level 1)
-  show heading.where(level: 1): it => [
-    #set par(leading: 1.0em, spacing: 0em, first-line-indent: (amount: 0pt, all: true))
-    #pagebreak(weak: true)
-    #v(1.0cm)
-    #align(center)[
-      #smallcaps(text(12pt, weight: "bold")[CHAPTER #counter(heading).display("1")])
+  show heading.where(level: 1): it => context {
+    let is-app = in-appendix.get()
+    set par(leading: 1.0em, spacing: 0em, first-line-indent: (amount: 0pt, all: true))
+    pagebreak(weak: true)
+    v(1.0cm)
+    align(center)[
+      #if is-app {
+        smallcaps(text(12pt, weight: "bold")[APPENDIX #counter(heading).display("A")])
+      } else {
+        smallcaps(text(12pt, weight: "bold")[CHAPTER #counter(heading).display("1")])
+      }
       #v(0.7cm)
       #text(14pt, weight: "bold")[#it.body]
     ]
-    #v(1.2cm)
-  ]
+    v(1.2cm)
+  }
 
   // Section headings (level 2)
-  show heading.where(level: 2): it => [
-    #set par(leading: 1.0em, spacing: 0em, first-line-indent: (amount: 0pt, all: true))
-    #v(0.65em)
-    #text(weight: "bold")[#counter(heading).display("1.1") #h(0.5em) #it.body]
-    #v(0.35em)
-  ]
+  show heading.where(level: 2): it => context {
+    let is-app = in-appendix.get()
+    set par(leading: 1.0em, spacing: 0em, first-line-indent: (amount: 0pt, all: true))
+    v(0.65em)
+    if is-app {
+      text(weight: "bold")[#counter(heading).display("A.1") #h(0.5em) #it.body]
+    } else {
+      text(weight: "bold")[#counter(heading).display("1.1") #h(0.5em) #it.body]
+    }
+    v(0.35em)
+  }
 
   // Subsection headings (level 3)
-  show heading.where(level: 3): it => [
-    #set par(leading: 1.0em, spacing: 0em, first-line-indent: (amount: 0pt, all: true))
-    #v(0.45em)
-    #text(weight: "bold")[#counter(heading).display("1.1.1") #h(0.5em) #it.body]
-    #v(0.25em)
-  ]
+  show heading.where(level: 3): it => context {
+    let is-app = in-appendix.get()
+    set par(leading: 1.0em, spacing: 0em, first-line-indent: (amount: 0pt, all: true))
+    v(0.45em)
+    if is-app {
+      text(weight: "bold")[#counter(heading).display("A.1.1") #h(0.5em) #it.body]
+    } else {
+      text(weight: "bold")[#counter(heading).display("1.1.1") #h(0.5em) #it.body]
+    }
+    v(0.25em)
+  }
 
   show figure: it => {
     v(1.5em)

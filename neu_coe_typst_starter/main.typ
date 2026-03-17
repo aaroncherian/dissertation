@@ -37,3 +37,11 @@ Write your acknowledgments here.
 
 
 #bibliography("references.bib", style: "nature")
+
+// --- Appendices ---
+#begin-appendix()
+
+// Example: include appendix files just like chapters
+// #include "chapters/appendix_a.typ"
+
+#include "chapters/appendix/appendix_a.typ"
