@@ -65,7 +65,7 @@ Spatiotemporal parameters were calculated for each system using their respective
 
 Root mean squared error (RMSE) was calculated across all gait-normalized joint center trajectories and joint angles. RMSE was calculated for each stride, averaged across strides within each trial to calculate a per-trial RMSE and then averaged across all trials to produce a single summary RMSE and standard deviation.
 
-To test for regions of signficance difference between the marker-based reference and each pose estimation backend, SPM two-tailed t-tests performed. For each test, the SPM{t} statistics were calculated.   
+To test for regions of significant difference between the marker-based reference and each pose estimation backend, SPM two-tailed t-tests performed. For each test, the SPM{t} statistics were calculated.   
 
 For each gait parameter, Bland-Altman plots with bias and 95% limits of agreement (LOA) were created @blandStatisticalMethodsAssessing1986. Intraclass correlation coefficients (ICC2) were calculated to assess agreement @shroutIntraclassCorrelationsUses1979. ICC values under 0.5 were interpreted as poor agreement, 0.5-0.75 interpreted as moderate agreement, 0.75-0.90 as good agreement, and greater than 0.90 as excellent agreement @kooGuidelineSelectingReporting2016.  
 

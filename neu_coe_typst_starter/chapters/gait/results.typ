@@ -32,6 +32,8 @@ Speed had little impact on trajectory error in the ML direction. Across the AP d
 
 #include "tables/trajectory_rmse_z.typ"
 
+=== Joint Kinematics
+
 Joint angle error was low across all joints and trackers (RMSE \< 7°, @tbl-joint-angle-rmse). ViTPose showed lowest error for the hip and knee, while RTMPose showed lowest error for the ankle.
 
 While joint angle error was generally low, statistical parametric mapping (SPM) paired t-tests (α = 0.05) revealed phase-dependent difference across the gait cycle (critical thresholds ranged from t\* = 3.41 to 4.56 across conditions) (@fig-joint-ang-spm). At the hip, significant differences were observed in early stance and late swing, particularly for MediaPipe. At the knee, supra-threshold clusters were primarily concentrated during early stance across all trackers. At the ankle, multiple supra-threshold clusters were observed throughout the gait cycle, with ViTPose showing the most frequent deviations and RTMPose the fewest.
@@ -47,7 +49,7 @@ Differences across speed were joint-dependent. The extent of significant differe
 
 #include "tables/joint_angle_rmse_table.typ"
 
-
+=== Gait Event Timing
 
 Gait event timing errors were low across all trackers, with heel-strike timing errors ranging from +5.4 to +9.3 ms and toe-off errors from +6.1 to +15.4 ms (@fig-timing-error). The majority of errors fell within one frame (33ms) of timing error, though a slight positive bias indicates slightly delayed detection. 
 
@@ -56,6 +58,7 @@ Gait event timing errors were low across all trackers, with heel-strike timing e
   caption:  [Histogram of heel strike and toe-off timing differences from freemocap backends and the reference system ]
 ) <fig-timing-error>
 
+== Gait Parameters
 
 Spatiotemporal gait parameters, pooled across all walking speeds, showed excellent agreement with the reference system (ICC \> 0.90 ; @tbl-ba-gait-pooled). Spatial parameters (stride length, step length) demonstrated excellent reliability (ICC = 0.972 - 0.993) with bias magnitudes ranging from 0.07mm (ViTPose) to 0.70mm (MediaPipe) and limits of agreement within ± 70mm across all trackers. Temporal parameters also showed high reliability for stance duration (0.991 - 0.997), with lower but still strong reliability for swing duration (0.90 - 0.932). Bias was generally small across trackers, with ViTPose showing near-zero bias (-0.93 - 0.81ms), while MediaPipe showed larger deviations (-5.35 - 4.78ms). MediaPipe and RTMPose showed a slight positive bias in stance duration and slight negative bias in swing duration, while ViTPose showed the opposite. Across trackers, MediaPipe tended to have wider limits of agreement, while RTMPose and ViTPose showed more consistent agreement with the reference system. 
 
@@ -71,6 +74,8 @@ In contrast to the systematic widening observed for spatial parameters, limits o
   caption: [placeholder]
   )
  <fig-gait-ba>
+
+=== Tracker-specific scaling
 
 Spatial scaling factors from spatial alignment reveal that MediaPipe and RTMPose produce 3D reconstructions closely matching the reference system (median for both ≈ 1.00; ranges 0.98-1.01 and 0.99-1.01 respectively) (@fig-scaling). ViTPose exhibited spatial contraction, with a median scaling factor of 0.98 (range: 0.96 - 0.98), indicated that ViTPose reconstructions were approximately 2-3% smaller than the marker-based reference. This pattern was consistent across all participants. 
 
