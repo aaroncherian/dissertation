@@ -5,24 +5,13 @@
 Reconstructed joint center error was generally under 30 mm across all joints. The hip joint center exhibited the largest error, with RMSE values of ~20mm in the anterior-posterior and vertical axes across speed. Kinematic error was typically below 5°, with larger error observed only for the ViTPose-derived ankle angle at higher speeds. 
 
 
-
-These metrics fall within ranges reported in prior work. Across multiple video-based motion capture systems, joint center errors on the order of ~6-30mm have been reported during gait. Ripic et al. for example, reported errors of \~8-28mm across axes using an 8-camera KinaTrax system @ripicComparisonThreedimensionalKinematics2023, while Nakano et al. reported errors of \~6-29mm across axes using a five-camera OpenPose based motion capture system. 
-
-Joint angle errors reported in the literature are similarly consistent with our findings. Kanko et. all reported sagittal angle errors of 11° at the hip, 3.3° at the knee, 6.7° at the ankle using an 8-camera Theia Markerless system @kankoAssessmentSpatiotemporalGait2021, while Uhlrich et al. reported errors in a range of 2.3-6.6° using a two-iPhone OpenCap system @uhlrichOpenCapHumanMovement2023. 
-
-OR
-
 These metrics fall within ranges reported in prior markerless validation work. Joint erros of \~6-30mm have been reported across various systems ( @ripicComparisonThreedimensionalKinematics2023, @nakanoEvaluation3DMarkerless2020) and sagittal angle errors of 2-11° ( @kankoAssessmentSpatiotemporalGait2021, @uhlrichOpenCapHumanMovement2023). The hip is consistently identified as a challenging joint to estimatem with Kanko et al. reporting 3D Euclidean hip position error of 36 mm and a hip flexion/extension error of 11° @kankoConcurrentAssessmentGait2021, while Needham et al. noted systematic differences in hip and knee position tracking (~30-50mm) @needhamAccuracySeveralPose2021.  
 
-
-
+Our reported joint center error is similar to the error reported by
 McGinley et al. suggest that errors between 2-5° are suitable for clinical use @mcginleyReliabilityThreedimensionalKinematic2009. 
 
 
 
-
-
-These metrics sit well within the limits found by other studies, with errors similar to and under what was found by Ripic et al. @ripicComparisonThreedimensionalKinematics2023. The hip is generally a known point of difficult to track, with Kanko et al. noting a 3D Euclidean error of 36mm in the hip position and an 11° difference in hip/flexion extension @kankoConcurrentAssessmentGait2021 and Needham et al. noting systematic differences in hip and knee position tracking (~30-50mm) @needhamAccuracySeveralPose2021. Marker-based motion capture can also have an error range of about 25-30mm (find sources).  McGinley et al. also suggest that errors between 2-5° are suitable for clinical use @mcginleyReliabilityThreedimensionalKinematic2009.  
 
 SPM testing shows consistent suprathreshold clusters in early stance phase in knee and ankle kinematics across all speeds. These clusters are positioned consistently with the loading response phase of gait, where the knee undergoes transient flexion as a method of shock absorption and the ankle plantarflexes slightly in the first rocker phase. Thus, it is possible that these motions may be difficult for pose estimation software to track correctly. Additionally, heel strike and the resulting absorption of impact has been shown to cause skin surface movement that propogates throughout the lower limb @painSoftTissueMotion2002. Skin-tissue artifacts are a known limitation of marker-based software - and as such a reminder that while our markerless system comparisons are in reference to a gold-standard method, it is not necessarily representative of true joint centers and their resulting kinematics, but rather the most accurate and available method we have to reconstruct them. 
 
