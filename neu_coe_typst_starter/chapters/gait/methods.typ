@@ -36,7 +36,7 @@ Marker-based and markerless data joint center trajectories were temporally align
 
 Markerless data were spatially aligned to the marker-based reference frame using a least-squares optimized transformation that minimized joint center errors between systems. To identify a transformation that was consistent over the full recording, candidate transformations were estimated from randomly sampled subsets of frames and evaluated across the entire dataset. 
 
-As part of the above optimization, an optional scaling factor was introduced to identify the proper scaling needed to fit the reconstructed 3D data from each pose estimation software to the reference marker-based data. 
+To assess systematic scaling bias, we also estimated the scaling factor that would be required to align markerless reconstructions with the marker-based reference.
 
 === Data Analysis
 

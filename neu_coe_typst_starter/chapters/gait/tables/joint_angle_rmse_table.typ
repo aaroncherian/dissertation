@@ -79,5 +79,5 @@
       table.hline(stroke: 1pt),
     )
   },
-  caption: [Joint angle RMSE (°) by speed. Values represent mean ± SD across trials compared to Qualisys.],
+  caption: [Joint angle RMSE (°) across walking speeds. Values represent mean ± SD across trials, computed relative to the marker-based reference.],
 ) <tbl-joint-angle-rmse>
