@@ -1,13 +1,13 @@
 == Results
 
+I refer to each FreeMoCap configuration by its pose estimation backend (MediaPipe, RTMPose, ViTPose) for brevity.
+
 === Trajectories 
+Reconstructed joint centers were generally under 30mm, with lowest error across the mediolateral (ML) axes (@fig-traj-x, @tbl-traj-rmse-x). The hip joint center exhibited the most error, with RMSEs of \~20mm in the anterior-posterior (AP) (@fig-traj-y, @tbl-traj-rmse-y) and vertical axes (@fig-traj-z, @tbl-traj-rmse-z) across all speeds.  
 
-Overall, trajectory error was lowest across the ML direction. The hip was was generally the hardest joint to track, with errors approaching \~20mm in AP and vertical dimensions across all joints. 
+Increases in trajectory error across speed were primarily observed at distal joints in the AP and vertical directions - although exceptions occurred (e.g. knee AP error decreased with speed for RTMPose and ViTPose, and vertical ankle error remained stable across all speeds.) Hip joint error was largely unaffected by speed across all three axes. 
 
-Generally RTMPose produced the lowest RMSE, particularly for the vertical axis of the ankle with an RMSE of  \~7mm. Difference in tracked hip trajectories between RTMPose and MediaPipe across axes was minimal. As a whole, ViTPose error was highest, particularly in the vertical axis where consistent underestimation of the trajectory can be seen.
-
-Speed had little impact on trajectory error in the ML direction. Across the AP direction, knee error for RTMPose and ViTPose tended to decrease with higher speed, while MediaPipe remained consistent. For all three trackers, error generally increased for the more distal joints (ankle and toe) as speed increased. In the vertical axis, trajectory error increased across speeds for the knee and toe. 
-
+Generally RTMPose-derived data showed the lowest joint trajectory error. ViTPose error tended to be the highest, particularly in the vertical axis with larger errors and consistent underestimation of ankle and toe trajectories (@fig-traj-z). 
 
 
 #figure(
@@ -34,12 +34,9 @@ Speed had little impact on trajectory error in the ML direction. Across the AP d
 
 === Joint Kinematics
 
-Joint angle error was low across all joints and trackers (RMSE \< 7°, @tbl-joint-angle-rmse). ViTPose showed lowest error for the hip and knee, while RTMPose showed lowest error for the ankle.
+Kinematic error tended to be under 5°, with errors exceeding 5° only exhibited at higher speeds for the ViTPose-tracked ankle (@tbl-joint-angle-rmse). Similar to the joint trajectories, angles for distal joints (knee and ankle) increased with speed. ViTPose error was smallest for hip and knee angles, while RTMPose error was smallest for the ankle. ViTPose exhibits a consistent plantarflexion offset in comparison to the reference data (@fig-joint-ang-spm)
 
-While joint angle error was generally low, statistical parametric mapping (SPM) paired t-tests (α = 0.05) revealed phase-dependent difference across the gait cycle (critical thresholds ranged from t\* = 3.41 to 4.56 across conditions) (@fig-joint-ang-spm). At the hip, significant differences were observed in early stance and late swing, particularly for MediaPipe. At the knee, supra-threshold clusters were primarily concentrated during early stance across all trackers. At the ankle, multiple supra-threshold clusters were observed throughout the gait cycle, with ViTPose showing the most frequent deviations and RTMPose the fewest.
-
-Differences across speed were joint-dependent. The extent of significant differences decreased across speed for the hip, remained relatively stable for the knee, and increased across speed for ViTPose at the ankle. 
-
+Statistical parametric mapping (SPM) shows common suprathreshold clusters (critical thresholds ranged from t\* = 3.41 to 4.56 across conditions and trackers) for all three joints in early stance. MediaPipe in particular exhibits suprathreshold clusters for hip and knee angles that decrease with speed. At the ankle, ViTPose showed the most extensive deviation, with suprathreshold clusters spanning much of the gait cycle at higher speeds, while RTMPose showed the fewest. 
 
 #figure(
   image("figures/joint_angles_with_spm.svg"),
@@ -51,7 +48,7 @@ Differences across speed were joint-dependent. The extent of significant differe
 
 === Gait Event Timing
 
-Gait event timing errors were low across all trackers, with heel-strike timing errors ranging from +5.4 to +9.3 ms and toe-off errors from +6.1 to +15.4 ms (@fig-timing-error). The majority of errors fell within one frame (33ms) of timing error, though a slight positive bias indicates slightly delayed detection. 
+Gait event timing errors were low across all trackers, with heel-strike timing errors ranging from +5.4 to +9.3 ms and toe-off errors from +6.1 to +15.4 ms (@fig-timing-error). The majority of errors fell within one frame (33ms) of timing error, with a slight positive bias that indicates slightly delayed detection. Heel-strike detection was more tightly clustered than toe-off, which showed more errors at one frame of delay. 
 
 #figure(
   image("figures/gait_events_histogram.svg", width: 100%),
