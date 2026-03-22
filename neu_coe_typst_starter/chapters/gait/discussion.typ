@@ -18,24 +18,12 @@ Clinically, we can compare bland-altman to minimal detectable change values to a
 
 *Impact of speed*
 
-Metrics based on spatial position (joint position/angle error, stride length, step length) demonstrated clear sensitivity to speed, while temporal metrics (heel strike and toe off timing error, stance duration, swing duration) seemed largely unaffected. However, temporal metrics should be interpreted within the context of measurement resolution. Our temporal measurements were limited by the framerate of the cameras and discretized to 33 ms increments, which may obscure more subtle speed-dependant changes. 
+Metrics based on spatial position (joint position/angle error, stride length, step length) demonstrated clear sensitivity to speed, while temporal metrics (heel strike and toe off timing error, stance duration, swing duration) appeared largely unaffected. However, temporal metrics should be interpreted within the context of measurement resolution. Our temporal measurements were limited by the framerate of the cameras and discretized to \~33 ms increments, which may obscure more subtle speed-dependant changes. 
 
-Increased walking speed resulted in larger errors in joint position and angle, particularly in the anterior-posterior and vertical directions for distal joints. In contrast, hip position and angle error remained stable across all axes and speeds. Increased walking speed in gait primarily manifest in the AP and vertical axes, rather than ML motion, and our findings are consistent with this. Faster segment velocities likely amplify frame-to-frame tracking error, particularly for distal segments, contributing to reduced agreement. However, the specific axis affect different by joint as well. AP error increased most clearly at the ankle and toe, while vertical error increased more at the knee and toe, suggesting that the impact of speed is not global but differs from segment to segment. 
+Increased walking speed resulted in larger errors in joint position and angle, particularly in the anterior-posterior and vertical directions for distal joints. In contrast, hip position and angle error remained stable across all axes and speeds. Increased walking speed in gait primarily manifest in the AP and vertical axes, rather than ML motion, and our findings are consistent with this. Faster segment velocities likely amplify frame-to-frame tracking error, particularly for distal segments, contributing to reduced agreement. 
 
+However, the specific axis affect different by joint as well. AP error increased most clearly at the ankle and toe, while vertical error increased more at the knee and toe, suggesting that the impact of speed is not global but differs from segment to segment. Spatial gait metrics (step and stride length), were largely more affected by speed then temporal metrics (swing and stance duration). 
 
-Spatial gait metrics (step and stride length), were largely more affected by speed then temporal metrics (swing and stance duration). 
-
-
-Walking speed had an invariate effect on the data across axes and joints. Speed-dependent joint position error was observed in the AP and vertical directions, but not in the ML direction. The hip joint position and kinematics were also largely unaffected by speed, with most position and angle error observed in distal joints. This asymmetric effect may be because joint movement change moving from a walk to run speed is more often seen in the AP and vertical directions for more distal joints. On a frame-to-frame basis, hip movement may not change that much with speed, and the same with joint movement in the ML direction. However, speed did not have a global impact on error - ankle and toe position error increased in the AP direction, while knee and ankle position error increased in the vertical. 
-
-
-
-Joint position and angle error in the ML direction were generally unaffected by speed, 
-
-
-Walking speed has a variable impact on the data. Generally, hip joint position error and hip angle error was not affected by speed. While joint position error in the ML axis was consistent across speed, ankle and toe joint center error increased with speed (i.e. Approximate RTMPose RMSE range from slowest to fastest speed, ankle: 9-16mm, toe:10-23mm) across the AP axis, and knee and ankle joint center increased across the ML axis (ie.e. Approximate RTMPose range from slowest to fastest speed: knee: 11-17, toe: 7-17mm), while the ankle error remained relatively consistent. Saggital knee and ankle angles also increased with speed (i.e. approximate RTMPose error from slowest to fastest speed, knee: 2.2-3.6°, ankle:1.6-3.2°). Joint angle error could be a result of the propogating positional error in trajectories. 
-
-Speed had an asymmetric impact on spatiotemporal gait parameters. When spatial gait metrics were stratified by speed, LoA across all trackers widened with faster movement (i.e. approximate ViTPose LoA from slowest to fastest speed: ±19mm to ±88mm). Step length agreement decreased substantially with speed as opposed to stride length, which showed only a slight decrease. Temporal gait metric LoA were generally not impacted by speed, remaining relatively stable across all speeds, although for both stance and swing duration, agreement with the reference decreased substantially across speed.  
 
 [something about why this is important]
 
