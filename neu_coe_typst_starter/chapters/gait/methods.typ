@@ -24,11 +24,11 @@ Participants completed two trials of the test, each being recorded simultaneousl
 === Data Processing
 *Marker-based motion capture data*
 
-Marker-based data was tracked, labeled and processed in QTM. Missing trajectories were interpolated using linear or relational gap-filling. The labeled and cleaned marker positions were exported as a `.tsv` file containing system timestamps. Joint centers were calculated as part of the analysis pipeline (detailed below). Head, elbow, wrist, knee and ankle joint centers were defined as the midpoint of their respective medial and lateral markers. Shoulder joint centers were defined as the midpoint of the anterior and posterior markers. The hip joint centers were estimated using the Bell method @bellPredictionHipJoint1989. Raw kinematic data was filtered using a zero-lag, 4th order, 6Hz Butterworth filter. 
+Marker-based data was tracked, labeled and processed in QTM. Missing trajectories were interpolated using linear or relational gap-filling. The labeled and cleaned marker positions were exported as a `.tsv` file containing system timestamps. Head, elbow, wrist, knee and ankle joint centers were defined as the midpoint of their respective medial and lateral markers. Shoulder joint centers were defined as the midpoint of the anterior and posterior markers. The hip joint centers were estimated using the Bell method @bellPredictionHipJoint1989. Raw kinematic data was filtered using a zero-lag, 4th order, 6Hz Butterworth filter. 
 
 *Markerless motion capture data*
 
-Synchronized videos were processed using the FreeMoCap (v.XX) pipeline described in Chapter X. 2D body keypoints were detected using MediaPipe, RTMPose and ViTPose pose estimation software. Corresponding keypoints were triangulated into 3D space. 3D data was filtered using a zero-lag, 4th order, 6Hz Butterworth filter.  
+Synchronized videos were processed using the FreeMoCap (v.XX) pipeline described in Chapter X. 2D body keypoints were detected using MediaPipe (v0.10.14),  (`rtmposelib`, v0.0.14) and ViTPose pose estimation software. Corresponding keypoints were triangulated into 3D space. 3D data was filtered using a zero-lag, 4th order, 6Hz Butterworth filter.  
 
 *Data synchronization and alignment*
 
@@ -42,7 +42,7 @@ As part of the above optimization, an optional scaling factor was introduced to 
 
 *Joint Angles*
 
-Joint angles were calculated as the Cardan XYZ decompositions of the relative rotation between adjacent segments. Lower-body kinematics (hip flexion/extension, knee flexion/extension, ankle dorsiflexion/plantarflexion) were extracted and analyzed across gait-normalized strides. 
+Joint angles were calculated as the Cardan XYZ decompositions of the relative rotation between adjacent segments. Lower-body kinematics (hip flexion/extension, knee flexion/extension, ankle dorsiflexion/plantarflexion) were extracted and analyzed across gait-normalized strides. Normalization.
 
 
 *Gait Event Detection*
@@ -63,11 +63,10 @@ Spatiotemporal parameters were calculated for each system using their respective
 
 *Statistical Analyses*
 
-Root mean squared error (RMSE) was calculated across all gait-normalized joint center trajectories and joint angles. RMSE was calculated for each stride, averaged across strides within each trial to calculate a per-trial RMSE and then averaged across all trials to produce a single summary RMSE and standard deviation.
+Statistical analyses were performed using Python `v3.11`. Root mean squared error (RMSE) was calculated across all gait-normalized joint center trajectories and joint angles. RMSE was calculated for each stride, averaged across strides within each trial to calculate a per-trial RMSE and then averaged across all trials to produce a single summary RMSE and standard deviation.
 
-To test for regions of significant difference between the marker-based reference and each pose estimation backend, SPM two-tailed t-tests performed. For each test, the SPM{t} statistics were calculated.   
+To test for regions of significant difference between the marker-based reference and each pose estimation backend, SPM two-tailed t-tests performed using the `spm1d` package. For each test, the SPM{t} statistics were calculated.   
 
-For each gait parameter, Bland-Altman plots with bias and 95% limits of agreement (LOA) were created @blandStatisticalMethodsAssessing1986. Intraclass correlation coefficients (ICC2) were calculated to assess agreement @shroutIntraclassCorrelationsUses1979. ICC values under 0.5 were interpreted as poor agreement, 0.5-0.75 interpreted as moderate agreement, 0.75-0.90 as good agreement, and greater than 0.90 as excellent agreement @kooGuidelineSelectingReporting2016.  
-
+For each gait parameter, Bland-Altman plots with bias and 95% limits of agreement (LOA) were created @blandStatisticalMethodsAssessing1986. Intraclass correlation coefficients (ICC2) using the `pingouin` package were calculated to assess agreement @shroutIntraclassCorrelationsUses1979. ICC values under 0.5 were interpreted as poor agreement, 0.5-0.75 interpreted as moderate agreement, 0.75-0.90 as good agreement, and greater than 0.90 as excellent agreement @kooGuidelineSelectingReporting2016.  
 
 
