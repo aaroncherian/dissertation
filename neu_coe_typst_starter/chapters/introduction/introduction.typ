@@ -5,7 +5,7 @@ Researchers and clinicians often make use of quantitative motion analysis as wel
 
 
 == Quantitative motion analysis in research
-Quantitative motion analysis is critical to furthering understanding of the biomechanics of human movement. From understanding more about the gait cycle to examining athletic performance, laboratories tend to employ sophisticated equipment such as force place and instrumented treadmills to accurately measure human movement. Of these, one commonly used tool is marker-based motion capture. 
+Quantitative motion analysis is critical to furthering understanding of the biomechanics of human movement. From further understanding gait to examining athletic performance, laboratories tend to employ sophisticated equipment such as force place and instrumented treadmills to accurately measure human movement. Of these, one commonly used tool is marker-based motion capture. 
 
 *Marker-based motion capture*
 
@@ -24,10 +24,10 @@ Thus, there is a need for technology that can returned detailed kinematic data w
 
 *A brief aside on 'gold-standards' for measuring movement*
 
-It should be noted that while marker-based motion capture will be referred to through this work as the 'gold-standard', one of the most accurate methods of measuring and evaluating joint function to date is biplanar videoradiography. Biplanar videography is a method of mapping the pose of 3D bone models using synchronized x-ray image sequences of motions @kesslerDirectComparisonBiplanar2019 with sub-millimeter accuracy. One study by Miranda et al. finding joint tracking errors ranging from .25-.30mm for the foot @mirandaStaticDynamicError2011. Despite high accuracy, cost, lack of whole-body kinematics and complicated setup make biplanar videoradiography impractical for widespread adoption @wadeApplicationsLimitationsCurrent2022. 
+I will note here that while marker-based motion capture will be referred to through this work as the 'gold-standard', one of the most accurate methods of measuring and evaluating joint function to date is biplanar videoradiography. Biplanar videography is a method of mapping the pose of 3D bone models using synchronized x-ray image sequences of motions @kesslerDirectComparisonBiplanar2019 with sub-millimeter accuracy, with joint tracking errors ranging from .25-.30mm for the foot @mirandaStaticDynamicError2011. Despite high accuracy, cost, lack of whole-body kinematics and complicated setup make biplanar videoradiography impractical for widespread adoption in both research and clinical contexts@wadeApplicationsLimitationsCurrent2022.
 
 == Quantitative analysis in clinical work
-For clinicians, quantifying movement can inform diagnosis, understanding of disease progression and severity, and examine rehabilitation or therapy efficacy @buckleyRoleMovementAnalysis2019@vanierselSystematicReviewQuantitativeclinical2004@vergheseQuantitativeGaitDysfunction2007@SummaryMeasuresClinical2014 @kerrAdoptionStrokeRehabilitation2018 (see Chapter 3: Introduction and Chapter 4: Introduction for examples specific to gait and posture). 
+In a clinical space, quantifying movement can inform diagnosis, understanding of disease progression and severity, and examine rehabilitation or therapy efficacy @buckleyRoleMovementAnalysis2019@vanierselSystematicReviewQuantitativeclinical2004@vergheseQuantitativeGaitDysfunction2007@SummaryMeasuresClinical2014 @kerrAdoptionStrokeRehabilitation2018 (see Chapter 3: Introduction and Chapter 4: Introduction for examples specific to gait and posture). 
 
 *Current methods of clinical motion analysis are largely observational*
 
@@ -48,7 +48,7 @@ There is a large disparity between the methods used for analysis of human motion
 
 *Marker-based motion capture is not suited for widespread clinical use* 
 
-The level of kinematic detail provided by marker-based motion capture could be useful in clinical work, but many factors make this kind of system ill-suited to the task. Marker-based motion capture is expensive @parksCurrentLowCostVideoBased2019 @sharmaFactorsInfluencingClinical2024, and the cost alone is usually enough of a barrier to prevent adoption. Marker-based motion capture requires specialized hardware and space and requires skilled users to be able to operate and clean the data @parksCurrentLowCostVideoBased2019, which limits adoption in clinical spaces@buckleyRoleMovementAnalysis2019 @ClinicalApplicationsSensors. Marker-placement also may not be suitable for certain patient populations. As such, these systems typically remain accessible only to specialized hospitals and research groups with the financial resources and infrastructure to support it. A tool to augment clinicians with quantitative data could help them with precise measurements of care, and also help provide justification to insurance for reimbursement@CurrentLowCostVideoBased. 
+The level of kinematic detail provided by marker-based motion capture could be useful in clinical work, but it is currently ill-suited to the task. Marker-based motion capture is expensive @parksCurrentLowCostVideoBased2019 @sharmaFactorsInfluencingClinical2024, and the cost alone is usually enough of a barrier to prevent adoption. Marker-based motion capture requires specialized hardware and space and requires skilled users to be able to operate and clean the data @parksCurrentLowCostVideoBased2019, which limits adoption in clinical spaces@buckleyRoleMovementAnalysis2019 @ClinicalApplicationsSensors. Marker-placement also may not be suitable for certain patient populations. As such, these systems typically remain accessible only to specialized hospitals and research groups with the financial resources and infrastructure to support it. A tool to augment clinicians with quantitative data could help them with precise measurements of care, and also help provide justification to insurance for reimbursement@CurrentLowCostVideoBased. 
 
 
 Thus, there is a need for accessible technology that can be accurate and feasible to use in a clinical setting. 
@@ -67,7 +67,6 @@ Acess, ease of use, and value for cost are considered important needs (by stroke
 
 https://pmc.ncbi.nlm.nih.gov/articles/PMC3566464/
 https://pmc.ncbi.nlm.nih.gov/articles/PMC6406749/ ("The main consideration when deciding the best approach is the need to balance the requirement for better granularity, sensitivity, specificity, measurement accuracy, and minimal rater bias, with the complexity and feasibility of using such methods in clinics, communities, and clinical trials (Table 1).")
-
 
 
 == The need 
