@@ -10,11 +10,28 @@ SPM testing shows consistent suprathreshold clusters in early stance phase in kn
 
 *Gait parameter accuracy*
 
-Generally, gait parameters show minimal bias and excellent agreement with the reference. Limits of agreement (LoA) for stride and step length pooled over all walking speeds are within approximately ±70mm for all pose estimation backends, and LoA for stance and swing duration within ±40ms for RTMPose and ViTPose and within ±70ms for MediaPipe. We found that lowest agreement was with swing phase (ICC = \~.90). These findings align closely with findings by Kanko et al., who found LoA to be within ±70mm for stride and step length, stance time within -40 - 70ms, and swing time within -70 to 40ms, with low agreement in swing phase (ICC = .39) for participants at a self-selected walking speed @kankoAssessmentSpatiotemporalGait2021. The foot is moving at its fastest in swing phase, and lower agreement could be a result of our framerate (30Hz). Higher framerate cameras would be able to capture smaller changes in foot position during periods of high velocity motion. A limitation of our temporal metrics is that error is discretized to 33ms increments (our framerate), which could obscure some error. Higher framerate cameras could provide a deeper level of insight and resolution into temporal metrics.  
+Generally, gait parameters show minimal bias and excellent agreement with the reference. Limits of agreement (LoA) for stride and step length, pooled across walking speeds, were within approximately ±70 mm across all pose estimation backends. Temporal agreement was similarly strong, with stance and swing duration LoA within ±40 ms for RTMPose and ViTPose and within ±70 ms for MediaPipe. Agreement was lowest for swing phase (ICC ≈ 0.90).
+
+These findings are consistent with prior work. Kanko et al. reported similar LoA ranges (±70 mm for stride/step length and ±40-70 ms for temporal parameters), along with reduced agreement during swing phase @kankoAssessmentSpatiotemporalGait2021. This reduced agreement likely reflects higher velocities of the foot during swing, which may be more difficult to capture accurately at lower sampling rates. Additionally, at 30Hz temporal resolution is limited to ~33 ms increments which could obscure finer differences in timing. Higher framerate systems may provide more detailed information on temporal agreement while also improving sensitive metrics such as swing duration.  
 
 Clinically, we can compare bland-altman to minimal detectable change values to assess whether our markerless setup would have the resolution to dscriminate between impaired and healthy populations. add some notes about some mdcs from papers. 
 
 *Impact of speed*
+
+Metrics based on spatial position (joint position/angle error, stride length, step length) demonstrated clear sensitivity to speed, while temporal metrics (heel strike and toe off timing error, stance duration, swing duration) seemed largely unaffected. However, temporal metrics should be interpreted within the context of measurement resolution. Our temporal measurements were limited by the framerate of the cameras and discretized to 33 ms increments, which may obscure more subtle speed-dependant changes. 
+
+Increased walking speed resulted in larger errors in joint position and angle, particularly in the anterior-posterior and vertical directions for distal joints. In contrast, hip position and angle error remained stable across all axes and speeds. Increased walking speed in gait primarily manifest in the AP and vertical axes, rather than ML motion, and our findings are consistent with this. Faster segment velocities likely amplify frame-to-frame tracking error, particularly for distal segments, contributing to reduced agreement. However, the specific axis affect different by joint as well. AP error increased most clearly at the ankle and toe, while vertical error increased more at the knee and toe, suggesting that the impact of speed is not global but differs from segment to segment. 
+
+
+Spatial gait metrics (step and stride length), were largely more affected by speed then temporal metrics (swing and stance duration). 
+
+
+Walking speed had an invariate effect on the data across axes and joints. Speed-dependent joint position error was observed in the AP and vertical directions, but not in the ML direction. The hip joint position and kinematics were also largely unaffected by speed, with most position and angle error observed in distal joints. This asymmetric effect may be because joint movement change moving from a walk to run speed is more often seen in the AP and vertical directions for more distal joints. On a frame-to-frame basis, hip movement may not change that much with speed, and the same with joint movement in the ML direction. However, speed did not have a global impact on error - ankle and toe position error increased in the AP direction, while knee and ankle position error increased in the vertical. 
+
+
+
+Joint position and angle error in the ML direction were generally unaffected by speed, 
+
 
 Walking speed has a variable impact on the data. Generally, hip joint position error and hip angle error was not affected by speed. While joint position error in the ML axis was consistent across speed, ankle and toe joint center error increased with speed (i.e. Approximate RTMPose RMSE range from slowest to fastest speed, ankle: 9-16mm, toe:10-23mm) across the AP axis, and knee and ankle joint center increased across the ML axis (ie.e. Approximate RTMPose range from slowest to fastest speed: knee: 11-17, toe: 7-17mm), while the ankle error remained relatively consistent. Saggital knee and ankle angles also increased with speed (i.e. approximate RTMPose error from slowest to fastest speed, knee: 2.2-3.6°, ankle:1.6-3.2°). Joint angle error could be a result of the propogating positional error in trajectories. 
 
