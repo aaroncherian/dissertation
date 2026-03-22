@@ -28,5 +28,5 @@
       table.hline(stroke: 1pt),
     )
   },
-  caption: [Bland-Altman agreement statistics for spatiotemporal gait parameters across all walking speeds. Bias and limits of agreement (LoA) are reported in the native units of each metric. ICC = intraclass correlation coefficient (2,1) with 95% confidence interval.],
+  caption: [Bland-Altman statistics (bias and limits of agreement) and agreement metrics (ICC(2,1), 95% CI) for spatiotemporal gait parameters across all trials, computed relative to the marker-based reference.],
 ) <tbl-ba-gait-pooled>

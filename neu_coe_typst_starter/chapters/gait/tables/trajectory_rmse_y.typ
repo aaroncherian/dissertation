@@ -99,5 +99,5 @@
       table.hline(stroke: 1pt),
     )
   },
-  caption: [Trajectory RMSE — AP (mm). Values represent mean ± SD RMSE across all participants and trials compared to Qualisys.],
+  caption: [Trajectory RMSE — AP (mm). Values represent mean RMSE ± SD across trials computed relative to the marker-based reference.],
 ) <tbl-traj-rmse-y>
