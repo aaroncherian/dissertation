@@ -8,9 +8,9 @@
       table.hline(stroke: 1pt),
       table.header(
         [*System*],
-        [*EC:Solid − EO:Solid*],
-        [*EO:Foam − EO:Solid*],
-        [*EC:Foam − EO:Solid*],
+        [*Visual <br> Perturbation*],
+        [*Mechanical <br> Perturbation*],
+        [*Visual + Mechanical  <br> Perturbation*],
       ),
       table.hline(stroke: 0.5pt),
       [FMC-MediaPipe],
@@ -31,5 +31,5 @@
       table.hline(stroke: 1pt),
     )
   },
-  caption: [Summary of COM path length sensitivity metrics across FreeMoCap pose estimation backends. Each cell reports the regression slope and coefficient of determination (_r_#super[2]) for the condition contrast relative to Qualisys.],
+  caption: [Summary of COM path length sensitivity metrics (regression slope and _r_#super[2]) across markerless tracking backends relative to the reference system.]
 ) <tbl-path-length-sensitivity>

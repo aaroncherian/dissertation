@@ -9,8 +9,8 @@
       table.header(
         [*System*],
         [*ICC(2,1) (95% CI)*],
-        [*Bias (mm/s)*],
-        [*LoA (mm/s)*],
+        [*Bias (mm)*],
+        [*LoA (mm)*],
         [*Slope*],
       ),
       table.hline(stroke: 0.5pt),
@@ -35,5 +35,5 @@
       table.hline(stroke: 1pt),
     )
   },
-  caption: [Summary of COM path length agreement metrics across FreeMoCap pose estimation backends compared to Qualisys.],
+  caption: [Summary of COM path length agreement and Bland-Altman statistics for each markerless tracking backend relative to the reference system],
 ) <tbl-path-length-agreement>

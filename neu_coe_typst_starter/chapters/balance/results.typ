@@ -1,34 +1,36 @@
 == Results 
 
 === Center-of-Mass (COM) Path Length
-When using a MediaPipe backend, our system preserve both the magnitude and relative ordering of COM path length across balance conditions(@fig-path-length-comparison). Group means and trial-level means were similar between the reference system and FMC-MediaPipe, with clear differentiation between progressively more challenging conditions. In contrast, using RTMPose and ViTPose backends showed elevated group means and poor contrast between conditions.
+
+MediaPipe-derived COM path length closely matched the reference and preserved separation across progressively more challenging conditions (@Center-of-mass-path-length). In contrast, RTMPose and ViTPose-derived data overestimated path length and failed to clearly differentiate between conditions. 
 
 #figure(
   image("com_path_length.svg", width: 100%),
-  caption: [Placeholder center of mass path length caption. EO = Eyes Open; EC = Eyes Closed; S = Solid Ground; F = Foam Pad],
-) <fig-path-length-comparison>
+  caption: [
+  Trial-level and group-level center of mass path length plotted across balance assessment conditions for the reference system and each markerless pose estimation backend. Black lines represent group level mean and standard deviation, while grey lines represent trial level path length (n = 12). EO = Eyes Open; EC = Eyes Closed; S = Solid Ground; F = Foam Pad
+  ],
+) <Center-of-mass-path-length>
 
 
 === FMC-MediaPipe Accuracy
 
-FMC-MediaPipe demonstrated strong agreement with the reference system (@fig-path-length-agreement). A ICC of 0.986 indicated excellent agreement with the reference. Systematic bias was small (1.23 mm) with limits of agreement at approximately ± 1.2 mm/s. Proportional bias of about 0.90 indicated a tendency towards underestimation of the path length. Underestimation was most apparent in trials with higher path lengths, which primarily occurred in foam conditions. In contrast, RTMPose and ViTPose demonstrated low ICC values (ICC <.10), high positive bias (14.37 and 20.49 mm/s respectively), and wide limits of agreement.  Summary metrics for comparisons across systems are shown in @tbl-path-length-agreement.  
+MediaPipe-derived path length demonstrates strong agreement with the reference system (@fig-path-length-agreement) (ICC = 0.985). Systematic bias was small (1.25 mm) with limits of agreement at approximately ± 68 mm. A slope of 0.90 indicated a proportional underestimation of the path length with Bland-Altman analyses showing more underestimation in progressively harder conditions. In contrast, RTMPose and ViTPose demonstrated low ICC values (ICC < 0.10), high positive bias (726 mm and 1052 mm respectively), and wide limits of agreement. Summary metrics for comparisons across systems are shown in @tbl-path-length-agreement.  
 
 
 #figure(
   image("com_path_length_agreement_ba.svg", width: 100%),
-  caption: [Placeholder agreement]
+  caption: [Trial-level agreement between MediaPipe-derived and reference center of mass path length (n = 12). Left: Identity plot with unity line (dashed) and line of best fit (red). Right: Bland–Altman plot of differences between MediaPipe-derived and reference estimates plotted against the mean of the two measurements. Dashed lines represent bias, and dotted lines represent 95% limits of agreement. Colors indicate balance condition. ]
 ) <fig-path-length-agreement>
 
 #include "path_length_agreement_table.typ"
-FMC-MediaPipe is also pretty sensitive. 
 
 === FMC-MediaPipe Sensitivity
 
-FMC-MediaPipe tracked within-subject changes in COM path length across different perturbations (_r_#super[2] = 0.92, 0.84, and 0.96 for visual, mechanical, and combined perturbations respectively). Sensitivity to visual perturbations exhibited about an 11% underestimation of path length change , while sensitivity to mechanical and combined perturbations exhibited slight overestimation (4% and 7% respectively). RTMPose and ViTPose demonstrated generally poor fits (_r_#super[2] = 0.03 to 0.45), with proportional bias differing substantially (slope = -6.46 to 1.58.) from the ideal. 
+The MediaPipe-based markerless system tracked COM changes due to different perturbations with strong fit to the regression line (_r_#super[2] = 0.83 - 0.96) and slopes near unity (0.89 - 1.06). Slight underestimation was observed in the visual perturbation condition. ViTPose and RTMPose-derived data demonstrated generally (_r_#super[2] = 0.03 to 0.45), with proportional bias differing substantially (slope = -6.46 to 1.58) from the ideal. 
 
 #figure(
   image("com_sensitivity.svg", width: 100%),
-  caption: [Placeholder sensitivity],
+  caption: [Sensitivity of MediaPipe-derived COM path length to condition-dependent perturbations. Identity plots are shown with unity line (dashed) and line of best fit (red). Each panel shows trial-level path length differences (n = 12) in different conditions, representing system perturbations. Left: Visual perturbation = Eyes Closed (Solid Ground) - Eyes Open (Solid Ground); Middle: Mechanical perturbation = Eyes Open (Foam Pad) - Eyes Open (Solid Ground); Right: Visual + Mechanical Perturbation = Eyes Closed (Foam Pad) - Eyes Open (Solid Ground).],
 ) <fig-path-length-sensitivity>
 
 #include "path_length_sensitivity_table.typ"   
