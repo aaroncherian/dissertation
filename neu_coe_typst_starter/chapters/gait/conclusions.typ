@@ -1,0 +1,1 @@
+Settings in which gait is evaluated can alter measurements (characteristics measured in a lab differed from outside)
