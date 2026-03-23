@@ -101,9 +101,22 @@
 
   set block(spacing: 0em)
 
+
+  show enum: set block(spacing: 1.25em)
+  show list: set block(spacing: 1.25em)
+  
   // Heading numbering
   set heading(numbering: "1.1.1")
 
+  set math.equation(numbering: num =>
+    numbering("(1.1)", counter(heading).get().first(), num)
+  )
+
+  show math.equation.where(block: true): it => {
+  v(1.5em)
+  it
+  v(1.5em)
+}
   // Chapter headings (level 1)
   show heading.where(level: 1): it => context {
     let is-app = in-appendix.get()

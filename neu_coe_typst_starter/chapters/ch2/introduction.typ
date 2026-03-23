@@ -1,9 +1,18 @@
+== Motivation
 
-== The Microsoft Kinect: A case study in accessibility
-
-To examine the potential impact that an affordable, 
+The motivation of the FreeMoCap Project is in a sense, quite simple: providing free motion capture for everyone. A number of times I have been asked who I consider our 'competitors' in the field to be. I remember the answer I gave then, and the more time I have spent on this project the more confident I have grown in it. While this work will validate and characterize our system and often compare it to existing standards in literature, our goal is not to convince researchers and clinicians to abandon their marker-based setups or commercial markerless systems. For us, our software should be the answer for anyone, researcher to animator to high school student, who does not have access to motion capture to build a setup according to their available resources. The following chapter outlines and explains the pipeline of the FreeMoCap software while also highlighting our  work in making this an accessible, scaleable project. 
 
 == Introduction
 
-Recent advances in computer vision have facilitated the development of software that can reconstruct motion data using only RGB cameras - eliminating the need for specialized hardware and marker placement. This method of reconstruction is known as markerless motion capture. Some of the earliest methods for markerless motion capture from the early 2000's operated by trying to find the body through motion, using optical flow tracking and model fitting to help reconstruct data @marzani3DMarkerfreeSystem2001@calaisNewTrendsMarkerfree2000. 
-Later advancements moved to performing silhouette extraction and fitting articulated models to the data @rosenhahnSystemMarkerlessMotion2006 @moeslundSurveyAdvancesVisionbased2006 @gavrila3DModelbasedTracking1996. Interestingly, the pipeline by Rosenhahn in particular operates at the inverse of how most markerless motion capture pipelines operate today. Instead of reconstructed 3D data from 2D views, a pre-built model with known structure and geometry (essentially a handcrafted articulated human model) was projected onto the 2D camera images and compared to the observed silhouette, and the model was readjusted until it matched the 2D observations @rosenhahnSystemMarkerlessMotion2006. However, these were computationally intensive and not ideal for clinical use. The Andriachi lab at Stanford tried for the application of the silhouette extraction idea for clinical gait analysis @corazzaMarkerlessMotionCapture2006. Silhouette extraction came from an era where the methods for detecting anatomical landmarks with deep-learning did not exist, and therefore the most accurate way to estimate them were to use the shape of the body itself. Move into talking about Deep CNN's (DeepPose, OpenPose). Mention the Kinect in demonstrating appetite for affordable, available motion capture sources. 
+Most current markerless motion capture pipelines share a few key steps in order to move from a set of 2D images to 3D reconstructed data. 
+
++ Camera calibration
++ Synchronized video acquisition
++ Pose estimation of 2D keypoints
++ Reconstruction of 3D data
+
+A typical data collection or recording with a multi-view markerless motion capture first involves positioning and orienting of the cameras. Optimal camera positioning is often task and subject-specific and dependent on the environment and the number of cameras. Next, the cameras are calibrated to estimate camera intrinsics and extrinsics. At this point, the user is able to take a series of recordings. The processing of these recordings involves 2D estimation of joint landmarks (often termed keypoints) using pose estimation software, per camera. Next, data is reconstructed into the 3D space, with various amounts of post-processing depending on the software and pipeline. 
+
+The following sections provide an overview of each of these step, its implementation in the FreeMoCap pipelines, and key considerations.
+
+
