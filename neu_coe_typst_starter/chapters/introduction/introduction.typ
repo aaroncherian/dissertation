@@ -1,11 +1,9 @@
 == Introduction
-Most of us are familiar with quantitative motion analysis, whether we realize it or not. If you've ever checked your step count on your phone, that's quantitative motion analysis coming from the accelerators and gyrscopes in your phone. Human movement is an adaptive, complex mechanism, and quantitative motion analysis finds measurable terms (i.e. joint kinematics, gait parameters, acceleration profiles) from this complexity. 
-
-Researchers and clinicians often make use of quantitative motion analysis as well, though often at more detailed levels with more sophisticated equipment. The following sections examine the use of quantitative motion analysis in both research and clinical work and existing gaps. 
+Human movement is an adaptive, complex mechanism, and quantitative motion analysis finds measurable terms (i.e. joint kinematics, gait parameters, acceleration profiles) from this complexity. Most of us are familiar with quantitative analysis in some form. For example, reading one's daily step count on their phone is an example of extracting kinematic data from accelerometers and gyroscopes. Researchers and clinicians often make use of quantitative motion analysis as well, though often at more detailed levels with more sophisticated equipment. The following sections examine the use of quantitative motion analysis in both research and clinical work and existing gaps. 
 
 
 == Quantitative motion analysis in research
-Quantitative motion analysis is critical to furthering understanding of the biomechanics of human movement. From further understanding gait to examining athletic performance, laboratories tend to employ sophisticated equipment such as force place and instrumented treadmills to accurately measure human movement. Of these, one commonly used tool is marker-based motion capture. 
+Quantitative motion analysis is critical to furthering understanding of the biomechanics of human movement. From further understanding gait to examining athletic performance, laboratories tend to employ sophisticated equipment such as force plates and instrumented treadmills to accurately measure human movement. Of these, one commonly used tool is marker-based motion capture. 
 
 *Marker-based motion capture*
 
@@ -23,8 +21,7 @@ Thus, there is a need for technology that can returned detailed kinematic data w
 
 
 *A brief aside on 'gold-standards' for measuring movement*
-
-I will note here that while marker-based motion capture will be referred to through this work as the 'gold-standard', one of the most accurate methods of measuring and evaluating joint function to date is biplanar videoradiography. Biplanar videography is a method of mapping the pose of 3D bone models using synchronized x-ray image sequences of motions @kesslerDirectComparisonBiplanar2019 with sub-millimeter accuracy, with joint tracking errors ranging from .25-.30mm for the foot @mirandaStaticDynamicError2011. Despite high accuracy, cost, lack of whole-body kinematics and complicated setup make biplanar videoradiography impractical for widespread adoption in both research and clinical contexts@wadeApplicationsLimitationsCurrent2022.
+While throughout this work, marker-based motion capture will be referred to through this work as the 'gold-standard', it should be noted that one of the most accurate methods of measuring and evaluating joint function to date is biplanar videoradiography. Biplanar videography is a method of mapping the pose of 3D bone models using synchronized x-ray image sequences of motions @kesslerDirectComparisonBiplanar2019 with sub-millimeter accuracy, with joint tracking errors ranging from .25-.30mm for the foot @mirandaStaticDynamicError2011. Despite high accuracy, cost, lack of whole-body kinematics and complicated setup make biplanar videoradiography impractical for widespread adoption in both research and clinical contexts@wadeApplicationsLimitationsCurrent2022.
 
 == Quantitative analysis in clinical work
 In a clinical space, quantifying movement can inform diagnosis, understanding of disease progression and severity, and examine rehabilitation or therapy efficacy @buckleyRoleMovementAnalysis2019@vanierselSystematicReviewQuantitativeclinical2004@vergheseQuantitativeGaitDysfunction2007@SummaryMeasuresClinical2014 @kerrAdoptionStrokeRehabilitation2018 (see Chapter 3: Introduction and Chapter 4: Introduction for examples specific to gait and posture). 
@@ -38,17 +35,17 @@ In a clinical space, quantifying movement can inform diagnosis, understanding of
 *Quantitative methods in clinical analysis*
 
 
-https://pmc.ncbi.nlm.nih.gov/articles/PMC6615543/ - talks about being able to use smartphones in place of stopwatches so patients can test themselves
+https://pmc.ncbi.nlm.nih.gov/articles/PMC6615543/ 
 
+There is a large disparity between the methods used for analysis of human motion in a laboratory and what can be feasibly used in a clinic @vanierselSystematicReviewQuantitativeclinical2004 @buckleyRoleMovementAnalysis2019. While some clinics may make use of gait mats, for many assessments (such as the Timed Up and Go Test), quantitative motion analysis is as simple as using a stopwatch. 
 
-STATEMENT ABOUT QUANTITATIVE METHODS THEY DO USE (goniometers etc.) 
+There has been exploration of inexpensive methods to expand kinds of methods uesd in everyday clinical environments. Accelerometers, for example, are sensors that can detect a variety of accelration changes, including those due to gravity (constant acceleration), vibration (time-varying acceleration) or tilt (quasi-static acceleration)@mohammedMonolithicMultiDegree2018 that have become nearly ubiquitous with the spread of smartphones. Several studies have found reliability and success in using smartphone accelerometers for gait analysis@grouiosAccelerometersOurPocket2022@nishiguchiReliabilityValidityGait2012. However, the extractions of meaningful data such signals can be difficult @ClinicalApplicationsSensors.
 
-
-There is a large disparity between the methods used for analysis of human motion in a laboratory and what can be feasibly used in a clinic @vanierselSystematicReviewQuantitativeclinical2004 @buckleyRoleMovementAnalysis2019. While some clinics may make use of gait mats, for many assessments (such as the Timed Up and Go test), quantitative motion analysis is as simple as using a stopwatch. There has been exploration of inexpensive methods to expand kinds of methods uesd in everyday clinical environments. Accelerometers, for example, are sensors that can detect a variety of accelration changes, including those due to gravity (constant acceleration), vibration (time-varying acceleration) or tilt (quasi-static acceleration)@mohammedMonolithicMultiDegree2018. Accelerometers, with the development and widespread use of smartphones, have become nearly ubiquitous. Several studies have found reliability and success in using smartphone accelerometers for gait analysis@grouiosAccelerometersOurPocket2022@nishiguchiReliabilityValidityGait2012. However, the extractions of meaningful data such signals can be difficult @ClinicalApplicationsSensors
+Kerr et al. describe access, ease of use, and value for cost to be 3 key needs @kerrAdoptionStrokeRehabilitation2018. Buckley et al. mention that for clinical use, there is a necessary tradeoff between wanting more detailed methods of quantitative motion analysis versus the complexity of using such software in a clinic @buckleyRoleMovementAnalysis2019. 
 
 *Marker-based motion capture is not suited for widespread clinical use* 
 
-The level of kinematic detail provided by marker-based motion capture could be useful in clinical work, but it is currently ill-suited to the task. Marker-based motion capture is expensive @parksCurrentLowCostVideoBased2019 @sharmaFactorsInfluencingClinical2024, and the cost alone is usually enough of a barrier to prevent adoption. Marker-based motion capture requires specialized hardware and space and requires skilled users to be able to operate and clean the data @parksCurrentLowCostVideoBased2019, which limits adoption in clinical spaces@buckleyRoleMovementAnalysis2019 @ClinicalApplicationsSensors. Marker-placement also may not be suitable for certain patient populations. As such, these systems typically remain accessible only to specialized hospitals and research groups with the financial resources and infrastructure to support it. A tool to augment clinicians with quantitative data could help them with precise measurements of care, and also help provide justification to insurance for reimbursement@CurrentLowCostVideoBased. 
+As an example of tradeoffs, while the level of kinematic detail provided by marker-based motion capture could be useful in clinical workl but is currently ill-suited to the task. Marker-based motion capture is expensive @parksCurrentLowCostVideoBased2019 @sharmaFactorsInfluencingClinical2024, and the cost alone is usually enough of a barrier to prevent adoption. Marker-based motion capture requires specialized hardware and space and requires skilled users to be able to operate and clean the data @parksCurrentLowCostVideoBased2019, which limits adoption in clinical spaces@buckleyRoleMovementAnalysis2019 @ClinicalApplicationsSensors. Marker-placement also may not be suitable for certain patient populations. As such, these systems typically remain accessible only to specialized hospitals and research groups with the financial resources and infrastructure to support it. A tool to augment clinicians with quantitative data could help them with precise measurements of care, and also help provide justification to insurance for reimbursement@CurrentLowCostVideoBased @parksCurrentLowCostVideoBased2019. 
 
 
 Thus, there is a need for accessible technology that can be accurate and feasible to use in a clinical setting. 
@@ -56,17 +53,7 @@ Thus, there is a need for accessible technology that can be accurate and feasibl
 
 == Mention of clinical measures of mvoement? 
 
-feasibility based on patient population - @sharmaFactorsInfluencingClinical2024
-
-Future steps - making data interpretable @sharmaFactorsInfluencingClinical2024
-
-informing/augment clinicians
-@sharmaFactorsInfluencingClinical2024
-
-Acess, ease of use, and value for cost are considered important needs (by stroke rehab) @kerrAdoptionStrokeRehabilitation2018
-
 https://pmc.ncbi.nlm.nih.gov/articles/PMC3566464/
-https://pmc.ncbi.nlm.nih.gov/articles/PMC6406749/ ("The main consideration when deciding the best approach is the need to balance the requirement for better granularity, sensitivity, specificity, measurement accuracy, and minimal rater bias, with the complexity and feasibility of using such methods in clinics, communities, and clinical trials (Table 1).")
 
 
 == The need 
@@ -81,7 +68,6 @@ There emerges a common theme here, where something to fill this need is not nece
 
 
 
-significance of movement diagnoses: Use of movement system diagnoses in the management of patients with neuromuscular conditions: a multiple-patient case report
 
 for collecting movement over time (Parks): Current Low-Cost Video-Based
 Motion Analysis Options for Clinical

@@ -22,3 +22,5 @@ In gait, quantitative movement analysis can be used for a multitude of purposes.
 
 as established earlier, there is a need for accessible metrics for getting gait metrics. here, we examine the effectiveness of a 6 camera freemocap markerless system for reconstructing dynamic gait data across a range of speeds.
 
+
+significance of movement diagnoses: Use of movement system diagnoses in the management of patients with neuromuscular conditions: a multiple-patient case report
