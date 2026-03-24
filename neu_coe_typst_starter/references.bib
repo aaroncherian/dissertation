@@ -991,6 +991,15 @@
   file = {C:\Users\aaron\Zotero\storage\P3YTA9XM\pinhole-camera-model.html}
 }
 
+@online{RefiningOpenPoseNew,
+  title = {Refining {{OpenPose}} with a New Sports Dataset for Robust {{2D}} Pose Estimation},
+  url = {https://ieeexplore.ieee.org/document/9707587},
+  urldate = {2026-03-24},
+  abstract = {3D marker-less motion capture can be achieved by triangulating estimated multi-views 2D poses. However, when the 2D pose estimation fails, the 3D motion capture also fails. This is particularly challenging for sports performance of athletes, which have extreme poses. In extreme poses (like having the head down) state-of-the-art 2D pose estimator such as OpenPose do not work at all. In this paper, we propose a new method to improve the training of 2D pose estimators for extreme poses by leveraging a new sports dataset and our proposed data augmentation strategy. Our results show significant improvements over previous methods for 2D pose estimation of athletes performing acrobatic moves, while keeping state-of-the-art performance on standard datasets.},
+  langid = {american},
+  file = {C:\Users\aaron\Zotero\storage\7NEL55DS\9707587.html}
+}
+
 @article{ripicComparisonThreedimensionalKinematics2023,
   title = {A Comparison of Three-Dimensional Kinematics between Markerless and Marker-Based Motion Capture in Overground Gait},
   author = {Ripic, Zachary and Nienhuis, Mitch and Signorile, Joseph F. and Best, Thomas M. and Jacobs, Kevin A. and Eltoukhy, Moataz},
@@ -1018,6 +1027,22 @@
   pages = {45--51},
   abstract = {In this contribution we present a silhouette based human motion capture system. The system components contain silhouette extraction based on level sets, a correspondence module, which relates image data to model data and a pose estimation module. Experiments are done in different camera setups and we estimate the model components with 21 degrees of freedom in up to two frames per second. To evaluate the stability of the proposed algorithm we perform a comparison of the motion estimation system with a marker based tracking system. The results show the applicability of the system for marker-less sports movement analysis. We finally present extensions for motion capture in complex environments, with changing lighting conditions and cluttered background.},
   file = {C:\Users\aaron\Zotero\storage\K5K3QYUH\Rosenhahn et al. - 2006 - A system for marker-less motion capture.pdf}
+}
+
+@online{seethapathiMovementScienceNeeds2019,
+  title = {Movement Science Needs Different Pose Tracking Algorithms},
+  author = {Seethapathi, Nidhi and Wang, Shaofei and Saluja, Rachit and Blohm, Gunnar and Kording, Konrad P.},
+  date = {2019-07-24},
+  eprint = {1907.10226},
+  eprinttype = {arXiv},
+  eprintclass = {cs},
+  doi = {10.48550/arXiv.1907.10226},
+  url = {http://arxiv.org/abs/1907.10226},
+  urldate = {2026-03-24},
+  abstract = {Over the last decade, computer science has made progress towards extracting body pose from single camera photographs or videos. This promises to enable movement science to detect disease, quantify movement performance, and take the science out of the lab into the real world. However, current pose tracking algorithms fall short of the needs of movement science; the types of movement data that matter are poorly estimated. For instance, the metrics currently used for evaluating pose tracking algorithms use noisy hand-labeled ground truth data and do not prioritize precision of relevant variables like three-dimensional position, velocity, acceleration, and forces which are crucial for movement science. Here, we introduce the scientific disciplines that use movement data, the types of data they need, and discuss the changes needed to make pose tracking truly transformative for movement science.},
+  pubstate = {prepublished},
+  keywords = {Computer Science - Computer Vision and Pattern Recognition,Quantitative Biology - Quantitative Methods},
+  file = {C\:\\Users\\aaron\\Zotero\\storage\\H9LPMGAL\\Seethapathi et al. - 2019 - Movement science needs different pose tracking algorithms.pdf;C\:\\Users\\aaron\\Zotero\\storage\\ZFGBXH5E\\1907.html}
 }
 
 @article{sharmaFactorsInfluencingClinical2024,
@@ -1309,6 +1334,30 @@
   urldate = {2026-03-18},
   abstract = {OpenCap, a markerless motion capture system, offers a practical alternative for movement assessment; however, additional validation is needed to confirm its applicability. This study evaluated how closely lower extremity kinematics measured by OpenCap matched those obtained from a conventional marker-based system during jump-landing tasks. We also examined whether OpenCap's accuracy varied between normal and simulated abnormal jump-landing conditions. Kinematic data were simultaneously recorded by both systems while 21 male participants performed jump-landing tasks under both normal and simulated abnormal conditions. Waveform similarity was assessed using the coefficient of multiple correlation (CMC), and error was quantified using root mean square error (RMSE). Wilcoxon signed-rank tests with Bonferroni correction were used to compare RMSE across conditions. OpenCap showed moderate to strong waveform similarity with the marker-based system during jump-landing tasks, with a grand mean CMC of 0.78 across all joint angles and conditions. Agreement was highest in the sagittal plane (0.84–0.98) and lowest in the transverse plane (0.51–0.60). A grand mean RMSE of 6.62° was observed across all joint angles and movement conditions. Wilcoxon signed-rank tests revealed significant RMSE differences only for ankle flexion (p\,{$<$}\,0.001) and inversion (p\,{$<$}\,0.001) under the simulated impaired postural control and restricted ankle motion conditions, respectively. These findings suggest the potential of OpenCap as a practical tool for assessing lower extremity kinematics in clinical and sports settings, especially for sagittal plane movements. While certain limitations remain in capturing movement in the transverse and frontal planes, continued algorithmic advancement may enhance its accuracy and broaden its applicability.},
   langid = {english}
+}
+
+@online{yeungAthletePose3DBenchmarkDataset2025,
+  title = {{{AthletePose3D}}: {{A Benchmark Dataset}} for {{3D Human Pose Estimation}} and {{Kinematic Validation}} in {{Athletic Movements}}},
+  shorttitle = {{{AthletePose3D}}},
+  author = {Yeung, Calvin and Suzuki, Tomohiro and Tanaka, Ryota and Yin, Zhuoer and Fujii, Keisuke},
+  date = {2025-07-11},
+  eprint = {2503.07499},
+  eprinttype = {arXiv},
+  eprintclass = {cs},
+  doi = {10.48550/arXiv.2503.07499},
+  url = {http://arxiv.org/abs/2503.07499},
+  urldate = {2026-03-24},
+  abstract = {Human pose estimation is a critical task in computer vision and sports biomechanics, with applications spanning sports science, rehabilitation, and biomechanical research. While significant progress has been made in monocular 3D pose estimation, current datasets often fail to capture the complex, high-acceleration movements typical of competitive sports. In this work, we introduce AthletePose3D, a novel dataset designed to address this gap. AthletePose3D includes 12 types of sports motions across various disciplines, with approximately 1.3 million frames and 165 thousand individual postures, specifically capturing high-speed, high-acceleration athletic movements. We evaluate state-of-the-art (SOTA) monocular 2D and 3D pose estimation models on the dataset, revealing that models trained on conventional datasets perform poorly on athletic motions. However, fine-tuning these models on AthletePose3D notably reduces the SOTA model mean per joint position error (MPJPE) from 214mm to 65mm-a reduction of over 69\%. We also validate the kinematic accuracy of monocular pose estimations through waveform analysis, highlighting strong correlations in joint angle estimations but limitations in velocity estimation. Our work provides a comprehensive evaluation of monocular pose estimation models in the context of sports, contributing valuable insights for advancing monocular pose estimation techniques in high-performance sports environments. The dataset, code, and model checkpoints are available at: https://github.com/calvinyeungck/AthletePose3D},
+  pubstate = {prepublished},
+  keywords = {Computer Science - Computer Vision and Pattern Recognition},
+  file = {C\:\\Users\\aaron\\Zotero\\storage\\3BV2I9C5\\Yeung et al. - 2025 - AthletePose3D A Benchmark Dataset for 3D Human Pose Estimation and Kinematic Validation in Athletic.pdf;C\:\\Users\\aaron\\Zotero\\storage\\ES4662MH\\2503.html}
+}
+
+@article{yingLDPoseInclusiveHumana,
+  title = {{{LDPose}}: {{Towards Inclusive Human Pose Estimation}} for {{Limb-Deficient Individuals}} in the {{Wild}}},
+  author = {Ying, Jiaying and Du, Heming and Zhang, Kaihao and Li, Lincheng and Yu, Xin},
+  langid = {english},
+  file = {C:\Users\aaron\Zotero\storage\HXZFYF9X\Ying et al. - LDPose Towards Inclusive Human Pose Estimation for Limb-Deficient Individuals in the Wild.pdf}
 }
 
 @article{zeniTwoSimpleMethods2008a,
