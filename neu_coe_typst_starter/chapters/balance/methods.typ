@@ -51,7 +51,7 @@ Using a custom-built viewer (cite NIH), each trial was annotated with the start 
 
 *Center of mass velocity distributions*
 
-COM velocity was calculated as the frame-to-frame displacement of COM position divided by the sampling rate. Mean 2D COM velocity in the horizontal plane was calculated as the trial-level mean of the magnitude of mediolateral and anteroposterior velocity components. Vertical velocity SD on firm ground during the Eyes Open/Solid Ground conditions was used as an estimate of system measurement noise. 
+COM velocity was calculated as the frame-to-frame displacement of COM position divided by the sampling rate. Mean 2D COM velocity in the horizontal plane was calculated as the trial-level mean of the magnitude of mediolateral and anteroposterior velocity components. Trial-wise standard deviations of vertical COM velocity were calculated for the eyes-open, firm-surface condition and summarized across participants (mean ± SD) to estimate baseline variability under minimal-movement conditions.
 
 *Sensitivity analysis* 
  

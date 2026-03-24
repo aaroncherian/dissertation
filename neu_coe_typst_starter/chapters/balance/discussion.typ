@@ -1,9 +1,13 @@
 
+The aim of this work was to determine if a markerless motion capture system was sensitive to small postural balance changes using center of mass (COM) and accurate in postural measurement whe compared to a marker-based reference. We used three different pose estimation backends from which 3D data was reconstructed. 
+
+Our results show that MediaPipe-derived data preserved condition-dependent ordering in COM path length across progressively difficult conditions and demonstrated strong agreement with the reference system. MediaPipe-derived data also showed strong sensitivity to the effects of visual, proprioceptive, and combined visual/proprioceptive perturbations on balance. In contrast, both RTMPose and ViTPose-derived data exhibited poor agreement with the reference system and poor sensitivity balance. 
+
 Generally, MediaPipe-derived data demonstrated strong agreement with the reference system and preserved condition-dependent structure in COM path length. In addition to accurately estimating path length per condition, MediaPipe-derived data also showed strong sensitivity to the effects of visual, mechanical, and combined visual/mechanical perturbation on balance at a trial level. In contrast, both RTMPose and ViTPose-derived data exhibited both poor agreement with the reference system and poor sensitivity to balance changes. 
 
 MediaPipe accuracy and sensitivity may be partly related to its use of temporal smoothing (the One-Euro filter @casiez1FilterSimple2012, see Chapter __ Discussion for more). The one-euro filter lowers cutoff frequency based on signal velocity, aggressive smoothing when velocity is low. During balance tasks, this may smooth landmark jitter while preserving low-frequency postural movement. In contrast, RTMPose and ViTPose-derived data may be more susceptible to landmark noise, which could obscure small postural changes of interest. Future work could evaluate into the implementation of similar temporal filtering to these backends' 2D keypoints prior to 3D reconstruction in order to improve their suitability for balance assessments. These findings suggest that temporal stability in landmark tracking may be critical for detecting subtle balance changes.  
 
-A previous study found that an IMU sensor was able to discriminate between eyes open and closed balance assessments relative to a force plate, finding significant difference with moderate to strong agreement @ferrariConstructValidityWearable2024. 
+A previous study found that an IMU sensor was able to discriminate between eyes open and closed balance assessments relative to a force plate, finding significant difference with moderate to strong agreement @ferrariConstructValidityWearable2024. Studies using motion capture to find values such as path length and mean velocity are limited. 
 
 - there aren't many markerless motion capture validations related to posture, necessarily, a lot for gait
 - previous studies are a bit different than ours
