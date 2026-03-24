@@ -1,5 +1,12 @@
 = Introduction B: Markerless Motion Capture
-Recent advances in computer vision have facilitated the rapid development of software that can reconstruct motion data using only RGB cameras - eliminating the need for specialized hardware and marker placement. This method of reconstruction is known as markerless motion capture.
+
+Recent advances in computer vision have facilitated the rapid development of software that can reconstruct motion data using only RGB cameras - eliminating the need for specialized hardware and marker placement. This method of reconstruction is known as markerless motion capture. Although we most often discuss markerless motion capture in the context of computer vision developments of the past 10 years, the goal of extracting meaningful biomechanics is not new. An early 1983 paper mapped a 3D human model made of a series of hierarchical cylinders onto an image of a person walking @hoggModelbasedVisionProgram1983. Gavrila and Davis built one of the earliest pipelines for markerless motion capture in 1996 @gavrila3DModelbasedTracking1996. 
+
+== Early markerless motion capture
+
+
+
+Although we often consider markerless motion capture in the context of computer vision developments of the past 10 years, research into markerless motion capture has existed and been used since the late 90's and early 2000s. 
 
 == Introduction
 
