@@ -3,6 +3,8 @@ Walking is one of the most human behaviors, yet underlying gait is a complex int
 
 Gait can be a non-invasive, early biomarker - and measures of quantitative movement could help provide object data to help with diagnosis, characterize disease, and evaluate recovery and rehabilitation efficacy @scheetsUseMovementSystem2007. 
 
-Markerless motion capture offers an accessible approach for obtaining such measurements outside of specialized laboratory environments (see Introductions A and B). Gait also provides a series of repeating patterns that make it well-suited for evaluating and comparing the accuracy of a motion capture system. Here, we present a six-camera video-based motion capture system observing walking at progressively increasing speeds, and compare it to a marker-based reference. Pose estimation software can be a meaningful source of variation, and so we further evaluate 3D reconstructions derived from three pose estimation frameworks—MediaPipe, RTMPose, and ViTPose. Thus, we can systematically characterize how tracking differences can shape downstream biomechanical measurements. 
+Markerless motion capture offers an accessible approach for obtaining such measurements outside of specialized laboratory environments (see Introductions A and B). Gait also provides a series of repeating patterns that make it well-suited for evaluating and comparing the accuracy of a motion capture system. 
+
+Here, we present a six-camera video-based motion capture system observing walking at progressively increasing speeds, and compare it to a marker-based reference. Pose estimation software can be a meaningful source of variation, and so we further evaluate 3D reconstructions derived from three pose estimation frameworks—MediaPipe, RTMPose, and ViTPose. Thus, we can systematically characterize how tracking differences can shape downstream biomechanical measurements. 
 
 

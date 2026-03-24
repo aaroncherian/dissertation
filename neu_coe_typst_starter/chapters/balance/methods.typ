@@ -17,19 +17,11 @@ Multi-camera calibration was performed prior to recording using a ChArUco calibr
 
 *Data Collection*
 
-Participants followed the protocol of the NIH Standing Balance Test @StandingBalanceTest, which itself is based on the Modified Clinical Test of Sensory Interaction on Balance @ModifiedClinicalTest2013. Participants were instructed to stand with their hands at their sides and perform the following four conditions for 60 seconds:
+Participants followed the protocol of the Modified Clinical Test of Sensory Interaction on Balance (CTSIB-M) @ModifiedClinicalTest2013. The CTSIB-M was selected because static balance tasks involve minimal body movement, providing a test of system sensitivity to small-amplitude kinematics, and because the graded condition structure allows evaluation of whether system accuracy varies with increasing postural challenge.
 
-1) Stand on firm surface with eyes open
+Participants stood with hands at their sides and completed four 60-second conditions: (1) firm surface, eyes open; (2) firm surface, eyes closed; (3) foam pad, eyes open; (4) foam pad, eyes closed. Feet were placed shoulder-width apart to minimize camera occlusions; this foot position has been shown to have little effect on CTSIB-M scoring @wrisleyEffectFootPosition2004. 
 
-2) Stand on firm surface with eyes closed
-
-3) Stand on a foam pad with eyes open
-
-4) Stand on a foam pad with eyes closed
-
-To reduce occlusions in camera views when tracking the body, participants were instructed to keep feet shoulder width apart. Participants were also given a visual mark to maintain focus on. Foot position has previously been shown to have little effect on the scoring of the test @wrisleyEffectFootPosition2004. Participants were given a line to step up to at the start of each condition and would step back at the end. They would also clap at the start to provide a visual reference in the software to look for condition start. 
-
-Participants completed two trials of the test, each being recorded simultaneously by both marker-based and markerless motion capture systems. 
+Participants were given a visual fixation target during eyes-open conditions and a floor mark to standardize starting position. A hand clap at the start of each condition provided a visual synchronization reference in the video recordings. Participants completed two trials of the full protocol, each recorded simultaneously by both the marker-based and markerless motion capture systems.
 
 === Data Processing
 *Marker-based motion capture data*
@@ -52,8 +44,19 @@ Markerless data were spatially aligned to the marker-based reference frame using
 
 For the reference system and each pose estimation backend, body segments were defined with segment mass fractions and COM locations according to the anthropometric tables reported by Winter @winterBiomechanicsMotorControl2009. Segment COM position was calculated along each segment using these definitions, and total-body COM was calculated as the mass-weighted average of all segment COM coordinates. 
 
-*Path length analysis*
+*Center of mass path length*
 
-Using a custom-built viewer (cite NIH), each trial was annotated with the start and stop frame numbers for each of the four conditions. The same number of frames was used for each condition, for every trial. Within each condition, COM path length was calculated as the sum of the Euclidean distance between consecutive 3D COM position. COM was also normalized by the frame duration in seconds. 
+Using a custom-built viewer (cite NIH), each trial was annotated with the start and stop frame numbers for each of the four conditions. The same number of frames was used for each condition, for every trial. Within each condition, COM path length was calculated as the sum of the Euclidean distance between consecutive 3D COM position. 
 
+*Center of mass velocity distributions*
+
+COM velocity was calculated as the frame-to-frame displacement of COM position divided by the sampling rate. Mean 2D COM velocity in the horizontal plane was calculated as the trial-level mean of the magnitude of mediolateral and anteroposterior velocity components. Vertical velocity SD on firm ground during the Eyes Open/Solid Ground conditions was used as an estimate of system measurement noise. 
+
+*Sensitivity analysis* 
+ 
+For each system and the marker-based reference, we calculated within-participant COM path length differences between conditions representing specific perturbations:visual perturbation using the difference between the Eyes Open/Solid Ground and Eyes Closed/Solid Ground conditions, proprioceptive perturbation using the difference between Eyes Open/Solid Ground and Eyes Open/Foam conditions, and combined visual/proprioceptive perturbation using the difference between Eyes Open/Solid Ground and Eyes Closed/Foam conditions. We then fit a regression line and report slope alongside $r^2$.
+
+*Statistical analyses*
+ 
+Statistical analyses were performed using Python `v3.11`. To assess accuracy between the markerless and marker-based reference, we calculated Bland-Altman statistics with bias and 95% limits of agreement (LoA) @blandStatisticalMethodsAssessing1986 alongside intraclass correletion coefficients (ICC (2,1)) using the `pingouin` package @shroutIntraclassCorrelationsUses1979. ICC values were interpreted as: poor (\<0.50), moderate (0.50-0.75), good (0.75-0.90), and excellent (\>0.90) @kooGuidelineSelectingReporting2016. We also fit a regression line and report slope. 
 

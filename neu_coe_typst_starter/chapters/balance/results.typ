@@ -12,6 +12,24 @@ MediaPipe-derived COM path length closely matched the reference and preserved se
 ) <Center-of-mass-path-length>
 
 
+=== Center-of-mass velocity distribution
+
+COM velocity distributions between MediaPipe-derived and marker-based reference data closely matched each other in the ML and AP directions, though MediaPipe-derived COM velocity distributions have a consistently longer tail (@fig-violin). Substantial difference is seen in the vertical direction, particularly on the solid ground conditions. As we expect little vertical movement in the COM on solid ground, this largely reflects measurement noise for each system rather than true postural movement. In the Eyes Open/Solid Ground condition, mean vertical velocity SD was 0.90 ± 0.26 mm/s for the marker-based reference, 2.40 ± 0.42 mm/s for MediaPipe-derived data, 9.60 ± 1.94 mm/s for ViTPose-derived data, and 14.25 ± 1.99 mm/s for RTMPose-derived data."
+
+Mean 2D COM velocity in the horizontal plane was comparable (@tbl-velocity-metrics) was comparable between MediaPipe-derived and reference data across all conditions, with slight underestimation of velocity by MediaPipe-derived data. 
+
+
+#include "tables/velocity_table.typ"
+
+
+
+#figure(
+  image(
+    "figures/com_velocity_violin.png", width: 85%),
+    caption: [Frame-level distribution of center of mass (COM) velocity data per condition for marker-based reference data (gray) and markerless MediaPipe-derived data (blue) for mediolateral, anteroposterior and vertical directions (n = 12 trials from 6 participants).]
+) <fig-violin>
+
+
 === FMC-MediaPipe Accuracy
 
 MediaPipe-derived path length demonstrates strong agreement with the reference system (@fig-path-length-agreement) (ICC = 0.985). Systematic bias was small (1.25 mm) with limits of agreement at approximately ± 68 mm. A slope of 0.90 indicated a proportional underestimation of the path length with Bland-Altman analyses showing more underestimation in progressively harder conditions. In contrast, RTMPose and ViTPose demonstrated low ICC values (ICC < 0.10), high positive bias (726 mm and 1052 mm respectively), and wide limits of agreement. Summary metrics for comparisons across systems are shown in @tbl-path-length-agreement.  
