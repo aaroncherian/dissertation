@@ -1,0 +1,6 @@
+Balance is a complex motor skill that integrates and coordinates several different body systems (https://www.sciencedirect.com/science/article/pii/S0966636297000180). Balance can be useful for therapy and diagnosis - such as early detection of fall risk in individuals or development of tailored therapy (https://www.sciencedirect.com/science/article/pii/S1388245708008547?via%3Dihub). But, qualitative balance assessments are subjective (https://www.sciencedirect.com/science/article/pii/S1388245708008547?via%3Dihub). All balance assessments are high level measures of complex movements that can suffer from tester bias (https://pmc.ncbi.nlm.nih.gov/articles/PMC3033730/). 
+
+From a markerless motion capture validation standpoint, balance is a useful task to evaluate, particularly static balance, because it requires extraction of data from subtle behavior. Thus, we get an idea of the sensitivity of the system, a parameter that gait analysis with dynamic movement may not necessarily be able to provide. Here, we also look at center of mass movement as well. Mention of why the graded Romberg? 
+
+
+large sway = fall risk kinect https://pubmed.ncbi.nlm.nih.gov/25047828/
