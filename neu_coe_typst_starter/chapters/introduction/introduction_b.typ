@@ -1,5 +1,14 @@
 = Introduction B: Markerless Motion Capture
 
+In 1983, David Hogg published a seminal work mapping a model made of a series of heirarchical cylinders onto an image of a person walking @hoggModelbasedVisionProgram1983. In 1996, Davis and Gavrila published one of the earliest multi-camera markreless motion capture software, mapped an articulated generalized cylindrical model onto images of a human using edge detection. We often state that markerless motion capture has advanced due to recent developments in pose estimation. Early markerless methods, lacking a method to accurately track anatomical landmarks from an image, would often first find the shape of the body itself - using methods such as optical flow tracking @marzani3DMarkerfreeSystem2001, 3D visual hull reconstruction @corazzaMarkerlessMotionCapture2006, or silleahoute extraction @rosenhahnSystemMarkerlessMotion2006. 
+
+The recent advances in computer vision oft mentioned in markerless motion capture context came with the development and release of CNN-based models DeepPose @toshevDeepPoseHumanPose2014 and OpenPose @caoOpenPoseRealtimeMultiPerson2019, with deep-learning methods suddenly becoming state of the art @nagornyComprehensiveReviewRealTime2025. 
+
+
+
+
+
+
 Recent advances in computer vision have facilitated the rapid development of software that can reconstruct motion data using only RGB cameras - eliminating the need for specialized hardware and marker placement. This method of reconstruction is known as markerless motion capture. Although we most often discuss markerless motion capture in the context of computer vision developments of the past 10 years, the goal of extracting meaningful biomechanics is not new. An early 1983 paper mapped a 3D human model made of a series of hierarchical cylinders onto an image of a person walking @hoggModelbasedVisionProgram1983. Gavrila and Davis built one of the earliest pipelines for markerless motion capture in 1996 @gavrila3DModelbasedTracking1996. 
 
 == Early markerless motion capture
