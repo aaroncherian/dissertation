@@ -5,7 +5,7 @@
 MediaPipe-derived COM path length closely matched the reference and preserved separation across progressively more challenging conditions (@Center-of-mass-path-length). In contrast, RTMPose and ViTPose-derived data overestimated path length and failed to clearly differentiate between conditions. 
 
 #figure(
-  image("com_path_length.svg", width: 100%),
+  image("figures\com_path_length.svg", width: 100%),
   caption: [
   Trial-level and group-level center of mass path length plotted across balance assessment conditions for the reference system and each markerless pose estimation backend. Black lines represent group level mean and standard deviation, while grey lines represent trial level path length (n = 12). EO = Eyes Open; EC = Eyes Closed; S = Solid Ground; F = Foam Pad
   ],
