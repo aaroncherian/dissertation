@@ -28,8 +28,6 @@ Many clinicians tend to use subjective methods to analyze patient motion, often 
 
 *Quantitative methods in clinical analysis*
 
-https://pmc.ncbi.nlm.nih.gov/articles/PMC6615543/ 
-
 There is a large disparity between the methods used for analysis of human motion in a laboratory and what can be feasibly used in a clinic @vanierselSystematicReviewQuantitativeclinical2004 @buckleyRoleMovementAnalysis2019. Some clinics may use gait mats or force plates, but for many clinics and assessments (e.g., the Timed Up and Go Test), tools for quantitative motion analysis may be as simple as using a stop watch. Use of tools in a clinic is largely a practical choice, with Kerr et al. describing access, ease of use and value for money as key needs in adopting technology for clinical use @kerrAdoptionStrokeRehabilitation2018 and Buckley et al. describing the tradeoff between wanting more detailed methods of analysis and the complexity of using such software in a clinic @buckleyRoleMovementAnalysis2019. 
 
 Augmenting clinician care with quantitative data could help trend trends over time, provide precise feedback on care, and also help provide justification to insurance for reimbursement @parksCurrentLowCostVideoBased2019. Often times, research into quantitative use for clinical use examines adopting practical everyday technology to provide data, such as using smartphone accelerometers for gait analyses @grouiosAccelerometersOurPocket2022@nishiguchiReliabilityValidityGait2012. While accelerometers are relatively inexpensive and easy to use, extractions of meaningful data from their signals can be difficult @ClinicalApplicationsSensors. Augmenting d
