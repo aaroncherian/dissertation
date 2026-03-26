@@ -1,5 +1,26 @@
 == Introduction
 
+*The Microsoft Kinect: A case study in accessibility*
+
+In 2010, Microsoft released the Kinect, a gaming peripheral for the Xbox 360 that, unlike other gaming consoles, did not require any controllers to use. Instead, the Kinect used dual infrared emitters/sensors and RBG cameras to create a 3D depth map in real-time @shottonRealTimeHumanPose. 
+
+Initially, the Kinect was a commerical success. Over the years however, a myriad of factors caused the Kinect to be faded out of use, until it was officially discontinued in 2017 @pandeSlowPainfulDeath2023. 
+
+One could tell this story and ultimately, call the Kinect a failure. That story however, would not account for how a gaming device changes the landscape of research and technology. 
+
+While today there is an abundance of software to provide tracking and motion capture to the everyday user, in the pre-deep learning area devices that could provide this kind of data typically cost tens of thousands of dollars. Suddenly, for the first time, it was available for a tidy sum of \$150.
+
+Many developers saw the potential in this software, if only it was not a black-box. And so, within weeks of its release, the Kinect was hacked. Adafruit posted a \$3,000 bounty to be awarded to the first person to do so @adafruitOpenKinectProject2010. The first open-source drivers to use the Kinect on the PC appeared within weeks. A perhaps interesting note here is that this contest was actually proposed to Adafruit by a core developer on the Kinect team. He had been frustrated with Microsoft's reluctance to offer any PC support and wanted to force their hand @KinectDeveloperClaims. 
+
+
+In the pre-deep learning revolution era, the Kinect was the first time technology to track human motion, which typically cost tens of thousands of dollars, was available for a neat sum of \$150. Many developers saw the potential in this software. Within days of its release, the Kinect was hacked. Adafruit posted a \$3000 bounty for the first person to do so @adafruitOpenKinectProject2010, and open-source drivers for PC use appeared within weeks (an interesting note: this contest was proposed to Adafruit by a core developer on the Kinect team who was frustrated with Microsoft's reluctance to offer any PC support @KinectDeveloperClaims). Depsite their initial reluctance to embrace this usage, Microsoft eventually released a developer kit in 2012, after which the Kinect saw a sudden widespread of use in biomechanical research. 
+
+Numerous studies exist detailing the use of the Kinect for clinical and research use @ValidityMicrosoftKinect2012 @jebeliStudyValidatingKinectV22017 @yeungEvaluationMicrosoftKinect2014. Even though several limitations @pfisterComparativeAbilitiesMicrosoft2014 (e.g. occlusion causing major issues due to the single camera view point) were identified, the cost and availability of the system made it one of the first available-to-researchers systems to take something very costly and do it for much less. 
+
+Even after Microsoft discontinued the Kinect for gaming, they released it under the Azure Development Kit for a few years after. Eventually however, this was discontinued as well. I go through the history and use of a defunct system here because I believe ultimately, even in its eventually failure continue to be in use, this story neatly illustrates the needs of the research and clinical community. There is a significant need for an available, low-cost system that researchers can use and adapt to their own purposes - one that cannot simply be 'discontinued'. 
+
+== Quantitative motion analysis 
+
 Human movement is an adaptive, complex mechanism, and quantitative motion analysis finds measurable terms (i.e. joint kinematics, gait parameters, acceleration profiles) from this complexity. Most of us are familiar with quantitative analysis in some form. For example, reading one's daily step count on their phone is an example of extracting kinematic data from accelerometers and gyroscopes. Researchers and clinicians often make use of quantitative motion analysis as well, though often at more detailed levels with more sophisticated equipment. The following sections examine the use of quantitative motion analysis in both research and clinical work and existing gaps. 
 
 

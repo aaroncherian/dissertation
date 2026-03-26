@@ -1,6 +1,6 @@
 == Discussion
 
-*Joint center and joint kinematic accuracy*
+*Joint trajectory and kinematics accuracy*
 
 Reconstructed joint center error was generally under 30 mm across all joints, with the largest errors observed at the hip (approximately 20 mm in the anterior-posterior and vertical axes across speeds). Kinematic error was typically below 5°, with larger error observed only for the ViTPose-derived ankle angle at higher speeds. 
 
@@ -34,7 +34,7 @@ These findings suggest that movement speed should be considered when interpretin
 
 RTMPose-derived reconstructions were generally consistent across spatial, kinematic, and spatiotemporal gait metrics, without the speed-dependent temporal effects observed in MediaPipe or the spatial bias observed in ViTPose-derived reconstructions. Ankle kinematics were tracked with the lowest error among the evaluated methods. This suggests a balance between spatial accuracy and temporal stability relative to other evaluated approaches. 
 
-MediaPipe SPM analyses revealed regions of significant difference flanking peak hip extension and knee flexion that decreased with increasing walking speed. These speed-dependent changes may be related to the behavior of the One-Euro filter @casiez1FilterSimple2012 utilized in MediaPipe landmark smoothing. The one-euro filter is an adaptive low-pass filter that adjusts its cutoff frequency based on signal velocity - applying stronger smoothing during slower motion and less smoothing during faster motion, balancing lag and jitter. The regions surrounding peak angle excursions correspond to phases of rapid change in joint velocity, where the filter must adapt to changing signal dynamics. Transitions between low and high velocity phases may introduce temporal lag. At slower walking speeds, overall signal velocities are lower, potentially leading to increased smoothing and greater lag. As walking speed increases, reduced smoothing may allow the signal to more closely track rapid changes, resulting in smaller deviations.  
+MediaPipe SPM analyses revealed regions of significant difference flanking peak hip extension and knee flexion that decreased with increasing walking speed. These speed-dependent changes may be related to the behavior of the one-euro filter @casiez1FilterSimple2012 utilized in MediaPipe landmark smoothing. The one-euro filter is an adaptive low-pass filter that adjusts its cutoff frequency based on signal velocity - applying stronger smoothing during slower motion and less smoothing during faster motion, balancing lag and jitter. The regions surrounding peak angle excursions correspond to phases of rapid change in joint velocity, where the filter must adapt to changing signal dynamics. Transitions between low and high velocity phases may introduce temporal lag. At slower walking speeds, overall signal velocities are lower, potentially leading to increased smoothing and greater lag. As walking speed increases, reduced smoothing may allow the signal to more closely track rapid changes, resulting in smaller deviations.  
 
 ViTPose-derived 3D reconstructions required a scaling factor of \~0.98 to align with the reference, suggesting an apparent 2-3\% size difference. Trajectory error was disproportionately elevated in the vertical direction compared to other tracker-derived data, suggesting that this discrepancy may be primarily vertical in nature. This is consistent with the minimal impact of the size difference observed on stride and step length, which are calculated along the AP direction. While ViTPose-derived knee and hip angles showed the lowest error overall, ankle angle error was notably higher. Given the sensitivity of foot segment orientation to small positional errors,  vertical positioning error at the toe may produce the near-constant plantarflexion offset and persistent suprathreshold SPM clusters observed across the gait cycle. Although ViTPose-derived estimates were generally accurate, care would need to be taken in calculating and assessing parameters that may depend on different axes (such as minimum toe clearance, which is the vertical height between the foot and the floor at lowest point of swing).
 
@@ -46,3 +46,5 @@ These findings show that while all trackers preserved key patterns of movement, 
 https://pmc.ncbi.nlm.nih.gov/articles/PMC12942615/#sec3-medicina-62-00418 for stride length and swing time
 
 https://pmc.ncbi.nlm.nih.gov/articles/PMC10511642/ for openpose vs mediapipe vs kinovea spm
+
+https://pmc.ncbi.nlm.nih.gov/articles/PMC10494994/ - hip is worse with speed? for theia
