@@ -15,7 +15,7 @@ Today, markerless tracking of humans has rapidly become the domain of computer v
 
 * Needs in the markerless motion capture field *
 
-Despite its potential, markerless motion capture does have limitations. Some of these are practical limitations - reconstruction accuracy can be affected by a number of factors (i.e., lighting, environment, clothing). Chapter __ expands on these limitations from a practical standpoint. 
+Despite its potential, markerless motion capture does have limitations. Some of these are practical limitations - reconstruction accuracy can be affected by a number of factors (i.e., lighting, environment, clothing). Chapter XXX expands on these limitations from a practical standpoint. 
 
 Within the available methods for research and clinical use however, compromises must still be made. Current solutions can be expensive (e.g., Theia Markerless, \$25,000+) or are constrained to particular applications (e.g., OpenCap), making adaptation across diverse research and clinical needs difficult.
 
