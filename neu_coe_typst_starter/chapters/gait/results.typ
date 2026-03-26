@@ -1,14 +1,19 @@
 == Results
 
-I refer to each FreeMoCap configuration by its pose estimation backend (MediaPipe, RTMPose, ViTPose) for brevity.
-
 === Trajectories 
-Reconstructed joint centers were generally under 30mm, with lowest error across the mediolateral (ML) axes (@fig-traj-x, @tbl-traj-rmse-x). The hip joint center exhibited the most error, with RMSEs of \~20mm in the anterior-posterior (AP) (@fig-traj-y, @tbl-traj-rmse-y) and vertical axes (@fig-traj-z, @tbl-traj-rmse-z) across all speeds.  
 
-Increases in trajectory error across speed were primarily observed at distal joints in the AP and vertical directions - although exceptions occurred (e.g. knee AP error decreased with speed for RTMPose and ViTPose, and vertical ankle error remained stable across all speeds.) Hip joint error was largely unaffected by speed across all three axes. 
+The reconstructed 3D data from each pose estimation backend are plotted alongside the marker-based reference in @fig-gait-reconstruction, with trajectories in the X (mediolateral), Y (anteroposterior) and Z (vertical) time normalized to 0-100% of the gait cycle in @fig-traj-x, @fig-traj-y, and @fig-traj-z, respectively.
 
-Generally RTMPose-derived data showed the lowest joint trajectory error. ViTPose error tended to be the highest, particularly in the vertical axis with larger errors and consistent underestimation of ankle and toe trajectories (@fig-traj-z). 
+#figure(
+  image("figures/example_gait.png", width: 100%),
+  caption: [Example of markerless motion capture with each pose estimation backend. Left: MediaPipe (blue); Middle: RTMPose (orange); Right: ViTPose (green). The marker-based reference is displayed in black for each frame. ]
+) <fig-gait-reconstruction>
 
+Reconstructed joint centers were generally under 30mm, with lowest error across the mediolateral (ML) axes (@tbl-traj-rmse-x). Errors were largest at the hip, with RMSE values of approximately 20 mm in both the anteroposterior (AP) axes (@tbl-traj-rmse-y) and vertical axes (@tbl-traj-rmse-z) across all speeds.  
+
+Errors increased with speed primarily at the distal joints in the AP and vertical directions, while the proximal joint (hip) error remained largely stable. Exceptions were observed, including decreased knee AP error with increasing speed for RTMPose and ViTPose and relatively consistent vertical ankle angle across all speeds). 
+
+Across trackers, RTMPose consistently showed the lowest trajectory error, while ViTPose exhibited the highest error, particularly in the vertical axis. These differences were most apparent at the ankle and toe, where ViTPose demonstrated a consistent vertical offset relative to the reference. 
 
 #figure(
   image("figures/trajectories_x.svg", width: 100%),
@@ -34,9 +39,9 @@ Generally RTMPose-derived data showed the lowest joint trajectory error. ViTPose
 
 === Joint Kinematics
 
-Kinematic error tended to be under 5°, with errors exceeding 5° only exhibited at higher speeds for the ViTPose-tracked ankle (@tbl-joint-angle-rmse). Similar to the joint trajectories, angles for distal joints (knee and ankle) increased with speed. ViTPose error was smallest for hip and knee angles, while RTMPose error was smallest for the ankle. ViTPose exhibits a consistent plantarflexion offset in comparison to the reference data (@fig-joint-ang-spm)
+Kinematic error remained below 5° across most conditions, with notable deviations emerging primarily at higher speeds in the ViTPose-tracked ankle (@tbl-joint-angle-rmse). Error increased with speed, particularly in distal joints (ankle and hip) while proximal joints remained relatively stable. Across trackers, ViTPose showed the lowest error for hip and knee angles, whereas RTMPose performed best at the ankle. In contrast, ViTPose exhibited consistent plantarflexion offset relative to the reference data (@fig-joint-ang-spm).
 
-Statistical parametric mapping (SPM) shows common suprathreshold clusters (critical thresholds ranged from t\* = 3.41 to 4.56 across conditions and trackers) for all three joints in early stance. MediaPipe in particular exhibits suprathreshold clusters for hip and knee angles that decrease with speed. At the ankle, ViTPose showed the most extensive deviation, with suprathreshold clusters spanning much of the gait cycle at higher speeds, while RTMPose showed the fewest. 
+Statistical parametric mapping (SPM) revealed common suprathreshold clusters ($t\*$ = 3.41 - 4.56 across conditions and trackers) across all joints in early stance. These deviations were most pronounced at the ankle, where ViTPose exhibited widespread differences spanning much of the gait cycle at higher speeds, while RTMPose showed comparatively little deviation. MediaPipe exhibited suprathreshold clusters for hip and knee angles that decreased with speed
 
 #figure(
   image("figures/joint_angles_with_spm.svg"),
@@ -48,7 +53,8 @@ Statistical parametric mapping (SPM) shows common suprathreshold clusters (criti
 
 === Gait Event Timing
 
-Gait event timing errors were low across all trackers, with heel-strike timing errors ranging from +5.4 to +9.3 ms and toe-off errors from +6.1 to +15.4 ms (@fig-timing-error). The majority of errors fell within one frame (33ms) of timing error, with a slight positive bias that indicates slightly delayed detection. Heel-strike detection was more tightly clustered than toe-off, which showed more errors at one frame of delay. 
+Timing errors in heel strike and toe off detection were small across all trackers. Heel strike timing ranged from +5.4 to +9.3 ms and toe-off errors from +6.1 to +15.4 ms (@fig-timing-error). The majority of errors fell within a single frame (33 ms) of timing error, with a slight positive bias indicating slightly delayed detection.  
+
 
 #figure(
   image("figures/gait_events_histogram.svg", width: 100%),
@@ -57,16 +63,19 @@ Gait event timing errors were low across all trackers, with heel-strike timing e
 
 == Gait Parameters
 
-Spatiotemporal gait parameters pooled across all walking speeds showed minimal bias and excellent agreement with the reference (@tbl-ba-gait-pooled). Limits of agreement (LoA) for stride and step length were within approximately ±70mm for all pose estimation backends. LoA for stance and swing duration were within ±40ms for RTMPose and ViTPose and within ±70ms for MediaPipe. Across all parameters, the lowest agreement was in swing phase duration (ICC = \~.90). 
+Spatiotemporal gait parameters, pooled across all walking speeds, showed minimal bias and excellent agreement with the reference (@tbl-ba-gait-pooled). Limits of agreement (LoA) for stride and step length were within approximately ±70mm for all pose estimation backends. For stance and swing duration, LoA were within ±40ms for RTMPose and ViTPose and within ±70ms for MediaPipe. 
 
-Bias was generally small across trackers, with ViTPose showing near-zero bias (-0.93 - 0.81ms), while MediaPipe showed larger deviations (-5.35 - 4.78ms). MediaPipe also exhibited wider limits of agreement, while RTMPose and ViTPose showed more consistent agreement with the reference system. 
+Agreement was high overall, with the lowest agreement observed in swing phase duration (ICC ≈ 0.90). Bias remained generally small across trackers, with ViTPose showing near-zero bias (-0.93 - 0.81 ms), while MediaPipe showed larger deviations (-5.35 - 4.78 ms). Consistent with this, MediaPipe also exhibited wider LoA, while RTMPose and ViTPose showed more consistent agreement with the reference system. 
 
 #include "tables/ba_gait_pooled.typ"
 
 
-Spatial gait parameters (step and stride length) demonstrated clear speed-dependent changes (@fig-gait-ba). When stratified by speed, spatial metric LoA widened with increasing walking speed (i.e. ViTPose step length LoA widened from ±19 mm to ± 88mm across speed). While stride length maintained strong agreement across speed (ICC \> 0.90 across all speeds ), step length agreement decreased substantially at higher speeds (ICC≈ 0.78 at high speeds). Across trackers, RTMPose and ViTPose showed more consistent agreement, while MediaPipe exhibited wider limits of agreement. Speed-stratified Bland-Altman statistics and ICC for spatial parameters can be found in Appendix A (@tbl-ba-gait-by-speed-spatial)
+Spatial gait parameters (step and stride length) demonstrated clear speed-dependent changes (@fig-gait-ba). 
+Limits of agreement (LoA) widened with increasing walking speed (e.g., ViTPose step length LoA widened from ±19 mm to ± 88mm across speeds).
 
-In contrast, bias and LoA for temporal metrics (swing and stance duration) remained consistent across walking speed. Stance duration agreement remained strong at lower and moderate speeds, but dropped sharply at the highest speed (ICC ≈ 0.65-0.72 across trackers). In contrast, swing duration showed a more progressive decline in agreement with increasing speed, decreasing to moderate agreement at higher speeds (ICC ≈ 0.57-0.66). Across all conditions, MediaPipe showed lower agreement compared to RTMPose and ViTPose.Speed-stratified Bland-Altman statistics and ICC for temporal parameters can be found in Appendix A (@tbl-ba-gait-by-speed-temporal).
+Stride length agreement remained strong across speed (ICC \> 0.90 across all speeds ), while step length agreement decreased at higher speeds (ICC ≈ 0.78 at high speeds). Across trackers, RTMPose and ViTPose showed more consistent agreement, while MediaPipe exhibited wider limits of agreement, consistent with pooled results. Speed-stratified Bland-Altman statistics and ICC for spatial parameters can be found in Appendix A (@tbl-ba-gait-by-speed-spatial).
+
+In contrast to spatial parameters, bias and LoA for temporal metrics (swing and stance duration) remained consistent across walking speed. Stance duration agreement remained strong at lower and moderate speeds, but dropped sharply at the highest speed (ICC ≈ 0.65-0.72 across trackers). In comparison, swing duration showed a more progressive decline in agreement with increasing speed, decreasing to moderate agreement at higher speeds (ICC ≈ 0.57-0.66). Across all conditions, MediaPipe showed lower agreement compared to RTMPose and ViTPose.Speed-stratified Bland-Altman statistics and ICC for temporal parameters can be found in Appendix A (@tbl-ba-gait-by-speed-temporal).
 
 
 #figure(
