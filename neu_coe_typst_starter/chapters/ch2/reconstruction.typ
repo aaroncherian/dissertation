@@ -1,6 +1,11 @@
 == 3D Reconstruction
 
-The final key step in the markerless motion capture pipeline is triangulating 2D keypoint detections into 3D coordinates. For each frame, the camera projection matrices (containing intrinsics and extrinsics) estimated during calibration and the 2D keypoint detection from each camera view are used to solve for 3D position via direct linear transformation. 
+The final key step in the markerless motion capture pipeline is triangulating 2D keypoint detections into 3D coordinates (@fig-reconstruction-example). For each frame, the camera projection matrices (containing intrinsics and extrinsics) estimated during calibration and the 2D keypoint detection from each camera view are used to solve for 3D position via direct linear transformation. 
+
+#figure(
+  image("reconstructed_human.png", width:50%),
+  caption: [An example frame of data reconstructed from six camera using a MediaPipe pose estimation backend. ]
+) <fig-reconstruction-example>
 
 Because pose estimators can produce erroneous detections in individual views (due to occlusions, background clutter, odd movements etc.), we implement a progressive outlier rejection procedure during triangulation. For each joint center on each frame, the system first triangulates a 3D data point using all available cameras, and then computes mean reprojection error across those cameras. Should this error fall below a threshold, the solution is accepted.
 

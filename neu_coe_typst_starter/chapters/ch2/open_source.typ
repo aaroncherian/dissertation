@@ -1,1 +1,5 @@
 == Open-source
+
+The FreeMoCap software is released under the GNU Affero General Public License (AGPL), which ensures that the full source code for every step described in this pipeline remains publicly available. This transparency allows researchers to examine analysis pipeline and facilitates methodological reproducibility, allowing analyses to be replicated and extended across different datasets and research groups. An open-source model allow enables rapid integration of advances made by the computer vision and machine learning backends. By focusing on creating a modular architecture, we allow for community contributions to accelerate iteration and research.
+
+Critically, this also facilitates clinical use of the software - for true widespread adoption, the software must be freely deployable without procurement processes, data privacy concerns, or recurring license fee. The open-source model is a key part and even requirement of the mission. 

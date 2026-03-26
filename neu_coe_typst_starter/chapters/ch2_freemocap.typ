@@ -8,3 +8,4 @@
 #include "ch2/data_handling.typ"
 #include "ch2/open_source.typ"
 #include "ch2/current_uses.typ"
+#include "ch2/conclusions.typ"
