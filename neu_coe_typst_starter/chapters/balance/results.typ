@@ -2,7 +2,7 @@
 
 === Center-of-Mass (COM) Path Length
 
-MediaPipe-derived COM path length closely matched the reference and preserved separation across progressively more challenging conditions (@Center-of-mass-path-length). In contrast, RTMPose and ViTPose-derived data overestimated path length and failed to clearly differentiate between conditions. 
+MediaPipe-derived COM path length closely matched the reference and preserved separation across progressively more challenging conditions (@Center-of-mass-path-length). In contrast, RTMPose and ViTPose-derived data overestimated path length and failed to clearly differentiate between balance conditions. 
 
 #figure(
   image("figures\com_path_length.svg", width: 100%),
@@ -14,7 +14,7 @@ MediaPipe-derived COM path length closely matched the reference and preserved se
 
 === Center-of-mass velocity distribution
 
-COM velocity distributions between MediaPipe-derived and marker-based reference data closely matched each other in the ML and AP directions, though MediaPipe-derived COM velocity distributions have a consistently longer tail (@fig-violin). Substantial difference is seen in the vertical direction, particularly on the solid ground conditions. As we expect little vertical movement in the COM on solid ground, this largely reflects measurement noise for each system rather than true postural movement. In the Eyes Open/Solid Ground condition, mean vertical velocity SD was 0.90 ± 0.26 mm/s for the marker-based reference, 2.40 ± 0.42 mm/s for MediaPipe-derived data, 9.60 ± 1.94 mm/s for ViTPose-derived data, and 14.25 ± 1.99 mm/s for RTMPose-derived data.
+COM velocity distributions between MediaPipe-derived and marker-based reference data closely matched in the ML and AP directions, though MediaPipe-derived COM velocity distributions have a consistently longer tail (@fig-violin). Larger differences were seen in the vertical direction, particularly during the solid ground conditions. As we expect little vertical movement in the COM on solid ground, this largely reflects measurement noise for each system rather than true postural movement. In the Eyes Open/Solid Ground condition, mean vertical velocity SD across trials was 0.90 ± 0.26 mm/s for the marker-based reference, 2.40 ± 0.42 mm/s for MediaPipe-derived data, 9.60 ± 1.94 mm/s for ViTPose-derived data, and 14.25 ± 1.99 mm/s for RTMPose-derived data.
 
 Mean 2D COM velocity in the horizontal plane was comparable (@tbl-velocity-metrics) was comparable between MediaPipe-derived and reference data across all conditions, with slight underestimation of velocity by MediaPipe-derived data. 
 
@@ -32,7 +32,7 @@ Mean 2D COM velocity in the horizontal plane was comparable (@tbl-velocity-metri
 
 === FMC-MediaPipe Accuracy
 
-MediaPipe-derived path length demonstrates strong agreement with the reference system (@fig-path-length-agreement) (ICC = 0.985). Systematic bias was small (1.25 mm) with limits of agreement at approximately ± 68 mm. A slope of 0.90 indicated a proportional underestimation of the path length with Bland-Altman analyses showing more underestimation in progressively harder conditions. In contrast, RTMPose and ViTPose demonstrated low ICC values (ICC < 0.10), high positive bias (726 mm and 1052 mm respectively), and wide limits of agreement. Summary metrics for comparisons across systems are shown in @tbl-path-length-agreement.  
+MediaPipe-derived path length demonstrates strong agreement with the reference system (@fig-path-length-agreement) (ICC = 0.985). Systematic bias was small (1.25 mm) with limits of agreement at approximately ± 68 mm. A slope of 0.90 indicated a proportional underestimation of the path length with Bland-Altman analyses showing more underestimation in progressively harder conditions. In contrast, RTMPose and ViTPose demonstrated poor agreement (ICC < 0.10), high positive bias (726 mm and 1052 mm respectively), and wide limits of agreement. Summary metrics for comparisons across systems are shown in @tbl-path-length-agreement.  
 
 
 #figure(
@@ -43,8 +43,7 @@ MediaPipe-derived path length demonstrates strong agreement with the reference s
 #include "path_length_agreement_table.typ"
 
 === FMC-MediaPipe Sensitivity
-
-The MediaPipe-based markerless system tracked COM changes due to different perturbations with strong fit to the regression line (_r_#super[2] = 0.83 - 0.96) and slopes near unity (0.89 - 1.06). Slight underestimation was observed in the visual perturbation condition. ViTPose and RTMPose-derived data demonstrated generally (_r_#super[2] = 0.03 to 0.45), with proportional bias differing substantially (slope = -6.46 to 1.58) from the ideal. 
+MediaPipe-derived COM changes exhibited good-to-excellent sensitivity to different perturbations (_r_#super[2] = 0.83 - 0.96) with slope of the fitted regression line near unity (0.89 - 1.06), though slight underestimation of path length was observed under visual perturbation. ViTPose and RTMPose-derived COM changes demonstrated poor sensitivity (_r_#super[2] = 0.03 to 0.45), with proportional bias differing substantially (slope = -6.46 to 1.58) from the ideal. 
 
 #figure(
   image("com_sensitivity.svg", width: 100%),
