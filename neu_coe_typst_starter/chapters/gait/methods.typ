@@ -7,7 +7,7 @@
 === Experimental setup
 *Marker-based motion capture*
 
-The marker-based system consisted of 9 Miqus M3 and 2 Oqus 700+ cameras (300Hz) and tracked the positions of 48 markers. Four markers were affixed to a head cap (top, front, left, right). An additional marker was placed on the C7 vertebra. Trunk markers were placed on the sternum, right lower back, and bilaterally on the acromion processes and on the anterior and posterior aspects of the shoulders. Upper extremity markers were placed bilaterally on the medial and lateral humeral epicondyles and the ulnar and radial styloid processes and dorsum of the hands. Pelvic markers were placed bilaterally on the anterior superior iliac spines (ASIS), iliac crests, and greater trochanters. Posterior pelvic motion was tracked using a rigid sacral plate containing markers positioned over the left and right posterior superior iliac spines (PSIS) and the sacrum. Lower extremity markers were placed bilaterally on the medial and lateral femoral epicondyles, medial and lateral malleoli, calcanei, 1st and 5th metatarsal heads, and dorsal aspect of the second metatarsal. 
+The marker-based system consisted of 9 Miqus M3 and 2 Oqus 700+ cameras (300 Hz) and tracked the positions of 48 markers. Four markers were affixed to a head cap (top, front, left, right). An additional marker was placed on the C7 vertebra. Trunk markers were placed on the sternum, right lower back, and bilaterally on the acromion processes and on the anterior and posterior aspects of the shoulders. Upper extremity markers were placed bilaterally on the medial and lateral humeral epicondyles, the ulnar and radial styloid processes, and dorsum of the hands. Pelvic markers were placed bilaterally on the anterior superior iliac spines (ASIS), iliac crests, and greater trochanters. Posterior pelvic motion was tracked using a rigid sacral plate containing markers positioned over the left and right posterior superior iliac spines (PSIS) and the sacrum. Lower extremity markers were placed bilaterally on the medial and lateral femoral epicondyles, medial and lateral malleoli, calcanei, 1st and 5th metatarsal heads, and dorsal aspect of the second metatarsal. 
  
 *Markerless motion capture*
 
@@ -21,26 +21,26 @@ Prior to recording, cameras were calibrated using a ChArUco calibration board (s
 
 Participants walked on a treadmill at progressively increasing speeds. The treadmill increased in 0.50 m/s increments every 30 seconds, starting from rest until 2.50 m/s. Prior to data collection, participants were given time to familiarize themselves with the treadmill and each speed condition.
 
-Each participant completed two trials, with all trials recorded simultaneously using both marker-based and markerless motion capture systems. At the start of each trial, participants held an "A-pose", a neutral position with feet slightly apart, head up, and arms angled downward at roughly 45 degrees. 
+Each participant completed two trials, with all trials recorded simultaneously using both marker-based and markerless motion capture systems. At the start of each trial, participants assumed an "A-pose", a neutral position with feet slightly apart, head up, and arms angled downward at roughly 45 degrees. 
 
 For analysis, 600 frames of data (20 seconds) were analyzed from each condition for each trial.
 
 === Data Processing
 *Marker-based motion capture data*
 
-Marker-based data were tracked, labeled and processed in QTM. Missing trajectories were interpolated using linear or relational gap-filling. The labeled and cleaned marker positions were exported as a `.tsv` file containing system timestamps. Head, elbow, wrist, knee and ankle joint centers were defined as the midpoint of their respective medial and lateral markers. Shoulder joint centers were defined as the midpoint of the anterior and posterior markers. The hip joint centers were estimated using the methods described by Bell et al. @bellPredictionHipJoint1989. Raw kinematic data were filtered using a zero-lag, 4th order, 6Hz Butterworth filter. 
+Marker-based data were tracked, labeled and processed in QTM. Missing trajectories were interpolated using linear or relational gap-filling. The labeled and cleaned marker positions were exported as a `.tsv` file containing system timestamps. Head, elbow, wrist, knee and ankle joint centers were defined as the midpoint of their respective medial and lateral markers. Shoulder joint centers were defined as the midpoint of the anterior and posterior markers. The hip joint centers were estimated using the methods described by Bell et al. @bellPredictionHipJoint1989. Raw kinematic data were filtered using a zero-lag, fourth-order Butterworth filter with a 6 Hz cutoff frequency. 
 
 *Markerless motion capture data*
 
-Synchronized videos were processed using the FreeMoCap (v1.7.4) pipeline described in Chapter 3. 2D body keypoints were detected using MediaPipe (`mediapipe`: v0.10.14),  RTMPose (`rtmposelib`: v0.0.14) and ViTPose (implemented using the `easy_ViTPose` repository on Github) pose estimation software. Corresponding keypoints were triangulated into 3D space. 3D data were filtered using a zero-lag, 4th order, 6Hz Butterworth filter.  
+Synchronized videos were processed using the FreeMoCap (v1.7.4) pipeline described in Chapter 3. 2D body keypoints were detected using MediaPipe (`mediapipe`: v0.10.14),  RTMPose (`rtmposelib`: v0.0.14) and ViTPose (implemented using the `easy_ViTPose` Github repository) pose estimation software. Corresponding keypoints were triangulated into 3D space. 3D data were filtered using a zero-lag, fourth-order Butterworth filter with a 6 Hz cutoff frequency. 
 
 *Data synchronization and alignment*
 
-Joint center trajectories from marker-based and markerless systems were temporally aligned using recorded Unix timestamps from both systems, which were generated on the same acquisition computer. Marker-based data were resampled to match the markerless sampling rate (30Hz). Residual temporal offsets were further refined using cross-correlation of joint trajectories, followed by manual inspection. 
+Joint center trajectories from marker-based and markerless systems were temporally aligned using recorded Unix timestamps from both systems, which were generated on the same acquisition computer. Marker-based data were resampled to match the markerless sampling rate (30 Hz). Residual temporal offsets were further refined using cross-correlation of joint trajectories, followed by manual inspection. 
 
 Markerless data were spatially aligned to the marker-based reference frame using a least-squares optimized rigid transformation that minimized joint center errors between systems. The transformation consisted of three rotational $(r_x, r_y, r_z)$ and three translation $(t_x, t_y, t_z)$ parameters. 
 
-To identify a transformation that was consistent over the full recording, candidate transformations were estimated from randomly sampled subsets of frames and evaluated across the entire dataset. The transformation that minimized the global joint center error across all frames was selected for each trial.
+To identify a transformation that was consistent over the full recording, candidate transformations were estimated from randomly sampled subsets of frames (to improve robustness to noise and occlusion) and evaluated across the entire dataset. The transformation that minimized the global joint center error across all frames was selected for each trial.
 
 === Data Analysis
 
@@ -69,7 +69,7 @@ Spatiotemporal parameters were calculated for each system using their respective
 
 To assess whether systematic scaling differences were present between pose estimation outputs and the marker-based reference, we extended the spatial optimization to include an additional uniform scaling parameter ($s$). In this formulation, the transformation consisted of rotation, translation, and a single global scale factor applied isotropically across all spatial dimensions. 
 
-For each trial, the optimal scale factor was estimated alongside the rigid transformation parameters by minimizing joint center error. These scale factors were not applied to the data used in downstream analyses but instead, they were recorded as a diagnostic measure of potential scale bias between systems.
+For each trial, the optimal scale factor was estimated alongside the rigid transformation parameters by minimizing joint center error. These scale factors were not applied to the data used in downstream analyses but instead were recorded as a diagnostic measure of potential scale bias between systems.
 
 A scale factor of $s = 1$ indicates no global scaling difference between systems, whereas deviations from unity reflect a uniform expansion or contraction of the reconstructed markerless skeleton relative to the reference.
 
