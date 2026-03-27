@@ -59,7 +59,7 @@ Spatiotemporal parameters were calculated for each system using their respective
 
 1) *Stance time:* The time from heel strike to subsequent toe off of the same foot in milliseconds (ms)
 
-2) *Swing time:* Time from toe off to subsequent heel strike of the same foot in milliseconds (ms)
+2) *Swing time:* The time from toe off to subsequent heel strike of the same foot in milliseconds (ms)
 
 3) *Step length:* The anterior-posterior distance between the contralateral ankle at contralateral heel strike and the ipsilateral ankle at the subsequent ipsilateral heel strike, reported in millimeters (mm). To account for the treadmill, step length was corrected by adding the distance traveled by the belt. Distance traveled by the belt was computed using the treadmill speed and the time between heel strikes.
 
