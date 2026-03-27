@@ -164,7 +164,7 @@
   show figure: it => {
     v(1.5em)
     it
-    v(1.0em)
+    v(1.5em)
   }
 
   // Figure captions (single-spaced, slightly smaller)
@@ -173,5 +173,6 @@
     #text(11pt)[#it]
   ]
 
+  
   body
 }
