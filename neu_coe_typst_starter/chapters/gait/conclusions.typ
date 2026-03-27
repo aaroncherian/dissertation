@@ -1,9 +1,2 @@
-This work examined the ability of our system to accurately capture joint trajectories and kinematics. We captured data with errors similar to existing literature, using \$120 worth of equipment. We also characterize the ability of three different pose estimation trackers to track tracjetories, kinematics, and spatiotemporal gait parameters over walking speed, which has yet to be characterized. 
+This study evaluated the accuracy of FreeMoCap, an open-source markerless motion capture system, against a marker-based reference across a range of walking speeds. We characterized the behavior of three different pose estimation backends. All backends produced clinically acceptable trajectory and kinematic errors, but each backend exhibited distinct profiles: MediaPipe's temporal filtering introduced speed-dependent kinematic deviations, ViTPose showed a systematic vertical spatial bias, and RTMPose demonstrated the most consistent agreement overall. These patterns were only apparent because backends were evaluated across multiple speeds under identical conditions, reinforcing the value of accessible, extensible frameworks for systematic benchmarking of markerless motion capture.
 
-Not many articles show impact of speed
-
-Settings in which gait is evaluated can alter measurements (characteristics measured in a lab differed from outside)
-
-https://www.sciencedirect.com/science/article/pii/S2542660522000439
-
-https://pmc.ncbi.nlm.nih.gov/articles/PMC11091809/  
