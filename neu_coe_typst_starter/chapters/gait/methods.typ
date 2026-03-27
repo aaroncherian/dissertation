@@ -15,7 +15,7 @@ The markerless system consisted of six consumer-grade cameras (USB webcams, \~\$
 
 All cameras were connected to a single acquisition computer. Video capture was performed using the FreeMoCap software. Because both FreeMoCap and Qualisys recordings were acquired on the same computer, timestamps from each system were referenced to a shared system clock, enabling temporal alignment between datasets.
 
-Prior to recording, cameras were calibrated using a ChArUco calibration board (square size: 126mm, board size: XXX). Intrinsic and extrinsic camera parameters were estimated using a modified implementation of the Anipose calibration pipeline (see Chapter 3: Calibration for details). At the start of each recording, the board was placed flat on the floor within view of all cameras to define the reference frame of the reconstruction (ground plane alignment). The origin of the capture volume was set using the board, and the reconstructed 3D data were aligned such that the vertical axis corresponded to the Z-axis, with the horizontal plane defined as $Z = 0$.   
+Prior to recording, cameras were calibrated using a ChArUco calibration board (square size: 126mm, board size: 40" x 27.5"). Intrinsic and extrinsic camera parameters were estimated using a modified implementation of the Anipose toolkit @AniposeToolkitRobust2021 (see Chapter 3: Calibration). At the start of each recording, the board was placed flat on the floor within view of all cameras to define the reference frame of the reconstruction (ground plane alignment). The origin of the capture volume was set using the board, and the reconstructed 3D data were aligned such that the vertical axis corresponded to the Z-axis, with the horizontal plane defined as $Z = 0$.   
 
 *Data Collection*
 
@@ -26,17 +26,19 @@ Each participant completed two trials, with all trials recorded simultaneously u
 === Data Processing
 *Marker-based motion capture data*
 
-Marker-based data was tracked, labeled and processed in QTM. Missing trajectories were interpolated using linear or relational gap-filling. The labeled and cleaned marker positions were exported as a `.tsv` file containing system timestamps. Head, elbow, wrist, knee and ankle joint centers were defined as the midpoint of their respective medial and lateral markers. Shoulder joint centers were defined as the midpoint of the anterior and posterior markers. The hip joint centers were estimated using the Bell method @bellPredictionHipJoint1989. Raw kinematic data was filtered using a zero-lag, 4th order, 6Hz Butterworth filter. 
+Marker-based data was tracked, labeled and processed in QTM. Missing trajectories were interpolated using linear or relational gap-filling. The labeled and cleaned marker positions were exported as a `.tsv` file containing system timestamps. Head, elbow, wrist, knee and ankle joint centers were defined as the midpoint of their respective medial and lateral markers. Shoulder joint centers were defined as the midpoint of the anterior and posterior markers. The hip joint centers were estimated using the methods described by Bell et al. @bellPredictionHipJoint1989. Raw kinematic data was filtered using a zero-lag, 4th order, 6Hz Butterworth filter. 
 
 *Markerless motion capture data*
 
-Synchronized videos were processed using the FreeMoCap (v.XX) pipeline described in Chapter X. 2D body keypoints were detected using MediaPipe (v0.10.14),  (`rtmposelib`, v0.0.14) and ViTPose pose estimation software. Corresponding keypoints were triangulated into 3D space. 3D data was filtered using a zero-lag, 4th order, 6Hz Butterworth filter.  
+Synchronized videos were processed using the FreeMoCap (v1.7.2) pipeline described in Chapter 3. 2D body keypoints were detected using MediaPipe (`mediapipe`: v0.10.14),  RTMPose (`rtmposelib`: v0.0.14) and ViTPose (implemented using `easy_ViTPose` repository on Github) pose estimation software. Corresponding keypoints were triangulated into 3D space. 3D data was filtered using a zero-lag, 4th order, 6Hz Butterworth filter.  
 
 *Data synchronization and alignment*
 
 Joint center trajectories from marker-based and markerless systems were temporally aligned using recorded Unix timestamps from both systems, which were generated on the same acquisition computer. Marker-based data were resampled to match the markerless sampling rate (30Hz). Residual temporal offsets were further refined using cross-correlation of joint trajectories, followed by manual inspection. 
 
-Markerless data were spatially aligned to the marker-based reference frame using a least-squares optimized transformation that minimized joint center errors between systems. To identify a transformation that was consistent over the full recording, candidate transformations were estimated from randomly sampled subsets of frames and evaluated across the entire dataset. 
+Markerless data were spatially aligned to the marker-based reference frame using a least-squares optimized rigid transformation that minimized joint center errors between systems. The transformation consisted of three rotational $(r_x, r_y, r_z)$ and three translation $(t_x, t_y, t_z)$ parameters. 
+
+To identify a transformation that was consistent over the full recording, candidate transformations were estimated from randomly sampled subsets of frames and evaluated across the entire dataset. The transformation that minimized the global joint center error across all frames was selected for each trial.
 
 === Data Analysis
 
@@ -61,14 +63,17 @@ Spatiotemporal parameters were calculated for each system using their respective
 
 4) *Stride length:* The anterior-posterior distance between the ipsilateral ankle at ipsilateral heel strike and the same ankle at the subsequent ipsilateral heel strike, reported in millimeters (mm). To account for the treadmill the distance traveled by the belt, step length was corrected by adding the distance traveled by the belt, computed from treadmill speed and the time between heel strikes.
 
-*Scaling* 
+*Scaling Analysis* 
 
-To assess systematic scaling bias, we also estimated the scaling factor that would be required to align markerless reconstructions with the marker-based reference.
+To assess whether systematic scaling differences were present between pose estimation outputs and the marker-based reference, we extended the spatial optimization to include an additional uniform scaling parameter ($s$). In this formulation, the transformation consisted of rotation, translation, and a single global scale factor applied isotropically across all spatial dimensions.
 
+For each trial, the optimal scale factor was estimated alongside the rigid transformation parameters by minimizing joint center error. These scale factors were not applied to the data used in downstream analyses but instead, they were recorded as a diagnostic measure of potential scale bias between systems.
+
+A scale factor of $s = 1$ indicates no global scaling difference between systems, whereas deviations from unity reflect a uniform expansion or contraction of the reconstructed markerless skeleton relative to the reference.
 
 *Statistical Analyses*
 
-Statistical analyses were performed using Python `v3.11`. Root mean squared error (RMSE) was calculated across all time-normalized joint center trajectories and joint angles. RMSE was calculated for each stride, averaged across strides within each trial to calculate a per-trial RMSE and then averaged across all trials to produce a single summary RMSE and standard deviation.
+Statistical analyses were performed using Python `v3.11`. Root mean squared error (RMSE) was calculated across all time-normalized joint center trajectories and joint angles. Per-trial RMSE was obtained by averaging across strides within a trial, and mean ± SD were then computed across all trials.
 
 To identify regions of significant difference between the marker-based reference and each pose estimation backend, statistical parametric mapping (SPM) two-tailed t-tests were performed using the `spm1d` package. SPM{t} statistics were computed across the gait cycle, and statistical significance was assessed at $alpha = 0.05$. SPM extends hypothesis testing to an entire timeseries, identifying continuous regions where differences exceed a critical threshold. 
 
