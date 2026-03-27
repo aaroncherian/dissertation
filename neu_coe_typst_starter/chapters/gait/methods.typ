@@ -2,14 +2,13 @@
 
 === Participants
 
-6 participants (5 male, 1 female) were recruited in this study. Prior to the experiments, participants signed an informed consent form approved by the IRB. Participants wore tight-fitting clothing and were equipped with the full-body marker set after arrival. 
+6 participants (5 male, 1 female) were recruited in this study. All participants were healthy adults with no reported musculoskeletal or neurological impairments affecting gait. The participants provided informed consent and the protocol was approved by the Northeastern University IRB (\#19-08-27).
 
 === Experimental setup
 *Marker-based motion capture*
 
 The marker-based system consisted of 9 Miqus M3 and 2 Oqus 700+ cameras (300Hz) and tracked the positions of 48 markers. Four markers were affixed to a head cap (top, front, left right). An additional marker was placed on the C7 vertebra. Trunk markers were placed on the sternum, right lower back, and bilaterally on the acromion processes and on the anterior and posterior aspects of the shoulders. Upper extremity markers were placed bilaterally on the medial and lateral humeral epicondyles and the ulnar and radial styloid processes and dorsum of the hands. Pelvic markers were placed bilaterally on the anterior superior iliac spines (ASIS), iliac crests, and greater trochanters. Posterior pelvic motion was tracked using a rigid sacral plate containing markers positioned over the left and right posterior superior iliac spines (PSIS) and the sacrum. Lower extremity markers were placed bilaterally on the medial and lateral femoral epicondyles, medial and lateral malleoli, calcanei, 1st and 5th metatarsal heads, and dorsal aspect of the second metatarsal. 
  
-
 *Markerless motion capture*
 
 The markerless system consisted of six consumer-grade cameras (USB webcams, \~\$20, 1280x720 resolution, 30Hz) arranged in a circle around the capture volume. Cameras were positioned to maximize multi-view coverage of the participant. Two cameras were aligned with the frontal plane, positioned anterior and posterior to the participant. The remaining four cameras were placed at approximately 45° oblique angles relative to the sagittal plane. Camera positions were standardized across participants using floor markers, while camera height and orientation were adjusted for each participant to optimize visibility and reduce occlusion. 
