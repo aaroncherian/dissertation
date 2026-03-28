@@ -1,42 +1,47 @@
 = Practical Considerations in Markerless Motion Capture
 
 == Introduction
-Across the preceding three chapters, I have presented various metrics of accuracy and sensitivity for FreeMoCap across gait, balance, and prosthetic gait contexts.  Perhaps the most important disclaimer I can offer is this: in any validation of a markerless system (this one included) the reported metrics of accuracy are not fixed properties of a software package or a system. 
+The preceding three chapters have presented various metrics of accuracy and sensitivity for FreeMoCap across gait, balance, and prosthetic gait contexts. While any research study has limitations, the most important one that I can emphasize is this: in any validation of a markerless system (this one included) the reported metrics of accuracy are not fixed properties of a software package or a system. 
 
-In my experience, the accuracy of a motion capture session is shaped by a confluence of factors: hardware, environment, camera positioning, participant characteristics, and the choices made by the person collecting the data. The metrics reported in any validation study, including those in this dissertation, reflect what a specific configuration was able to achieve under specific conditions. They are not universal guarantees. 
+In practice, the accuracy of a motion capture session is shaped by a confluence of factors: hardware, environment, camera positioning, participant characteristics, and the choices made by the person collecting the data. As such, the metrics reported in any validation study, including those in this work, reflect what a specific system and camera configuration were able to achieve under specific conditions. They are not universal guarantees. 
 
-Consider our laboratory setup for example - the data in this work was collected in that is built and optimized for different kinds of motion analysis. The space is wide and open with space for a six camera setup, has windows with controllable shades to help keep lighting conditions controlled, and minimal clutter and clean white walls to provide a clean background for pose estimation software to latch onto. This is not necessarily representative of real world environments, and not an expectation we can hold of in-home and clinical environments. 
+Consider, for example, our laboratory environment. The data in this work were collected in a space that is optimized for motion analysis: a wide, open room with sufficient space for multi-camera setups, controllable window shades to fix lighting conditions, minimal visual clutter, and clean backgrounds. These conditions are not representative of many real-world environments, particularly in-home or clinical settings, and should not be assumed as a baseline expectation.
 
-What we can do however, is try to make widely known the practices of what one can do it get better data. This chapter is an effort to write about practical considerations in collecting motion capture data from a markerless motion capture system, in the hopes that it can inform or help other validation and collection in the future. 
+This chapter then, is an effort to outline practical considerations for collecting motion capture data, drawing from my experiences in conducting these studies. This chapter highlights factors that I have found strongly influence data quality, in the hopes that it can inform or help other validation and collection in the future
 
-== The important things to know
 
-The first and foremost finding that I can relate is that markerless motion capture is not just a tool, but also a technique. While many users might be able to use this as an out-of-the-box tool to get the data they need, I find that the more you expect out of it, the more there is to learn. Technique is practiced and refined over time - and so will the accuracy of the motion capture data you capture from the system. 
+== Markerless motion capture is a technique
 
-In describing markerless motion capture as a technique, I would put it like so: good motion capture is like good videography and photography. Just as these are skills one needs to hone to take cinematic videos and Instagram-worthy pictures, so too is motion capture a technique that needs to be practiced in order to get research quality data. 
+The first and foremost point is that markerless motion capture is not just a tool, but a technique. 
 
-This metaphor was not just a one-off. Ultimately in markerless motion capture, the raw data are the videos that are taken of the subject. he considerations one must make in taking a good photo or video (e.g., proper lighting, framing against the background, positioning of the subject within the frame) often apply to markerless motion capture. 
+While systems like FreeMoCap can be used out of the box to produce clean, usable data - collecting research-quality data can require iterations. This might be tinkering with the setup, observing points of failure in reconstruction and iterating on lighting and camera placement decisions. 
+
+I find the most useful way to think about it is this: good markerless motion capture is like good videography or photography. Producing high quality images requires more than just a capable camera, it requires attention to lighting, consideration of framing, the background etc. Markerless motion capture operates on the same principles. The raw data are the recorded videos, and the quality of those videos directly constrains the quality of the reconstructed motion.
+
+For this reason, many of the considerations that apply to capturing good images—clear lighting, visual contrast between subject and background, and thoughtful framing—also apply here. The following sections outline the key factors that emerged as most important in the collection of these datasets.
 
 == Clothing
 
-Clothing should be on the tighter fitting end, although research has shown that clothing may not have a major impact on tracking accuracy @horsakRepeatabilityMinimalDetectable2024 @augustineEffectsTightLoosefitting2023. Perhaps moreso than the tightness of the clothing, an important factor to think of is contrast. I've found that there are two questions related to contrast worth asking when looking at any camera view 
+Clothing should generally be form-fitting, although prior work suggests that clothing alone may not have a major impact on tracking accuracy @horsakRepeatabilityMinimalDetectable2024 @augustineEffectsTightLoosefitting2023. Perhaps more so than the tightness of the clothing, an important factor to consider is contrast. I've found that there are two questions worth asking when evaluating any camera view: 
 
-1) How easy is it to distinguish your participant from the environment? 
+1) How easily can the participant be distinguished from the environment? 
 
-2) How easy is it to distinguish different limbs of your participant from each other?  
+2) How easily can different limbs be distinguished from one another?  
 
-To explain this further, in our initial pilot testing for the validation study, participants wore full-black body suits with black shoes on a black treadmill. Here, we generally found poor results because we failed at both these questions. Regarding the first question, black pants and black shoes are not easy to distinguish on a black treadmill. Regarding the seconds, limbs that are all dressed in black are very difficult to differentiate, particularly in dynamic activities such as gait. We then switched our participant attire to sleeveless shirts, shorts, and spray-painted the shoes white to add the necessary contrast. @fig-clothing below shows the difference between our participant attire during our pilot testing and the validation study proper. 
+To explain this further, in our early pilot testing for this study, participants wore full-black body suits with black shoes on a black treadmill. Here, we generally found poor results largely because we failed at both criteria. First, the participant was note easily distinguishable form the environment. Perhaps unsurprisingly, black pants and shoes do not provide much contrast on a black treadmill. Second, limbs that are all the same, dark color were difficult to differentiate from one another, particularly during dynamic movement, where overlapping segments further reduced visual separability.
+
+We found much more success in modifying our participant attire to increase contrast. Participants wore sleeveless shirts and shorts, and shoes were spray-painted white to improve visibility. @fig-clothing below shows the difference between our participant attire during our pilot testing and the validation study proper. 
 
 #figure(
-    image("practicals/clothing.png"),
-    caption:[Attire worn by participants during markerless motion capture recording. *Left*: Initial pilot testing where the participants wore a full body suit with black shoes. Note how it is hard in the photo to clearly differentiate where the ankles and feet are on the treadmill. *Right*: Validation study attire, with shorts and sleeveless shirt to add limb contrast, and white shoes to add environment contrast. Exposing the joints (elbows and knees) adds much necessary contrast to the body, particularly during gait.]
+    image("practicals/clothing.png", width: 85%),
+    caption:[Attire worn by participants during markerless motion capture recording. *Left*: Initial pilot testing attire: a full body suit with black shoes. Note the difficulty in clearly distinguishing the ankles and feet from the treadmill belt. *Right*: Validation study attire: shorts, a sleeveless shirt to add limb contrast, and white shoes to add environmental contrast. Exposing the joints (elbows and knees) adds much necessary contrast to the body, particularly during gait.]
 ) <fig-clothing>
 
 
 
 == Lighting
 
-Returning to our earlier metaphor, lighting, as in photography, is fundamental. The subject needs to be well-lit, and this matters particularly because minimizing motion blur often means keeping exposure settings low, which inherently darkens the camera view. Participant skin color is also a factor here — darker skin tones against a dark environment compound the contrast challenges. The goal is even, sufficient illumination across the full body, with particular attention to whatever body regions are most relevant to the analysis.
+Returning to my earlier metaphor, lighting, as in photography, is fundamental. The subject needs to be well-lit, and this matters particularly because minimizing motion blur often means keeping exposure settings low, which inherently darkens the camera view. Participant skin color is also a factor here — darker skin tones against a dark environment compound the contrast challenges. The goal is even, sufficient illumination across the full body, with particular attention to whatever body regions are most relevant to the analysis.
 
 @fig-clothing illustrates this as well. In our initial pilot testing, we used a single spotlight resting on the ground and aiming _up_ at the participants' upper bodies. However, in gait, the limbs of primary interest are the lower ones - and the ground-level light left the treadmill belt and lower limbs underlit. In our final validation setup, we used three stage lights aimed downward toward the treadmill surface to improve lower-limb illumination. This arrangement approximated the three-point lighting approach common in film and photography, which helped minimize shadows cast by the participant onto the treadmill belt.
 
