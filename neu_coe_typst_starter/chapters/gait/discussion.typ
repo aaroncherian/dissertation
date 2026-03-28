@@ -1,32 +1,26 @@
 == Discussion
 
-*Joint trajectory and kinematics accuracy*
+*Evaluating joint trajectory and angle accuracy*
 
-Reconstructed joint center error was generally under 30 mm across all joints, with the largest errors observed at the hip (approximately 20 mm in the anteroposterior and vertical axes across speeds). Kinematic error was typically below 5°, with larger errors observed only for the ViTPose-derived ankle angle at higher speeds. 
+This work aimed to examine the accuracy of a low-cost, six-camera markerless motion capture system in capturing gait kinematics across increasing walking speed and characterize the effect of three pose estimation backends (MediaPipe, RTMPose, and ViTPose) on the reconstructed 3D data. Overall, the markerless system demonstrated good agreement with the marker-based reference across joint trajectories and sagittal kinematics, with errors comparable to those reported in prior validation studies.
 
-These values fall within ranges reported in prior markerless validation studies. Joint trajectory errors on the order of 6-30 mm@ripicComparisonThreedimensionalKinematics2023, @nakanoEvaluation3DMarkerless2020 and sagittal angle errors of 2-11° @kankoAssessmentSpatiotemporalGait2021, @uhlrichOpenCapHumanMovement2023 have been reported across various systems. The hip, in particular, has been consistently identified as a challenging joint to estimate. Kanko et al. reported 3D Euclidean hip position error of 36 mm and a hip flexion/extension error of 11° @kankoConcurrentAssessmentGait2021, while Needham et al. noted systematic differences in hip and knee position tracking (\~30-50 mm) @needhamAccuracySeveralPose2021. Notably, the kinematic errors observed in this study fall within the 2-5° range that McGinley et al. suggest is suitable for clinical work, given consideration during interpretation @mcginleyReliabilityThreedimensionalKinematic2009.
+Joint trajectory errors were generally under 30 mm and sagittal joint angle errors below 5°, consistent with ranges reported across markerless validation studies (6–30 mm for trajectories, 2–11° for sagittal angles) @ripicComparisonThreedimensionalKinematics2023 @nakanoEvaluation3DMarkerless2020 @kankoAssessmentSpatiotemporalGait2021 @uhlrichOpenCapHumanMovement2023. The hip - often been identified as a particularly challenging joint, with reported errors of 36 mm and 11° in flexion/extension @kankoConcurrentAssessmentGait2021 and 30-50mm in position tracking @needhamAccuracySeveralPose2021, showed approximately 20 mm of trajectory error in the present study and flexion/extension error below 4.5°.
+Overall, the kinematic errors observed in this study fall within the 2-5° range that McGinley et al. suggest is suitable for clinical work, given consideration during interpretation @mcginleyReliabilityThreedimensionalKinematic2009.
  
 SPM testing showed consistent suprathreshold clusters in early stance phase in knee and ankle kinematics across all speeds. These deviations align with the loading response phase of gait, during which the knee undergoes transient flexion as a method of shock absorption and the ankle plantarflexes slightly during the first rocker phase. This suggests that these rapid, impact related motions may be more difficult to track accurately. 
 
 Additionally, heel strike and impact absorption are known to cause skin surface movement that propagates throughout the lower limb @painSoftTissueMotion2002, and marker-based motion capture can be particularly susceptible to soft tissue artifacts during the landing phases of movement @KinematicDifferencesOptical2013. As such, while marker-based data serve as the reference in this study, they do not represent true joint centers, but rather the most accurate available approximation.
 
-*Gait parameter accuracy*
+*Evaluating gait parameter accuracy*
 
-Gait parameters demonstrated minimal bias and strong agreement with the reference system. Pooled across walking speeds, limits of agreement (LoA) for stride and step length were within approximately ±70 mm across all pose estimation frameworks. Temporal agreement was similarly strong, with stance and swing duration LoA within ±40 ms for RTMPose and ViTPose, and within ±70 ms for MediaPipe. Agreement was lowest for swing phase duration (ICC ≈ 0.90).
+Spatiotemporal gait parameters, pooled across all speeds, demonstrated minimal bias and strong agreement with the reference. Agreement was lowest for the swing phase duration (ICC ≈ 0.90), consistent with findings from Kanko et al. who reported similar LoA ranges and reduced swing phase agreement @kankoAssessmentSpatiotemporalGait2021. This pattern likely reflects higher foot velocity during swing that may be more difficult to capture accurately. Additionally, at a sampling rate of 30 Hz, temporal resolution is limited to approximately 33 ms increments. As the majority of detected gait event timing errors were within one frame, this may obscure finer differences in event timing. Higher frame rate systems may therefore provide improved temporal resolution.
 
-These findings are consistent with prior work. Kanko et al. reported similar LoA ranges (±70 mm for stride/step length and ±40-70 ms for temporal parameters), along with reduced agreement during swing phase @kankoAssessmentSpatiotemporalGait2021. This pattern likely reflects higher foot velocity during swing that may be more difficult to capture. Additionally, at a sampling rate of 30 Hz, temporal resolution is limited to approximately 33 ms increments. As the majority of detected gait event timing errors were within one frame, this may obscure finer differences in event timing. Higher frame rate systems may therefore provide improved temporal resolution.
 
-Clinically, we can compare bland-altman to minimal detectable change values to assess whether our markerless setup would have the resolution to dscriminate between impaired and healthy populations. add some notes about some mdcs from papers. 
-
-*Impact of speed*
+*The impact of speed on accuracy*
 
 As a general pattern, metrics based on spatial position (e.g., joint position and angle error, stride length, step length) demonstrated clear sensitivity to walking speed, while temporal metrics (e.g., heel strike and toe off timing error, stance duration, swing duration) appeared comparatively stable. However, temporal metrics should be interpreted within the context of the system's temporal resolution limits, as mentioned above. 
 
-Increasing walking speed resulted in larger joint position and angle errors, particularly in the AP and vertical directions for distal joints. In contrast, hip position and angle error remained stable across axes and speeds. These findings are consistent with the biomechanics of gait, where increases in speed are primarily expressed in AP and vertical motion rather than mediolateral movement. Higher segment velocities likely amplify frame-to-frame tracking error, particularly for distal segments, contributing to reduced agreement. 
-
-The impact of speed also varies by joint and axis. AP error increased most clearly at the ankle and toe, while vertical error increased more prominently at the knee and toe, suggesting that the impact of speed is not global, but differs from segment to segment. 
-
-These findings suggest that movement speed should be considered when interpreting markerless motion capture data, particularly for distal joints and spatial metrics.
+Increasing walking speed resulted in larger joint position and angle errors, particularly in the anteroposterior and vertical directions at distal joints. In contrast, hip position and angle error remained relatively stable across axes and speeds. These findings are consistent with gait biomechanics, where faster walking speeds produce larger and more rapid excursions in the anteroposterior and vertical directions, especially at distal segments. Higher segment velocities likely amplify frame-to-frame tracking error, contributing to reduced agreement. However, the effect of speed on accuracy was not uniform, but varied across joints and axes, suggesting segment-specific sensitivity to speed.
 
 *Impact of tracker*
 
