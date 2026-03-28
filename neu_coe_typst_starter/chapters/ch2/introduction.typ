@@ -4,7 +4,7 @@ The motivation behind the Free Motion Capture (FreeMoCap) Project is, in a sense
 
 FreeMoCap is designed as a fully open-source markerless motion capture framework that prioritizes accessibility at every level of the pipeline. It is built to work with consumer-grade webcams, requires no physical markers or specialized recording environment, and provides a complete processing pipeline from synchronized video acquisition through 3D kinematic reconstruction. Its architecture is modular and tracker-agnostic, allowing users to swap between pose estimation backends depending on their needs. 
 
-
+This chapter describes the core components of the FreeMoCap framework and the design decisions that shape them. In doing so, it examines how choices motivated by accessibility also carry direct implications for the quality and flexibility of the resulting motion capture data.
 
 == Key Steps in Markerless Motion Capture
 

@@ -1,7 +1,6 @@
 == Conclusions
 
-While I have, and will often, refer to the accessibility and adaptability of our software as a key part of its design, this chapter examines the FreeMoCap pipeline in detail to examine exactly how even the seemingly innocuous choices in design can lead to signficant impacts on system accuracy and applicability to a wide spread of research. While I have, and will often, refer to the accessibility and adaptability of our software as a key part of its design, I hope to show that beyond lowering barrier for entry, these choices can have significant impacts on the quality of the data one can achieve.  
-
+This chapter examined the FreeMoCap pipeline in detail. Beyond that, it explored how while many of the design choices made for the software could simply be framed as accessibility features, they also have direct consequences for data quality. A synchronization approach that supports inexpensive cameras makes it practical to deploy more of them, which strengthens triangulation geometry and reduces occlusion. A tracker-agnostic architecture allows researchers to select the pose estimation backend best suited to their task rather than accepting whatever a system ships with. Lowering the barrier for entry is not just a concession - it is a choice that can directly improve the accuracy and the applicability of the resulting data. 
 
 
 
