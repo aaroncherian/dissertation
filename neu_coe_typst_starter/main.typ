@@ -24,11 +24,16 @@ Write your abstract here.
 Write your acknowledgments here.
 
 #pagebreak()
+#front-heading("PREFACE")
+#include "preface.typ"
+#pagebreak()
 #front-heading("TABLE OF CONTENTS")
-#outline()
+#outline(title: none)
+
 
 // --- Main matter (arabic numerals) ---
 #begin-mainmatter()
+
 
 #include "chapters/ch1_intro.typ"
 #include "chapters/ch2_freemocap.typ"
