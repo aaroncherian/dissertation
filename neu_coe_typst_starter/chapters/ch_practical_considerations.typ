@@ -2,7 +2,9 @@
 
 Sometimes during the scientific process and in the preparation to present and publish, I feel that we as scientists and engineers may get too involved in reducing as much as we can towards neat metrics to plot and display. However in the process of collecting data with and validation this markerless motion capture system, I believe that there are some key components of accuracy that are not simple to boil down into numbers, but can only be explained. This chapter is an effort to write about practical considerations in collecting motion capture data from a markerless motion capture system, in the hopes that it can inform or help other validation and collection in the future. 
 
-The most important disclaimer and limitation that can be stated, I believe, about markerless motion capture, is that in any validation you read with metrics of accuracy or sensitivity, those are not fixed aspects of the software or a system. Accuracy is affected by a number of factors. These can be hardware related, such as the type, resolution and number of cameras. Or it can be environmental factors, such as lighting and room clutter. Even participant-related factors, such as skin color or clothing can affect accuracy. For example, 
+The most important disclaimer and limitation that can be stated, I believe, about markerless motion capture, is that in any validation you read with metrics of accuracy or sensitivity, those are not fixed aspects of the software or a system. Accuracy is affected by a number of factors that are hardware, environment, or participant-specific. Our validation study took place in a wide, minimally cluttered environemnt with space to place six cameras and meticulously controlled lighting and camera placement. This is not necessarily a reasonable expectation that we can expect every lab, clinic or home to adopt. Therefore, it 
+
+
 
 When teaching others about markerless motion capture, and in particular the setup of the capture environment, I mention that it is important to remember that the raw data, ultimately, is the videos that are taken of the subject - and so my preffered metaphor is that that good motion capture is like good videography and photography. The considerations one must make in taking a good photo or video often apply to markerless motion capture. 
 
@@ -16,8 +18,6 @@ The positioning of multiple cameras matters. Frankly, I spent many months optimi
 
 Camera positioning is also highly task dependent. A participant walking on a treadmill will require a participant walking overground for 10 feet. For the former, cameras would want to be placed closer around the treadmill making sure that each camera has the best possible view of the subject at all times. For the latter, you might find that cameras are better placed wider apart to maximize camera view coverage of the walkway in an effort to make sure that at any given point in the participants route, multiple cameras have view of them to reconstruct data from. 
 For a participant that is squatting, it may be important to position the cameras such that occlusion during the squat itself is minimized, which may require different camera angles. To contradict my own advice about avoiding purely saggital planes earlier - when recording participants on a stationary bike, I found moderate success in having cameras completely saggital to the subject on either side of the subject to better account from occlusion in the bike. 
-
-We had a highly controlled setup. Camera tripod positions were marked on the floor with tape to maintain as much consistency in camera placement across participants as possible, though specifics of camera height and orientation were tuned to most clearly view the participant in the frame.
 
 
 
