@@ -40,6 +40,10 @@ Returning to our earlier metaphor, lighting, as in photography, is fundamental. 
 
 @fig-clothing illustrates this as well. In our initial pilot testing, we used a single spotlight resting on the ground and aiming _up_ at the participants' upper bodies. However, in gait, the limbs of primary interest are the lower ones - and the ground-level light left the treadmill belt and lower limbs underlit. In our final validation setup, we used three stage lights aimed downward toward the treadmill surface to improve lower-limb illumination. This arrangement approximated the three-point lighting approach common in film and photography, which helped minimize shadows cast by the participant onto the treadmill belt.
 
+== Framing 
+
+You want to frame the participant as well as you can in the camera views. Particularly in views where they won't be moving, you want to have them take up as much of the frame as possible, but still keep their whole body visible. Camera height and tilt should be optimized to the participant to keep them visible. When doing final touches on camera orientation, I may ask the participant to assume a T-pose where they outstretch their hands, or to go through the motions of the action they will perform to make sure that there is no camera view in which they move out of frame. 
+
 == The Amount of Cameras
 
 Research describing the best number of cameras can be a little contradictory. Theia3D requires an absolute minimum of six cameras, but suggests at least eight. Uhlrich et al. found minimal decrease in error when moving from two to five cameras with OpenCap @uhlrichOpenCapHumanMovement2023, while Yang et al. found substantial decrease in error using an OpenPose-based motion capture system @yangEvaluationCameraConfigurations2025. Part of why we used six cameras, quite frankly, is because that is the maximum amount of USB ports available on the computer to plug into. 
@@ -66,7 +70,6 @@ For tasks where the participant moves across a wide area, such as overground gai
     
 ) <fig-overground>
 
-
 To even contradict my earlier advice regarding sagittal planes - we once recorded participants on a stationary row machine, and due to the occlusions from the machine that purely frontal planes would cause, I used purely sagittal views instead and for this particular task successfully collected clean data (@fig-bike).
 
 #figure(
@@ -74,7 +77,8 @@ To even contradict my earlier advice regarding sagittal planes - we once recorde
     caption: [Camera views to record participants on a stationary row machine. The natural occlusions caused by the machine itself caused some difficulties in camera positioning, but these particular viewpoints gave us good data.]
 ) <fig-bike>
 
-Ultimately, the answer is that there is no exact answer as to where the cameras should be positioned. What it requires is a bit of patience, tinkering, and iteration to find what gets you the best data. This is what I mean when I call it a technique. 
+As you may have come to surmise, the ultimate answwer is that there
+ is no exact answer as to where the cameras should be positioned. Each activity (e.g., squatting, jumping, one-leg balance) will require its own necessary camera setup. What it requires is a bit of patience, tinkering, and iteration to find what gets you the best data. This is what I mean when I call it a technique. 
 
 
 
