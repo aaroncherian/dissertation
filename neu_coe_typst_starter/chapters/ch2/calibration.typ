@@ -1,12 +1,12 @@
 == Calibration 
-In order to reconstruct 3D data from the 2D camera images, it is necessary to determine how each camera observes the world and where each camera is positioned within it. The former is known as intrinsic parameters, describing how each camera maps light onto its image sense. The latter is known as extrinsic parameters, describing the position and orientation of each camera relative to a common world reference frame.  
+In order to reconstruct 3D data from the 2D camera images, it is necessary to determine how each camera observes the world and where each camera is positioned within it. The former describes what we call intrinsic parameters, which is how each camera maps light onto its image sense. The latter describes extrinsic parameters, which is the position and orientation of each camera relative to a common world reference frame.  
 
 Camera calibration is the process of calculating intrisic and extrinsic parameters of a set of cameras, establishing the geometric relationships required to project 2D image features into a shared 3D coordinate system.
 
 
 * The calibration process *
 
-For calibration and 3D reconstruction, FreeMoCap utilizes a modified implementation of the Anipose toolkit @AniposeToolkitRobust2021. Calibration is performed using a ChArUco board, a hybrid calibration target consisting of a checkerboard pattern overlaid with uniquely identifiable ArUco markers (@fig-board). This board can be printed on standard paper and mounted to a rigid surface, or produced directly as a rigid board.
+For calibration and 3D reconstruction, FreeMoCap utilizes a modified implementation of the Anipose toolkit @AniposeToolkitRobust2021. Calibration is performed using a ChArUco board, a hybrid calibration target consisting of a checkerboard pattern overlaid with uniquely identifiable ArUco markers (@fig-board). This board can be printed on standard paper and mounted to a rigid surface, or printed directly onto a rigid board.
 
 #figure(
   image("calibration_board.png", width: 75%),
