@@ -13,7 +13,7 @@ Pose estimation introduces two key challenges in markerless motion capture syste
 
 This however, leads us to our second consideration - even when suitable pose estimation models exist, integrating them into motion capture pipelines remains a challenge. Many existing systems are tightly coupled to a single backend, requiring substantial effort to incorporate alternative models and limiting flexibility for researchers.
 
-* SkellyTracker: design and motivations *
+=== SkellyTracker: Design and Motivations 
 
 To address this limitation, we have developed, and continue to develop,our pose estimation package `SkellyTracker` as a modular pose estimation framework that decouples pose estimation from the rest of the processing pipeline. The system defines a standardized interface for pose estimation models, allowing new trackers to be integrated by implementing this interface. As a result, different pose estimation algorithms can be used interchangeably within the same pipeline without requiring changes to downstream processing steps.
 

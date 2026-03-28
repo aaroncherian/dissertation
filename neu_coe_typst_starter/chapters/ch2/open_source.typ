@@ -1,4 +1,4 @@
-== Open-source
+== Open-Source Licensing
 
 The FreeMoCap software is released under the GNU Affero General Public License (AGPL), which ensures that the full source code for every step described in this pipeline remains publicly available. This transparency allows researchers to inspect the complete analysis pipeline, replicate results, and extend methods across different datasets and research contexts. 
 

@@ -1,4 +1,4 @@
-== Handling Motion Capture Data
+== Standardized Data Representation
 
 A key issue in building a  framework to integrate, run and reconstruct data from multiple pose estimation trackers is that each pose estimation algorithm comes with its own unique outputs and keypoints. Without standardized representation, downstream biomechanical analyses would require different pipelines for each tracker, making it difficult to compare results or extend the system. 
 

@@ -1,4 +1,4 @@
-== Current use
+== Adoption and Use Cases
 
 FreeMoCap has seen adoption across a range of biomechanical applications. This includes independent research, including studies of reaching and grasping kinematics @mazroueiCatchingSmallBalls2026 and sagittal-plane gait mechanics under controlled postural manipulations @nunez-lisboaUnderstandingGaitAlterations2024. Validation work has also shown favorable agreement against marker-based system for spatiotemporal gait parameters @dariciLowCostMarkerlessMotion2025a, squat and countermovement jump mechanics @minogueValidationFreetoUseMarkerless2025, and with regards to clinical application for functional gait assessment as well @dariciLowCostMarkerlessMotion2025a. Beyond biomechanics, the software has been adopted for multimodal corpus construction in computational linguistics @peechattMULTICOLLABMultimodalCorpus2024 @orrMULTICOLLABASLAffectiveComputing2024 @nunnariDGSFabeln1MultiAngleParallel2024.
 
