@@ -16,7 +16,7 @@ Today, markerless tracking of humans has rapidly become the domain of computer v
 
 In the research space, multi-camera markerless motion capture systems are typically implemented in one of three forms, reflecting trade-offs in adaptability, accuracy and accessibility.
 
-The first is custom-built workflows. Some studies describe the building and implementation of custom markerless workflows @nakanoEvaluation3DMarkerless2020 @needhamDevelopmentEvaluationFully2022 @Validation3DMarkerless. While these can be built to research-specific needs, they may often be difficult for other researchers to build and implement themselves without the required computer vision and programming understanding.
+The first is custom-built workflows. Some studies describe the building and implementation of custom markerless workflows @nakanoEvaluation3DMarkerless2020 @needhamDevelopmentEvaluationFully2022 @Validation3DMarkerless @yangEvaluationCameraConfigurations2025. While these can be built to research-specific needs, they may often be difficult for other researchers to build and implement themselves without the required computer vision and programming understanding.
 
 The second is available open-source systems. These systems are designed to be used by other researchers. Most notable here is OpenCap @uhlrichOpenCapHumanMovement2023, a software that allows for the calculation of kinematic data from two (or more) iPhones, but also includes software such as Pose2Sim @pagnonPose2SimEndtoEndWorkflow2022 or PosePipe @cottonPosePipeOpenSourceHuman2022. However, these systems may lack the flexibility to adapt to specific research needs depending on the underlying architecture.
 

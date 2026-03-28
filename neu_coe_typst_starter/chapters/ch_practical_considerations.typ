@@ -19,22 +19,69 @@ This metaphor was not just a one-off. Ultimately in markerless motion capture, t
 
 == Clothing
 
-Clothing should be tight-fitting and ideally, contrasting with the environment. Pose estimation software generally, is looking for a human-like object to place joint centers on, and so the more obviously human-like we can make our subject/participant look, the more we can aid our 2D tracking of the subject. In initial pilot testing of our validation study, participants wore full-body black suits. We found that these were detrimental to our accuracy, particularly in gait. Black-on-black makes overlapping limbs in a camera view hard to contrast - therefore we switched to sleeveless shirts and tight fitting shorts to better provide contrast. We took special care to spray paint shoes worn by the participants to be white such that they had clear contrast against the black belts of our instrumented treadmill. 
+Clothing should be on the tighter fitting end, although research has shown that clothing may not have a major impact on tracking accuracy @horsakRepeatabilityMinimalDetectable2024 @augustineEffectsTightLoosefitting2023. Perhaps moreso than the tightness of the clothing, an important factor to think of is contrast. I've found that there are two questions related to contrast worth asking when looking at any camera view 
+
+1) How easy is it to distinguish your participant from the environment? 
+
+2) How easy is it to distinguish different limbs of your participant from each other?  
+
+To explain this further, in our initial pilot testing for the validation study, participants wore full-black body suits with black shoes on a black treadmill. Here, we generally found poor results because we failed at both these questions. Regarding the first question, black pants and black shoes are not easy to distinguish on a black treadmill. Regarding the seconds, limbs that are all dressed in black are very difficult to differentiate, particularly in dynamic activities such as gait. We then switched our participant attire to sleeveless shirts, shorts, and spray-painted the shoes white to add the necessary contrast. @fig-clothing below shows the difference between our participant attire during our pilot testing and the validation study proper. 
+
+#figure(
+    image("practicals/clothing.png"),
+    caption:[Attire worn by participants during markerless motion capture recording. *Left*: Initial pilot testing where the participants wore a full body suit with black shoes. Note how it is hard in the photo to clearly differentiate where the ankles and feet are on the treadmill. *Right*: Validation study attire, with shorts and sleeveless shirt to add limb contrast, and white shoes to add environment contrast. Exposing the joints (elbows and knees) adds much necessary contrast to the body, particularly during gait.]
+) <fig-clothing>
+
+
 
 == Lighting
-Lighting matters. As in taking a photo, you want the subject to be well-lit, this too matters in markerless motion capture. This matters matters even more when considering that often to minimize motion blur, we must keep our exposure settings somewhat lower which also makes the camera view darker. Therefore, it should be of interest to keep the limbs of interest as well-illuminated as possible. Participant clothing and skin colors should be considering in the lighting. Window shades were always shut with overhead lighting turned on to make sure that time of day and sunlight was never a factor the lighting of our participant. We used three stage lights to light the participant, particularly pointing them down towards the treadmill to illuminate the belt and further improve lower-limb lighting, and approximating a 3 point lighting approach often used in film and photography to minimize the shadows caused by the lights themselves. 
 
-== Camera Positioning
+Returning to our earlier metaphor, lighting, as in photography, is fundamental. The subject needs to be well-lit, and this matters particularly because minimizing motion blur often means keeping exposure settings low, which inherently darkens the camera view. Participant skin color is also a factor here — darker skin tones against a dark environment compound the contrast challenges. The goal is even, sufficient illumination across the full body, with particular attention to whatever body regions are most relevant to the analysis.
 
-The positioning of multiple cameras matters. Frankly, I spent many months optimizing our six camera setup to my liking. From a personal standpoint, I prefer avoiding fully saggital angle. If the subject is relatively stationary in the capture area, I like to try and make sure each camera is gathering as much data about the participant as possible. Fully saggital plane views cut out perhaps 50% of the data you could be gather about the participant, while also contributing to the occlusion problem. Generally, I preferred to place any saggital views as being somewhat oblique saggital - where it could fully see both sides of the participant, even if one side was fairly more obvious to the camera. 
+@fig-clothing illustrates this as well. In our initial pilot testing, we used a single spotlight resting on the ground and aiming _up_ at the participants' upper bodies. However, in gait, the limbs of primary interest are the lower ones - and the ground-level light left the treadmill belt and lower limbs underlit. In our final validation setup, we used three stage lights aimed downward toward the treadmill surface to improve lower-limb illumination. This arrangement approximated the three-point lighting approach common in film and photography, which helped minimize shadows cast by the participant onto the treadmill belt.
 
-== Everything is task-dependent 
+== The Amount of Cameras
 
-Camera positioning is also highly task dependent. A participant walking on a treadmill will require a participant walking overground for 10 feet. For the former, cameras would want to be placed closer around the treadmill making sure that each camera has the best possible view of the subject at all times. For the latter, you might find that cameras are better placed wider apart to maximize camera view coverage of the walkway in an effort to make sure that at any given point in the participants route, multiple cameras have view of them to reconstruct data from. 
+Research describing the best number of cameras can be a little contradictory. Theia3D requires an absolute minimum of six cameras, but suggests at least eight. Uhlrich et al. found minimal decrease in error when moving from two to five cameras with OpenCap @uhlrichOpenCapHumanMovement2023, while Yang et al. found substantial decrease in error using an OpenPose-based motion capture system @yangEvaluationCameraConfigurations2025. Part of why we used six cameras, quite frankly, is because that is the maximum amount of USB ports available on the computer to plug into. 
+
+Generally, we recommend at least three cameras. But the exact number might change depending on the space available and the task at hand. For example, if you were trying to track overground gait, I would suggest using as many cameras as you need to achieve visual coverage of the space. 
+
+== The Positioning of Cameras
+
+Personally, I believe in camera positioning is a key part of gathering good data. I spent many months optimizing our six camera setup to my liking for our validation (pictured in @fig-treadmill, for reference), and have come up with a myriad of personal-though-not-necessarily-supported-by-research-viewpoints. 
+For example, I prefer to avoid fully sagittal views of a participant when possible, as they invite heavy occlusion and don't provide as much data. I prefer to use frontal views and oblique angles to make sure each camera is gathering as much data about the participant as possible. 
+
+#figure(
+    image("practicals/treadmill.png", width:80%),
+    caption: [Positioning of six cameras around a treadmill to capture data for our validation study]
+) <fig-treadmill>
+
+Camera positioning is also highly task dependent, and that task might ultimately be the most important factor in where cameras are positioned. 
+
+For tasks where the participant moves across a wide area, such as overground gait, the camera positioning strategy shifts. Rather than framing the participant tightly as you would around a treadmill, the goal becomes covering the space itself. You consider the full area the participant might move through, identify the regions you care about most, and position the cameras so that at any given point within that area, at least two cameras have the participant in view for triangulation. @fig-overground shows a five-camera overground gait setup we tried as an example. Two cameras were placed at opposite ends of the walkway in portrait orientation, angled to look down the full length of the path — the reasoning being that as the participant moved far enough from one end camera to leave its field of view, they would be approaching the other. The remaining three cameras were positioned along the side of the walkway in landscape orientation to maximize lateral coverage. Between the five, the goal was to ensure that no matter where the participant was on the walkway, at least two cameras could see them. Note in this case, the mixed use of portrait and landscape orientations to maximize ground coverage. 
+
+#figure(
+    image("practicals/overground.png"),
+    caption: [Five-camera setup for overground gait capture. Two cameras at opposite ends of the walkway are oriented in portrait mode to view the full length of the path, providing overlapping coverage as the participant moves between them. Three cameras along the side are oriented in landscape mode to maximize lateral coverage. ]
+    
+) <fig-overground>
+
+
+A participant walking on a treadmill will require much different camera positioning than a participant walking overground.  For the former, cameras would want to be placed closer around the treadmill making sure that each camera has the best possible view of the subject at all times. For the latter, you might find that cameras are better placed wider apart to maximize camera view coverage of the walkway in an effort to make sure that at any given point in the participants route, multiple cameras have view of them to reconstruct data from. 
+
+For a participant that is squatting, it may be important to position the cameras such that occlusion during the squat itself is minimized, which may require different camera angles. 
+
+To even contradict my earlier advice regarding sagittal planes - we once recorded participants on a stationary row machine, and due to the occlusions from the machine that purely frontal planes would cause, I used purely sagittal views instead and for this particular task successfully collected clean data (@fig-bike).
+
+#figure(
+    image("practicals/stationary_row.png"),
+    caption: [Camera views to record participants on a stationary row machine. The natural occlusions caused by the machine itself caused some difficulties in camera positioning, but these particular viewpoints gave us good data.]
+) <fig-bike>
+
+Ultimately, the answer is that there is no exact answer as to where the cameras should be positioned. What it requires is a bit of patience, tinkering, and iteration to find what gets you the best data. This is what I mean when I call it a technique. 
 
 
 
-For a participant that is squatting, it may be important to position the cameras such that occlusion during the squat itself is minimized, which may require different camera angles. To contradict my own advice about avoiding purely saggital planes earlier - when recording participants on a stationary bike, I found moderate success in having cameras completely saggital to the subject on either side of the subject to better account from occlusion in the bike. 
 
 We had a highly controlled setup. Camera tripod positions were marked on the floor with tape to maintain as much consistency in camera placement across participants as possible, though specifics of camera height and orientation were tuned to most clearly view the participant in the frame.
 
