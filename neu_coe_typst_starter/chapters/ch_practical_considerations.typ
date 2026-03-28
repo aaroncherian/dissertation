@@ -67,10 +67,6 @@ For tasks where the participant moves across a wide area, such as overground gai
 ) <fig-overground>
 
 
-A participant walking on a treadmill will require much different camera positioning than a participant walking overground.  For the former, cameras would want to be placed closer around the treadmill making sure that each camera has the best possible view of the subject at all times. For the latter, you might find that cameras are better placed wider apart to maximize camera view coverage of the walkway in an effort to make sure that at any given point in the participants route, multiple cameras have view of them to reconstruct data from. 
-
-For a participant that is squatting, it may be important to position the cameras such that occlusion during the squat itself is minimized, which may require different camera angles. 
-
 To even contradict my earlier advice regarding sagittal planes - we once recorded participants on a stationary row machine, and due to the occlusions from the machine that purely frontal planes would cause, I used purely sagittal views instead and for this particular task successfully collected clean data (@fig-bike).
 
 #figure(
