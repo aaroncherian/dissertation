@@ -1,16 +1,15 @@
 == 3D Reconstruction
 
-The final key step in the markerless motion capture pipeline is triangulating 2D keypoint detections into 3D coordinates (@fig-reconstruction-example). For each frame, the camera projection matrices (containing intrinsics and extrinsics) estimated during calibration and the 2D keypoint detection from each camera view are used to solve for 3D position via direct linear transformation. 
+The final key step in the markerless motion capture pipeline is triangulating 2D keypoint detections into 3D coordinates (@fig-reconstruction-example). For each frame, the camera projection matrices estimated during calibration and the 2D keypoint detections from each camera view are used to solve for the 3D position of each keypoint via direct linear transformation (DLT). FreeMoCap's triangulation implementation is built on the Anipose library @AniposeToolkitRobust2021.
 
 #figure(
   image("reconstructed_human.png", width:50%),
   caption: [An example frame of data reconstructed from six camera using a MediaPipe pose estimation backend. ]
 ) <fig-reconstruction-example>
 
-Because pose estimators can produce erroneous detections in individual views (due to occlusions, background clutter, odd movements etc.), we implement a progressive outlier rejection procedure during triangulation. For each joint center on each frame, the system first triangulates a 3D data point using all available cameras, and then computes mean reprojection error across those cameras. Should this error fall below a threshold, the solution is accepted.
+Because pose estimators can produce erroneous detections in individual camera views due to occlusion, background clutter, or unusual body configurations, a progressive outlier rejection procedure is applied during triangulation. Incidentally, this procedure was contributed by an open-source community member and is exemplifies the benefits of community contributions. 
 
-If the error exceeds the threshold, the system tests all camera combinations, retriangulating with each subset, computing resulting mean reprojection error. The lowest reprojection error and its associated camera combination is compared against the original solution - if the error improvement ratio exceeds a defined threshold, the refined solution replaces the default. 
+For each keypoint on each frame, the system first triangulates using all available cameras and computes the mean reprojection error across those views. If this error falls below a defined threshold, the solution is accepted. If it exceeds the threshold, the system tests all N-1 camera subsets, retriangulating with each combination that drops a single camera, and identifies the subset producing the lowest mean reprojection error. If the ratio of the original error to the best subset error exceeds an improvement threshold, the refined solution replaces the default. For cases where the improvement ratio falls between 1.0 and the threshold, a weighted blend of the default and refined solutions is used, with an exponential weighting function that transitions smoothly between the two to avoid frame-to-frame oscillation in the reconstructed trajectories.
 
-Post-processing of the reconstructed 3D trajectories is handled by the FreeMoCap package SkellyForge, which applies gap interpolation and low-pass Butterworth filtering to reduce high-frequency noise in the final coordinate time series.
-
+`SkellyForge` is a separate post-processing package that operates on the reconstructed 3D trajectories. It currently applies gap interpolation for frames where no acceptable triangulation solution was found, followed by low-pass Butterworth filtering to attenuate high-frequency noise in the coordinate time series. Like `SkellyTracker`, `SkellyForge` is designed as a modular component of the pipeline, with an architecture that can accommodate additional post-processing methods as they are developed.
 
