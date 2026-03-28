@@ -2,7 +2,7 @@
 
 === Postural stability metrics
 
-Postural stability metrics are summarized in @tbl-postural-metrics. Average ellipse area showed comparable values over all trackers with respect to the reference. @fig-xy-plane shows COM trajectories in the horizontal plane with a 95% confidence ellipse fit to it for a representative trial. 
+Postural stability metrics are summarized in @tbl-postural-metrics. Average ellipse area showed comparable values over all trackers with respect to the reference. @fig-xy-plane shows COM trajectories in the horizontal plane with a 95% confidence ellipse fit for a representative trial. 
 
 #include ("tables/balance_metrics_table.typ")
 
@@ -28,7 +28,7 @@ MediaPipe-derived COM path length closely matched the reference and preserved se
 
 === Center-of-mass velocity distribution
 
-COM velocity distributions between MediaPipe-derived and marker-based reference data closely matched in the ML and AP directions, though MediaPipe-derived COM velocity distributions have a consistently longer tail (@fig-violin). Larger differences were seen in the vertical direction, particularly during the solid ground conditions. As we expect little vertical movement in the COM on solid ground, this largely reflects measurement noise for each system rather than true postural movement. In the Eyes Open/Solid Ground condition, mean vertical velocity SD across trials was 0.90 ± 0.26 mm/s for the marker-based reference, 2.40 ± 0.42 mm/s for MediaPipe-derived data, 9.60 ± 1.94 mm/s for ViTPose-derived data, and 14.25 ± 1.99 mm/s for RTMPose-derived data.
+COM velocity distributions between MediaPipe-derived and marker-based reference data closely matched in the ML and AP directions, though MediaPipe-derived COM velocity distributions had a consistently longer tail (@fig-violin). Larger differences were seen in the vertical direction, particularly during the solid ground conditions. As we expect little vertical movement in the COM on solid ground, this largely reflects measurement noise for each system rather than true postural movement. In the Eyes Open/Solid Ground condition, mean vertical velocity SD across trials was 0.90 ± 0.26 mm/s for the marker-based reference, 2.40 ± 0.42 mm/s for MediaPipe-derived data, 9.60 ± 1.94 mm/s for ViTPose-derived data, and 14.25 ± 1.99 mm/s for RTMPose-derived data.
 
 #figure(
   image(
@@ -37,9 +37,9 @@ COM velocity distributions between MediaPipe-derived and marker-based reference 
 ) <fig-violin>
 
 
-=== FMC-MediaPipe Accuracy
+=== Markerless system agreement 
 
-MediaPipe-derived path length demonstrates strong agreement with the reference system (@fig-path-length-agreement) (ICC = 0.985). Systematic bias was small (1.25 mm) with limits of agreement at approximately ± 68 mm. A slope of 0.90 indicated a proportional underestimation of the path length with Bland-Altman analyses showing more underestimation in progressively harder conditions. In contrast, RTMPose and ViTPose demonstrated poor agreement (ICC < 0.10), high positive bias (726 mm and 1052 mm respectively), and wide limits of agreement. Summary metrics for comparisons across systems are shown in @tbl-path-length-agreement.  
+MediaPipe-derived path length demonstrated strong agreement with the reference system (@fig-path-length-agreement) (ICC = 0.985). Systematic bias was small (1.25 mm) with limits of agreement at approximately ± 68 mm. A slope of 0.90 indicated a proportional underestimation of the path length with Bland-Altman analyses showing more underestimation in progressively harder conditions. In contrast, RTMPose and ViTPose demonstrated poor agreement (ICC < 0.10), high positive bias (726 mm and 1052 mm respectively), and wide limits of agreement. Summary metrics for comparisons across systems are shown in @tbl-path-length-agreement, and identity and Bland-Altman plots for RTMPose and ViTPose derived data can be found in Appendix B ( @fig-agreement-all).  
 
 
 #figure(
@@ -49,12 +49,12 @@ MediaPipe-derived path length demonstrates strong agreement with the reference s
 
 #include "path_length_agreement_table.typ"
 
-=== FMC-MediaPipe Sensitivity
-MediaPipe-derived COM changes exhibited good-to-excellent sensitivity to different perturbations (_r_#super[2] = 0.83 - 0.96) with slope of the fitted regression line near unity (0.89 - 1.06), though slight underestimation of path length was observed under visual perturbation. ViTPose and RTMPose-derived COM changes demonstrated poor sensitivity (_r_#super[2] = 0.03 to 0.45), with proportional bias differing substantially (slope = -6.46 to 1.58) from the ideal. 
+=== Markerless system sensitivity 
+MediaPipe-derived COM changes exhibited good-to-excellent sensitivity to different perturbations (_r_#super[2] = 0.83 - 0.96) with slope of the fitted regression line near unity (0.89 - 1.06), though slight underestimation of path length was observed under visual perturbation ( @fig-path-length-sensitivity). ViTPose and RTMPose-derived COM changes demonstrated poor sensitivity (_r_#super[2] = 0.03 to 0.45), with proportional bias differing substantially (slope = -6.46 to 1.58) from the ideal. Identity plots per perturbation for RTMPose and ViTPose-derived data can be found in Appendix B (@fig-sensitivity-all).
 
 #figure(
   image("com_sensitivity.svg", width: 100%),
-  caption: [Sensitivity of MediaPipe-derived COM path length to condition-dependent perturbations. Identity plots are shown with unity line (dashed) and line of best fit (red). Each panel shows trial-level path length differences (n = 12) in different conditions, representing system perturbations. Left: Visual perturbation = Eyes Closed (Solid Ground) - Eyes Open (Solid Ground); Middle: Mechanical perturbation = Eyes Open (Foam Pad) - Eyes Open (Solid Ground); Right: Visual + Mechanical Perturbation = Eyes Closed (Foam Pad) - Eyes Open (Solid Ground).],
+  caption: [Sensitivity of MediaPipe-derived COM path length to condition-dependent perturbations. Identity plots are shown with unity line (dashed) and line of best fit (red). Each panel shows trial-level path length differences (n = 12) in different conditions, representing system perturbations. Left: Visual perturbation = Eyes Closed (Solid Ground) - Eyes Open (Solid Ground); Middle: Proprioceptive perturbation = Eyes Open (Foam Pad) - Eyes Open (Solid Ground); Right: Visual + Proprioceptive Perturbation = Eyes Closed (Foam Pad) - Eyes Open (Solid Ground).],
 ) <fig-path-length-sensitivity>
 
 #include "path_length_sensitivity_table.typ"   

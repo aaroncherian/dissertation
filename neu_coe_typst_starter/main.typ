@@ -51,3 +51,4 @@ Write your acknowledgments here.
 // #include "chapters/appendix_a.typ"
 
 #include "chapters/appendix/appendix_a.typ"
+#include "chapters/appendix/appendix_b.typ"
