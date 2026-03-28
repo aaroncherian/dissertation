@@ -9,8 +9,8 @@
       table.header(
         [*System*],
         [*Visual <br> Perturbation*],
-        [*Mechanical <br> Perturbation*],
-        [*Visual + Mechanical  <br> Perturbation*],
+        [*Proprioceptive <br> Perturbation*],
+        [*Visual + Proprioceptive  <br> Perturbation*],
       ),
       table.hline(stroke: 0.5pt),
       [FMC-MediaPipe],
@@ -31,5 +31,5 @@
       table.hline(stroke: 1pt),
     )
   },
-  caption: [Summary of COM path length sensitivity metrics (regression slope and _r_#super[2]) across markerless tracking backends relative to the reference system.]
+  caption: [Summary of COM path length sensitivity metrics (regression slope and _r_#super[2]) across markerless tracking backends relative to the reference system.],
 ) <tbl-path-length-sensitivity>
