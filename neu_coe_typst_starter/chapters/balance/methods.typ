@@ -14,7 +14,7 @@ Participants were asked to complete the Modified Clinical Test of Sensory Intera
 
 The CTSIB-M was selected because: 1) Static balance tasks present minimal body movement, providing a method of measuring system sensitivity to small-amplitude kinematics; 2) The graded condition structure allows evaluation of whether particular postural challenges affect system accuracy.
 
-Participants were given a visual fixation target during eyes-open conditions and a floor mark to standardize starting position. A hand clap at the start of each condition provided a visual synchronization reference in the video recordings. Participants completed two trials of the full protocol, each recorded simultaneously by both the marker-based and markerless motion capture systems.
+Participants were given a visual fixation target during eyes-open conditions and a floor mark to standardize starting position. Participants completed two trials of the full protocol, each recorded simultaneously by both the marker-based and markerless motion capture systems.
 
 === Data Processing
 
@@ -32,11 +32,17 @@ For the reference system and each pose estimation backend, body segments were de
 
 Using a custom-built viewer (available at: https://github.com/aaroncherian/nih_balance_analyses), each trial was annotated with the start and stop frame numbers for each of the four conditions. 1600 frames were analyzed per condition (6400 per trial, two trials per participant). Within each condition, COM path length was calculated as the cumulative sum of the Euclidean distance between consecutive 3D COM positions. 
 
-*Center of mass velocity distributions*
+* Postural metrics *
 
-COM velocity was calculated as the frame-to-frame displacement of COM position divided by the sampling rate. Mean 2D COM velocity in the horizontal plane was calculated as the trial-level mean of the magnitude of mediolateral and anteroposterior velocity components. 
+The 95% confidence ellipse area is the area that is expected to enclose approximately 95% of the points on the COM path @prietoMeasuresPosturalSteadiness1996. Area was computed from the 2D covariance matrix of the mean-centered mediolateral and anteroposterior COM positions. The covariance matrix was eigendecomposed to obtain the principal axes of the position distribution, and the semi-axis lengths were scaled by $chi^2_(0.95, 2) approx 5.991$ to define the boundary enclosing 95% of the data under a bivariate normal assumption@schubertEllipseAreaCalculations2014. Ellipse area was then calculated as $pi a b$, where $a$ and $b$ are the scaled semi-axis lengths.
+
+COM velocity was calculated per axis as the frame-to-frame displacement of COM position divided by the sampling interval. Mean 2D COM velocity in the horizontal plane was then calculated as the trial-level mean of the magnitude of the mediolateral and anteroposterior velocity components.
+
+
+*Noise characterization*
 
 During quiet standing, vertical COM displacement is expected to be minimal, making vertical velocity a useful indicator of measurement noise. Trial-wise standard deviations of vertical COM velocity were calculated for the Eyes Open/Solid Ground condition and summarized across participants (mean ± SD) to characterize the baseline noise floor of each pose estimation backend and the marker-based reference system under minimal-movement conditions.
+
 
 *Sensitivity analysis* 
  
