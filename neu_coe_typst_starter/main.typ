@@ -22,7 +22,9 @@
 
 
 // --- Front matter (roman numerals) ---
-#begin-frontmatter()
+#pagebreak()
+#set page(numbering: "i")
+#counter(page).update(1)
 
 #front-heading("ABSTRACT")
 Write your abstract here.
@@ -49,7 +51,10 @@ Write your acknowledgments here.
 )
 
 // --- Main matter (arabic numerals) ---
-#begin-mainmatter()
+// --- Main matter ---
+#pagebreak()
+#set page(numbering: "1")
+#counter(page).update(1)
 
 
 #include "chapters/ch1_intro.typ"
