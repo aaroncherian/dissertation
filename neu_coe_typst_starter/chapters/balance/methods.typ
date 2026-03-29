@@ -30,11 +30,11 @@ For the reference system and each pose estimation backend, body segments were de
 
 *Center of mass path length*
 
-Using a custom-built viewer (available at: https://github.com/aaroncherian/nih_balance_analyses), each trial was annotated with the start and stop frame numbers for each of the four conditions. 1600 frames were analyzed per condition (6400 per trial, two trials per participant). Within each condition, COM path length was calculated as the cumulative sum of the Euclidean distance between consecutive 3D COM positions. 
+Using a custom-built viewer (available at: https://github.com/aaroncherian/nih_balance_analyses), each trial was annotated with the start and stop frame numbers for each of the four conditions. 1600 frames were analyzed per standing condition within a trial. Within each condition, COM path length was calculated as the cumulative sum of the Euclidean distance between consecutive 3D COM positions. 
 
 * Postural metrics *
 
-The 95% confidence ellipse area is the area that is expected to enclose approximately 95% of the points on the COM path @prietoMeasuresPosturalSteadiness1996. Area was computed from the 2D covariance matrix of the mean-centered mediolateral and anteroposterior COM positions. The covariance matrix was eigendecomposed to obtain the principal axes of the position distribution, and the semi-axis lengths were scaled by $chi^2_(0.95, 2) approx 5.991$ to define the boundary enclosing 95% of the data under a bivariate normal assumption@schubertEllipseAreaCalculations2014. Ellipse area was then calculated as $pi a b$, where $a$ and $b$ are the scaled semi-axis lengths.
+The 95% confidence ellipse area, a measure often used in posturography, is the area that is expected to enclose approximately 95% of the points on the COM path @prietoMeasuresPosturalSteadiness1996. Area was computed from the 2D covariance matrix of the mean-centered mediolateral and anteroposterior COM positions. The covariance matrix was eigendecomposed to obtain the principal axes of the position distribution, and the semi-axis lengths were scaled by $chi^2_(0.95, 2) approx 5.991$ to define the boundary enclosing 95% of the data under a bivariate normal assumption@schubertEllipseAreaCalculations2014. Ellipse area was then calculated as $pi a b$, where $a$ and $b$ are the scaled semi-axis lengths.
 
 COM velocity was calculated per axis as the frame-to-frame displacement of COM position divided by the sampling interval. Mean 2D COM velocity in the horizontal plane was then calculated as the trial-level mean of the magnitude of the mediolateral and anteroposterior velocity components.
 
@@ -46,7 +46,7 @@ During quiet standing, vertical COM displacement is expected to be minimal, maki
 
 *Sensitivity analysis* 
  
-For markerless and marker-based systems, we calculated within-participant COM path length differences between conditions representing specific perturbations: 1) Visual perturbation using the path length difference between the Eyes Open/Solid Ground and Eyes Closed/Solid Ground conditions; 2) Proprioceptive perturbation using the path length difference between Eyes Open/Solid Ground and Eyes Open/Foam conditions; 3) Combined visual/proprioceptive perturbation using the path length difference between Eyes Open/Solid Ground and Eyes Closed/Foam conditions. For each perturbation, markerless path length differences were regressed against marker-based path length differences, and we report slope alongside r².
+For markerless and marker-based systems, we calculated within-participant COM path length differences between conditions representing specific perturbations: 1) Visual perturbation using the path length difference between the Eyes Open/Solid Ground and Eyes Closed/Solid Ground conditions; 2) Proprioceptive perturbation using the path length difference between Eyes Open/Solid Ground and Eyes Open/Foam conditions; 3) Combined visual/proprioceptive perturbation using the path length difference between Eyes Open/Solid Ground and Eyes Closed/Foam conditions. For each perturbation, markerless path length differences were compared to marker-based path length differences using linear regression, and we report slope alongside r².
 
 *Statistical analyses*
  
