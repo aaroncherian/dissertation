@@ -37,6 +37,7 @@ Write your acknowledgments here.
 
 #include "chapters/ch1_intro.typ"
 #include "chapters/ch2_freemocap.typ"
+#include "chapters/ch_math.typ"
 #include "chapters/ch_gait.typ"
 #include "chapters/ch_balance.typ"
 #include "chapters/ch_prosthetics.typ"
