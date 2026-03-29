@@ -7,4 +7,3 @@
 #figure(
   image("sensitivity_all_trackers.png"),
   caption: [Sensitivity of markerless system COM path length to condition-dependent perturbations across all trackers (Top: MediaPipe; Middle: RTMPose; Bottom: ViTPose). Identity plots are shown with unity line (dashed) and line of best fit (red). Each panel shows trial-level path length differences (n = 12) in different conditions, representing system perturbations. Left: Visual perturbation = Eyes Closed (Solid Ground) - Eyes Open (Solid Ground); Middle: Proprioceptive perturbation = Eyes Open (Foam Pad) - Eyes Open (Solid Ground); Right: Visual + Proprioceptive Perturbation = Eyes Closed (Foam Pad) - Eyes Open (Solid Ground).] ) <fig-sensitivity-all>
-)
