@@ -31,7 +31,9 @@ At the start of the recording, the ChArUco board may be placed flat on the groun
 
 #figure(
   image("groundplane.svg", width: 80%,),
-  caption: [The ChArUco board can be used to set the reference coordinate system of the world. Left: The axes for the 5x3 board configuration; Right: The axes for the 7x5 board configuration. The $X$ and $Y$axes are defined by the origin marker $0$ and the furthest markers along the edge of the board. The $Z$ axis is defined to as the normal vector pointing up from the board.],
+  caption: flex-caption(
+    [The ChArUco board can be used to set the reference coordinate system of the world. Left: The axes for the 5x3 board configuration; Right: The axes for the 7x5 board configuration. The $X$ and $Y$axes are defined by the origin marker $0$ and the furthest markers along the edge of the board. The $Z$ axis is defined to as the normal vector pointing up from the board.],
+    [Using the ChArUco board to set the ground plane])
 ) <fig-groundplane>
 
 
