@@ -166,13 +166,15 @@
     it
     v(1.5em)
   }
-
+  
   // Figure captions (single-spaced, slightly smaller)
   show figure.caption: it => [
     #set par(leading: 1.0em, spacing: 0em, first-line-indent: (amount: 0pt, all: true))
     #text(11pt)[#it]
   ]
 
-  
+
   body
 }
+#let in-outline = state("in-outline", false)
+#let flex-caption(long, short) = context if in-outline.get() { short } else { long }

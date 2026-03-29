@@ -1,3 +1,5 @@
+#import "../../template.typ": flex-caption
+
 == Calibration 
 In order to reconstruct 3D data from the 2D camera images, it is necessary to determine how each camera observes the world and where each camera is positioned within it. The former describes what we call intrinsic parameters, which is how each camera maps light onto its image sensor. The latter describes extrinsic parameters, which is the position and orientation of each camera relative to a common world reference frame.  
 
@@ -10,7 +12,9 @@ For calibration and 3D reconstruction, FreeMoCap utilizes a modified implementat
 
 #figure(
   image("calibration_board.png", width: 75%),
-  caption: [A ChArUco board being  detected during a frame of calibration. Each marker on the board (known as an ArUco marker) has a unique ID that can be detected, and subsequently each corner between a pair of markers also has associated IDs. The detected corner IDs are annotated in blue on the image. ]
+  caption: flex-caption(
+    [A ChArUco board being  detected during a frame of calibration. Each marker on the board (known as an ArUco marker) has a unique ID that can be detected, and subsequently each corner between a pair of markers also has associated IDs. The detected corner IDs are annotated in blue on the image.],
+    [A ChArUco board with detections])
 ) <fig-board>
 
 

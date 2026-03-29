@@ -1,5 +1,11 @@
 #import "template.typ": *
 
+#show outline: it => {
+  in-outline.update(true)
+  it
+  in-outline.update(false)
+}
+
 #show: neu-coe-dissertation
 
 // --- Title page ---
@@ -12,6 +18,8 @@
   field: "Bioengineering",
   submit_date: "February 2026",
 )
+
+
 
 // --- Front matter (roman numerals) ---
 #begin-frontmatter()
@@ -30,6 +38,15 @@ Write your acknowledgments here.
 #front-heading("TABLE OF CONTENTS")
 #outline(title: none)
 
+
+#front-heading("List of Figures")
+
+
+
+#outline(
+  title: none,
+  target: figure.where(kind: image),
+)
 
 // --- Main matter (arabic numerals) ---
 #begin-mainmatter()
