@@ -101,6 +101,9 @@ On the ChArUco board (@fig-charuco-math), each corner has a known position relat
 
 So, every detected corner gives us an equation between a known $X$ and observed $x$, where the only unknowns are the camera parameters. With enough corners detected across enough images, the system becomes overconstrained and we can optimize for the set of intrinsic and extrinsic parameters (optimization is, non-technically, the process of finding the best answers through a series of guesses that ideally, slowly become more accurate over time). For each guess taken for a set of parameters, the system projects the known 3D points back onto the image using the forward model — the distance between where a corner was actually detected and where the model predicts it should appear is the reprojection error. Optimization adjusts the parameters until total reprojection error is minimized.
 
+In addition to K and [R|t], the calibration process also estimates lens distortion coefficients. The pinhole model assumes an ideal camera with no lens, but real cameras introduce warping — calibration corrects for this as part of the same optimization.
+
+
 This yields an intrinsic matrix K for each camera, which remains constant as long as the camera's optics do not change. It also yields extrinsic parameters [R|t] representing each camera's pose relative to the board. 
 
 Each camera's extrinsic parameters describe its position and orientation relative to the calibration board. Since we defined the world origin at the 
@@ -132,3 +135,6 @@ where $C_i$ is the camera center in world coordinates (obtained from the extrins
 
 This is where the multi-camera setup becomes essential. If a second camera also detects the same landmark, we get a second ray from a different position and angle. In a perfect world, those two rays would intersect at exactly one point — the true 3D location of the landmark. In practice, noise in the detections means the rays will not perfectly intersect, so we estimate the 3D point as the location that minimizes its distance to all rays. In FreeMoCap, this triangulation is performed using the Direct Linear Transform (DLT) method, which reformulates the problem as a linear system and solves it using singular value decomposition (SVD).
 
+== Conclusion
+
+With the calibrated camera parameters and the triangulation process described above, we can take 2D pixel detections from multiple synchronized cameras and recover 3D positions in a shared world space. This is the core mathematical machinery underlying FreeMoCap's reconstruction pipeline — and ultimately, what makes it possible to turn a set of ordinary webcam videos into motion capture data.
