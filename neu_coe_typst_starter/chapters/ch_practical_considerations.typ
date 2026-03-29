@@ -1,24 +1,20 @@
 = Practical Considerations in Markerless Motion Capture
 
 == Introduction
-The preceding three chapters have presented various metrics of accuracy and sensitivity for FreeMoCap across gait, balance, and prosthetic gait contexts. While any research study has limitations, the most important one that I can emphasize is this: in any validation of a markerless system (this one included) the reported metrics of accuracy are not fixed properties of a software package or a system. 
-
-In practice, the accuracy of a motion capture session is shaped by a confluence of factors: hardware, environment, camera positioning, participant characteristics, and the choices made by the person collecting the data. As such, the metrics reported in any validation study, including those in this work, reflect what a specific system and camera configuration were able to achieve under specific conditions. They are not universal guarantees. 
+The preceding three chapters have presented various metrics of accuracy and sensitivity for FreeMoCap across gait, balance, and prosthetic gait contexts. While any research study has limitations, the most important one that I can emphasize is this: The accuracy of a motion capture session is shaped by a confluence of factors: hardware, environment, camera positioning, participant characteristics, and the choices made by the person collecting the data. In any validation study of a markerless system (this one included) the reported metrics of accuracy are not fixed properties of the software package or system. The reported metrics reflect what that system was able to achieve under the specific conditions that is was in. 
 
 Consider, for example, our laboratory environment. The data in this work were collected in a space that is optimized for motion analysis: a wide, open room with sufficient space for multi-camera setups, controllable window shades to fix lighting conditions, minimal visual clutter, and clean backgrounds. These conditions are not representative of many real-world environments, particularly in-home or clinical settings, and should not be assumed as a baseline expectation.
 
-This chapter then, is an effort to outline practical considerations for collecting motion capture data, drawing from my experiences in conducting these studies. This chapter highlights factors that I have found strongly influence data quality, in the hopes that it can inform or help other validation and collection in the future
+This chapter is an effort to outline practical considerations for collecting motion capture data, drawing from my experiences in conducting these studies and highlighting factors that I have found strongly influence data quality in the hopes that it can inform or help other validation and collection in the future
 
 
 == Markerless motion capture is a technique
 
 The first and foremost point is that markerless motion capture is not just a tool, but a technique. 
+While systems like FreeMoCap can be used out of the box to produce clean, usable data, collecting research-quality data can require iteration. This might mean tinkering with the lighting and camera placement decisions, recording data, observing points of failure in reconstruction and trying all over again. 
 
-While systems like FreeMoCap can be used out of the box to produce clean, usable data - collecting research-quality data can require iterations. This might be tinkering with the setup, observing points of failure in reconstruction and iterating on lighting and camera placement decisions. 
-
-I find the most useful way to think about it is this: good markerless motion capture is like good videography or photography. Producing high quality images requires more than just a capable camera, it requires attention to lighting, consideration of framing, the background etc. Markerless motion capture operates on the same principles. The raw data are the recorded videos, and the quality of those videos directly constrains the quality of the reconstructed motion.
-
-For this reason, many of the considerations that apply to capturing good images—clear lighting, visual contrast between subject and background, and thoughtful framing—also apply here. The following sections outline the key factors that emerged as most important in the collection of these datasets.
+I find the most useful way to think about it is this: good markerless motion capture is like good videography or photography. Producing high quality images requires more than just a capable camera, it requires attention to lighting, consideration of framing, the background, and also, experience. Markerless motion capture operates on the same principles. The raw data are the recorded videos, and the quality of those videos directly constrains the quality of the reconstructed motion.
+The following sections outline the key factors that emerged as most important in the collection of these datasets.
 
 == Clothing
 
@@ -28,7 +24,7 @@ Clothing should generally be form-fitting, although prior work suggests that clo
 
 2) How easily can different limbs be distinguished from one another?  
 
-To explain this further, in our early pilot testing for this study, participants wore full-black body suits with black shoes on a black treadmill. Here, we generally found poor results largely because we failed at both criteria. First, the participant was note easily distinguishable form the environment. Perhaps unsurprisingly, black pants and shoes do not provide much contrast on a black treadmill. Second, limbs that are all the same, dark color were difficult to differentiate from one another, particularly during dynamic movement, where overlapping segments further reduced visual separability.
+To explain this further, in our early pilot testing for this study, participants wore full-black body suits with black shoes on a black treadmill. Here, we generally found poor results largely because we failed at both criteria. First, the participant was note easily distinguishable form the environment. Perhaps unsurprisingly, black pants and shoes do not provide much contrast on a black treadmill. Second, limbs that are all the same, dark color were difficult to differentiate from one another, particularly during dynamic movement where overlapping segments further reduced visual separability.
 
 We found much more success in modifying our participant attire to increase contrast. Participants wore sleeveless shirts and shorts, and shoes were spray-painted white to improve visibility. @fig-clothing below shows the difference between our participant attire during our pilot testing and the validation study proper. 
 
@@ -41,7 +37,7 @@ We found much more success in modifying our participant attire to increase contr
 
 == Lighting
 
-Returning to my earlier metaphor, lighting, as in photography, is fundamental. The subject needs to be well-lit, and this matters particularly because minimizing motion blur often means keeping exposure settings low, which inherently darkens the camera view. Participant skin color is also a factor here — darker skin tones against a dark environment compound the contrast challenges. The goal is even, sufficient illumination across the full body, with particular attention to whatever body regions are most relevant to the analysis.
+Returning to my earlier metaphor, lighting, as in photography, is fundamental. The subject needs to be well-lit, and this matters particularly because minimizing motion blur often means keeping exposure settings low, which inherently darkens the camera view. Participant skin color is also a factor here, as darker skin tones against a dark environment compound the contrast challenges. The goal is even, sufficient illumination across the full body, with particular attention to whatever body regions are most relevant to the analysis.
 
 @fig-clothing illustrates this as well. In our initial pilot testing, we used a single spotlight resting on the ground and aiming _up_ at the participants' upper bodies. However, in gait, the limbs of primary interest are the lower ones - and the ground-level light left the treadmill belt and lower limbs underlit. In our final validation setup, we used three stage lights aimed downward toward the treadmill surface to improve lower-limb illumination. This arrangement approximated the three-point lighting approach common in film and photography, which helped minimize shadows cast by the participant onto the treadmill belt.
 
@@ -51,9 +47,9 @@ You want to frame the participant as well as you can in the camera views. Partic
 
 == The Amount of Cameras
 
-Research describing the best number of cameras can be a little contradictory. Theia3D requires an absolute minimum of six cameras, but suggests at least eight. Uhlrich et al. found minimal decrease in error when moving from two to five cameras with OpenCap @uhlrichOpenCapHumanMovement2023, while Yang et al. found substantial decrease in error using an OpenPose-based motion capture system @yangEvaluationCameraConfigurations2025. Part of why we used six cameras, quite frankly, is because that is the maximum amount of USB ports available on the computer to plug into. 
+Research describing the best number of cameras can be a little contradictory. Theia3D requires an absolute minimum of six cameras, but suggests at least eight. Uhlrich et al. found minimal benefits when moving from two to five cameras with OpenCap @uhlrichOpenCapHumanMovement2023, while Yang et al. found substantial decrease in error using an OpenPose-based motion capture system @yangEvaluationCameraConfigurations2025. 
 
-Generally, we recommend at least three cameras. But the exact number might change depending on the space available and the task at hand. For example, if you were trying to track overground gait, I would suggest using as many cameras as you need to achieve visual coverage of the space. 
+As to why we used six cameras, quite frankly, is because that is the maximum number of USB ports that were available on the lab computer to use. Generally, we recommend at least three cameras. But the exact number might change depending on the space available and the task at hand. For example, if you were trying to track overground gait, I would suggest using as many cameras as you need to achieve visual coverage of the space. 
 
 == The Positioning of Cameras
 
