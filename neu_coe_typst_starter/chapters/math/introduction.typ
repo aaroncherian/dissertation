@@ -55,7 +55,7 @@ So now we have three reference frames - the *image*, the *camera*, and the *worl
 
 To do that, we first need to understand the reverse - how does a 3D point in the world become a 2D pixel in an image? Or more simply, if you take a picture of a tree, how does that three dimensional tree become a two dimension image on your phone screen? 
 
-This is described by something called the _pinhole camera model_. While it seem counterintuitive to learn this from the opposite direction of what we want, the logic is straightforward - we need to learn the forward process so we can invert it. The forward process describes two transformations we need to estimate:
+This is described by something called the _pinhole camera model_. While it seem counterintuitive to learn this from the opposite direction of what we want, the logic is straightforward - we need to learn the forward process so we can invert it. The forward process describes two transformations we need to estimate, and we call them extrinsics and intrinsics. 
 
 *Extrinsics: world to camera*
 
@@ -65,7 +65,7 @@ translation vector $t$:
 $ X_c = R X_w + t $ <eq:extrinsics>
 
 where $X_w$ is the 3D position of a point in the world frame ("2 units in the positive X direction, 3 units in positive Y direction of the world) and $X_c$ is the position of that same point expressed in the camera's local frame ("in front of me, to the right"). $R$ encodes 
-the camera's orientation - it rotates the world's axes into the camera's axes (the "language" conversion we discussed earlier). $t$ encodes the camera's position - the offset between the world origin and the camera origin.
+the camera's orientation - it rotates the world's axes into the camera's axes (the camera to shared "language" conversion we discussed earlier). $t$ encodes the camera's position relative to the world origin.
 
 * Camera Intrinsics * 
 
@@ -83,78 +83,98 @@ where $(f_x, f_y)$ are the focal length in pixels, $[c_x, c_y]$ is principal poi
 
 * The camera matrix: combining intrinsics and extrinsics *
 
-Together, @eq:intrinsics and @eq:extrinsics can create the camera matrix $P$:
+Together, @eq:extrinsics and @eq:intrinsics can create the camera matrix $P$:
 
 $ P = K [R | t] $ <eq:camera_matrix>
 
-where $K$ is the intrinsics matrix and $[R t]$ the extrinsics matrix. @eq:camera_matrix maps a 3D world point directly to a 2D pixel location:
+where $K$ is the intrinsics matrix and $[R t]$ the extrinsics matrix. @eq:mapping maps a 3D world point directly to a 2D pixel location:
 
 $ x = P X $ <eq:mapping>
-where $x$ is the 2D image point in pixels, and $X$ is the 3D world point in homogeneous coordinates. This is the full forward model: world frame, through the camera frame, onto the image.
+where $x$ is the 2D image point in pixels, and $X$ is the 3D world point in homogeneous coordinates. 
 
-Because the ideal pinhole camera does not have a lens, camera calibration processes will often also correct for camera lens distortion. Camera intrinsics help move data from the camera space into the image space in pixel coordinates.
+This is the full forward model: world frame, through the camera frame, onto the image.
 
 == Calibration
 
-Now we get to the markerless motion capture of it all.  With the pinhole model, we showed that when a 3D point becomes a pixel on an image, the camera extrinsics first convert it into a 3D point in the camera's local reference frame, and then the camera intrinsics project it onto the image plane.
+Now we get to the markerless motion capture of it all.  With the pinhole model, we showed that for a 3D point to become a pixel on an image, the camera extrinsics first convert it into a 3D point in the camera's local reference frame, and then the camera intrinsics project it onto the image plane.
 
-But in markerless motion capture we want to go in the other direction.
-We have pixel coordinates on an image and we want to turn them into 3D positions in the world. To do that, we need to run the forward model in reverse - which means we need to know the parameters that define it. That is: the intrinsic and extrinsic parameters for each camera.
+But in markerless motion capture we want to go in the _other direction_. We have pixel coordinates on an image and we want to turn them into 3D positions in the world. To do that, we need to run the forward model in reverse - which means we need to know the parameters that define it. That is: the intrinsic and extrinsic parameters for each camera.
 
 The step in markerless motion capture we call *calibration* is the process of estimation those two parameters. The previous chapter detailed the calibration process (waving a ChArUco board around) from a functional standpoint - now we look at the mathematics underlying the process. 
 
-The forward model (@eq:mapping) tells us:
-
-$ x = P X$,
-where $x$ is a pixel location, $X$ is a 3D world point, and $P$ contains the intrinsic and extrinsic parameters we are trying to find. Which means if we had an object whose 3D positions we already knew, and we could detect where those same points appear in each camera's image, we would have known values on both sides of the equations, and then we could solve for the camera parameters.
+The forward model (@eq:mapping) tells us $ x = P X$,
+where $x$ is a pixel location ("Object A is a pixel on row 845, column 401"), $X$ is a 3D world point ("Object A is 2 units in the positive X direction, 3 units in positive Y direction of the world"), and $P$ contains the intrinsic and extrinsic parameters we are trying to find. So, if we had an object with a known 3D position, and we could detect that position in each image given to us by a camera, we would have known values on both sides of the equations, and then we could solve for the camera parameters.
 
 This is the role of the ChArUco board. 
 
 #figure(image("../ch2/calibration_board.png", width:50%),
 caption: [This figure is a copy of one from the previous chapter. A ChArUco board being  detected during a frame of calibration. Each marker on the board (known as an ArUco marker) has a unique ID that can be detected, and subsequently each corner between a pair of markers also has associated IDs. The detected corner IDs are annotated in blue on the image.]) <fig-charuco-math>
 
-On the ChArUco board (@fig-charuco-math), each corner has a known position relative to every other corner. So, if each square is say 30 mm in length, and we decide that the world origin is the first corner of the board at $(0,0,0)$, and then the next corner of that row is $(30,0,0)$ and the next at $(60,0,0)$ and so in. These are our known 3D world points $X$. Each corner also has a unique ID that is detectable using computier vision, allowing us to find where each corner appears in the image as pixel coordinates $(u,v)$. These are our detected 2D points $x$. 
+Remember that the *world* reference frame needs an origin and axes placed somewhere - and that the choice is, in principle, arbitrary. The ChArUco board is where we make that choice. We place the world origin at a corner of the board, and align the axes with the board's edges.
+
+On the ChArUco board (@fig-charuco-math), each corner has a known position relative to every other corner. So, if each square is say 30 mm in length, and we decide that the world origin is the first corner of the board at $(0,0,0)$, and then the next corner of that row is $(30,0,0)$ and the next at $(60,0,0)$ and so in. These are our known 3D world points $X$. Each corner also has a unique ID that is detectable using computer vision, allowing us to find where each corner appears in the image as pixel coordinates $(u,v)$. These are our detected 2D points $x$. 
 
 #figure(
   image("calibration_math.png", width:95%),
   caption: [The calibration process using a ChArUco board. The world origin is defined as the first corner of the board, and using the known square size the 3D world coordinates of the other coordinates can be found. Computer vision can detect the pixel locations of the corners in the image. Thus, the solution for $x = P X$ can be optimized for to find $P$, the camera matrix containing intrinsic and extrinsic parameters. ]
 )
 
-So, every detected corner gives us an equation between a known $X$ and observed $x$, where the only unknowns are the camera parameters. With enough corners detected across enough images, the system becomes overconstrained and we can optimize for the set of intrinsic and extrinsic parameters (optimization is, non-technically, the process of finding the best answers through a series of guesses that ideally, slowly become more accurate over time). For each guess taken for a set of parameters, the system projects the known 3D points back onto the image using the forward model — the distance between where a corner was actually detected and where the model predicts it should appear is the reprojection error. Optimization adjusts the parameters until total reprojection error is minimized.
+So, every detected corner gives us an equation between a known world $X$ and detected pixel $x$, where the only unknowns are the camera parameters. With enough corners detected across enough images, the system becomes overconstrained (that is, we have far more equations than unknowns, which gives us redundant information to work with) and we can optimize for the set of intrinsic and extrinsic parameters (optimization is, non-technically, the process of finding the best answers through a series of guesses that ideally  become more accurate over time).
 
-In addition to K and [R|t], the calibration process also estimates lens distortion coefficients. The pinhole model assumes an ideal camera with no lens, but real cameras introduce warping — calibration corrects for this as part of the same optimization.
+For each guess taken for a set of parameters, the system projects the known 3D points back onto the image using the forward model — the distance between where a corner was actually detected and where the model predicts it should appear is the reprojection error. Optimization adjusts the parameters until total reprojection error is minimized.
 
+This yields an intrinsic matrix K for each camera, which remains constant as long as the camera's optics do not change. It also yields extrinsic parameters [R|t] representing each camera's pose relative to the board. In addition to K and [R|t], the calibration process may also estimate lens distortion coefficients. The pinhole model assumes an ideal camera with no lens, but real cameras introduce warping — calibration corrects for this as part of the same optimization.
 
-This yields an intrinsic matrix K for each camera, which remains constant as long as the camera's optics do not change. It also yields extrinsic parameters [R|t] representing each camera's pose relative to the board. 
+Now, because the world origin is the calibration board, and each camera's extrinsics describe its pose relative to that board, we now have something we didn't have before: a common language between cameras. Camera 1 knows where it is relative to the board. Camera 2 also knows where it is relative to the board. And because it's the same board, Camera 1 and Camera 2 now know where they are relative to each other. 
 
-Each camera's extrinsic parameters describe its position and orientation relative to the calibration board. Since we defined the world origin at the 
-board, this means each camera's extrinsics directly place it in the world frame. Critically, the cameras are fixed in the real world — they do not move between calibration and recording. So if Camera 1 is at [R₁|t₁] and Camera 2 is at [R₂|t₂], both relative to the same board, then their positions relative to each other are permanently known. They share a common reference point, and their spatial relationship is locked in.
+To try and simplify this, it's a bit like two people who haven't met trying to figure out where the other is - but both know exactly how far they are from the same landmark. And from that, they can figure out how far apart they are (possibly with some error, but that happens in calibration as well!)
+
+It is worth noting that during calibration, the board is being moved around the scene - so our reference point is, somewhat counterintuitively, a moving object. But the cameras are fixed. Each time the board appears in a new 
+position, that is another snapshot of the same stationary cameras seeing a known object from a new angle. More snapshots means more evidence, and the optimization uses all of them to pin down each camera's true, fixed pose.
 
 #figure(
   image("board_connection.png", width: 90%),
   caption: [Deriving camera-to-camera relationships from shared calibration. Each camera's extrinsic parameters (C₁|board and C₂|board) describe its pose relative to the calibration board, which defines the world origin. Because both cameras are calibrated against the same board, their positions relative to each other (C₁|₂) can be computed. ]
 )
 
+Mathematically, each camera's extrinsics are a transformation from the world frame to that camera's local frame. If we know the transformation from the world to Camera 1 and the transformation from the world to Camera 2, we can chain them together - go from Camera 1's frame back to the world, and then from the world into Camera 2's frame - to get the transformation between the 
+two cameras directly.
+
 Once multiple cameras have been calibrated with respect to the same board, their positions relative to each other are also known — and we have the shared world frame we need for reconstruction.
 
 == Reconstruction
 
-We now have everything we need. Each camera's intrinsic and extrinsic parameters are known, and a pose estimation model has detected a landmark in each camera's image as a 2D pixel coordinate. The question is: how do we turn those pixels into a 3D point in the world?
+Earlier, I asked you to hold onto two questions: how do two cameras agree on where a 3D point is, and how do we get 3D data out of 2D images? We now have everything we need to answer both.
 
-For a given camera, the intrinsics and extrinsics define a ray — a line that originates at the camera's center in world space and passes through the detected pixel, extending outward into the scene. This ray can be expressed as:
+Each camera's intrinsic and extrinsic parameters are known, and a pose estimation model has detected a landmark in each camera's image as a 2D pixel coordinate. For a given camera, the intrinsics and extrinsics define 
+a ray - a line that originates at the camera's center in world space and passes through the detected pixel, extending outward into the scene. This ray can be expressed as:
 
 $
   P(lambda) = C_i + lambda d_i
 $
 
-where $C_i$ is the camera center in world coordinates (obtained from the extrinsics), $d_i$ is the unit direction vector of the ray in world coordinates (obtained from the intrinsics), $lambda$ a scalar depth parameter, and $P(lambda)$ represents a point along the ray in world space. Every point along that ray would project onto the same pixel — so from a single camera's perspective, the landmark could be anywhere along that line. One camera gives us direction, but not depth.
+where $C_i$ is the camera center in world coordinates (obtained from the extrinsics), $d_i$ is the direction vector of the ray (obtained from the pixel location and the intrinsics), and $lambda$ is a scalar depth 
+parameter. Every point along that ray would project onto the same pixel - so a single camera can tell us the direction of an object, but not how far away it is. This is the fundamental limitation of a 2D image: in collapsing the world onto a flat plane, depth is lost.
+
+So we're halfway there. We asked: how do we turn a 2D pixel into a 3D point? The answer so far is: one camera gets us a line in 3D space, which is more than a pixel but less than a point. To pin down the actual location 
+(i.e., to recover that lost depth) we need a second camera.
+
+This is where the multi-camera setup becomes essential. If a second camera also detects the same landmark, we get a second ray from a different position and angle. 
+
+
+Remember the question from earlier — how do two cameras suddenly agree on where a 3D point is? This is the answer. They don't communicate. They each independently cast a ray into the world, and geometry does the rest. Where the rays meet is where the point must be - and because calibration placed both cameras in the same *world* reference frame, that intersection is a real position in 3D space. This is triangulation. And more cameras means more rays, which means more information constraining that intersection - this is one reason why adding cameras generally improves reconstruction accuracy.
 
 #figure(
   image("reconstruction.png", width: 130%),
   caption: [3D reconstruction via triangulation. Each camera detects points P₁ and P₂ in its image as 2D pixel coordinates. Using each camera's intrinsic and extrinsic parameters, these pixel detections define rays extending from each camera into the world. The 3D position of each point is estimated where the corresponding rays from multiple cameras converge.]
 )
 
-This is where the multi-camera setup becomes essential. If a second camera also detects the same landmark, we get a second ray from a different position and angle. In a perfect world, those two rays would intersect at exactly one point — the true 3D location of the landmark. In practice, noise in the detections means the rays will not perfectly intersect, so we estimate the 3D point as the location that minimizes its distance to all rays. In FreeMoCap, this triangulation is performed using the Direct Linear Transform (DLT) method, which reformulates the problem as a linear system and solves it using singular value decomposition (SVD).
+Now, in a perfect world, every ray would intersect at exactly one point. Unfortunately, it's not so simple. As you may have noticed, there's a lot of estimation that goes into this process. Intrinsics and extrinsics are estimates, so if either is slightly off, that's noise that shifts the ray. Pose estimation algorithms are also an estimate of where the landmark is - and those estimates of the ground truth location might be slightly different camera to camera (especially if it's harder to see that joint in a particular camera view), and that's noise that shifts the ray. 
+
+All of this to say, there's a lot of steps in this process that can introduce error, and by the time each ray from a camera is cast, each one has been nudged slightly by calibration error and detection noise, which means that every camera may not neatly intersect at one clean point. That means once again, we need to estimate the best answer given imperfect information. There are many methods for how this estimation can proceed - the implementation of calibration and triangulation we use in FreeMoCap uses the Direct Linear Transform (DLT) method @AniposeToolkitRobust2021.  So instead of a clean intersection, we look for the single point in 3D space that comes closest to all rays simultaneously. The DLT method sets this up as a linear system and solves it using singular value decomposition (SVD).
+
+It is worth stepping back to appreciate what is happening here. Everything we just described - casting rays, triangulating, estimating a 3D position - happens for every tracked landmark, on every frame, across every camera. A single frame of human pose estimation might track 30 or more joints, and a typical recording might run for thousands of frames. The full reconstruction is this entire pipeline running at scale: 2D detections in, 3D skeleton out.
+
 
 == Conclusion
 
