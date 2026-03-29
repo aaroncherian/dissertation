@@ -1,42 +1,28 @@
 == Math
 Often, the process of calibration is defined using the pinhole camera model, which describes the projection of a point in 3D space onto the 2D image plane of an idealized pinhole camera @MultiviewVideoAcquisition2018. Within in this model are two main parameters necessarily for successful camera calibration, intrinsics and extrinsics, which we can estimate using the calibration algorithm proposed by Zhang @zhangFlexibleNewTechnique2000.
 
-* Camera Intrinsics * 
 
-Camera intrinsics broadly put, is a description of how a given camera "sees" the world. More technically, intrinsics describe the internal properties of a camera. Core intrinsic properties include focal length, the principal point, and skew @heikkilaFourstepCameraCalibration1997. 
-
-The intrinsics camera matrix $K$ is typically defined as:
-
-$ K = mat(
-  f_x, s,   c_x;
-  0,   f_y, c_y;
-  0,   0,   1
-) $ <eq:intrinsics>
-
-where $(f_x, f_y)$ are the focal length in pixels, $[c_x, c_y]$ is principal point where the optical axis of the camera intersects with the image plane, and $s$ is the skew, which accounts for any non-rectangular pixels. 
-
-Because the ideal pinhole camera does not have a lens, camera calibration processes will often also correct for camera lens distortion. Camera intrinsics help move data from the camera space into the image space in pixel coordinates.
 
 * Camera Extrinsics *
 
 If camera intrinsics can be described as how a camera "sees" the world, extrinsics can be described as where exactly that camera is in the world, relative to the worlds origin. Camera extrinsic parameters define the pose (position and orientation) of a given camera relative to the calibration board. Extrinsic parameters consist of a rotation $R$ and a translation $t$ and are often commonly expressed as a combined matrix of $[R t]$. This is also equivalent to the transformation: 
 
-$ X_c = R X_w + t $ <eq:extrinsics>
+// $ X_c = R X_w + t $ <eq:extrinsics>
 
 where $X_c$ is the 3D coordinates of a point in the camera coordinate system and $X_w$ represents the coordinates of the same point in the world coordinate system. 
 
-* The camera matrix: combining intrinsics and extrinsics *
+// * The camera matrix: combining intrinsics and extrinsics *
 
-Together, @eq:intrinsics and @eq:extrinsics can create the camera matrix $P$:
+// Together, @eq:intrinsics and @eq:extrinsics can create the camera matrix $P$:
 
-$ P = K [R t] $ <eq:camera_matrix>
+// $ P = K [R t] $ <eq:camera_matrix>
 
-where $K$ is the intrinsics matrix and $[R t]$ the extrinsics matrix. @eq:camera_matrix can be used to map 3D world coordinates into 2D image coordinates using:
+// where $K$ is the intrinsics matrix and $[R t]$ the extrinsics matrix. @eq:camera_matrix can be used to map 3D world coordinates into 2D image coordinates using:
 
-$ x = P X $ <eq:mapping>
-where $x$ is the 2D image point in pixels, and $X$ is the homogenized coordinates of the 3D world point. 
+// $ x = P X $ <eq:mapping>
+// where $x$ is the 2D image point in pixels, and $X$ is the homogenized coordinates of the 3D world point. 
 
-While this math may sound daunting, it may be simpler to think of this process like so: transforming an 3D point into an image is a series of operations. First, we take the 3D point that exists in the world reference frame and transform it into the reference frame of the camera using camera extrinsics. Then, we project the that point onto a 2D image plane using intrinsics. 
+// While this math may sound daunting, it may be simpler to think of this process like so: transforming an 3D point into an image is a series of operations. First, we take the 3D point that exists in the world reference frame and transform it into the reference frame of the camera using camera extrinsics. Then, we project the that point onto a 2D image plane using intrinsics. 
 
 * Calibration: Calculating intrinsics and extrinsics *
 
