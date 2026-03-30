@@ -42,11 +42,11 @@
 
 #pagebreak()
 #front-heading("Abstract")
-Write your abstract here.
+#include "abstract.typ"
 
 #pagebreak()
 #front-heading("Acknowledgements")
-Write your acknowledgments here.
+I'll get to this.
 
 #pagebreak()
 #front-heading("Preface")

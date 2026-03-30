@@ -1,6 +1,23 @@
 // Northeastern University COE MS/PhD Dissertation Template (Typst)
 // Matches: neu_msthesis LaTeX class (US Letter, 1.5" left margin, double-spaced)
 
+// --- Vendored from headcount package (https://github.com/jbirnick/typst-headcount) ---
+#let hc-reset-counter(ctr, levels: 1) = it => {
+  if it.level <= levels { ctr.update((0,)) }
+  it
+}
+#let hc-normalize-length(array, length) = {
+  if array.len() > length {
+    array = array.slice(0, length)
+  } else if array.len() < length {
+    array += (length - array.len()) * (0,)
+  }
+  return array
+}
+#let hc-dependent-numbering(style, levels: 1) = n => {
+  numbering(style, ..hc-normalize-length(counter(heading).get(), levels), n)
+}
+
 // -------------------
 // Helper functions (called from main.typ)
 // -------------------
@@ -113,6 +130,9 @@
   // Heading numbering
   set heading(numbering: "1.1.1")
 
+  // Figure numbering: "Chapter.Figure" (e.g. Figure 3.2)
+  set figure(numbering: hc-dependent-numbering("1.1"))
+
   set math.equation(numbering: num =>
     numbering("(1.1)", counter(heading).get().first(), num)
   )
@@ -209,6 +229,11 @@ show outline.entry: it => {
   }
 }
 
+
+  // Reset figure counters at each new chapter (MUST be after heading formatting show rules)
+  show heading: hc-reset-counter(counter(figure.where(kind: image)))
+  show heading: hc-reset-counter(counter(figure.where(kind: table)))
+  show heading: hc-reset-counter(counter(figure.where(kind: raw)))
 
   body
 }
