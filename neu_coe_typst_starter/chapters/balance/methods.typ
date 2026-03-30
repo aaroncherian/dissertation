@@ -34,7 +34,7 @@ Using a custom-built viewer (available at: https://github.com/aaroncherian/nih_b
 
 * Postural metrics *
 
-The 95% confidence ellipse area, a measure often used in posturography, is the area that is expected to enclose approximately 95% of the points on the COM path @prietoMeasuresPosturalSteadiness1996. Area was computed from the 2D covariance matrix of the mean-centered mediolateral and anteroposterior COM positions. The covariance matrix was eigendecomposed to obtain the principal axes of the position distribution, and the semi-axis lengths were scaled by $chi^2_(0.95, 2) approx 5.991$ to define the boundary enclosing 95% of the data under a bivariate normal assumption@schubertEllipseAreaCalculations2014. Ellipse area was then calculated as $pi a b$, where $a$ and $b$ are the scaled semi-axis lengths.
+The 95% confidence ellipse area, a measure often used in posturography, is the area that is expected to enclose approximately 95% of the points on the COM path @prietoMeasuresPosturalSteadiness1996. The ellipse axes were derived from the decomposition of the 2D position covariance matrix. Semi-axis lengths were scaled to enclose 95% of the data. The scaling factor ($chi^2_(0.95, 2) approx 5.991$) is derived from the chi-squared distribution with two degrees of freedom @schubertEllipseAreaCalculations2014.  Ellipse area was then calculated as $pi a b$, where $a$ and $b$ are the scaled semi-axis lengths.
 
 COM velocity was calculated per axis as the frame-to-frame displacement of COM position divided by the sampling interval. Mean 2D COM velocity in the horizontal plane was then calculated as the trial-level mean of the magnitude of the mediolateral and anteroposterior velocity components.
 
@@ -46,7 +46,7 @@ During quiet standing, vertical COM displacement is expected to be minimal, maki
 
 *Sensitivity analysis* 
  
-For markerless and marker-based systems, we calculated within-participant COM path length differences between conditions representing specific perturbations: 1) Visual perturbation using the path length difference between the Eyes Open/Solid Ground and Eyes Closed/Solid Ground conditions; 2) Proprioceptive perturbation using the path length difference between Eyes Open/Solid Ground and Eyes Open/Foam conditions; 3) Combined visual/proprioceptive perturbation using the path length difference between Eyes Open/Solid Ground and Eyes Closed/Foam conditions. For each perturbation, markerless path length differences were compared to marker-based path length differences using linear regression, and we report slope alongside r².
+For markerless and marker-based systems, we calculated within-participant COM path length differences between conditions representing specific perturbations: 1) *Visual perturbation* using the path length difference between the Eyes Open/Solid Ground and Eyes Closed/Solid Ground conditions; 2) *Proprioceptive perturbation* using the path length difference between Eyes Open/Solid Ground and Eyes Open/Foam conditions; 3) *Combined visual/proprioceptive perturbation* using the path length difference between Eyes Open/Solid Ground and Eyes Closed/Foam conditions. For each perturbation, markerless path length differences were compared to marker-based path length differences using linear regression, and we report slope alongside r².
 
 *Statistical analyses*
  
