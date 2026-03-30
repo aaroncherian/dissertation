@@ -60,21 +60,13 @@ Write your acknowledgments here.
 #set page(numbering: "1")
 #counter(page).update(1)
 
-#counter(figure).update(0)
 #include "chapters/ch1_intro.typ"
-#counter(figure).update(0)
 #include "chapters/ch2_freemocap.typ"
-#counter(figure).update(0)
 #include "chapters/ch_math.typ"
-#counter(figure).update(0)
 #include "chapters/ch_gait.typ"
-#counter(figure).update(0)
 #include "chapters/ch_balance.typ"
-#counter(figure).update(0)
 #include "chapters/ch_prosthetics.typ"
-#counter(figure).update(0)
 #include "chapters/ch_practical_considerations.typ"
-#counter(figure).update(0)
 #include "chapters/ch_conclusion.typ"
 
 #bibliography("references.bib", style: "nature")
