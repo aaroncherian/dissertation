@@ -135,6 +135,12 @@
         #text(14pt, weight: "bold")[#it.body]
       ]
       v(0.75cm)
+    } else if it.numbering == none {
+      // Unnumbered main-matter headings (e.g. Bibliography) — no CHAPTER label
+      align(center)[
+        #text(14pt, weight: "bold")[#it.body]
+      ]
+      v(1.2cm)
     } else {
       align(center)[
         #if is-app {
