@@ -1,3 +1,4 @@
+== Introduction 
 
 In comparison to gait, balance presents a fundamentally different measurement challenge. As opposed to capturing repeated kinematic cycles, balance assessment requires resolving more subtle postural adjustments. These adjustments result from the continuous coordination of visual, vestibular, and neuromuscular systems @horakClinicalAssessmentBalance1997. 
 
