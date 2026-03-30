@@ -36,7 +36,7 @@ Although marker-based motion capture does provide detailed, meaningful kinematic
 
 Thus, there is a need for accessible technology that can be accurate and feasible to use in a clinical setting. 
 
-== The need: a more accessible method of measuring kinematic data
+== The Need: A More Accessible Method of Measuring Kinematic Data
 
 In examining the research and clinical spaces, we see different, yet related, needs emerge. In the research space, there is a need to facilitate motion analyses in ways that do not constrain natural behavior and operate in the real world, while in clinical spaces we see that reliable access to detailed methods of quantitative motion analysis could augment clinical decision making, but current solutions still force a tradeoff between depth of data and practicality. 
 
