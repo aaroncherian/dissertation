@@ -1,4 +1,4 @@
-== Conclusion
+= Conclusion
 
 The work examined the development and use of a low-cost, markerless motion capture system using the FreeMoCap software. In particular, I examined the accuracy and sensitivity of a six camera setup across a variety of tasks and characterized the performance of different pose estimation software. Key findings are summarized below.
 
@@ -15,9 +15,7 @@ Each of these behaviors was uncovered through rigorous comparison not just from 
 We should consider these results in two contexts: First, that there is a need to build more standardized datasets comparing the results of pose estimation software across varied tasks, and second, that there is a need the FreeMoCap software is positioned to fulfill in allowing for the benchmarking of pose estimation software across those tasks. 
 
 
-Validation pipeline? 
-
-*Key contributions of this work*
+*Contributions of this work to the field*
 
 The markerless motion capture validation field is not small, and this work joins one of many validation studies that exist in the literature. However, in the course of writing this I feel that there are a few novel contributions worth noting:
 
