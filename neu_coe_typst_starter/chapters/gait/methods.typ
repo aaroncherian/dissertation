@@ -69,7 +69,7 @@ To assess whether systematic scaling differences were present between pose estim
 
 For each trial, the optimal scale factor was estimated alongside the rigid transformation parameters by minimizing joint center error. These scale factors were not applied to the data used in downstream analyses but instead were recorded as a diagnostic measure of potential scale bias between systems.
 
-A scale factor of $s = 1$ indicates no global scaling difference between systems, whereas deviations from unity reflect a uniform expansion or contraction of the reconstructed markerless skeleton relative to the reference.
+A scale factor of $s = 1.0$ indicates no global scaling difference between systems, whereas deviations from 1.0 reflect a uniform expansion or contraction of the reconstructed markerless skeleton relative to the reference.
 
 *Statistical Analyses*
 

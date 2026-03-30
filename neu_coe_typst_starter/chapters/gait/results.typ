@@ -94,9 +94,9 @@ In contrast to spatial parameters, bias and LoA for temporal metrics (swing and 
 
 === Tracker-specific scaling
 
-To assess whether pose estimation choice introduced systematic scaling, scale factors between each tracker's reconstruction and the marker-based reference were computed for each trial (@fig-scaling). ViTPose demonstrated a consistent deviation from unity, with a median scale factor of 0.98 (range: 0.96-0.98), indicating that ViTPose reconstructions were approximately 2-4% larger than the marker-based reference. 
+To assess whether pose estimation choice introduced systematic scaling, scale factors between each tracker's reconstruction and the marker-based reference were computed for each trial (@fig-scaling). ViTPose demonstrated a consistent deviation, with a median scale factor of 0.98 (range: 0.96-0.98), indicating that ViTPose reconstructions were approximately 2-4% larger than the marker-based reference. 
 
-In contrast, MediaPipe and RTMPose showed scale factors centered near unity, indicating minimal global scaling bias relative to the reference (MediaPipe median: 1.00, range: 0.98-1.01; RTMPose median: 1.00, range: 0.99-1.01). 
+In contrast, MediaPipe and RTMPose showed scale factors centered near 1.0, indicating minimal global scaling bias relative to the reference (MediaPipe median: 1.00, range: 0.98-1.01; RTMPose median: 1.00, range: 0.99-1.01). 
 
 
  #figure(
