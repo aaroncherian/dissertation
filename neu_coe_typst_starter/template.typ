@@ -15,7 +15,7 @@
   field: none,
   submit_date: none,
 ) = {
-  set par(first-line-indent: (amount: 0pt, all: false), spacing: .5em)
+  set par(first-line-indent: (amount: 0pt, all: false), spacing: 1em)
   set page(footer: none)
   align(center)[
     #v(0.6in)
@@ -25,7 +25,7 @@
     By \
     #v(0.15in)
     #text(14pt, weight: "bold")[#author]
-    #v(0.2in)
+    #v(0.5in)
     to
     #v(0.15in)
     #text(14pt, weight: "bold")[The Department of #dept]
@@ -177,6 +177,18 @@
     #set par(leading: 1.0em, spacing: 0em, first-line-indent: (amount: 0pt, all: true))
     #text(11pt)[#it]
   ]
+
+  // Table of contents / List of figures styling — tighter spacing, bold chapters
+  show outline.entry: it => {
+    set par(first-line-indent: (amount: 0pt, all: true))
+    if it.level == 1 {
+      v(0.5em)
+      strong(it)
+    } else {
+      v(-.5em)
+      it
+    }
+  }
 
 
   body
