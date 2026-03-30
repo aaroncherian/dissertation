@@ -6,13 +6,15 @@ The method used to achieve synchronization can directly constrain the camera har
 
 As such, synchronization can be one of the primary cost drivers of a markerless system. 
 
-=== SkellyCam: Design and Motivations
+=== SkellyCam
 
 A core directive of `SkellyCam`, the synchronized video acquisition component of FreeMoCap, is to provide high quality synchronous recording methods that enable the usage of low-cost hardware - specifically consumer-grade, off-the-shelf webcams. The data presented in the later chapters of this work were all collected using six \~\$20 USB webcams (1280 x 720, 30 FPS) purchased from Amazon. 
 
 However, these cameras may not be suitable for all research needs. For example, capturing athletic performance may necessitate higher frame rate cameras, while outdoor recordings may require non-USB cameras. The software accommodates these use cases in two ways: 1) Videos collected from a set of external cameras (e.g., GoPros or smartphone cameras) can be synchronized using light and audio-based methods; 2) A pre-synchronized set of videos can be directly imported into the software for processing. 
 
-From a research standpoint, this means the system does not constrain users to low-cost hardware. Researchers with access to specialized camera systems, or established synchronization workflows, can integrate those resources directly into the pipeline, while the ground-level user can still record motion capture data with as few as two low-cost webcams. This flexibility reduces dependency on specific hardware configurations and allows data collection protocols to be adapted to the needs of the study, rather than constrained by the system itself.
+*Research Significance*
+
+From a research standpoint, this means the system does not constrain users to low-cost hardware. Researchers with access to specialized camera systems or established synchronization workflows can integrate those resources directly into the pipeline, while the ground-level user can still record motion capture data with as few as two low-cost webcams. This flexibility reduces dependency on specific hardware configurations and allows data collection protocols to be adapted to the needs of the study, rather than constrained by the system itself.
 
 
 === Single Camera vs. Multi-Camera Recording
