@@ -60,7 +60,7 @@ MediaPipe-derived COM changes exhibited good-to-excellent sensitivity to differe
 
 #figure(
   image("com_sensitivity.svg", width: 100%),
-  caption: flex-caption([Sensitivity of MediaPipe-derived COM path length to condition-dependent perturbations. Identity plots are shown with identity line (dashed) and line of best fit (red). Each panel shows trial-level path length differences (n = 12) in different conditions, representing system perturbations. Left: Visual perturbation = Eyes Closed (Solid Ground) - Eyes Open (Solid Ground); Middle: Proprioceptive perturbation = Eyes Open (Foam Pad) - Eyes Open (Solid Ground); Right: Visual + Proprioceptive Perturbation = Eyes Closed (Foam Pad) - Eyes Open (Solid Ground).],
+  caption: flex-caption([Sensitivity of MediaPipe-derived center of mass path length to condition-dependent perturbations. Identity plots are shown with identity line (dashed) and line of best fit (red). Each panel shows trial-level path length differences (n = 12) in different conditions, representing system perturbations. Left: Visual perturbation = Eyes Closed (Solid Ground) - Eyes Open (Solid Ground); Middle: Proprioceptive perturbation = Eyes Open (Foam Pad) - Eyes Open (Solid Ground); Right: Visual + Proprioceptive Perturbation = Eyes Closed (Foam Pad) - Eyes Open (Solid Ground).],
   [Sensitivity of markerless system to condition-dependent perturbations])
 ) <fig-path-length-sensitivity>
 
