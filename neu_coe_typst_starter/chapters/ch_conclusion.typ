@@ -23,3 +23,12 @@ Second, in _evaluating sensitivity to postural subtle differences_. To my knowle
 Third, in _examining how architectural differences in pose estimation software may affect accuracy_. Metrics of accuracy between pose estimation software have been reported in many studies, but sources of error between algorithms are often attributed primarily to training data. While this is certainly a factor, this work proposes that implementation differences that may also cause systematic issues - most notably exemplified by MediaPipe's One Euro filter and the scaling discrepancy with ViTPose-reconstructed data. While all of these results warrant further investigation, they are a reminder that there is more to pose estimation algorithms than the data they are trained on, and further characterization of these algorithms, perhaps in collaboration with machine learning experts, is warranted.
 
 Finally, in introducing a fully open-source _validation pipeline_. The pipeline developed to run every analysis in this work, across every tracker, is fully open-source and available online, in the effort of promoting reproducibility and transparency. I hope to continue to format and implement this pipeline into something that other researchers can use, contribute to, and improve. 
+
+
+
+== Future Directions
+
+The most immediate future direction is continued development of the FreeMoCap software. Many of the potential benefits described in this work (modular pose estimation, open-source benchmarking, adaptability through custom model integration) require continued iteration to make these components easily accessible to researchers across domains and experience levels. This includes packaging the gait and balance analyses developed here into a toolbox that other researchers can freely use, extend and improve. 
+
+More broadly, I believe the field would benefit from shared, standardized validation datasets that allow direct comparison across markerless systems and pose estimation backends. FreeMoCap, as a free and open-source platform, is well-positioned to support that effort.
+
