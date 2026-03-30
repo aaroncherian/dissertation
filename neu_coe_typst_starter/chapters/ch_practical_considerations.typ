@@ -93,7 +93,8 @@ As you may now surmise, the ultimate answer is that there
 is no exact answer as to where the cameras should be positioned. Each activity (e.g., squatting, jumping, one-leg balance) will require its own necessary camera setup. What it requires is a bit of patience, tinkering, and iteration to find what results in the best data - hence, markerless motion capture is a technique.  
 
 
-
+== Conclusion
+This chapter is an overview of some factors I found helpful in our data collection. It is by no means a complete and total list. However, I believe the acknowledging the impact that experimental setup variety can have on the results is key to encouraging widespread use of markerless motion capture in general, and that even small details such as shoe color can be helpful to others in reproducing and conducting their own markerless data collection. 
 
 
 
