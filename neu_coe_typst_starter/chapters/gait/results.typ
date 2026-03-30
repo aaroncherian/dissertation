@@ -1,3 +1,5 @@
+#import "../../template.typ": flex-caption
+
 == Results
 
 === Trajectories 
@@ -6,7 +8,8 @@ The reconstructed 3D data from each pose estimation backend are shown alongside 
 
 #figure(
   image("figures/example_gait.png", width: 100%),
-  caption: [Example of markerless motion capture data using each pose estimation backend. *Left*: MediaPipe (blue); *Middle*: RTMPose (orange); *Right*: ViTPose (green). The marker-based reference skeleton is displayed in black on each panel.]
+  caption: flex-caption([Example of markerless motion capture data using each pose estimation backend. *Left*: MediaPipe (blue); *Middle*: RTMPose (orange); *Right*: ViTPose (green). The marker-based reference skeleton is displayed in black on each panel.],
+  [Example of markerless motion capture data using each pose estimation backend])
 ) <fig-gait-reconstruction>
 
 Reconstructed joint center errors were generally under 30 mm, with the lowest error observed in the mediolateral (ML) direction (@tbl-traj-rmse-x). Across joints, the hip exhibited the largest overall RMSE, with approximately 20 mm of error in both the anteroposterior (AP) (@tbl-traj-rmse-y) and vertical directions (@tbl-traj-rmse-z), although the magnitude of this error was largely unaffected by walking speed.
@@ -17,21 +20,24 @@ Across trackers, RTMPose generally exhibited the lowest trajectory error, while 
 
 #figure(
   image("figures/trajectories_x.svg", width: 100%),
-  caption: [Comparison of lower-limb (hip, knee, ankle, toe) joint center trajectories in the *mediolateral (X) direction* across walking speeds (0.50 - 2.50 m/s). Trajectories derived from MediaPipe (blue), RTMPose (orange), and ViTPose (green) are shown alongside the marker-based reference (grey). Shaded error bars indicate ±1 SD across strides. The gait cycle is normalized to 0-100%.]
+  caption: flex-caption([Comparison of lower-limb (hip, knee, ankle, toe) joint center trajectories in the *mediolateral (X) direction* across walking speeds (0.50 - 2.50 m/s). Trajectories derived from MediaPipe (blue), RTMPose (orange), and ViTPose (green) are shown alongside the marker-based reference (grey). Shaded error bars indicate ±1 SD across strides. The gait cycle is normalized to 0-100%.],
+  [Mediolateral lower-limb joint center trajectories across walking speeds])
 ) <fig-traj-x>
 
 #include "tables/trajectory_rmse_x.typ"
 
 #figure(
   image("figures/trajectories_y.svg", width: 100%),
-  caption: [Comparison of lower-limb (hip, knee, ankle, toe) joint center trajectories in the *anteroposterior (Y) direction* across walking speeds (0.50 - 2.50 m/s). Trajectories derived from MediaPipe (blue), RTMPose (orange), and ViTPose (green) are shown alongside the marker-based reference (grey). Shaded error bars indicate ±1 SD across strides. The gait cycle is normalized to 0-100%.],
+  caption: flex-caption([Comparison of lower-limb (hip, knee, ankle, toe) joint center trajectories in the *anteroposterior (Y) direction* across walking speeds (0.50 - 2.50 m/s). Trajectories derived from MediaPipe (blue), RTMPose (orange), and ViTPose (green) are shown alongside the marker-based reference (grey). Shaded error bars indicate ±1 SD across strides. The gait cycle is normalized to 0-100%.],
+  [Anteroposterior lower-limb joint center trajectories across walking speeds])
 ) <fig-traj-y>
 
 #include "tables/trajectory_rmse_y.typ"
 
 #figure(
   image("figures/trajectories_z.svg", width: 100%),
-  caption: [Comparison of lower-limb (hip, knee, ankle, toe) joint center trajectories in the *vertical (Z) direction* across walking speeds (0.50 - 2.50 m/s). Trajectories derived from MediaPipe (blue), RTMPose (orange), and ViTPose (green) are shown alongside the marker-based reference (grey). Shaded error bars indicate ±1 SD across strides. The gait cycle is normalized to 0-100%.],
+  caption: flex-caption([Comparison of lower-limb (hip, knee, ankle, toe) joint center trajectories in the *vertical (Z) direction* across walking speeds (0.50 - 2.50 m/s). Trajectories derived from MediaPipe (blue), RTMPose (orange), and ViTPose (green) are shown alongside the marker-based reference (grey). Shaded error bars indicate ±1 SD across strides. The gait cycle is normalized to 0-100%.],
+  [Vertical lower-limb joint center trajectories across walking speeds])
 ) <fig-traj-z>
 
 
@@ -45,7 +51,8 @@ Statistical parametric mapping (SPM) paired t-tests ($ alpha = 0.05$) revealed c
 
 #figure(
   image("figures/joint_angles_with_spm.svg"),
-  caption: [Comparison of sagittal hip, knee, and ankle joint angles across walking speeds (0.50-2.50 m/s). Angles derived from MediaPipe (blue), RTMPose (orange), and ViTPose (green) are shown alongside the marker-based reference (grey). Shaded error bars indicate ±1 SD across strides and the gait cycle is normalized to 0-100%. Statistical parametric mapping (SPM) results are shown in the lower panels. Dashed lines indicate the critical threshold (t\*), and shaded regions denote time intervals where differences from the marker-based reference are statistically significant (p < .05). ]
+  caption: flex-caption([Comparison of sagittal hip, knee, and ankle joint angles across walking speeds (0.50-2.50 m/s). Angles derived from MediaPipe (blue), RTMPose (orange), and ViTPose (green) are shown alongside the marker-based reference (grey). Shaded error bars indicate ±1 SD across strides and the gait cycle is normalized to 0-100%. Statistical parametric mapping (SPM) results are shown in the lower panels. Dashed lines indicate the critical threshold (t\*), and shaded regions denote time intervals where differences from the marker-based reference are statistically significant (p < .05). ],
+  [Lower-limb kinematics and SPM across walking speeds])
 ) <fig-joint-ang-spm>
 
 
@@ -58,7 +65,8 @@ Timing errors in heel strike and toe off detection were small across all tracker
 
 #figure(
   image("figures/gait_events_histogram.svg", width: 100%),
-  caption:  [Distribution of gait event timing errors across all trials relative to the marker-based reference for data derived from MediaPipe (blue), RTMPose (orange), and ViTPose (green). *Left*: Heel strike; *Right*: Toe off. Positive values indicate delayed detection relative to the marker-based reference.]
+  caption:  flex-caption([Distribution of gait event timing errors across all trials relative to the marker-based reference for data derived from MediaPipe (blue), RTMPose (orange), and ViTPose (green). *Left*: Heel strike; *Right*: Toe off. Positive values indicate delayed detection relative to the marker-based reference.],
+  [Distribution of gait event timing errors])
 ) <fig-timing-error>
 
 === Gait Parameters
@@ -79,7 +87,8 @@ In contrast to spatial parameters, bias and LoA for temporal metrics (swing and 
 
 #figure(
   image("figures/ba_stride_length.png", width: 75%),
-  caption: [Bland-Altman plot of stride length differences between markerless and marker-based reference estimates, plotted against the mean of the measurements. Panels correspond to data from each pose estimation backend (*Top:* MediaPipe; *Middle:* RTMPose; *Bottom:* ViTPose), and colors indicate walking speed (0.50 - 2.50 m/s). Dashed lines represent bias, and dash-dot lines indicate 95% limits of agreement. ]
+  caption: flex-caption([Bland-Altman plot of stride length differences between markerless and marker-based reference estimates, plotted against the mean of the measurements. Panels correspond to data from each pose estimation backend (*Top:* MediaPipe; *Middle:* RTMPose; *Bottom:* ViTPose), and colors indicate walking speed (0.50 - 2.50 m/s). Dashed lines represent bias, and dash-dot lines indicate 95% limits of agreement. ],
+  [Bland-Altman plot of stride length difference])
   )
  <fig-gait-ba>
 
@@ -92,7 +101,8 @@ In contrast, MediaPipe and RTMPose showed scale factors centered near unity, ind
 
  #figure(
   image("figures/scaling_factor_boxplot.svg", width: 60%),
-  caption: [Box plot of per-trial uniform scaling factors estimated during spatial alignment to the marker-based reference for RTMPose (orange), MediaPipe (blue), and ViTPose (green). The scaling factor $s$ represents the isotropic scaling required to minimize joint center error. Dashed line indicates a scaling factor of 1 (perfect agreement).]
+  caption: flex-caption([Box plot of per-trial uniform scaling factors estimated during spatial alignment to the marker-based reference for RTMPose (orange), MediaPipe (blue), and ViTPose (green). The scaling factor $s$ represents the isotropic scaling required to minimize joint center error. Dashed line indicates a scaling factor of 1 (perfect agreement).],
+  [Box plot of per-trial uniform scaling factors])
  )
  <fig-scaling>
 
