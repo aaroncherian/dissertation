@@ -10,12 +10,12 @@
 
 // --- Title page ---
 #title-page(
-  title: "Your Dissertation Title",
-  author: "Your Name",
+  title: "Open-Source Development and Validation of a Low-Cost Markerless System for Quantitative Motion Analysis",
+  author: "Aaron T. Cherian",
   dept: "Bioengineering",
   degree: "Doctor of Philosophy",
   field: "Bioengineering",
-  submit_date: "August 2025",
+  submit_date: "April 13th, 2026",
 )
 
 
@@ -55,18 +55,26 @@ Write your acknowledgments here.
 #in-frontmatter.update(false)
 
 // --- Main matter (arabic numerals) ---
+// --- Main matter ---
 #pagebreak()
 #set page(numbering: "1")
 #counter(page).update(1)
 
-
+#counter(figure).update(0)
 #include "chapters/ch1_intro.typ"
+#counter(figure).update(0)
 #include "chapters/ch2_freemocap.typ"
+#counter(figure).update(0)
 #include "chapters/ch_math.typ"
+#counter(figure).update(0)
 #include "chapters/ch_gait.typ"
+#counter(figure).update(0)
 #include "chapters/ch_balance.typ"
+#counter(figure).update(0)
 #include "chapters/ch_prosthetics.typ"
+#counter(figure).update(0)
 #include "chapters/ch_practical_considerations.typ"
+#counter(figure).update(0)
 #include "chapters/ch_conclusion.typ"
 
 #bibliography("references.bib", style: "nature")
