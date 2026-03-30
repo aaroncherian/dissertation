@@ -1,6 +1,9 @@
+#import "../../template.typ": flex-caption
+
+
 == Introduction
 
-With how neatly computer vision  is packaged these days, it is entirely possible to go through  the entire process of markerless motion capture without having to touch the underlying math. It took about three to four years of working with motion capture myself before I needed to dive into the underlying mechanics myself. While there are many great resources out there, I found that it took a combination of many of them before I even began to grasp the math of markerless motion capture. This chapter is not directly relevant to the main work itself, but is written for the curious soul. 
+With how neatly computer vision  is packaged these days, it is entirely possible to go through  the entire process of markerless motion capture without having to touch the underlying math. It took about three to four years of working with motion capture myself before I needed to dive into the underlying mechanics myself. While there are many great resources out there, I found that it took a combination of many of them before I even began to grasp the math of markerless motion capture. This chapter should be taken as an aside that is not directly relevant to the main work itself, but is written for the curious soul who may be curious about what is happening underneath the hood of markerless motion capture.  
 
 == Defining Concepts: The Problem
 
@@ -24,7 +27,9 @@ As mentioned earlier, a reference frame is an origin and a set of axes. For the 
 To make this concrete: the *image* says 'Object A is a pixel on row 845, column 401'. The *camera* says 'Object A is 2 feet in front of me a bit to the right'. 
 
 #figure(image("frames.png", width: 85%),
-caption: [Illustration of the image and camera reference frames. The image frame coordinates are 2D pixel coordinates. The camera reference frame always has the camera at the origin, with the Z-axis pointing along the camera's optical axis (the center of an optical system).])
+caption: flex-caption([Illustration of the image and camera reference frames. The image frame coordinates are 2D pixel coordinates. The camera reference frame always has the camera at the origin, with the Z-axis pointing along the camera's optical axis (the center of an optical system).],
+[Illustration of the image and camera reference frames.]
+))
 
 *The World Reference Frame*
 
@@ -34,7 +39,8 @@ The role of the *world* frame becomes a more intuitive when we remember that in 
 
 #figure(
   image("world_frame.png", width: 100%),
-  caption: [Construction of the world frame. Left: Without a world reference frame, the object of interest is described by two separate camera reference frames with no way to communicate. Right: With the creation of a world reference frame, each object is now described in a standard way relative to our new axes.]
+  caption: flex-caption([Construction of the world frame. Left: Without a world reference frame, the object of interest is described by two separate camera reference frames with no way to communicate. Right: With the creation of a world reference frame, each object is now described in a standard way relative to our new axes.],
+  [Construction of the world reference frame])
 )
 
 But the positioning the camera in this new *world* frame is only half the problem. There's also what I might call a 'language' conversion issue - how do we go from Object A being described separately by two cameras to being described in one standard way?
@@ -108,7 +114,8 @@ where $x$ is a pixel location ("Object A is a pixel on row 845, column 401"), $X
 This is the role of the ChArUco board. 
 
 #figure(image("../ch2/calibration_board.png", width:50%),
-caption: [This figure is a copy of one from the previous chapter. A ChArUco board being  detected during a frame of calibration. Each marker on the board (known as an ArUco marker) has a unique ID that can be detected, and subsequently each corner between a pair of markers also has associated IDs. The detected corner IDs are annotated in blue on the image.]) <fig-charuco-math>
+caption: flex-caption([A ChArUco board being detected during a frame of calibration. Each marker on the board (known as an ArUco marker) has a unique ID that can be detected, and subsequently each corner between a pair of markers also has associated IDs. The detected corner IDs are annotated in blue on the image.],
+[A ChArUco board being detected during a frame of calibration])) <fig-charuco-math>
 
 Remember that the *world* reference frame needs an origin and axes placed somewhere - and that the choice is, in principle, arbitrary. The ChArUco board is where we make that choice. We place the world origin at a corner of the board, and align the axes with the board's edges.
 
@@ -116,7 +123,8 @@ On the ChArUco board (@fig-charuco-math), each corner has a known position relat
 
 #figure(
   image("calibration_math.png", width:95%),
-  caption: [The calibration process using a ChArUco board. The world origin is defined as the first corner of the board, and using the known square size the 3D world coordinates of the other coordinates can be found. Computer vision can detect the pixel locations of the corners in the image. Thus, the solution for $x = P X$ can be optimized for to find $P$, the camera matrix containing intrinsic and extrinsic parameters. ]
+  caption: flex-caption([Estimation of intrinsics and extrinsics from a calibration board. The world origin is defined as the first corner of the board, and using the known square size the 3D world coordinates of the other coordinates can be found. Computer vision can detect the pixel locations of the corners in the image. Thus, the solution for $x = P X$ can be optimized for to find $P$, the camera matrix containing intrinsic and extrinsic parameters.],
+  [Estimation of intrinsics and extrinsics from a calibration board])
 )
 
 So, every detected corner gives us an equation between a known world $X$ and detected pixel $x$, where the only unknowns are the camera parameters. With enough corners detected across enough images, the system becomes overconstrained (that is, we have far more equations than unknowns, which gives us redundant information to work with) and we can optimize for the set of intrinsic and extrinsic parameters (optimization is, non-technically, the process of finding the best answers through a series of guesses that ideally  become more accurate over time).
@@ -134,7 +142,8 @@ position, that is another snapshot of the same stationary cameras seeing a known
 
 #figure(
   image("board_connection.png", width: 90%),
-  caption: [Deriving camera-to-camera relationships from shared calibration. Each camera's extrinsic parameters (C₁|board and C₂|board) describe its pose relative to the calibration board, which defines the world origin. Because both cameras are calibrated against the same board, their positions relative to each other (C₁|₂) can be computed. ]
+  caption: flex-caption([Deriving camera-to-camera relationships from shared calibration. Each camera's extrinsic parameters (C₁|board and C₂|board) describe its pose relative to the calibration board, which defines the world origin. Because both cameras are calibrated against the same board, their positions relative to each other (C₁|₂) can be computed.],
+  [Deriving camera-to-camera relationships from shared calibration])
 )
 
 Mathematically, each camera's extrinsics are a transformation from the world frame to that camera's local frame. If we know the transformation from the world to Camera 1 and the transformation from the world to Camera 2, we can chain them together - go from Camera 1's frame back to the world, and then from the world into Camera 2's frame - to get the transformation between the 
@@ -166,7 +175,8 @@ Remember the question from earlier — how do two cameras suddenly agree on wher
 
 #figure(
   image("reconstruction.png", width: 130%),
-  caption: [3D reconstruction via triangulation. Each camera detects points P₁ and P₂ in its image as 2D pixel coordinates. Using each camera's intrinsic and extrinsic parameters, these pixel detections define rays extending from each camera into the world. The 3D position of each point is estimated where the corresponding rays from multiple cameras converge.]
+  caption: flex-caption([3D reconstruction via triangulation. Each camera detects points P₁ and P₂ in its image as 2D pixel coordinates. Using each camera's intrinsic and extrinsic parameters, these pixel detections define rays extending from each camera into the world. The 3D position of each point is estimated where the corresponding rays from multiple cameras converge.],
+  [3D reconstruction via triangulation])
 )
 
 Now, in a perfect world, every ray would intersect at exactly one point. Unfortunately, it's not so simple. As you may have noticed, there's a lot of estimation that goes into this process. Intrinsics and extrinsics are estimates, so if either is slightly off, that's noise that shifts the ray. Pose estimation algorithms are also an estimate of where the landmark is - and those estimates of the ground truth location might be slightly different camera to camera (especially if it's harder to see that joint in a particular camera view), and that's noise that shifts the ray. 
@@ -175,7 +185,6 @@ All of this to say, there's a lot of steps in this process that can introduce er
 
 It is worth stepping back to appreciate what is happening here. Everything we just described - casting rays, triangulating, estimating a 3D position - happens for every tracked landmark, on every frame, across every camera. A single frame of human pose estimation might track 30 or more joints, and a typical recording might run for thousands of frames. The full reconstruction is this entire pipeline running at scale: 2D detections in, 3D skeleton out.
 
-
 == Conclusion
 
-With the calibrated camera parameters and the triangulation process described above, we can take 2D pixel detections from multiple synchronized cameras and recover 3D positions in a shared world space. This is the core mathematical machinery underlying FreeMoCap's reconstruction pipeline — and ultimately, what makes it possible to turn a set of ordinary webcam videos into motion capture data.
+With the calibrated camera parameters and the triangulation process described above, we can take 2D pixel detections from multiple synchronized cameras and recover 3D positions in a shared world space. This is the core mathematical machinery underlying FreeMoCap's reconstruction pipeline - and ultimately, what makes it possible to turn a set of ordinary webcam videos into motion capture data.
