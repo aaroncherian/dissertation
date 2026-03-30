@@ -15,27 +15,32 @@
   field: none,
   submit_date: none,
 ) = {
-  set par(first-line-indent: (amount: 0pt, all: false), spacing: 1em)
+  set par(first-line-indent: (amount: 0pt, all: false), spacing: .5em)
   set page(footer: none)
   align(center)[
-    #v(1.6in)
-    #text(18pt, weight: "bold")[#title]
+    #v(0.6in)
+    #text(14pt, weight: "bold")[#title]
     #v(1.2in)
-    by \
-    #text(14pt, weight: "bold")[#author] \
-    #v(0.3in)
-    #if nuid != none { [NUID: #nuid] } \
+    A Dissertation Presented \
+    By \
+    #v(0.15in)
+    #text(14pt, weight: "bold")[#author]
+    #v(0.2in)
+    to
+    #v(0.15in)
+    #text(14pt, weight: "bold")[The Department of #dept]
+    #v(0.15in)
+    in partial fulfillment of the requirements \
+    for the degree of
+    #v(0.15in)
+    #text(14pt, weight: "bold", style: "italic")[#if degree != none { degree } else { [Doctor of Philosophy] }]
+    #v(0.15in)
+    in the field of \
+    #text(14pt, weight: "bold")[#if field != none { field } else { dept }]
     #v(1.0in)
 
-    A dissertation submitted to the faculty of \
-    Northeastern University \
-    in partial fulfillment of the requirements for the degree of \
-    #if degree != none { degree } else { [Doctor of Philosophy] } \
-    in \
-    #if field != none { field } else { dept } \
-    #v(0.75in)
-
-    #if dept != none { dept } \
+    #text(14pt, weight: "bold")[Northeastern University] \
+    #text(14pt, weight: "bold")[Boston, Massachusetts]
     #v(0.75in)
 
     #if submit_date != none { submit_date } else { [Month Year] }

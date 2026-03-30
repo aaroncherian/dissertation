@@ -10,13 +10,13 @@
 
 // --- Title page ---
 #title-page(
-  title: "Your Dissertation Title",
-  author: "Your Name",
-  nuid: "123456789",
-  dept: "Your Department",
+  title: "Open-source Development and Validation of a Low-Cost Markerless System for Quantitative Motion Analysis
+",
+  author: "Aaron T. Cherian",
+  dept: "Bioengineering",
   degree: "Doctor of Philosophy",
   field: "Bioengineering",
-  submit_date: "February 2026",
+  submit_date: "April 2026",
 )
 
 
