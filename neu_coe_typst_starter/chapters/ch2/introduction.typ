@@ -1,10 +1,12 @@
 == Introduction
 
-The motivation behind the Free Motion Capture (FreeMoCap) Project is, in a sense, quite simple: provide free motion capture for everyone. Despite advances in markerless motion capture, the ability to measure human movement remains constrained by cost, technical complexity, and environmental requirements, often limiting its use to well-resourced laboratories and specialized applications. As a result, many potential users—researchers, clinicians, educators, and creators—are left without practical access to these tools.
+Despite advances in markerless motion capture, the ability to measure human movement remains constrained by cost, technical complexity, and environmental requirements, often limiting its use to well-resourced laboratories and specialized applications. As a result, many potential users (e.g., researchers, clinicians, educators, and creators) are left without practical access to these tools. The motivation behind the Free Motion Capture (FreeMoCap) Project is, in a sense, quite simple: provide free motion capture for everyone.
 
-FreeMoCap is designed as a fully open-source markerless motion capture framework that prioritizes accessibility at every level of the pipeline. It is built to work with consumer-grade webcams, requires no physical markers or specialized recording environment, and provides a complete processing pipeline from synchronized video acquisition through 3D kinematic reconstruction. Its architecture is modular and tracker-agnostic, allowing users to swap between pose estimation backends depending on their needs. 
+FreeMoCap is a fully open-source markerless motion capture framework that prioritizes accessibility at every level of the pipeline. It is built to work with consumer-grade webcams, requires no physical markers or specialized recording environment, and provides a complete processing pipeline from synchronized video acquisition through 3D kinematic reconstruction. The architecture is modular and tracker-agnostic, allowing users to swap between pose estimation backends depending on their needs. 
 
-This chapter describes the core components of the FreeMoCap framework and the design decisions that shape them. In doing so, it examines how choices motivated by accessibility also carry direct implications for the quality and flexibility of the resulting motion capture data.
+It is perhaps easy to assume that accessibility must come at the cost of accuracy - and across the landscape we can see that trade-off is frequency observed. However, as this chapter will argue, design choices made in the service of accessibility can also directly improve the quality of the data a system produces. The following sections describe the core components of the FreeMoCap framework with that principle in mind.
+
+
 
 == Key Steps in Markerless Motion Capture
 
