@@ -53,14 +53,12 @@
 // Switch to front matter (roman numerals)
 #let begin-frontmatter() = {
   pagebreak()
-  set page(numbering: "i")
   counter(page).update(1)
 }
 
 // Switch to main matter (arabic numerals)
 #let begin-mainmatter() = {
   pagebreak()
-  set page(numbering: "1")
   counter(page).update(1)
 }
 
