@@ -3,11 +3,15 @@
 
 == Introduction
 
-With how neatly computer vision  is packaged these days, it is entirely possible to go through  the entire process of markerless motion capture without having to touch the underlying math. It took about three to four years of working with motion capture myself before I needed to dive into the underlying mechanics myself. While there are many great resources out there, I found that it took a combination of many of them before I even began to grasp the math of markerless motion capture. This chapter should be taken as an aside that is not directly relevant to the main work itself, but is written for the curious soul who may be curious about what is happening underneath the hood of markerless motion capture.  
+With how neatly computer vision  is packaged these days, it is entirely possible to go through  the entire process of markerless motion capture without having to touch the underlying math. I myself found reasons to avoid diving into the underlying mechanics for about three to four years, until a particularly confounding bug in our calibration pipeline forced me to walk into the belly of the beast. There are a great many resources out there that walk through, in depth, the concepts I touch upon in these chapters (the pinhole camera model, computer vision and calibration, rotation matrices and reference frames), and this chapter is not meant to replace them. What those resources don't typically do is connect these ideas to each other in the context of markerless motion capture. Making those connections myself took several months of working across many sources, and synthesizing that understanding is the goal of this chapter. This chapter should be taken as an aside that is not directly relevant to the main work itself, but is written for the curious soul who may be curious about what is happening underneath the hood of markerless motion capture.  
+
+*A note on language*
+
+The language in this chapter occasionally dips into casual or informal syntax. This is intentional. There is no shortage of formally written treatments of these topics - what I found myself lacking was an explanation that traded precision of language for clarity of understanding. This chapter is written with understanding as the priority, where sometimes the clearest path to a concept runs through simple, familiar wording rather than proper terminology.
 
 == Defining Concepts: The Problem
 
-Before diving into any equations, it is important to frame the problem that we are trying to solve. Pose estimation tracking gives us the 2D pixel locations of (in human pose estimation) anatomical joint centers. In multi-view markerless motion capture, we want to take those 2D pixel locations from multiple cameras and turn it into 3D data. 
+Before diving into any equations, it is important to frame the problem that we are trying to solve in markerless motion capture. Pose estimation tracking gives us the 2D pixel locations of (in human pose estimation) anatomical joint centers. In multi-view markerless motion capture, we want to take those 2D pixel locations from multiple cameras and turn it into 3D data. 
 
 So, on a given frame, we have these features on a 2D *image* that was taken by a *camera*, and we want to project it into the *real world*.  
 
@@ -15,13 +19,13 @@ Each of these bolded terms represents a different _reference frame_, and it's he
 
 == Defining Concepts: Reference Frames
 
-A reference frame is an origin and a set of axes that describes where something is. Each of our major 'locations' of interest (the image, the camera, and the real world) has a different way of describing what it sees.
+A reference frame is an origin and a set of axes that describes where something is. Each of our major 'locations' of interest (the *image*, the *camera*, and the *real world*) has a different way of describing what it sees.
 
 * The Camera and Image Reference Frames *
 
-We first begin with understanding how an image and camera understand "where" an object of interest is. The *image* knows where something is in pixel locations. The *camera* knows the direction of something relative to its lens. 
+We first begin with understanding how an image and camera understand "where" an object of interest is. The *image* knows where something is in pixel locations. The *camera* knows the direction of something relative to its lens. As mentioned, a reference frame is an origin and a set of axes, and there are standard definitions for how we can define image and camera reference frames (@fig-im_cam-frame).
 
-As mentioned earlier, a reference frame is an origin and a set of axes. For the image, the origin $(0,0)$ is usually placed in the top left corner, with $+X$ going rightward and $+Y$ downward (these axes may sometimes be written as $u$ and $v$ for image coordinates instead of $X$ and $Y$.) For the camera, the origin $(0,0,0)$ is that camera itself. More specifically, it is usually the optical center of the camera lens. $+Z$ is defined as the axis going through the optical center of the camera (the line of sight of the camera), while $+X$ and $+Y$ again point rightward and downward respectively. These are parallels of the $X$ and $Y$ in the image frame - this time we now add depth into the mix with $Z. $
+ For the *image*, the origin $(0,0)$ is usually placed in the top left corner, with $+X$ going rightward and $+Y$ downward (these axes may sometimes be written as $u$ and $v$ for image coordinates instead of $X$ and $Y$.) For the *camera*, the origin $(0,0,0)$ is that camera itself. More specifically, it is usually the optical center of the camera lens. $+Z$ is defined as the axis going through the optical center of the camera (the line of sight of the camera), while $+X$ and $+Y$ again point rightward and downward respectively. These are parallels of the $X$ and $Y$ in the image frame - this time we now add depth into the mix with $Z. $
 
 
 To make this concrete: the *image* says 'Object A is a pixel on row 845, column 401'. The *camera* says 'Object A is 2 feet in front of me a bit to the right'. 
@@ -29,39 +33,51 @@ To make this concrete: the *image* says 'Object A is a pixel on row 845, column 
 #figure(image("frames.png", width: 85%),
 caption: flex-caption([Illustration of the image and camera reference frames. The image frame coordinates are 2D pixel coordinates. The camera reference frame always has the camera at the origin, with the Z-axis pointing along the camera's optical axis (the center of an optical system).],
 [Illustration of the image and camera reference frames.]
-))
+)) <fig-im_cam-frame>
 
 *The World Reference Frame*
 
 Now we're left with the *world* reference frame. This one can be a little more tricky to describe, because unlike the image and camera reference frames where the origins and axes have standard definitions, the *world* frame is a bit more arbitrary. In some sense, we can imagine a 3D space, and put an origin anywhere with any orientation and call that a *world* reference frame. Why then, would that be useful for us in markerless motion capture? 
 
-The role of the *world* frame becomes a more intuitive when we remember that in a multi-camera system, there's a second camera also seeing Object A. So, Camera 1 says "Object A is 2 feet in front of me a bit to the right", and Camera 2 says "Actually, Object A is actually 4 feet in front of _me_ and a bit to the left." Each camera can only describe where Object A is relative to itself, and so we need to introduce a common way for the cameras and objects to be defined: Enter the *world* reference frame.  We define a new reference frame with a shared origin and axes, "Heads up, Camera 1, in this new coordinate system you're at point [1,1,1] and Camera 2, you're at [2,2,1]." This frame is the *world* frame. If you're wondering how we set the origin and orientation of the axes for this new reference frame for motion capture, we'll get to that shortly. 
+The role of the *world* frame becomes a more intuitive when we remember that in a multi-camera system, there is, at minimum, a second camera also seeing Object A. 
+
+So, Camera 1 says "Object A is 2 feet in front of me a bit to the right", and Camera 2 says "Actually, Object A is actually 4 feet in front of _me_ and a bit to the left." 
+
+Each camera can only describe where Object A is relative to itself, and so we need to introduce a common way for the cameras and objects to be defined: Enter the *world* reference frame.  We define a new reference frame with a shared origin and axes and say "Heads up, Camera 1, in this new coordinate system you're at point [1,1,1] and Camera 2, you're at [2,2,1]." This frame is the *world* frame. If you're wondering how we set the origin and orientation of the axes for this new reference frame for motion capture, we'll touch on that later. 
 
 #figure(
   image("world_frame.png", width: 100%),
-  caption: flex-caption([Construction of the world frame. Left: Without a world reference frame, the object of interest is described by two separate camera reference frames with no way to communicate. Right: With the creation of a world reference frame, each object is now described in a standard way relative to our new axes.],
+  caption: flex-caption([Construction of the world frame. Left: Without a world reference frame, the object of interest is described by two separate camera reference frames with no way to communicate. Right: With the creation of a world reference frame, the object and cameras are now described in a standard way relative to our new axes.],
   [Construction of the world reference frame])
 )
 
-But the positioning the camera in this new *world* frame is only half the problem. There's also what I might call a 'language' conversion issue - how do we go from Object A being described separately by two cameras to being described in one standard way?
+But the positioning the camera in this new *world* frame is only half the problem. There's also what I might call a 'language' conversion issue - how do we go from Object A being described separately by two *cameras* to being described in one standard way in the *world*?
 
-When Camera 1 says it sees something "2 feet in front of me and bit to the right", those directions (_in front of_ and _to the right_) are defined by Camera 1's orientation (i.e., the way it sees the world). However, the way Camera 1 sees the world (physically, the way that it is situated and oriented) won't match the way Camera 2 seems the world. So, "forward" in Camera 1's language might mean "left" in Camera 2's language. So we not only need to know _where_ each camera is, we also need to know _which way it's facing_ so we can convert each camera's local description ("in front of me, to the right") into the shared language of the world frame. ("2 units in the positive X direction, 3 units in positive Y direction of the world").
+When Camera 1 says it sees something "2 feet in front of me and bit to the right", those directions (_in front of_ and _to the right_) are defined by Camera 1's orientation (i.e., the way it sees the world). However, the way Camera 1 sees the world (physically, the way the camera is pointed) won't match the way Camera 2 seems the world. So, "forward" in Camera 1's language might mean "left" in Camera 2's language. So we not only need to know _where_ each camera is, we also need to know _which way it's facing_ so we can convert each camera's local description ("in front of me, to the right") into the shared language of the world frame. ("2 units in the positive X direction, 3 units in positive Y direction of the world").
 
-Mathematically, we call the positioning of the camera relative to the *world* origin a _translation_, and the conversion of its personal 'language' into the shared one a _rotation_. 
+Mathematically, we call the positioning of the *camera* relative to the *world* origin a _translation_, and the conversion of its personal 'language' into the shared one a _rotation_. 
 
-Something that still may not seem intuitive is, in this world of 'translating' camera languages, how do Camera 1 and Camera 2 suddenly agree on where this 3D point is? And if an image only gives us 2D coordinates, how do we turn that into a 3D point? 
+Something that still may not seem intuitive is, in this realm of 'translating' camera languages, how do Camera 1 and Camera 2 suddenly agree on where this 3D point is? And if an image only gives us 2D coordinates, how do we turn that into a 3D point? 
 
 Hold onto that thought, we'll get there. 
 
+#figure(
+  image("summary.png"),
+  caption: flex-caption(
+    [Overview of moving from a pixel in an image to a triangulated 3D point. Pixel coordinates are brought into the camera reference frame. We construct a world reference frame and place the cameras within it, and then triangulate the points location in the world using multiple cameras.],
+    [Overview of moving from a pixel in an image to a triangulated 3D point]
+  )) <fig-summary>
 
-
-== Moving from pixels to the real world: the pinhole camera model
-
-So now we have three reference frames - the *image*, the *camera*, and the *world* - and to reconstruct a point, we need to move a pixel from the image to a point in the camera frame, build a shared world reference frame, and move the point from the camera into the world reference frame (again, if this last step seems like a black box, we'll get there).
+So to summarize (@fig-summary), now we have three reference frames - the *image*, the *camera*, and the *world* - and to reconstruct a point, we need to move a pixel from the *image* to a point in the *camera* frame, build a shared *world* reference frame, and move the point from the camera into the *world* reference frame (again, if this last step seems like a black box, we'll get there).
 
 To do that, we first need to understand the reverse - how does a 3D point in the world become a 2D pixel in an image? Or more simply, if you take a picture of a tree, how does that three dimensional tree become a two dimension image on your phone screen? 
 
-This is described by something called the _pinhole camera model_. While it seem counterintuitive to learn this from the opposite direction of what we want, the logic is straightforward - we need to learn the forward process so we can invert it. The forward process describes two transformations we need to estimate, and we call them extrinsics and intrinsics. 
+
+== The Pinhole Camera Model: How An Object Becomes An Image
+
+
+
+This is described by something called the _pinhole camera model_. While it seem counterintuitive to look at turning an object into a series of pixels when what we really want is to turn a series of pixels into an object, the logic is straightforward - we need to learn the forward process so we can invert it. The forward process describes two transformations we need to estimate, and we call them extrinsics and intrinsics. 
 
 *Extrinsics: world to camera*
 
@@ -71,7 +87,7 @@ translation vector $t$:
 $ X_c = R X_w + t $ <eq:extrinsics>
 
 where $X_w$ is the 3D position of a point in the world frame ("2 units in the positive X direction, 3 units in positive Y direction of the world) and $X_c$ is the position of that same point expressed in the camera's local frame ("in front of me, to the right"). $R$ encodes 
-the camera's orientation - it rotates the world's axes into the camera's axes (the camera to shared "language" conversion we discussed earlier). $t$ encodes the camera's position relative to the world origin.
+the camera's orientation - it rotates the world's axes into the camera's axes (the "language" conversion we discussed earlier). $t$ encodes the camera's position relative to the world origin.
 
 * Camera Intrinsics * 
 
@@ -131,7 +147,7 @@ So, every detected corner gives us an equation between a known world $X$ and det
 
 For each guess taken for a set of parameters, the system projects the known 3D points back onto the image using the forward model — the distance between where a corner was actually detected and where the model predicts it should appear is the reprojection error. Optimization adjusts the parameters until total reprojection error is minimized.
 
-This yields an intrinsic matrix K for each camera, which remains constant as long as the camera's optics do not change. It also yields extrinsic parameters [R|t] representing each camera's pose relative to the board. In addition to K and [R|t], the calibration process may also estimate lens distortion coefficients. The pinhole model assumes an ideal camera with no lens, but real cameras introduce warping — calibration corrects for this as part of the same optimization.
+This yields an intrinsic matrix K for each camera, which remains constant as long as the camera's optics do not change. It also yields extrinsic parameters [R|t] representing each camera's pose relative to the board. In addition to K and [R|t], the calibration process may also estimate lens distortion coefficients. The pinhole model assumes an ideal camera with no lens, but real cameras introduce warping - calibration corrects for this as part of the same optimization.
 
 Now, because the world origin is the calibration board, and each camera's extrinsics describe its pose relative to that board, we now have something we didn't have before: a common language between cameras. Camera 1 knows where it is relative to the board. Camera 2 also knows where it is relative to the board. And because it's the same board, Camera 1 and Camera 2 now know where they are relative to each other. 
 
@@ -149,7 +165,7 @@ position, that is another snapshot of the same stationary cameras seeing a known
 Mathematically, each camera's extrinsics are a transformation from the world frame to that camera's local frame. If we know the transformation from the world to Camera 1 and the transformation from the world to Camera 2, we can chain them together - go from Camera 1's frame back to the world, and then from the world into Camera 2's frame - to get the transformation between the 
 two cameras directly.
 
-Once multiple cameras have been calibrated with respect to the same board, their positions relative to each other are also known — and we have the shared world frame we need for reconstruction.
+Once multiple cameras have been calibrated with respect to the same board, their positions relative to each other are also known - and we have the shared world frame we need for reconstruction.
 
 == Reconstruction
 
