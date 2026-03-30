@@ -23,7 +23,7 @@ This leads to the second challenge: integration. Even when suitable pose estimat
 
 The default FreeMoCap pipeline utilizes MediaPipe @lugaresiMediaPipeFrameworkBuilding2019, a free, open-source framework based on the CNN BlazePose @bazarevskyBlazePoseOndeviceRealtime2020. We selected MediaPipe on the basis of practicality and accessibility. MediaPipe is simple to install and interface with using Python scripts. It is also computationally lightweight, and can be run on a CPU-only computer. Thus, of many available options, MediaPipe makes our software the most accessible for the widest range of users. 
 
-* Research Significance *
+* Research Significance: Benchmarking *
 
 As the software interface allows pose estimation backends to be swapped without any change to the rest of the pipeline, we can directly compare how different algorithms perform under identical conditions (i.e., using the same cameras, calibration, reconstruction and post-processing). These comparisons can aid in detailed benchmarking of pose estimation algorithms in markerless motion capture, a noted need by the research community @needhamAccuracySeveralPose2021. The following chapters take advantage of this by evaluating three additional trackers alongside MediaPipe: ViTPose, RTMPose, and in one chapter a custom-trained DeepLabCut model. These comparisons both serve as an evaluation of pose estimation performance and a demonstration of the practical benefits of a modular, pose estimation architecture. 
 
