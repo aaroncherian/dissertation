@@ -1,3 +1,5 @@
+#import "../../template.typ": flex-caption
+
 == Results
 
 === Accuracy of Prosthetic Tracking
@@ -5,7 +7,8 @@ Integrating a prosthesis-specific DeepLabCut (DLC) model into the tracking pipel
 
 #figure(
   image("figures/tracking_fig_v5.png"),
-  caption: [Comparison of prosthesis-side keypoint trajectories captured by Qualisys (black), MediaPipe (red), RTMPose (green), and DeepLabCut (DLC) (blue) during a treadmill walking trial. Left panel shows pose estimation tracking overlays from MediaPipe (top), RTMPose (middle), and a DeepLabCut model trained on prosthetic limb features (bottom). Right panel illustrates 3D trajectories (X: anterior-posterior, Y: medio-lateral, Z: vertical) for the prosthetic leg (right knee, ankle, heel and toe) joint centers from a representative trial.]
+  caption: flex-caption([Comparison of prosthesis-side keypoint trajectories captured by Qualisys (black), MediaPipe (red), RTMPose (green), and DeepLabCut (DLC) (blue) during a treadmill walking trial. Left panel shows pose estimation tracking overlays from MediaPipe (top), RTMPose (middle), and a DeepLabCut model trained on prosthetic limb features (bottom). Right panel illustrates 3D trajectories (X: anterior-posterior, Y: medio-lateral, Z: vertical) for the prosthetic leg (right knee, ankle, heel and toe) joint centers from a representative trial.],
+  [Comparison of prosthesis trajectories between marker-based and markerless systems])
 ) <fig-prosthetic-tracking>
 
 #figure(
@@ -43,7 +46,8 @@ Both systems consistently tracked the ±6.35 mm and ±12.70 mm prosthetic leg le
 
 #figure(
   image("figures/leg_length_plot.png", width:80%),
-  caption: [Median leg length relative to the neutral prosthetic configuration across prosthesis length conditions, measured by marker-based and markerless systems. Dashed line indicates the expected change based on known prosthetic adjustments (±6.35 mm, ±12.70 mm). Error bars represent median absolute deviation (MAD).]
+  caption: flex-caption([Median leg length relative to the neutral prosthetic configuration across prosthesis length conditions, measured by marker-based and markerless systems. Dashed line indicates the expected change based on known prosthetic adjustments (±6.35 mm, ±12.70 mm). Error bars represent median absolute deviation (MAD).],
+  [Median leg length relative to the neutral prosthetic configuration across prosthesis length conditions])
 ) <fig-llp>
 
 
@@ -52,7 +56,8 @@ The marker-based system demonstrated sensitivity to changes in pelvic obliquity 
 
 #figure(
   image("figures/pelvic_obliquity_plot.png", width: 95%),
-  caption: [ Pelvic obliquity is shown for markerless (left) and marker-based (right) systems across five alignment conditions (leg length adjustment: -12.70 mm, -6.35 mm, neutral, +6.35 mm, +12.70 mm). Pelvic obliquity data for the markerless system is derived from an RTMPose pose estimation backend. Solid lines indicate condition-level means and error bars indicate ±1 SD across strides. The gait cycle is normalized to 0-100\% for comparison across strides. Positive values indicate that the right hip is higher than the left. ]
+  caption: flex-caption([ Pelvic obliquity is shown for markerless (left) and marker-based (right) systems across five alignment conditions (leg length adjustment: -12.70 mm, -6.35 mm, neutral, +6.35 mm, +12.70 mm). Pelvic obliquity data for the markerless system is derived from an RTMPose pose estimation backend. Solid lines indicate condition-level means and error bars indicate ±1 SD across strides. The gait cycle is normalized to 0-100\% for comparison across strides. Positive values indicate that the right hip is higher than the left.],
+  [Comparison of pelvic obliquity across markerless and marker-based systems across leg length configurations])
 )
 
 === Tracking Ankle Plantar/Dorsiflexion Adjustments
@@ -63,13 +68,15 @@ Both systems demonstrated a general increase in minimum toe clearance with progr
 
 #figure(
   image("figures/ankle_adjustment_plot.png", width:90%),
-  caption: [Mean sagittal plane knee and ankle angles are shown for markerless (left) and marker-based (right) systems across five prosthetic alignment conditions (plantarflexion: -5.6°, -2.8°; neutral: 0°, dorsiflexion: +2.8°, +5.6°). Solid lines indicate condition-level means and error bars indicate ±1 SD across strides. The gait cycle is normalized to 0-100\% for comparison across strides.]
+  caption: flex-caption([Mean sagittal plane knee and ankle angles are shown for markerless (left) and marker-based (right) systems across five prosthetic alignment conditions (plantarflexion: -5.6°, -2.8°; neutral: 0°, dorsiflexion: +2.8°, +5.6°). Solid lines indicate condition-level means and error bars indicate ±1 SD across strides. The gait cycle is normalized to 0-100\% for comparison across strides.],
+  [Comparison of sagittal knee and ankle angles for markerless and marker-based systems across ankle alignment conditions])
 ) <fig-aap>
 
 
 #figure(
   image("figures/toe_clearance.png", width: 80%),
-  caption: [Minimum toe clearance measured by markerless (blue circles) and marker-based (red squares) systems across prosthetic ankle plantar/dorsiflexion alignment conditions relative to neutral. Points represent condition-level means and error bars indicate ±1 SD across strides]
+  caption: flex-caption([Minimum toe clearance measured by markerless (blue circles) and marker-based (red squares) systems across prosthetic ankle plantar/dorsiflexion alignment conditions relative to neutral. Points represent condition-level means and error bars indicate ±1 SD across strides],
+  [Minimum toe clearance measured by markerless and marker-based motion capture across ankle alignment conditions])
 )
 
 === Tracking Toe-In/Toe-Out Adjustments
@@ -77,14 +84,16 @@ Both markerless and marker-based systems captured systematic changes in foot pro
 
 #figure(
   image("figures/fpa_plot.png", width:90%),
-  caption: [Mean foot progression angle is shown for markerless (left) and marker-based (right) systems across five alignment conditions (toe-in: –6°, –3°; neutral: 0°, toe-out: +3°, +6°). Solid lines indicate condition-level means and error bars indicate ±1 SD across strides. The gait cycle is normalized to 0–100\% for comparison across strides. ]) <fig-fpa>
+  caption: flex-caption([Mean foot progression angle is shown for markerless (left) and marker-based (right) systems across five alignment conditions (toe-in: –6°, –3°; neutral: 0°, toe-out: +3°, +6°). Solid lines indicate condition-level means and error bars indicate ±1 SD across strides. The gait cycle is normalized to 0-100\% for comparison across strides. ],
+  [Mean foot progression angle for markerless and marker-based systems across toe alignment conditions])) <fig-fpa>
 
 === Gait Parameter Comparison
 The markerless system tended to underestimate stance duration and overestimate swing duration (@fig-prosthetic-hist). Mean error for the prosthetic leg 3D data (DLC-derived) was close to zero (stance duration: -12.7 ± 31.8 ms; swing duration: 13.9 ± 29.6 ms; N = 590 strides). For the non-prosthetic leg 3D data (RTMPose-derived), mean error was slightly larger (stance duration: -23.4 ± 137.6 ms; swing duration: 29.6 ± 132.1 ms; N = 591 strides), with substantially greater variability in temporal estimates. 
 
 #figure(
   image("figures/gait_error_histogram_left_right.png", width:90%),
-  caption: [Distribution of stride-level markerless system gait event errors relative to marker-based reference across all trials. Left: Stance duration. Right: Swing duration. The vertical dashed line indicates zero error. Prosthetic leg gait parameters (blue) are derived from the custom-trained DeepLabCut model and non-prosthetic gait parameters (orange) are derived from an RTMPose pose estimation backend. Display range set to the 99th percentile of absolute error (±333 ms). Twenty-three strides (1.0\%) with errors exceeding this range are not shown. All observations were retained in statistical analyses.]
+  caption: flex-caption([Distribution of stride-level markerless system gait event errors relative to marker-based reference across all trials. Left: Stance duration. Right: Swing duration. The vertical dashed line indicates zero error. Prosthetic leg gait parameters (blue) are derived from the custom-trained DeepLabCut model and non-prosthetic gait parameters (orange) are derived from an RTMPose pose estimation backend. Display range set to the 99th percentile of absolute error (±333 ms). Twenty-three strides (1.0\%) with errors exceeding this range are not shown. All observations were retained in statistical analyses.],
+  [Distribution of markerless gait event timing errors])
 ) <fig-prosthetic-hist>
 
 
