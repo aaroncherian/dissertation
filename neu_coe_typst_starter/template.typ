@@ -15,17 +15,17 @@
   field: none,
   submit_date: none,
 ) = {
-  set par(first-line-indent: (amount: 0pt, all: false), spacing: 1em)
+  set par(first-line-indent: (amount: 0pt, all: false), spacing: .5em)
   set page(footer: none)
   align(center)[
-    #v(0.6in)
+    #v(0.8in)
     #text(14pt, weight: "bold")[#title]
     #v(1.2in)
     A Dissertation Presented \
     By \
     #v(0.15in)
     #text(14pt, weight: "bold")[#author]
-    #v(0.5in)
+    #v(0.2in)
     to
     #v(0.15in)
     #text(14pt, weight: "bold")[The Department of #dept]
