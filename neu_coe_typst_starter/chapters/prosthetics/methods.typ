@@ -1,8 +1,11 @@
+#import "../../template.typ": flex-caption
+
 == Methods
 
 #figure(
   image("figures/methods_fig_v2-03.png"),
-  caption: [ An overview of experiment design and analysis methods. *Setup:* Six generic USB-webcams were placed circularly around the treadmill and connected to a single PC, with the FreeMoCap software used for video acquisition. A ChArUco board (board size: 40" x 27.5", square size: 126 mm) was used to calibrate the cameras. *Data Collection:* Three prosthetic alignment parameters (leg length, sagittal plane alignment of the ankle, and toe-in/toe-out angle) were manipulated across five discrete adjustments. For each adjustment, the participant completed a 1-minute walking trial while being recorded by both a markerless and marker-based motion capture system. *Pose Estimation:* RTMPose was used to detect 2D full-body anatomical keypoints per camera view. A custom DeepLabCut (DLC) model was trained to identify analogous keypoints on the prosthesis. *Triangulation:* For both pose estimation software, 2D keypoints per camera were triangulated to reconstruct 3D joint center trajectories. The two sets of 3D data were spliced together to create a model where a DLC-backend was used to track the prosthesis, while RTMPose-backend was used to track the rest of the body. *Outcome metrics:* Outcome metrics relating to each prosthetic alignment adjustment (leg length, knee and ankle joint angles, pelvic obliquity, foot progression angle, toe clearance, stance and swing duration) were calculated.]
+  caption: flex-caption([ An overview of experiment design and analysis methods. *Setup:* Six generic USB-webcams were placed circularly around the treadmill and connected to a single PC, with the FreeMoCap software used for video acquisition. A ChArUco board (board size: 40" x 27.5", square size: 126 mm) was used to calibrate the cameras. *Data Collection:* Three prosthetic alignment parameters (leg length, sagittal plane alignment of the ankle, and toe-in/toe-out angle) were manipulated across five discrete adjustments. For each adjustment, the participant completed a 1-minute walking trial while being recorded by both a markerless and marker-based motion capture system. *Pose Estimation:* RTMPose was used to detect 2D full-body anatomical keypoints per camera view. A custom DeepLabCut (DLC) model was trained to identify analogous keypoints on the prosthesis. *Triangulation:* For both pose estimation software, 2D keypoints per camera were triangulated to reconstruct 3D joint center trajectories. The two sets of 3D data were spliced together to create a model where a DLC-backend was used to track the prosthesis, while RTMPose-backend was used to track the rest of the body. *Outcome metrics:* Outcome metrics relating to each prosthetic alignment adjustment (leg length, knee and ankle joint angles, pelvic obliquity, foot progression angle, toe clearance, stance and swing duration) were calculated.],
+  [Overview of prosthetic alignment experiment design and analysis methods])
 )
 
 === Participant
@@ -53,7 +56,7 @@ DLC-estimated 2D keypoints were reconstructed into 3D trajectories using the Fre
 *Data Synchronization and Alignment*
 Markerless and marker-based data were temporally aligned using recorded Unix timestamps from both systems, generated from the same acquisition computer. Qualisys data were resampled to match FreeMoCap timestamps, with cross-correlation of joint trajectories and manual inspection used for final refinement of small residual temporal offsets.
 
-Markerless data were spatially aligned to the marker-based reference frame using a least-squares–optimized transformation that minimized joint center errors between systems. To identify a transformation that was consistent over the full recording, candidate transformations were estimated from randomly sampled subsets of frames and evaluated across the entire dataset.
+Markerless data were spatially aligned to the marker-based reference frame using a least-squares-optimized transformation that minimized joint center errors between systems. To identify a transformation that was consistent over the full recording, candidate transformations were estimated from randomly sampled subsets of frames and evaluated across the entire dataset.
 
 === Data Analysis
 
