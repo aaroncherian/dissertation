@@ -40,7 +40,7 @@ Write your acknowledgments here.
 #front-heading("TABLE OF CONTENTS")
 #outline(title: none)
 
-
+#pagebreak()
 #front-heading("List of Figures")
 
 
