@@ -2,7 +2,7 @@
 
 When discussing FreeMoCap, I have found that there are two questions I am often asked. 
 
-The first is: "Who are your competitors?"  Ultimately, I believe the goal of this software is better captured by a different question - not "What motion capture systems are we competing with?", but instead "Who has not been able to access motion capture, and how can we make it possible?". Systems like OpenCap have made significant strides in making markerless motion capture more accessible, particularly for kinematic and kinetic 
+The first is: "Who are your competitors?"  Ultimately, I believe the goal of this software is better captured by a different question - "Who has not been able to access motion capture, and how can we make it possible?". Systems like OpenCap have made significant strides in making markerless motion capture more accessible, particularly for kinematic and kinetic 
 analysis in established biomechanical workflows. However, the potential applications of motion capture extend beyond these domains. The aim of this work is to lower the barriers to collecting 3D movement data, enabling use across a range of contexts, from research to education and creative applications. And as this chapter has argued, lowering barriers to entry does not require sacrificing accuracy - in some cases, as with camera scaling, it can directly 
 improve it. 
 
