@@ -30,13 +30,14 @@ To explain this further, in our early pilot testing for this study, participants
 
 We found much more success in modifying our participant attire to increase contrast. Participants wore sleeveless shirts and shorts, and shoes were spray-painted white to improve visibility. @fig-clothing below shows the difference between our participant attire during our pilot testing and the validation study proper. 
 
-While not strictly related to clothing, for participants with longer hair, I highly recommend they tie it back during a recording, especially if there is a camera directed at that participant from the back. I have found issues in pose estimation algorithms from this viewpoint if hair is obscuring the neck. 
-
 #figure(
     image("practicals/clothing.png", width: 85%),
     caption: flex-caption([Attire worn by participants during markerless motion capture recording. *Left*: Initial pilot testing attire: a full body suit with black shoes. Note the difficulty in clearly distinguishing the ankles and feet from the treadmill belt. *Right*: Validation study attire: shorts, a sleeveless shirt to add limb contrast, and white shoes to add environmental contrast. Exposing the joints (elbows and knees) adds much necessary contrast to the body, particularly during gait.],
     [Attire considerations in markerless data collection])
 ) <fig-clothing>
+
+
+While not strictly related to clothing, participants with longer hair should tie it back during a recording, especially if there is a camera directed at that participant from the back. I have found issues in pose estimation algorithms from this viewpoint if hair obscures the neck the neck. 
 
 
 == Lighting
@@ -47,11 +48,11 @@ Returning to my earlier metaphor, lighting, as in photography, is fundamental. T
 
 == Framing 
 
-Framing of the participant fully in the camera views is important. Particularly if they will largely be staying in place through the recording, participants should take up as much of the frame as possible, while still ensuring their whole body is still visible. Camera height and tilt should be optimized to the participant to keep them visible. When doing final touches on camera orientation, I may ask the participant to assume a T-pose where they outstretch their hands, or to go through the motions of the action they will perform to make sure that there is no camera view in which they move out of frame. 
+Framing of the participant fully in the camera views is important. Particularly if they will largely be staying in place through the recording, participants should take up as much of the camera view as possible, while still ensuring their whole body is still visible. Camera height and tilt should be optimized to the participant to keep them visible. When doing final touches on camera orientation, I may ask the participant to assume a T-pose where they outstretch their hands, or to go through the motions of the action they will perform to make sure that there is no camera view in which a limb moves out of frame. 
 
 
 == Background
-The background should, to the extent that is possible, be free of clutter. Primarily, this is because pose estimation algorithms are imperfect and sometimes prone to what we call the "ghost skeleton" problem - which is when the pose estimation software detects joint center keypoints on something that is distinctly not a human. These hauntings occur particularly in recordings where the participant is a bit distant from the camera. Keeping the area where you are recording free of as much clutter as possible can help mitigate this problem. Strong framing of the participant as discussed above also helps here, as the better a participant is framed, the less reason pose estimation algorithms have to hunt for a person elsewhere. 
+The background should, to the extent that is possible, be free of clutter. Primarily, this is because pose estimation algorithms are imperfect and sometimes prone to what we call the "ghost skeleton" problem - which is when the pose estimation software detects joint center keypoints on something that is, distinctly, not a human. These hauntings occur particularly in recordings where the participant is a bit distant from the camera. Keeping the area where you are recording free of as much clutter as possible can help mitigate this problem. Strong framing of the participant as discussed above also helps here, as the better a participant is framed, the less reason pose estimation algorithms have to hunt for a person elsewhere. 
 
 == The Amount of Cameras
 
@@ -61,7 +62,8 @@ We used six cameras because, quite frankly, that is the maximum number of USB po
 
 == The Positioning of Cameras
 
-Personally, I believe in camera positioning is a key part of gathering good data. I spent many months optimizing our six camera setup to my liking for our validation (pictured in @fig-treadmill, for reference), which has led to a myriad of opinions that are perhaps more preference that statement of fact.  
+Personally, I believe camera positioning is a key part of gathering good data. I spent many months optimizing our six camera setup to my liking for our validation (pictured in @fig-treadmill, for reference), which has led to a myriad of opinions that should be taken as more preference than statement of fact.  
+
 For example, I prefer to avoid fully sagittal views of a participant when possible, as they invite heavy occlusion and don't provide as much data. Instead, I prefer oblique angles positioned to capture the whole body, even if favoring one side primarily, to make sure each camera is gathering as much data about the participant as possible. 
 
 #figure(
@@ -87,7 +89,7 @@ Now, to contradict my earlier opinion regarding sagittal planes - we once record
     caption: [Camera views to record participants on a stationary row machine]
 ) <fig-bike>
 
-As you may have come to surmise, the ultimate answer is that there
+As you may now surmise, the ultimate answer is that there
 is no exact answer as to where the cameras should be positioned. Each activity (e.g., squatting, jumping, one-leg balance) will require its own necessary camera setup. What it requires is a bit of patience, tinkering, and iteration to find what results in the best data - hence, markerless motion capture is a technique.  
 
 
