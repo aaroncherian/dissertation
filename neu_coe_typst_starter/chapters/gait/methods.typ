@@ -30,7 +30,7 @@ Marker-based data were tracked, labeled and processed in QTM. Missing trajectori
 
 *Markerless motion capture data*
 
-Synchronized videos were processed using the FreeMoCap (v1.7.4) pipeline described in Chapter 3. 2D body keypoints were detected using MediaPipe (`mediapipe`: v0.10.14),  RTMPose (`rtmposelib`: v0.0.14) and ViTPose (implemented using the `easy_ViTPose` Github repository) pose estimation software. Corresponding keypoints were triangulated into 3D space. 3D data were filtered using a zero-lag, fourth-order Butterworth filter with a 6 Hz cutoff frequency. 
+Synchronized videos were processed using the FreeMoCap (v1.7.4) pipeline described in Chapter 3. 2D body keypoints were detected using MediaPipe @lugaresiMediaPipeFrameworkBuilding2019 (`mediapipe`: v0.10.14),  RTMPose @jiangRTMPoseRealTimeMultiPerson2023 (`rtmposelib`: v0.0.14), and ViTPose @xuViTPoseSimpleVision2022 (implemented using the `easy_ViTPose` Github repository) pose estimation software. Corresponding keypoints were triangulated into 3D space. 3D data were filtered using a zero-lag, fourth-order Butterworth filter with a 6 Hz cutoff frequency. 
 
 *Data synchronization and alignment*
 

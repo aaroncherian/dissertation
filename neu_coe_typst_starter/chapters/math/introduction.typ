@@ -187,7 +187,7 @@ So we're halfway there. We asked: how do we turn a 2D pixel into a 3D point? The
 This is where the multi-camera setup becomes essential. If a second camera also detects the same landmark, we get a second ray from a different position and angle. 
 
 
-Remember the question from earlier — how do two cameras suddenly agree on where a 3D point is? This is the answer. They don't communicate. They each independently cast a ray into the world, and geometry does the rest. Where the rays meet is where the point must be - and because calibration placed both cameras in the same *world* reference frame, that intersection is a real position in 3D space. This is triangulation. And more cameras means more rays, which means more information constraining that intersection - this is one reason why adding cameras generally improves reconstruction accuracy.
+Remember the question from earlier - how do two cameras suddenly agree on where a 3D point is? This is the answer. They don't communicate. They each independently cast a ray into the world, and geometry does the rest. Where the rays meet is where the point must be - and because calibration placed both cameras in the same *world* reference frame, that intersection is a real position in 3D space. This is triangulation. And more cameras means more rays, which means more information constraining that intersection - this is one reason why adding cameras generally improves reconstruction accuracy.
 
 #figure(
   image("reconstruction.png", width: 130%),
