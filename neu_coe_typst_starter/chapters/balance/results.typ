@@ -56,7 +56,7 @@ MediaPipe-derived path length demonstrated strong agreement with the reference s
 #include "path_length_agreement_table.typ"
 
 === Markerless system sensitivity 
-MediaPipe-derived COM changes exhibited good-to-excellent sensitivity to different perturbations (_r_#super[2] = 0.83 - 0.96) with slope of the fitted regression line showing near one-to-one agreement (0.89 - 1.06), though slight underestimation of path length was observed under visual perturbation ( @fig-path-length-sensitivity). ViTPose and RTMPose-derived COM changes demonstrated poor sensitivity (_r_#super[2] = 0.03 to 0.45), with proportional bias differing substantially (slope = -6.46 to 1.58) from the ideal. Identity plots per perturbation for RTMPose and ViTPose-derived data can be found in Appendix B (@fig-sensitivity-all).
+MediaPipe-derived COM changes exhibited good-to-excellent sensitivity to different perturbations (_r_#super[2] = 0.83 - 0.96) with slope of the fitted regression line showing near one-to-one agreement (0.89 - 1.06), though slight underestimation of path length was observed under visual perturbation (@fig-path-length-sensitivity). ViTPose and RTMPose-derived COM changes demonstrated poor sensitivity (_r_#super[2] = 0.03 to 0.45), with proportional bias differing substantially (slope = -6.46 to 1.58) from the ideal. Identity plots per perturbation for RTMPose and ViTPose-derived data can be found in Appendix B (@fig-sensitivity-all).
 
 #figure(
   image("com_sensitivity.svg", width: 100%),
