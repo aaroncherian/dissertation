@@ -47,12 +47,9 @@
   ]
 }
 
-// Front matter section heading (centered, bold)
+// Front matter section heading (centered, bold, real heading for TOC)
 #let front-heading(name) = {
-  set par(first-line-indent: (amount: 0pt, all: true), leading: 1.0em, spacing: 0em)
-  v(1.0cm)
-  align(center)[#text(14pt, weight: "bold")[#name]]
-  v(0.75cm)
+  heading(level: 1, numbering: none)[#name]
 }
 
 // Switch to front matter (roman numerals)
@@ -69,6 +66,9 @@
 
 // Appendix state
 #let in-appendix = state("in-appendix", false)
+
+// Front matter state
+#let in-frontmatter = state("in-frontmatter", false)
 
 // Switch to appendix mode (letter-numbered chapters, reset counter)
 #let begin-appendix() = {
@@ -125,19 +125,28 @@
   // Chapter headings (level 1)
   show heading.where(level: 1): it => context {
     let is-app = in-appendix.get()
+    let is-front = in-frontmatter.get()
     set par(leading: 1.0em, spacing: 0em, first-line-indent: (amount: 0pt, all: true))
     pagebreak(weak: true)
     v(1.0cm)
-    align(center)[
-      #if is-app {
-        smallcaps(text(12pt, weight: "bold")[APPENDIX #counter(heading).display("A")])
-      } else {
-        smallcaps(text(12pt, weight: "bold")[CHAPTER #counter(heading).display("1")])
-      }
-      #v(0.7cm)
-      #text(14pt, weight: "bold")[#it.body]
-    ]
-    v(1.2cm)
+    if is-front {
+      // Front matter headings: centered, bold, no "CHAPTER N" label
+      align(center)[
+        #text(14pt, weight: "bold")[#it.body]
+      ]
+      v(0.75cm)
+    } else {
+      align(center)[
+        #if is-app {
+          smallcaps(text(12pt, weight: "bold")[APPENDIX #counter(heading).display("A")])
+        } else {
+          smallcaps(text(12pt, weight: "bold")[CHAPTER #counter(heading).display("1")])
+        }
+        #v(0.7cm)
+        #text(14pt, weight: "bold")[#it.body]
+      ]
+      v(1.2cm)
+    }
   }
 
   // Section headings (level 2)
@@ -178,17 +187,21 @@
     #text(11pt)[#it]
   ]
 
-  // Table of contents / List of figures styling — tighter spacing, bold chapters
-  show outline.entry: it => {
-    set par(first-line-indent: (amount: 0pt, all: true))
-    if it.level == 1 {
-      v(0.5em)
-      strong(it)
-    } else {
-      v(-.5em)
-      it
-    }
+// Table of contents styling — tighter spacing, bold chapter headings only
+show outline.entry: it => {
+  set par(first-line-indent: (amount: 0pt, all: true))
+  if it.level == 1 and it.element.func() == heading {
+    v(0.5em)
+    strong(it)
+  } else if it.level == 1 {
+    // Figure entries (level 1 but not headings) — normal weight
+    v(0.2em)
+    it
+  } else {
+    v(-0.5em)
+    it
   }
+}
 
 
   body

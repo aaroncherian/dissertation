@@ -24,8 +24,12 @@
 #pagebreak()
 #set page(numbering: "i")
 #counter(page).update(1)
+#in-frontmatter.update(true)
 
-#front-heading("TABLE OF CONTENTS")
+// Manual heading so the TOC doesn't list itself
+#v(1.0cm)
+#align(center)[#text(14pt, weight: "bold")[TABLE OF CONTENTS]]
+#v(0.75cm)
 #outline(title: none)
 
 #pagebreak()
@@ -37,19 +41,20 @@
 )
 
 #pagebreak()
-#front-heading("ABSTRACT")
+#front-heading("Abstract")
 Write your abstract here.
 
 #pagebreak()
-#front-heading("ACKNOWLEDGMENTS")
+#front-heading("Acknowledgements")
 Write your acknowledgments here.
 
 #pagebreak()
-#front-heading("PREFACE")
+#front-heading("Preface")
 #include "preface.typ"
 
+#in-frontmatter.update(false)
+
 // --- Main matter (arabic numerals) ---
-// --- Main matter ---
 #pagebreak()
 #set page(numbering: "1")
 #counter(page).update(1)
