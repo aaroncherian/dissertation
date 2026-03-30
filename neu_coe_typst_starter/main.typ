@@ -64,6 +64,7 @@ Write your acknowledgments here.
 #include "chapters/ch_balance.typ"
 #include "chapters/ch_prosthetics.typ"
 #include "chapters/ch_practical_considerations.typ"
+#include "chapters/ch_conclusion.typ"
 
 #bibliography("references.bib", style: "nature")
 
