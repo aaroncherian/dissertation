@@ -26,7 +26,7 @@ Clothing should generally be form-fitting, although prior work suggests that clo
 
 2) How easily can different limbs be distinguished from one another?  
 
-To explain this further, in our early pilot testing for this study, participants wore full-black body suits with black shoes on a black treadmill. Here, we generally found poor results largely because we failed at both criteria. First, the participant was note easily distinguishable form the environment. Perhaps unsurprisingly, black pants and shoes do not provide much contrast on a black treadmill. Second, limbs that are all the same, dark color were difficult to differentiate from one another, particularly during dynamic movement where overlapping segments further reduced visual separability.
+To explain this further, in our early pilot testing for this study, participants wore full-black body suits with black shoes on a black treadmill. Here, we generally found poor results largely because we failed at both criteria. First, the participant was not easily distinguishable form the environment. Perhaps unsurprisingly, black pants and shoes do not provide much contrast on a black treadmill. Second, limbs that are all the same, dark color were difficult to differentiate from one another, particularly during dynamic movement where overlapping segments further reduced visual separability.
 
 We found much more success in modifying our participant attire to increase contrast. Participants wore sleeveless shirts and shorts, and shoes were spray-painted white to improve visibility. @fig-clothing below shows the difference between our participant attire during our pilot testing and the validation study proper. 
 

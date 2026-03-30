@@ -6,7 +6,7 @@
   image("figures/methods_fig_v2-03.png"),
   caption: flex-caption([ An overview of experiment design and analysis methods. *Setup:* Six generic USB-webcams were placed circularly around the treadmill and connected to a single PC, with the FreeMoCap software used for video acquisition. A ChArUco board (board size: 40" x 27.5", square size: 126 mm) was used to calibrate the cameras. *Data Collection:* Three prosthetic alignment parameters (leg length, sagittal plane alignment of the ankle, and toe-in/toe-out angle) were manipulated across five discrete adjustments. For each adjustment, the participant completed a 1-minute walking trial while being recorded by both a markerless and marker-based motion capture system. *Pose Estimation:* RTMPose was used to detect 2D full-body anatomical keypoints per camera view. A custom DeepLabCut (DLC) model was trained to identify analogous keypoints on the prosthesis. *Triangulation:* For both pose estimation software, 2D keypoints per camera were triangulated to reconstruct 3D joint center trajectories. The two sets of 3D data were spliced together to create a model where a DLC-backend was used to track the prosthesis, while RTMPose-backend was used to track the rest of the body. *Outcome metrics:* Outcome metrics relating to each prosthetic alignment adjustment (leg length, knee and ankle joint angles, pelvic obliquity, foot progression angle, toe clearance, stance and swing duration) were calculated.],
   [Overview of prosthetic alignment experiment design and analysis methods])
-)
+) <fig-prosthetic-methods>
 
 === Participant
 One transfemoral prosthesis user participated in this proof-of-concept validation study. A single-participant, within-session repeated-measures design was chosen to isolate the effect of controlled alignment perturbations from inter-individual variability in gait, residual limb morphology, and prosthetic componentry.  The participant provided informed consent, and the protocol was approved by the Northeastern University IRB (\#22-03-07). The participant used their personal prosthesis (knee: Ottobock C-Leg 4; foot: passive carbon fiber device) for the study. 
@@ -23,7 +23,7 @@ Video data was acquired using 6 generic USB-webcams (approximately \$20 each, 12
 
 === Experimental Design 
 
-The overall experimental workflow, including data collection, pose estimation, 3D reconstruction, and outcome metric calculation, is illustrated in Figure \ref{fig:methods}.
+The overall experimental workflow, including data collection, pose estimation, 3D reconstruction, and outcome metric calculation, is illustrated in @fig-prosthetic-methods.
 
 *Trial Structure*
 
@@ -49,7 +49,7 @@ Synchronized video data were processed using the FreeMoCap pipeline. Of the six 
 
 *Prosthesis pose estimation*
 
-A custom prosthesis-specific DeepLabCut (DLC) model was developed to improve tracking of prosthetic limb features. The DLC model was trained using frames from neutral alignment trials to estimate the prosthetic knee, ankle, heel and toe joint centers. The trained model was then applied to all recording sessions. Prosthesis-specific annotation and model training for the DLC model were facilitated using a streamlined multi-camera annotation workflow (add citation: \textbf{cite skellyclicker)}. 
+A custom prosthesis-specific DeepLabCut (DLC) model was developed to improve tracking of prosthetic limb features. The DLC model was trained using frames from neutral alignment trials to estimate the prosthetic knee, ankle, heel and toe joint centers. The trained model was then applied to all recording sessions. Prosthesis-specific annotation and model training for the DLC model were facilitated using a streamlined multi-camera annotation workflow.
 
 DLC-estimated 2D keypoints were reconstructed into 3D trajectories using the FreeMoCap 3D reconstruction pipeline described above. These trajectories were then substituted for the corresponding MediaPipe and RTMPose-derived trajectories in the right leg.
 
