@@ -2,9 +2,9 @@ The current landscape of quantitative motion analysis methods forces specific tr
 
 This dissertation evaluates the FreeMoCap system against three core design requirements:
 
-1) Biomechanical utility — The system should produce measurements whose agreement with reference data is in line with prior markerless validation studies, while capturing biomechanically meaningful patterns across tasks.
+1) *Biomechanical utility*: The system should produce measurements whose agreement with reference data is in line with prior markerless validation studies, while capturing biomechanically meaningful patterns across tasks.
 
-2) Extensibility — The system should support multiple pose estimation backends and permit task or population-specific modifications when out-of-the-box markerless pipelines are insufficient.
+2) *Extensibility:* The system should support multiple pose estimation backends and permit task or population-specific modifications when out-of-the-box markerless pipelines are insufficient.
 
-3) Accessibility — The system should reduce financial, computational, and methodological barriers to motion capture by supporting low-cost hardware, minimizing specialized software and hardware requirements, and providing openly available, reusable analysis workflows.
+3) *Accessibility:* The system should reduce financial, computational, and methodological barriers to motion capture by supporting low-cost hardware, minimizing specialized software and hardware requirements, and providing openly available, reusable analysis workflows.
 
