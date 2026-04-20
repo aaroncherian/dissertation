@@ -1,11 +1,19 @@
+#import "../../template.typ": flex-caption
+
 == Methods
+
+#figure(
+  image("figures/methods_balance.png", width: 93%),
+  caption: flex-caption([An overview of balance experiment design and analysis methods. *Setup:* Six generic USB-webcams were placed circularly around the capture volume and connected to a single PC, with the FreeMoCap software used for video acquisition. A ChArUco board (board size: 40" x 27.5", square size: 126 mm) was used to calibrate the cameras. *Data Collection:* Participants completed the Modified Clinical Test of Sensory Interaction on Balance (CTSIB-M), standing as still as possible for 60 seconds under four different conditions: 1) Eyes open on solid ground; 2) Eyes closed on solid ground; 3) Eyes open on a foam pad; 4) Eyes closed on a foam pad. Each participant completed two trials while being recorded by both a markerless and marker-based motion capture system. *Processing:* Markerless data were processed using three pose estimation backends (MediaPipe, RTMPose, and ViTPose), each producing a set of reconstructed 3D data. *Analysis and Outcomes:* Center of mass was calculated using anthropometric data. Path length, sway area, and sway velocity were calculated using center of mass. Differences in path length measurements between conditions were used to assess markerless sensitivity to balance changes. ],
+  [An overview of balance experiment design and analysis methods])) <fig-balance-methods>
+
 
 === Participants
 
 6 participants (5 male, 1 female) were recruited in this study. All participants were healthy adults with no reported musculoskeletal or neurological impairments affecting gait. The participants provided informed consent and the protocol was approved by the Northeastern University IRB (\#19-08-27).
 
 === Experimental setup
-The experimental setup for the marker-based and markerless motion capture systems follows the protocol written out in Chapter 5: Methods.
+The experimental setup for the marker-based and markerless motion capture systems follows the protocol written out in Chapter 5: Methods. An overview of the experimental design and analysis pipeline is shown in @fig-balance-methods.
 
 
 *Data Collection*
