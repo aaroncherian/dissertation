@@ -4,7 +4,7 @@
 
 === Trajectories 
 
-The reconstructed 3D data from each pose estimation backend are shown alongside the marker-based reference in @fig-gait-reconstruction. Gait cycle-normalized joint trajectories in the X (mediolateral), Y (anteroposterior), and Z (vertical) directions are shown in @fig-traj-x, @fig-traj-y, and @fig-traj-z, respectively.
+The reconstructed 3D data from each pose estimation backend are shown alongside the marker-based reference in @fig-gait-reconstruction. Gait cycle-normalized joint trajectories in the X (mediolateral), Y (anteroposterior), and Z (vertical) directions are shown in @fig-traj-x, @fig-traj-y, and @fig-traj-z, respectively. 
 
 #figure(
   image("figures/example_gait.png", width: 100%),
@@ -12,14 +12,20 @@ The reconstructed 3D data from each pose estimation backend are shown alongside 
   [Example of markerless motion capture data using each pose estimation backend])
 ) <fig-gait-reconstruction>
 
-Reconstructed joint center errors were generally under 30 mm, with the lowest error observed in the mediolateral (ML) direction (@tbl-traj-rmse-x). Across joints, the hip exhibited the largest overall RMSE, with approximately 20 mm of error in both the anteroposterior (AP) (@tbl-traj-rmse-y) and vertical directions (@tbl-traj-rmse-z), although the magnitude of this error was largely unaffected by walking speed.
+Reconstructed joint center errors for each lower-limb joint across speed, axis, and pose estimation backend are summarized in @fig-rmse-grid. Joint center errors were generally under 30 mm, with the lowest error observed in the mediolateral (ML) direction (@tbl-traj-rmse-x). Across joints, the hip exhibited the largest overall RMSE, with approximately 20 mm of error in both the anteroposterior (AP) (@tbl-traj-rmse-y) and vertical directions (@tbl-traj-rmse-z), although the magnitude of this error was largely unaffected by walking speed.
 
 Error increased with walking speed at distal joints (particularly in the AP and vertical directions). However, this pattern was not uniform across joints and axes. For example, AP error at the knee decreased with speed for RTMPose and ViTPose-derived trajectories. Additionally, across all trackers, vertical error at the ankle remained relatively consistent.
 
 Across trackers, RTMPose generally exhibited the lowest trajectory error, while ViTPose exhibited the highest, particularly in the vertical direction. These differences were most apparent at the ankle and toe, where ViTPose demonstrated a consistent vertical offset relative to the marker-based reference. 
 
 #figure(
-  image("figures/trajectories_x.svg", width: 100%),
+  image("figures/trajectory_rmse_grid.png", width: 100%),
+  caption: flex-caption([Trajectory RMSE (mm) across joints, axes, and walking speeds for each pose estimation backend. Rows correspond to joint centers (hip, knee, ankle, toe) and columns to pose estimation backends (MediaPipe, RTMPose, ViTPose). Error is shown separately for the mediolateral (blue), anteroposterior (orange), and vertical (green) directions. Points represent mean RMSE across all trials; error bars indicate ±1 SD. Values correspond to Tables 5.1-5.3.],
+  [Trajectory RMSE (mm) across joints, axes, and walking speeds for each pose estimation backend])
+) <fig-rmse-grid>
+
+#figure(
+  image("figures/trajectories_x.svg", width: 75%),
   caption: flex-caption([Comparison of lower-limb (hip, knee, ankle, toe) joint center trajectories in the *mediolateral (X) direction* across walking speeds (0.50 - 2.50 m/s). Trajectories derived from MediaPipe (blue), RTMPose (orange), and ViTPose (green) are shown alongside the marker-based reference (grey). Shaded error bars indicate ±1 SD across strides. The gait cycle is normalized to 0-100%.],
   [Mediolateral lower-limb joint center trajectories across walking speeds])
 ) <fig-traj-x>
@@ -27,7 +33,7 @@ Across trackers, RTMPose generally exhibited the lowest trajectory error, while 
 #include "tables/trajectory_rmse_x.typ"
 
 #figure(
-  image("figures/trajectories_y.svg", width: 100%),
+  image("figures/trajectories_y.svg", width: 75%),
   caption: flex-caption([Comparison of lower-limb (hip, knee, ankle, toe) joint center trajectories in the *anteroposterior (Y) direction* across walking speeds (0.50 - 2.50 m/s). Trajectories derived from MediaPipe (blue), RTMPose (orange), and ViTPose (green) are shown alongside the marker-based reference (grey). Shaded error bars indicate ±1 SD across strides. The gait cycle is normalized to 0-100%.],
   [Anteroposterior lower-limb joint center trajectories across walking speeds])
 ) <fig-traj-y>
@@ -35,13 +41,14 @@ Across trackers, RTMPose generally exhibited the lowest trajectory error, while 
 #include "tables/trajectory_rmse_y.typ"
 
 #figure(
-  image("figures/trajectories_z.svg", width: 100%),
+  image("figures/trajectories_z.svg", width: 75%),
   caption: flex-caption([Comparison of lower-limb (hip, knee, ankle, toe) joint center trajectories in the *vertical (Z) direction* across walking speeds (0.50 - 2.50 m/s). Trajectories derived from MediaPipe (blue), RTMPose (orange), and ViTPose (green) are shown alongside the marker-based reference (grey). Shaded error bars indicate ±1 SD across strides. The gait cycle is normalized to 0-100%.],
   [Vertical lower-limb joint center trajectories across walking speeds])
 ) <fig-traj-z>
 
 
 #include "tables/trajectory_rmse_z.typ"
+
 
 === Joint Kinematics
 
