@@ -25,8 +25,12 @@
       [Swing Duration (ms)], [MediaPipe], [-5.35], [-49.27], [+38.58], [0.900 (0.880, 0.910)],
       [], [RTMPose], [-2.56], [-38.92], [+33.81], [0.936 (0.930, 0.940)],
       [], [ViTPose], [+0.81], [-37.13], [+38.75], [0.932 (0.930, 0.940)],
+      table.hline(stroke: 0.3pt),
+      [Stride Duration (ms)], [MediaPipe], [-0.83], [-69.85], [+68.20], [0.993 (0.990, 0.990)],
+      [], [RTMPose], [-0.08], [-36.36], [+36.20], [0.998 (1.000, 1.000)],
+      [], [ViTPose], [-0.12], [-37.23], [+36.99], [0.998 (1.000, 1.000)],
       table.hline(stroke: 1pt),
     )
   },
-  caption: [Bland-Altman statistics (bias and limits of agreement) and agreement metrics (ICC(2,1), 95% CI) for spatiotemporal gait parameters across all trials, computed relative to the marker-based reference.],
+  caption: [Bland-Altman agreement statistics for spatiotemporal gait parameters across all walking speeds. Bias and limits of agreement (LoA) are reported in the native units of each metric. ICC = intraclass correlation coefficient (2,1) with 95% confidence interval.],
 ) <tbl-ba-gait-pooled>

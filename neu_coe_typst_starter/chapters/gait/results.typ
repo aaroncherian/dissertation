@@ -84,18 +84,18 @@ Spatiotemporal gait parameters, pooled across all walking speeds, showed minimal
 #include "tables/ba_gait_pooled.typ"
 
 
-Spatial gait parameters (step and stride length) demonstrated clear speed-dependent changes (@fig-gait-ba). 
+Spatial gait parameters (step and stride length) demonstrated clear speed-dependent changes compared to temporal gait parameters (@fig-gait-ba). 
 LoA increased with walking speed (e.g., ViTPose step length: ±19 mm to ±88 mm).
 
 Stride length agreement remained strong across speeds (ICC \> 0.90), while step length agreement decreased at higher speeds (ICC ≈ 0.78 at the fastest speed). Across trackers, RTMPose and ViTPose-derived spatial parameters showed more consistent agreement, while MediaPipe-derived parameters exhibited wider LoA, consistent with pooled results above. Speed-stratified Bland-Altman statistics and ICC for spatial parameters can be found in Appendix A (@tbl-ba-gait-by-speed-spatial).
 
-In contrast to spatial parameters, bias and LoA for temporal metrics (swing and stance duration) remained consistent across speeds, though ICC declined at higher speeds. Stance duration agreement remained strong at low to moderate speeds, but dropped sharply at the highest speed (ICC ≈ 0.65-0.72 across trackers). Swing duration, in contrast, showed a more progressive decline in agreement with increasing speed, decreasing to moderate agreement at higher speeds (ICC ≈ 0.57-0.66). Across all conditions, MediaPipe-derived metrics exhibited the lowest agreement. Speed-stratified Bland-Altman statistics and ICC for temporal parameters can be found in Appendix A (@tbl-ba-gait-by-speed-temporal).
+In contrast to spatial parameters, bias and LoA for temporal metrics (swing, stance, and stride duration) remained consistent across speeds, with differences clustering at multiples of the 33 ms frame interval (@fig-gait-ba), though ICC declined at higher speeds. Stance duration agreement remained strong at low to moderate speeds, but dropped sharply at the highest speed (ICC ≈ 0.65-0.72 across trackers). Swing duration, in contrast, showed a more progressive decline in agreement with increasing speed, decreasing to moderate agreement at higher speeds (ICC ≈ 0.57-0.66). Across all conditions, MediaPipe-derived metrics exhibited the lowest agreement. Speed-stratified Bland-Altman statistics and ICC for temporal parameters can be found in Appendix A (@tbl-ba-gait-by-speed-temporal).
 
 
 #figure(
-  image("figures/ba_stride_length.png", width: 75%),
-  caption: flex-caption([Bland-Altman plot of stride length differences between markerless and marker-based reference estimates, plotted against the mean of the measurements. Panels correspond to data from each pose estimation backend (*Top:* MediaPipe; *Middle:* RTMPose; *Bottom:* ViTPose), and colors indicate walking speed (0.50 - 2.50 m/s). Dashed lines represent bias, and dash-dot lines indicate 95% limits of agreement. ],
-  [Bland-Altman plot of stride length difference])
+  image("figures/ba_stride_both.png", width: 100%),
+  caption: flex-caption([Bland-Altman plots of stride duration (left) and stride length (right) agreement between markerless and marker-based systems. Rows correspond to each pose estimation backend (MediaPipe, RTMPose, ViTPose), and colors indicate walking speed (0.50-2.50 m/s). Dashed lines represent bias, and dash-dot lines indicate 95% limits of agreement. Stride duration differences are reported in milliseconds and stride length differences in millimeters.],
+  [Bland-Altman plots of stride duration and stride length differences])
   )
  <fig-gait-ba>
 
