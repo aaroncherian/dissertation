@@ -99,5 +99,5 @@
       table.hline(stroke: 1pt),
     )
   },
-  caption: [Trajectory RMSE per pose estimation backend across speeds — AP (mm). Values represent mean ± SD RMSE across all participants and trials compared to the marker-based reference.],
+  caption: [Trajectory RMSE per pose estimation backend across speeds — AP (mm). RMSE was calculated per gait-cycle-normalized stride and averaged across strides within each trial. Values represent mean ± SD across all participants and trials compared to the marker-based reference.],
 ) <tbl-traj-rmse-y>

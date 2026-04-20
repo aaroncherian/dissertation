@@ -20,7 +20,7 @@ Across trackers, RTMPose generally exhibited the lowest trajectory error, while 
 
 #figure(
   image("figures/trajectory_rmse_grid.png", width: 100%),
-  caption: flex-caption([Trajectory RMSE (mm) across joints, axes, and walking speeds for each pose estimation backend. Rows correspond to joint centers (hip, knee, ankle, toe) and columns to pose estimation backends (MediaPipe, RTMPose, ViTPose). Error is shown separately for the mediolateral (blue), anteroposterior (orange), and vertical (green) directions. Points represent mean RMSE across all trials; error bars indicate ±1 SD. Values correspond to Tables 5.1-5.3.],
+  caption: flex-caption([Trajectory RMSE (mm) across joints, axes, and walking speeds for each pose estimation backend. RMSE was calculated per gait-cycle-normalized stride and averaged across strides within each trial. Rows correspond to joint centers (hip, knee, ankle, toe) and columns to pose estimation backends (MediaPipe, RTMPose, ViTPose). Error is shown separately for the mediolateral (blue), anteroposterior (orange), and vertical (green) directions. Points represent mean RMSE across all trials; error bars indicate ±1 SD. Values correspond to Tables 5.1-5.3.],
   [Trajectory RMSE (mm) across joints, axes, and walking speeds for each pose estimation backend])
 ) <fig-rmse-grid>
 
