@@ -25,7 +25,7 @@ Across trackers, RTMPose generally exhibited the lowest trajectory error, while 
 ) <fig-rmse-grid>
 
 #figure(
-  image("figures/trajectories_x.svg", width: 75%),
+  image("figures/trajectories_x.svg", width: 85%),
   caption: flex-caption([Comparison of lower-limb (hip, knee, ankle, toe) joint center trajectories in the *mediolateral (X) direction* across walking speeds (0.50 - 2.50 m/s). Trajectories derived from MediaPipe (blue), RTMPose (orange), and ViTPose (green) are shown alongside the marker-based reference (grey). Shaded error bars indicate ±1 SD across strides. The gait cycle is normalized to 0-100%.],
   [Mediolateral lower-limb joint center trajectories across walking speeds])
 ) <fig-traj-x>
@@ -33,7 +33,7 @@ Across trackers, RTMPose generally exhibited the lowest trajectory error, while 
 #include "tables/trajectory_rmse_x.typ"
 
 #figure(
-  image("figures/trajectories_y.svg", width: 75%),
+  image("figures/trajectories_y.svg", width: 85%),
   caption: flex-caption([Comparison of lower-limb (hip, knee, ankle, toe) joint center trajectories in the *anteroposterior (Y) direction* across walking speeds (0.50 - 2.50 m/s). Trajectories derived from MediaPipe (blue), RTMPose (orange), and ViTPose (green) are shown alongside the marker-based reference (grey). Shaded error bars indicate ±1 SD across strides. The gait cycle is normalized to 0-100%.],
   [Anteroposterior lower-limb joint center trajectories across walking speeds])
 ) <fig-traj-y>
@@ -41,7 +41,7 @@ Across trackers, RTMPose generally exhibited the lowest trajectory error, while 
 #include "tables/trajectory_rmse_y.typ"
 
 #figure(
-  image("figures/trajectories_z.svg", width: 75%),
+  image("figures/trajectories_z.svg", width: 85%),
   caption: flex-caption([Comparison of lower-limb (hip, knee, ankle, toe) joint center trajectories in the *vertical (Z) direction* across walking speeds (0.50 - 2.50 m/s). Trajectories derived from MediaPipe (blue), RTMPose (orange), and ViTPose (green) are shown alongside the marker-based reference (grey). Shaded error bars indicate ±1 SD across strides. The gait cycle is normalized to 0-100%.],
   [Vertical lower-limb joint center trajectories across walking speeds])
 ) <fig-traj-z>
