@@ -1,3 +1,5 @@
+
+== Design Requirements
 The current landscape of quantitative motion analysis methods forces specific tradeoffs. Affordable and portable methods such as accelerometers and IMUs can be deployed in a wide range of settings, but often do not provide the spatial and kinematic detail needed for biomechanical analysis. Marker-based motion capture systems provide this depth, but remain inaccessible to users without substantial funding, dedicated laboratory space, and technical expertise. Existing markerless motion capture alternatives reduce some of these barriers, but often impose hardware constraints that increase cost while remaining tied to fixed pose estimation backends and skeletal models that limit flexibility across research populations and use cases.
 
 This dissertation evaluates the FreeMoCap system against three core design requirements:
