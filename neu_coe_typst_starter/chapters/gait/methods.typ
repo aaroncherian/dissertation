@@ -1,10 +1,22 @@
+#import "../../template.typ": flex-caption
+
+
 == Methods
+
+#figure(
+  image("figures/methods_gait.png", width: 93%),
+  caption: flex-caption([An overview of gait experiment design and analysis methods. *Setup:* Six generic USB-webcams were placed circularly around the treadmill and connected to a single PC, with the FreeMoCap software used for video acquisition. A ChArUco board (board size: 40" x 27.5", square size: 126 mm) was used to calibrate the cameras. *Data Collection:* Participants walked on a treadmill, with speed increasing in increments of 0.5 m/s from 0–2.5 m/s every 30 seconds. Each participant completed two trials while being recorded by both a markerless and marker-based motion capture system. *Processing:* Markerless data were processed using three pose estimation backends (MediaPipe, RTMPose, and ViTPose), each producing a set of reconstructed 3D data. *Analysis and Outcomes:* Errors in joint position and joint angles, as well as agreement between spatiotemporal gait parameters from both systems, were calculated. ],
+  [An overview of gait experiment design and analysis methods ])) <fig-gait-methods>
+
 
 === Participants
 
 6 participants (5 male, 1 female) were recruited in this study. All participants were healthy adults with no reported musculoskeletal or neurological impairments affecting gait. The participants provided informed consent and the protocol was approved by the Northeastern University IRB (\#19-08-27).
 
 === Experimental setup
+
+An overview of the experimental design and analysis pipeline is shown in @fig-gait-methods.
+
 *Marker-based motion capture*
 
 The marker-based system consisted of 9 Miqus M3 and 2 Oqus 700+ cameras (300 Hz) and tracked the positions of 48 markers. Four markers were affixed to a head cap (top, front, left, right). An additional marker was placed on the C7 vertebra. Trunk markers were placed on the sternum, right lower back, and bilaterally on the acromion processes and on the anterior and posterior aspects of the shoulders. Upper extremity markers were placed bilaterally on the medial and lateral humeral epicondyles, the ulnar and radial styloid processes, and dorsum of the hands. Pelvic markers were placed bilaterally on the anterior superior iliac spines (ASIS), iliac crests, and greater trochanters. Posterior pelvic motion was tracked using a rigid sacral plate containing markers positioned over the left and right posterior superior iliac spines (PSIS) and the sacrum. Lower extremity markers were placed bilaterally on the medial and lateral femoral epicondyles, medial and lateral malleoli, calcanei, 1st and 5th metatarsal heads, and dorsal aspect of the second metatarsal. 
