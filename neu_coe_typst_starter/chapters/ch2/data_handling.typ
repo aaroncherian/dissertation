@@ -1,4 +1,4 @@
-== Standardized Data Representation
+== Standardized data representation
 
 A key issue in integrating, running and reconstructing data from multiple pose estimation trackers is that each algorithm comes with its own unique outputs and keypoints. Without a standardized representation, downstream biomechanical analyses would require different pipelines for each tracker, making it difficult to compare results or extend the system. 
 

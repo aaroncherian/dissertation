@@ -1,4 +1,4 @@
-== Synchronous Video Recording
+== Synchronous video recording
 
 Synchronous video recording refers to the acquisition and temporal alignment of video streams. For accurate 3D reconstruction, each set of frames must correspond to the same moment in time. Without proper synchronization, time lags between cameras can result in inaccurate 3D data. 
 
@@ -17,7 +17,7 @@ However, these cameras may not be suitable for all research needs. For example, 
 From a research standpoint, this means the system does not constrain users to low-cost hardware. Researchers with access to specialized camera systems or established synchronization workflows can integrate those resources directly into the pipeline, while the ground-level user can still record motion capture data with as few as two low-cost webcams. This flexibility reduces dependency on specific hardware configurations and allows data collection protocols to be adapted to the needs of the study, rather than constrained by the system itself.
 
 
-=== Single Camera vs. Multi-Camera Recording
+=== Single camera vs. multi-camera recording
 
 While it is possible to reconstruct 3D data from a single image, monocular 3D data tends to fall well-short of the accuracy that reconstructions from multiple cameras can provide @wadeApplicationsLimitationsCurrent2022 @nogueiraMarkerlessMultiview3D2025. Multi-camera viewpoints provide additional information about joint center locations that can improve accuracy of reconstruction while also mitigating the effect of occlusions, which are a significant barrier to single camera reconstruction. 
 

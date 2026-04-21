@@ -1,4 +1,4 @@
-== Conclusions
+== Conclusion
 
 When discussing FreeMoCap, I have found that there are two questions I am often asked. 
 

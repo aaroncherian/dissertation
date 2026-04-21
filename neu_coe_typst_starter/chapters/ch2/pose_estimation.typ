@@ -1,6 +1,6 @@
 #import "../../template.typ": flex-caption
 
-== Pose Estimation
+== Pose estimation
 
 Pose estimation is a computer vision task that identifies meaningful keypoints within an image. In human pose estimation, these keypoints typically correspond to joint centers. In practice, pose estimation produces 2D keypoint locations in pixel coordinates for each camera and frame of a recording. 
 

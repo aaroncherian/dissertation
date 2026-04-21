@@ -1,4 +1,4 @@
-== Open-Source Software
+== Open-source software
 
 The FreeMoCap software is released under the GNU Affero General Public License (AGPL), which ensures that all modifications and deployed versions of the software remain open and publicly accessible. This transparency enables researchers to inspect the full analysis pipeline, reproduce results, and extend methods across datasets and research contexts. By making the full pipeline transparent and modifiable, this approach reduces reliance on undocumented or opaque processing steps, which can introduce hidden sources of error and variability. In this way, open-source implementation not only improves accessibility, but also enhances the reliability and interpretability of the resulting data, a noted concern by Ito et al. when discussing the use of Theia3D's proprietary algorithms @itoMarkerlessMotionCapture2022.
 

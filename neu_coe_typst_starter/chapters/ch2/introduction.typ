@@ -10,7 +10,7 @@ It is perhaps easy to assume that accessibility must come at the cost of accurac
 
 
 
-== Key Steps in Markerless Motion Capture
+== Key steps in markerless motion capture
 
 Markerless motion capture systems generally follow a common set of transformations to estimate 3D human movement from 2D image data. These steps include synchronized video acquisition, camera calibration, 2D pose estimation, and 3D reconstruction. 
 
