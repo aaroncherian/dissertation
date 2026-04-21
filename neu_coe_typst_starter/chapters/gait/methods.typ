@@ -6,7 +6,7 @@
 #figure(
   image("figures/methods_gait.png", width: 93%),
   caption: flex-caption([An overview of gait experiment design and analysis methods. *Setup:* Six generic USB-webcams were placed circularly around the treadmill and connected to a single PC, with the FreeMoCap software used for video acquisition. A ChArUco board (board size: 40" x 27.5", square size: 126 mm) was used to calibrate the cameras. *Data Collection:* Participants walked on a treadmill, with speed increasing in increments of 0.5 m/s from 0–2.5 m/s every 30 seconds. Each participant completed two trials while being recorded by both a markerless and marker-based motion capture system. *Processing:* Markerless data were processed using three pose estimation backends (MediaPipe, RTMPose, and ViTPose), each producing a set of reconstructed 3D data. *Analysis and Outcomes:* Errors in joint position and joint angles, as well as agreement between spatiotemporal gait parameters from both systems, were calculated. ],
-  [An overview of gait experiment design and analysis methods ])) <fig-gait-methods>
+  [An overview of gait experiment design and analysis methods])) <fig-gait-methods>
 
 
 === Participants
@@ -29,13 +29,13 @@ All cameras were connected to a single acquisition computer. Video capture was p
 
 Prior to recording, cameras were calibrated using a ChArUco calibration board (square size: 126 mm, board size: 40" x 27.5"). Intrinsic and extrinsic camera parameters were estimated using a modified implementation of the Anipose toolkit @AniposeToolkitRobust2021 (see Chapter 3: Calibration). At the start of each recording, the board was placed flat on the floor within view of all cameras to define the reference frame of the reconstruction (ground plane alignment). The origin of the capture volume was set using the board, and the reconstructed 3D data were aligned such that the vertical axis corresponded to the Z-axis, with the horizontal plane defined as $Z = 0$.   
 
-*Data Collection*
+*Data collection*
 
 Participants walked on a treadmill at progressively increasing speeds. The treadmill increased in 0.50 m/s increments every 30 seconds, starting from rest until 2.50 m/s. Prior to data collection, participants were given time to familiarize themselves with the treadmill and each speed condition.
 
 Each participant completed two trials, with all trials recorded simultaneously using both marker-based and markerless motion capture systems. At the start of each trial, participants assumed an "A-pose", a neutral position with feet slightly apart, head up, and arms angled downward at roughly 45 degrees. For analysis, 600 frames of data (20 seconds) were analyzed from each condition for each trial.
 
-=== Data Processing
+=== Data processing
 *Marker-based motion capture data*
 
 Marker-based data were tracked, labeled and processed in QTM. Missing trajectories were interpolated using linear or relational gap-filling. The labeled and cleaned marker positions were exported as a `.tsv` file containing system timestamps. Head, elbow, wrist, knee and ankle joint centers were defined as the midpoint of their respective medial and lateral markers. Shoulder joint centers were defined as the midpoint of the anterior and posterior markers. The hip joint centers were estimated using the methods described by Bell et al. @bellPredictionHipJoint1989. Raw kinematic data were filtered using a zero-lag, fourth-order Butterworth filter with a 6 Hz cutoff frequency. 
@@ -52,18 +52,18 @@ Markerless data were spatially aligned to the marker-based reference frame using
 
 To identify a transformation that was consistent over the full recording, candidate transformations were estimated from randomly sampled subsets of frames  and evaluated across the entire dataset. The transformation that minimized the global joint center error across all frames was selected for each trial.
 
-=== Data Analysis
+=== Data analysis
 
-*Joint Angles*
+*Joint angles*
 
 Joint angles were calculated as the Cardan XYZ decomposition of the relative rotation between adjacent segments. Sagittal-plane lower-body kinematics were extracted and analyzed across gait cycle-normalized strides. Joint angles were offset-corrected by subtracting the mean angle measured during the neutral A-pose stance at the start of each trial.
 
 
-*Gait Event Detection*
+*Gait event detection*
 
 Heel strike and toe off events were identified based on anteroposterior velocity zero-crossings of the foot, using the methods described by Zeni et al. @zeniTwoSimpleMethods2008a. Marker-based gait events were used as the reference for time-normalizing to 0-100% of the gait cycle for all pose-estimated derived trajectories and joint angles.
 
-*Gait Parameters*
+*Gait parameters*
 
 Spatiotemporal parameters were calculated for each system using their respective gait events. The following gait parameters were calculated:
 
@@ -75,7 +75,7 @@ Spatiotemporal parameters were calculated for each system using their respective
 
 4) *Stride length:* The *anteroposterior distance between the ipsilateral ankle at ipsilateral heel strike and the same joint at the subsequent ipsilateral heel strike*, reported in millimeters (mm). To account for the treadmill, stride length was corrected using the distance traveled by the belt. Distance traveled by the belt was computed using the treadmill speed and the time between heel strikes.
 
-*Scaling Analysis* 
+*Scaling analysis* 
 
 To assess whether systematic scaling differences were present between pose estimation outputs and the marker-based reference, we extended our spatial optimization to include an additional uniform scaling parameter ($s$). In this formulation, the transformation consisted of rotation, translation, and a single global scale factor applied isotropically across all spatial dimensions. 
 
@@ -83,7 +83,7 @@ For each trial, the optimal scale factor was estimated alongside the rigid trans
 
 A scale factor of $s = 1.0$ indicates no global scaling difference between systems, whereas deviations from 1.0 reflect a uniform expansion or contraction of the reconstructed markerless skeleton relative to the reference.
 
-*Statistical Analyses*
+*Statistical analyses*
 
 Statistical analyses were performed using Python `v3.11`. Root mean squared error (RMSE) was calculated across all gait cycle-normalized joint center trajectories and joint angles. Per-trial RMSE was obtained by averaging across strides within a trial, and mean ± SD were then computed across all trials.
 

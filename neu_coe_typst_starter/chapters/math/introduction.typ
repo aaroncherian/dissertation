@@ -73,7 +73,7 @@ So to summarize (@fig-summary), now we have three reference frames - the *image*
 To do that, we first need to understand the reverse - how does a 3D point in the world become a 2D pixel in an image? Or more simply, if you take a picture of a tree, how does that three dimensional tree become a two dimension image on your phone screen? 
 
 
-== The Pinhole Camera Model: How an object becomes an image
+== The pinhole camera model: How an object becomes an image
 
 
 

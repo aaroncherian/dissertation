@@ -50,7 +50,7 @@ Across trackers, RTMPose generally exhibited the lowest trajectory error, while 
 #include "tables/trajectory_rmse_z.typ"
 
 
-=== Joint Kinematics
+=== Joint kinematics
 
 Sagittal joint angle error was below 5° across most conditions, with the primary exception being ViTPose-derived ankle angles at higher speeds (@tbl-joint-angle-rmse). These errors increased with speed at the knee and ankle, while hip angle error remained relatively stable. Across trackers, ViTPose-derived angles exhibited the lowest error for hip and knee angles but displayed a consistent plantarflexion offset at the ankle (@fig-joint-ang-spm). RTMPose-derived ankle angles were most accurate.
 
@@ -65,7 +65,7 @@ Statistical parametric mapping (SPM) paired t-tests ($ alpha = 0.05$) revealed c
 
 #include "tables/joint_angle_rmse_table.typ"
 
-=== Gait Event Timing
+=== Gait event timing
 
 Timing errors in heel strike and toe off detection were small across all trackers. Mean heel strike timing error ranged from +5.4 to +9.3 ms and mean toe-off error from +6.1 to +15.4 ms (@fig-timing-error), with the largest errors observed for MediaPipe-derived gait events. The majority of errors fell within a single frame (33 ms), with a small positive bias indicating slightly delayed detection.  
 
@@ -76,7 +76,7 @@ Timing errors in heel strike and toe off detection were small across all tracker
   [Distribution of gait event timing errors])
 ) <fig-timing-error>
 
-=== Gait Parameters
+=== Gait parameters
 
 Spatiotemporal gait parameters, pooled across all walking speeds, showed minimal bias and excellent agreement (ICC > 0.90) with the marker-based reference (@tbl-ba-gait-pooled). Across trackers, ViTPose demonstrated near-zero bias across all parameters. RTMPose and ViTPose both exhibited tight limits of agreement (LoA), while MediaPipe showed larger deviations and wider LoA.
 
