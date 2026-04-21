@@ -9,7 +9,7 @@ With how neatly computer vision  is packaged these days, it is entirely possible
 
 The language in this chapter occasionally dips into casual or informal syntax. This is intentional. There is no shortage of formally written treatments of these topics - what I found myself lacking was an explanation that traded precision of language for clarity of understanding. This chapter is written with understanding as the priority, where sometimes the clearest path to a concept runs through simple, familiar wording rather than proper terminology.
 
-== Defining Concepts: The Problem
+== Defining concepts: The problem
 
 Before diving into any equations, it is important to frame the problem that we are trying to solve in markerless motion capture. Pose estimation tracking gives us the 2D pixel locations of (in human pose estimation) anatomical joint centers. In multi-view markerless motion capture, we want to take those 2D pixel locations from multiple cameras and turn it into 3D data. 
 
@@ -17,11 +17,11 @@ So, on a given frame, we have these features on a 2D *image* that was taken by a
 
 Each of these bolded terms represents a different _reference frame_, and it's helpful to have an intuition for what that means before moving forward. 
 
-== Defining Concepts: Reference Frames
+== Defining concepts: Reference frames
 
 A reference frame is an origin and a set of axes that describes where something is. Each of our major 'locations' of interest (the *image*, the *camera*, and the *real world*) has a different way of describing what it sees.
 
-* The Camera and Image Reference Frames *
+* The camera and image reference frames *
 
 We first begin with understanding how an image and camera understand "where" an object of interest is. The *image* knows where something is in pixel locations. The *camera* knows the direction of something relative to its lens. As mentioned, a reference frame is an origin and a set of axes, and there are standard definitions for how we can define image and camera reference frames (@fig-im_cam-frame).
 
@@ -35,7 +35,7 @@ caption: flex-caption([Illustration of the image and camera reference frames. Th
 [Illustration of the image and camera reference frames.]
 )) <fig-im_cam-frame>
 
-*The World Reference Frame*
+*The world reference frame*
 
 Now we're left with the *world* reference frame. This one can be a little more tricky to describe, because unlike the image and camera reference frames where the origins and axes have standard definitions, the *world* frame is a bit more arbitrary. In some sense, we can imagine a 3D space, and put an origin anywhere with any orientation and call that a *world* reference frame. Why then, would that be useful for us in markerless motion capture? 
 
@@ -73,13 +73,13 @@ So to summarize (@fig-summary), now we have three reference frames - the *image*
 To do that, we first need to understand the reverse - how does a 3D point in the world become a 2D pixel in an image? Or more simply, if you take a picture of a tree, how does that three dimensional tree become a two dimension image on your phone screen? 
 
 
-== The Pinhole Camera Model: How An Object Becomes An Image
+== The Pinhole Camera Model: How an object becomes an image
 
 
 
 This is described by something called the _pinhole camera model_. While it seem counterintuitive to look at turning an object into a series of pixels when what we really want is to turn a series of pixels into an object, the logic is straightforward - we need to learn the forward process so we can invert it. The forward process describes two transformations we need to estimate, and we call them extrinsics and intrinsics. 
 
-*Extrinsics: world to camera*
+*Camera extrinsics*
 
 Extrinsics, put simply, is the description of where exactly the camera is in the world and how it is orientated. If that sounds familiar, it' s because just a little ways up we walked exactly through that and called it the camera's _translation_ and _rotation_. Formally, the extrinsic parameters define the pose (position and orientation) of a given camera. The extrinsic parameters consist of a rotation matrix $R$ and a 
 translation vector $t$:
@@ -89,7 +89,7 @@ $ X_c = R X_w + t $ <eq:extrinsics>
 where $X_w$ is the 3D position of a point in the world frame ("2 units in the positive X direction, 3 units in positive Y direction of the world) and $X_c$ is the position of that same point expressed in the camera's local frame ("in front of me, to the right"). $R$ encodes 
 the camera's orientation - it rotates the world's axes into the camera's axes (the "language" conversion we discussed earlier). $t$ encodes the camera's position relative to the world origin.
 
-* Camera Intrinsics * 
+* Camera intrinsics * 
 
 Camera intrinsics broadly put, is a description of how a given camera "sees" the world and these parameters describe how a point in the camera's local 3D space gets projected onto the 2D image plane.  More technically, intrinsics describe the internal properties of a camera. Core intrinsic properties include focal length, the principal point, and skew @heikkilaFourstepCameraCalibration1997. 
 
