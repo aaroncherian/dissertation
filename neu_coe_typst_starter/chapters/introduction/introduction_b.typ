@@ -18,11 +18,11 @@ The first of these are custom-built workflows, developed by researchers for thei
 
 The second is open-source software and systems, designed to be used by other researchers. The most prominent example in this space is OpenCap @uhlrichOpenCapHumanMovement2023, a software that allows for the calculation of kinematic data from two (or more) iPhones, but also includes software such as Pose2Sim @pagnonPose2SimEndtoEndWorkflow2022 and PosePipe @cottonPosePipeOpenSourceHuman2022. While these systems lower the barrier to entry, they may be limited in how easily they can be adapted (e.g., swapping out the underlying pose estimation model or modifying the processing pipeline to suit a specific study design). 
 
-The third and final form is commercial proprietary systems, most notably, Theia3D (Theia Markerless Inc., Kingston, ON, Canada). These systems are often accurate and widely validated @kankoAssessmentSpatiotemporalGait2021 and offer a variety of analysis pipelines, but are also expensive. Additionally, their proprietary and closed-source nature can limit transparency and flexibility. 
+The third form is commercial proprietary systems, most notably, Theia3D (Theia Markerless Inc., Kingston, ON, Canada). These systems are often accurate and widely validated @kankoAssessmentSpatiotemporalGait2021 and offer a variety of analysis pipelines, but are also expensive. Additionally, their proprietary and closed-source nature can limit transparency and flexibility. 
 
-Across these approaches, a consistent pattern emerges: improvements in accuracy, accessibility, or adaptability are typically achieved at the expense of the others
+Across these approaches, a consistent pattern emerges: improvements in accuracy, accessibility, or adaptability are typically achieved at the expense of the others.
 
-== Conclusion
+== From landscapes to needs
 
 We can look at the history of markerless motion capture as, in many ways, a history of shifting barriers. Early model-fitting approaches required specialized expertise and significant computational resources, limiting who could use them. The release of low-cost commercial systems such as the Kinect (see Preface for more) showed what the impact of accessible markerless technology could be on research, and advancements in deep-learning dramatically lowered the technical barrier to implementing a markerless motion capture system. However, even current systems still force compromises between accessibility, accuracy, and adaptability of the system, restricting the broader impact of motion capture technology. There is a need then for a system that can address these limitations. 
 
