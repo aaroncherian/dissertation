@@ -30,7 +30,7 @@ MediaPipe-derived COM path length closely matched the reference and preserved se
 ) <Center-of-mass-path-length>
 
 
-=== Center-of-mass velocity distribution
+=== Center of mass velocity distribution
 
 COM velocity distributions between MediaPipe-derived and marker-based reference data closely matched in the ML and AP directions, though MediaPipe-derived COM velocity distributions had a consistently longer tail (@fig-violin). Larger differences were seen in the vertical direction, particularly during the solid ground conditions. As we expect little vertical movement in the COM on solid ground, this largely reflects measurement noise for each system rather than true postural movement. In the Eyes Open/Solid Ground condition, mean vertical velocity SD across trials was 0.90 ± 0.26 mm/s for the marker-based reference, 2.40 ± 0.42 mm/s for MediaPipe-derived data, 9.60 ± 1.94 mm/s for ViTPose-derived data, and 14.25 ± 1.99 mm/s for RTMPose-derived data.
 

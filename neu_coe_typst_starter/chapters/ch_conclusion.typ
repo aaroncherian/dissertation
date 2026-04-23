@@ -28,13 +28,13 @@ While accessibility is difficult to fully quantify, several indicators suggest b
 
 A further dimension of accessibility, particularly for scientific use, is the fully open-source nature of the analysis pipeline. All comparison and analysis code used in this work, including FreeMoCap-Qualisys synchronization, gait analysis methods, and balance-specific posturography metrics, is publicly available. This serves a dual purpose: promoting transparency and reproducibility for researchers adopting the system, while also providing reusable tools for benchmarking pose estimation backends across new tasks and populations, thereby supporting continued evaluation of biomechanical utility and extensibility.
 
-== Overall Limitations
+== Overall limitations
 
 The findings of this work should be interpreted within several key limitations that reflect both the underlying structure of markerless motion capture systems and the specific design choices of this study. First, data in this work were primarily collected at a sampling rate of 30 Hz. While sufficient for many kinematic analyses, this temporal resolution limits the detection of fine timing differences and may obscure small trends or errors in temporal metrics. More broadly, the performance of markerless motion capture remains strongly dependent on the underlying pose estimation algorithm. Errors in 2D keypoint detection—arising from factors such as occlusion, visual ambiguity, or model limitations—propagate directly into 3D reconstruction and downstream biomechanical measures. As such, if a pose estimation model is unable to reliably track a given movement or population, it becomes unsuitable for motion capture within this framework. Although approaches such as custom-trained DeepLabCut models can address some of these limitations, they introduce additional requirements in the form of time-intensive data labeling and model training. Additionally, the results presented in this work are task and population-specific. Validation was conducted using gait on a treadmill, a static balance assessment, and a prosthesis user. While these domains were selected to represent a range of movement complexities, the findings may not generalize to other populations, environments, or movement types (such as overground gait or more dynamic balance tasks).
 
 Finally, markerless motion capture systems remain sensitive to experimental conditions, including camera configuration and visibility. Occlusion and limited viewpoints can reduce reconstruction accuracy, reinforcing the importance of multi-camera setups and careful data collection protocols.
   
-== Future Directions
+== Future directions
 
 The most immediate future direction is continued development of the FreeMoCap software. Many of the potential benefits described in this work (modular pose estimation, open-source benchmarking, adaptability through custom model integration) require continued iteration to make these components easily accessible to researchers across domains and experience levels. This includes packaging the gait and balance analyses developed here into a toolbox that other researchers can freely use, extend and improve. 
 

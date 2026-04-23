@@ -16,7 +16,7 @@
 The experimental setup for the marker-based and markerless motion capture systems follows the protocol written out in Chapter 5: Methods. An overview of the experimental design and analysis pipeline is shown in @fig-balance-methods.
 
 
-*Data Collection*
+*Data collection*
 
 Participants were asked to complete the Modified Clinical Test of Sensory Interaction on Balance (CTSIB-M) @ModifiedClinicalTest2013. This test consists of four 60-second conditions that vary participant visual condition (i.e., standing with eyes open vs. eyes closed) and standing surface (i.e., standing on a solid surface vs. a foam pad; ProsourceFit Exercise Balance Pad): (1) Eyes Open/Solid Ground; (2) Eyes Closed/Solid Ground; (3) Eyes Open/Foam Pad; (4) Eyes Closed/Foam Pad. Participants stood with hands at their sides. To minimize camera occlusions, participants were asked to place feet shoulder-width apart. This placement has been shown to have little effect on CTSIB-M scoring @wrisleyEffectFootPosition2004.
 
@@ -24,15 +24,15 @@ The CTSIB-M was selected because: 1) Static balance tasks present minimal body m
 
 Participants were given a visual fixation target during eyes-open conditions and a floor mark to standardize starting position. Participants completed two trials of the full protocol, each recorded simultaneously by both the marker-based and markerless motion capture systems.
 
-=== Data Processing
+=== Data processing
 
 Data processing for marker-based and markerless data, including temporal synchronization and alignment procedures follow the protocol written out in Chapter 5: Methods. 
 
 Markerless and marker-based joint trajectories were filtered using a zero-lag, 4th-order Butterworth low-pass filter with a 6 Hz cutoff frequency.
 
-=== Data Analysis
+=== Data analysis
 
-*Center-of-mass (COM) calculation*
+*Center of mass (COM) calculation*
 
 For the reference system and each pose estimation backend, body segments were defined with segment mass fractions and COM locations according to the anthropometric tables reported by Winter @winterBiomechanicsMotorControl2009. Anthropometric data was used to calculate segment COM position. Total-body COM was calculated as the mass-weighted average of all segment COM coordinates. 
 

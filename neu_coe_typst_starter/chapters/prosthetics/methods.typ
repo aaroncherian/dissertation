@@ -21,15 +21,15 @@ One transfemoral prosthesis user participated in this proof-of-concept validatio
 
 Video data was acquired using 6 generic USB-webcams (approximately \$20 each, 1280x720 pixels) recording at 30Hz. Cameras were connected to a single computer and arranged circularly around the Bertec split belt treadmill (Columbus, Ohio, USA). Multi-camera synchronized video acquisition was performed using the FreeMoCap software. Camera calibration data were collected prior to recording using a ChArUco calibration board printed on a rigid surface (board size: 40" x 27.5", square size: 126 mm). All recorded data, including calibration sequences, were then processed offline using FreeMoCap (v1.7.2) to estimate intrinsic and extrinsic camera parameters, perform 2D pose estimation, and reconstruct 3D kinematics. 
 
-=== Experimental Design 
+=== Experimental design 
 
 The overall experimental workflow, including data collection, pose estimation, 3D reconstruction, and outcome metric calculation, is illustrated in @fig-prosthetic-methods.
 
-*Trial Structure*
+*Trial structure*
 
 The participant completed 15 treadmill walking trials at their self-selected walking speed, each lasting one minute. Three categories of alignment changes were tested with five levels of adjustment per category. At the start of each trial, the participant adopted a neutral A-pose, (standing still with arms abducted slightly, feet shoulder width apart). Due to unfamiliarity with treadmill walking, the participant elected to keep at least one hand on an anterior railing during each trial to maintain balance.
 
-*Alignment Conditions*
+*Alignment conditions*
 
 Three clinically relevant prosthetic alignment parameters were manipulated, each at five discrete levels. Leg length was set to -12.70 mm (-0.5"), -6.35 mm (-0.25"), 0 mm (0"),  +6.35 mm (+0.25"),  +12.70 mm (+0.5") with 0 mm being the height of the participant's prosthesis without any adjustments made. Ankle alignment in the sagittal plane was set to –5.6°, –2.8°, 0°, +2.8°, +5.6°; 0° is the original alignment of the prosthetic ankle, positive is a more dorsiflexed (DF) position and negative is a more plantarflexed (PF) position. The toe-in and toe-out position was set to –6°, –3°, 0°, +3°, +6°; 0°  is the original alignment of the foot, positive is a more toed-out position, and negative is a more toed-in position. 
 
@@ -37,7 +37,7 @@ The evaluated alignment changes in this study are routinely performed in clinica
 
 Leg length was altered using an adjustable height tube clamp adapter. Sagittal plane alignment at the prosthetic ankle was adjusted using the distal tube clamp adapter's anterior-posterior set screws; one full turn of the set screw is approximately 2.8° @shepherdPatientPreferredProstheticAnkleFoot2021. Toe-in and toe-out was adjusted using the transverse plane component of the tube clamp adapter and pylon; degree change was measured and labeled on the pylon before the data collection. 
 
-=== Data Processing 
+=== Data processing 
 
 * Marker-based motion capture* 
 
@@ -53,22 +53,22 @@ A custom prosthesis-specific DeepLabCut (DLC) model was developed to improve tra
 
 DLC-estimated 2D keypoints were reconstructed into 3D trajectories using the FreeMoCap 3D reconstruction pipeline described above. These trajectories were then substituted for the corresponding MediaPipe and RTMPose-derived trajectories in the right leg.
 
-*Data Synchronization and Alignment*
+*Data synchronization and alignment*
 Markerless and marker-based data were temporally aligned using recorded Unix timestamps from both systems, generated from the same acquisition computer. Qualisys data were resampled to match FreeMoCap timestamps, with cross-correlation of joint trajectories and manual inspection used for final refinement of small residual temporal offsets.
 
 Markerless data were spatially aligned to the marker-based reference frame using a least-squares-optimized transformation that minimized joint center errors between systems. To identify a transformation that was consistent over the full recording, candidate transformations were estimated from randomly sampled subsets of frames and evaluated across the entire dataset.
 
-=== Data Analysis
+=== Data analysis
 
-*Gait Event Detection and Normalization* 
+*Gait event detection and normalization* 
 
 Heel strike and toe off events were identified using the velocity-based treadmill gait event detection method described by Zeni et al., based on zero-crossings of the anterior-posterior velocity of the foot @zeniTwoSimpleMethods2008a. Heel strike was defined as the transition from positive to negative velocity of the heel marker, and toe off as the transition from negative to positive velocity of the toe marker. Gait events were used to compute stance and swing duration for both feet. For markerless motion capture, events for the prosthetic limb were calculated from DeepLabCut-based 3D data, while events for the non-prosthetic limb were calculated from RTMPose-based 3D data. Marker-based gait events were used as the reference to define time-normalized gait cycles for trajectory and joint angle comparisons across systems.
 
-*Leg Length* 
+*Leg length* 
 
 Leg length was calculated as the 3D distance between the detected prosthetic knee and ankle centers. Leg length was calculated per frame and summarized as the median across all frames in a given recording to reduce the effect of outliers from occasional tracking errors. Variability was calculated as median absolute deviation.
 
-*Joint Angles* 
+*Joint angles* 
 
 Joint angles were calculated as Cardan XYZ decomposition of the relative rotation between adjacent segments. Knee flexion/extension and ankle plantarflexion/dorsiflexion were extracted and analyzed across time-normalized gait cycles.
 
@@ -80,9 +80,9 @@ where $bold(v) = bold("hip")_R - bold("hip")_L$ is the vector connecting the rig
 
 *Minimum toe clearance* 
 
-Minimum toe clearance was defined as the minimum height of the toe from the ground for each system during the swing phase of gait. For each stride, the vertical (Z-axis) toe position was extracted within 70–95% of the gait cycle, corresponding to the mid-to-late swing phase. This specific window was used to exclude stance phase and terminal swing. Minimum toe clearance was then computed and averaged across strides.
+Minimum toe clearance was defined as the minimum height of the toe from the ground for each system during the swing phase of gait. For each stride, the vertical (Z-axis) toe position was extracted within 70-95% of the gait cycle, corresponding to the mid-to-late swing phase. This specific window was used to exclude stance phase and terminal swing. Minimum toe clearance was then computed and averaged across strides.
 
-*Foot Progression Angle* 
+*Foot progression angle* 
 
 The effects of toe-in/toe-out adjustments were assessed using foot progression angle (FPA), defined as the angle between the long axis of the foot and the line of progression, projected onto the transverse plane. The line of progression was defined as the laboratory $Y$ (anterior-posterior) axis and the axis of rotation as the laboratory $Z$ (vertical) axis. Both the foot longitudinal axis and line of progression vector were projected onto the plane orthogonal to the axis of rotation as:
 
@@ -96,6 +96,6 @@ $ "FPA" = tan^(-1) ((bold(p)_perp times bold(f)_perp) dot bold(n)) / (bold(p)_pe
 
 FPA was computed across time-normalized gait cycles and averaged across strides. Positive values indicate external rotation (toe-out) and negative values indicate internal rotation (toe-in).
 
-*Root Mean Squared Error (RMSE)* 
+*Root mean squared error (RMSE)* 
 
 Agreement between markerless and marker-based joint center position was quantified using root mean squared error (RMSE). RMSE was calculated across medio-lateral ($X$), anterior-posterior ($Y$) and vertical ($Z$) directions. For each axis, RMSE was calculated per gait-normalized stride and averaged across strides. RMSE was also calculated to compare joint kinematics including knee flexion/extension and ankle dorsiflexion/plantarflexion, and pelvic obliquity, as well as foot progression angle, comparing gait-normalized angle trajectories between systems and averaging across strides. For minimum toe clearance, RMSE was computed between stride-matched values across systems within each condition, subsequently averaged across conditions.

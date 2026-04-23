@@ -2,7 +2,7 @@
 
 == Results
 
-=== Accuracy of Prosthetic Tracking
+=== Accuracy of prosthetic tracking
 Integrating a prosthesis-specific DeepLabCut (DLC) model into the tracking pipeline markedly improved reconstruction quality. @fig-prosthetic-tracking illustrates representative trajectories for the prosthetic knee, ankle and toe trajectories during gait. Improvements from the DLC model were evident across the sagittal and mediolateral axes, although the biggest improvements were seen in the vertical axis. For instance, vertical error at the prosthetic ankle decreased from 152.1 ± 11.5 mm to 8.0 ± 2.4 mm following DLC model integration (@tbl-prosthetic-rmse).
 
 #figure(
@@ -41,7 +41,7 @@ Integrating a prosthesis-specific DeepLabCut (DLC) model into the tracking pipel
   caption: [Prosthetic-side marker RMSE (mm), mean $plus.minus$ SD across trials.],
 ) <tbl-prosthetic-rmse>
 
-=== Tracking Leg-Length Adjustments
+=== Tracking leg length adjustments
 Both systems consistently tracked the ±6.35 mm and ±12.70 mm prosthetic leg length adjustments (@fig-llp), with measured differences preserving the order and approximate magnitude of adjustments. The marker-based data exhibited small deviations from expected values (-0.58 to +1.43 mm) with low variability (MAD: 0.53-0.80 mm). The markerless system exhibited comparable deviations from expected values (-1.58 to +1.64 mm) with higher variability (MAD: 1.57-3.08 mm). 
 
 #figure(
@@ -60,7 +60,7 @@ The marker-based system demonstrated sensitivity to changes in pelvic obliquity 
   [Comparison of pelvic obliquity across markerless and marker-based systems across leg length configurations])
 )
 
-=== Tracking Ankle Plantar/Dorsiflexion Adjustments
+=== Tracking ankle plantar/dorsiflexion adjustments
 
 The markerless system and marker-based reference both demonstrated sensitivity to changes in sagittal knee and ankle angles across each prosthetic ankle alignment condition ( @fig-aap). Mean RMSE across conditions was 3.84 ± 0.12° for the knee and 1.45 ± 0.20° for the ankle. Both systems detected consistent, condition-dependent increases in peak ankle dorsiflexion corresponding to the alignment adjustments. Peak ankle dorsiflexion increased from 1.81 ± 0.60° (-5.6° condition) to 7.06 ± 0.37° (+5.6° condition) in the markerless system, and from 2.30 ± 0.34° to 6.52 ± 0.30° in the marker-based system, demonstrating similar sensitivity to alignment-induced changes. During swing phase, markerless ankle angle profiles showed greater fluctuation and larger between-stride variability relative to the marker-based system.
 
@@ -79,7 +79,7 @@ Both systems demonstrated a general increase in minimum toe clearance with progr
   [Minimum toe clearance measured by markerless and marker-based motion capture across ankle alignment conditions])
 )
 
-=== Tracking Toe-In/Toe-Out Adjustments
+=== Tracking toe-in/toe-out adjustments
 Both markerless and marker-based systems captured systematic changes in foot progression angle (FPA) consistent with the toe-in/out adjustments to the prosthesis (@fig-fpa). The markerless system preserved condition ordering relative to the reference system, with a mean stride-level RMSE across conditions of 0.96 ± 0.37°, demonstrating sensitivity to controlled prosthetic alignment changes. 
 
 #figure(
@@ -87,7 +87,7 @@ Both markerless and marker-based systems captured systematic changes in foot pro
   caption: flex-caption([Mean foot progression angle is shown for markerless (left) and marker-based (right) systems across five alignment conditions (toe-in: –6°, –3°; neutral: 0°, toe-out: +3°, +6°). Solid lines indicate condition-level means and error bars indicate ±1 SD across strides. The gait cycle is normalized to 0-100\% for comparison across strides. ],
   [Mean foot progression angle for markerless and marker-based systems across toe alignment conditions])) <fig-fpa>
 
-=== Gait Parameter Comparison
+=== Gait parameter comparison
 The markerless system tended to underestimate stance duration and overestimate swing duration (@fig-prosthetic-hist). Mean error for the prosthetic leg 3D data (DLC-derived) was close to zero (stance duration: -12.7 ± 31.8 ms; swing duration: 13.9 ± 29.6 ms; N = 590 strides). For the non-prosthetic leg 3D data (RTMPose-derived), mean error was slightly larger (stance duration: -23.4 ± 137.6 ms; swing duration: 29.6 ± 132.1 ms; N = 591 strides), with substantially greater variability in temporal estimates. 
 
 #figure(

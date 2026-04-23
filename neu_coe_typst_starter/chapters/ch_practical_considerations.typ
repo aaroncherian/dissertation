@@ -54,13 +54,13 @@ Framing of the participant fully in the camera views is important. Particularly 
 == Background
 The background should, to the extent that is possible, be free of clutter. Primarily, this is because pose estimation algorithms are imperfect and sometimes prone to what we call the "ghost skeleton" problem - which is when the pose estimation software detects joint center keypoints on something that is, distinctly, not a human. These hauntings occur particularly in recordings where the participant is a bit distant from the camera. Keeping the area where you are recording free of as much clutter as possible can help mitigate this problem. Strong framing of the participant as discussed above also helps here, as the better a participant is framed, the less reason pose estimation algorithms have to hunt for a person elsewhere. 
 
-== The Amount of Cameras
+== Amount of cameras
 
 Research describing the best number of cameras can be a little contradictory. Theia3D requires an absolute minimum of six cameras, but suggests at least eight. Uhlrich et al. found minimal benefits when moving from two to five cameras with OpenCap @uhlrichOpenCapHumanMovement2023, while Yang et al. found substantial decrease in error using an OpenPose-based motion capture system @yangEvaluationCameraConfigurations2025. 
 
 We used six cameras because, quite frankly, that is the maximum number of USB ports that were available on the lab computer to use. Generally, we recommend at least three cameras. But the exact number might change depending on the space available and the task at hand. For example, if you were trying to track overground gait, I would suggest using as more cameras to achieve visual coverage of the space. However, Darici et al., using FreeMoCap, still reported accurate metrics for overground gait over a 6 meter walkway using just 3 cameras @dariciLowCostMarkerlessMotion2025a.
 
-== The Positioning of Cameras
+== Positioning of cameras
 
 Personally, I believe camera positioning is a key part of gathering good data. I spent many months optimizing our six camera setup to my liking for our validation (pictured in @fig-treadmill, for reference), which has led to a myriad of opinions that should be taken as more preference than statement of fact.  
 
