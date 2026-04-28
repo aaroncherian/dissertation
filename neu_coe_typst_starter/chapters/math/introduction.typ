@@ -51,9 +51,9 @@ Each camera can only describe where Object A is relative to itself, and so we ne
   [Construction of the world reference frame])
 )
 
-But finding the positioning the camera in this new *world* frame is only half the problem. There's also what I might call a 'language' conversion issue - how do we go from Object A being described separately by two *cameras* to being described in one standard way in the *world*?
+But positioning the camera in this new *world* frame is only half the problem. There's also what I might call a 'language' conversion issue - how do we go from Object A being described separately by two *cameras* to being described in one standard way in the *world*?
 
-When Camera 1 says it sees something "2 feet in front of me and bit to the right", those directions (_in front of_ and _to the right_) are defined by Camera 1's orientation (i.e., the way it sees the world). However, the way Camera 1 sees the world (physically, the way the camera is pointed) won't match the way Camera 2 seems the world. So, "forward" in Camera 1's language might mean "left" in Camera 2's language. So we not only need to know _where_ each camera is, we also need to know _which way it's facing_ so we can convert each camera's local description ("in front of me, to the right") into the shared language of the world frame. ("2 units in the positive X direction, 3 units in positive Y direction of the world").
+When Camera 1 says it sees something "2 feet in front of me and a bit to the right", those directions (_in front of_ and _to the right_) are defined by Camera 1's orientation (i.e., the way it sees the world). However, the way Camera 1 sees the world (physically, the way the camera is pointed) won't match the way Camera 2 sees the world. So, "forward" in Camera 1's language might mean "left" in Camera 2's language. So we not only need to know _where_ each camera is, we also need to know _which way it's facing_ so we can convert each camera's local description ("in front of me, to the right") into the shared language of the world frame. ("2 units in the positive X direction, 3 units in positive Y direction of the world").
 
 Mathematically, we call the positioning of the *camera* relative to the *world* origin a _translation_, and the conversion of its personal 'language' into the shared one a _rotation_. 
 
@@ -91,7 +91,7 @@ the camera's orientation - it rotates the world's axes into the camera's axes (t
 
 * Camera intrinsics * 
 
-Camera intrinsics broadly put, are a description of how a given camera "sees" the world and these parameters describe how a point in the camera's local 3D space gets projected onto the 2D image plane.  More technically, intrinsics describe the internal properties of a camera. Core intrinsic properties include focal length, the principal point, and skew @heikkilaFourstepCameraCalibration1997. 
+Camera intrinsics, broadly put, are a description of how a given camera "sees" the world and these parameters describe how a point in the camera's local 3D space gets projected onto the 2D image plane.  More technically, intrinsics describe the internal properties of a camera. Core intrinsic properties include focal length, the principal point, and skew @heikkilaFourstepCameraCalibration1997. 
 
 The intrinsics camera matrix $K$ is defined as:
 
@@ -122,7 +122,7 @@ Now we get to the markerless motion capture of it all.  With the pinhole model, 
 
 But in markerless motion capture we want to go in the _other direction_. We have pixel coordinates on an image and we want to turn them into 3D positions in the world. To do that, we need to run the forward model in reverse - which means we need to know the parameters that define it. That is: the intrinsic and extrinsic parameters for each camera.
 
-The step in markerless motion capture we call *calibration* is the process of estimation those two parameters. The previous chapter detailed the calibration process (waving a ChArUco board around) from a functional standpoint - now we look at the mathematics underlying the process. 
+The step in markerless motion capture we call *calibration* is the process of estimating those two parameters. The previous chapter detailed the calibration process (waving a ChArUco board around) from a functional standpoint - now we look at the mathematics underlying the process. 
 
 The forward model (@eq:mapping) tells us $ x = P X$,
 where $x$ is a pixel location ("Object A is a pixel on row 845, column 401"), $X$ is a 3D world point ("Object A is 2 units in the positive X direction, 3 units in positive Y direction of the world"), and $P$ contains the intrinsic and extrinsic parameters we are trying to find. So, if we had an object with a known 3D position, and we could detect that position in each image given to us by a camera, we would have known values on both sides of the equations, and then we could solve for the camera parameters.
@@ -139,7 +139,7 @@ On the ChArUco board (@fig-charuco-math), each corner has a known position relat
 
 #figure(
   image("calibration_math.png", width:95%),
-  caption: flex-caption([Estimation of intrinsics and extrinsics from a calibration board. The world origin is defined as the first corner of the board, and using the known square size the 3D world coordinates of the other coordinates can be found. Computer vision can detect the pixel locations of the corners in the image. Thus, the solution for $x = P X$ can be optimized for to find $P$, the camera matrix containing intrinsic and extrinsic parameters.],
+  caption: flex-caption([Estimation of intrinsics and extrinsics from a calibration board. The world origin is defined as the first corner of the board, and using the known square size the 3D world coordinates of the other coordinates can be found. Computer vision can detect the pixel locations of the corners in the image. Thus, the solution for $x = P X$ can be optimized to find $P$, the camera matrix containing intrinsic and extrinsic parameters.],
   [Estimation of intrinsics and extrinsics from a calibration board])
 )
 

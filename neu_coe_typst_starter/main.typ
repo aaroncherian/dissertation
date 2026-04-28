@@ -15,7 +15,7 @@
   dept: "Bioengineering",
   degree: "Doctor of Philosophy",
   field: "Bioengineering",
-  submit_date: "May 2025",
+  submit_date: "May 2026",
 )
 
 
@@ -45,11 +45,11 @@
 #include "abstract.typ"
 
 #pagebreak()
-#front-heading("ACKNOWLEDGMENTS")
+#front-heading("Acknowledgments")
 #include "chapters/acknowledgements.typ"
 
 #pagebreak()
-#front-heading("PREFACE")
+#front-heading("Preface")
 #include "preface.typ"
 
 #in-frontmatter.update(false)

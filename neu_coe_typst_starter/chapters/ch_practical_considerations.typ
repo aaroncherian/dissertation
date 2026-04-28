@@ -3,7 +3,7 @@
 = Practical Considerations in Markerless Motion Capture
 
 == Introduction
-The preceding three chapters have presented various metrics of accuracy and sensitivity for FreeMoCap across gait, balance, and prosthetic gait contexts. While any research study has limitations, the most important one that I can emphasize is this: The accuracy of a motion capture session is shaped by a confluence of factors: hardware, environment, camera positioning, participant characteristics, and the choices made by the person collecting the data. In any validation study of a markerless system (this one included) *the reported metrics of accuracy are not fixed properties of the software package or system*. The reported metrics reflect what that system was able to achieve under the specific conditions that is was in. 
+The preceding three chapters have presented various metrics of accuracy and sensitivity for FreeMoCap across gait, balance, and prosthetic gait contexts. While any research study has limitations, the most important one that I can emphasize is this: The accuracy of a motion capture session is shaped by a confluence of factors: hardware, environment, camera positioning, participant characteristics, and the choices made by the person collecting the data. In any validation study of a markerless system (this one included) *the reported metrics of accuracy are not fixed properties of the software package or system*. The reported metrics reflect what that system was able to achieve under the specific conditions that it was in. 
 
 Consider, for example, our laboratory environment. The data in this work were collected in a space that is optimized for motion analysis: a wide, open room with sufficient space for multi-camera setups, controllable window shades to fix lighting conditions, minimal visual clutter, and clean backgrounds. These conditions are not representative of many real-world environments, particularly in-home or clinical settings, and should not be assumed as a baseline expectation.
 
@@ -37,7 +37,7 @@ We found much more success in modifying our participant attire to increase contr
 ) <fig-clothing>
 
 
-While not strictly related to clothing, participants with longer hair should tie it back during a recording, especially if there is a camera directed at that participant from the back. I have found issues in pose estimation algorithms from this viewpoint if hair obscures the neck the neck. 
+While not strictly related to clothing, participants with longer hair should tie it back during a recording, especially if there is a camera directed at that participant from the back. I have found issues in pose estimation algorithms from this viewpoint if hair obscures the neck. 
 
 
 == Lighting
