@@ -41,7 +41,7 @@ Now we're left with the *world* reference frame. This one can be a little more t
 
 The role of the *world* frame becomes more intuitive when we remember that in a multi-camera system, there is, at minimum, a second camera also seeing Object A. 
 
-So, Camera 1 says "Object A is 2 feet in front of me a bit to the right", and Camera 2 says "Actually, Object A is actually 4 feet in front of _me_ and a bit to the left." 
+So, Camera 1 says "Object A is 2 feet in front of me a bit to the right", and Camera 2 says "Actually, Object A is 4 feet in front of _me_ and a bit to the left." 
 
 Each camera can only describe where Object A is relative to itself, and so we need to introduce a common way for the cameras and objects to be defined: Enter the *world* reference frame.  We define a new reference frame with a shared origin and axes and say "Heads up, Camera 1, in this new coordinate system you're at point [1,1,1] and Camera 2, you're at [2,2,1]." This frame is the *world* frame. If you're wondering how we set the origin and orientation of the axes for this new reference frame for motion capture, we'll touch on that later. 
 
@@ -64,13 +64,13 @@ Hold onto that thought, we'll get there.
 #figure(
   image("summary.png"),
   caption: flex-caption(
-    [Overview of moving from a pixel in an image to a triangulated 3D point. Pixel coordinates are brought into the camera reference frame. We construct a world reference frame and place the cameras within it, and then triangulate the points location in the world using multiple cameras.],
+    [Overview of moving from a pixel in an image to a triangulated 3D point. Pixel coordinates are brought into the camera reference frame. We construct a world reference frame and place the cameras within it, and then triangulate the point's location in the world using multiple cameras.],
     [Overview of moving from a pixel in an image to a triangulated 3D point]
   )) <fig-summary>
 
 So to summarize (@fig-summary), now we have three reference frames - the *image*, the *camera*, and the *world* - and to reconstruct a point, we need to move a pixel from the *image* to a point in the *camera* frame, build a shared *world* reference frame, and move the point from the camera into the *world* reference frame (again, if this last step seems like a black box, we'll get there).
 
-To do that, we first need to understand the reverse - how does a 3D point in the world become a 2D pixel in an image? Or more simply, if you take a picture of a tree, how does that three dimensional tree become a two dimensional image on your phone screen? 
+To do that, we first need to understand the reverse - how does a 3D point in the world become a 2D pixel in an image? Or more simply, if you take a picture of a tree, how does that three-dimensional tree become a two-dimensional image on your phone screen? 
 
 
 == The pinhole camera model: How an object becomes an image
@@ -197,7 +197,7 @@ Remember the question from earlier - how do two cameras suddenly agree on where 
 
 Now, in a perfect world, every ray would intersect at exactly one point. Unfortunately, it's not so simple. As you may have noticed, there's a lot of estimation that goes into this process. Intrinsics and extrinsics are estimates, so if either is slightly off, that's noise that shifts the ray. Pose estimation algorithms are also an estimate of where the landmark is - and those estimates of the ground truth location might be slightly different camera to camera (especially if it's harder to see that joint in a particular camera view), and that's noise that shifts the ray. 
 
-All of this to say, there's a lot of steps in this process that can introduce error, and by the time each ray from a camera is cast, each one has been nudged slightly by calibration error and detection noise, which means that every camera may not neatly intersect at one clean point. That means once again, we need to estimate the best answer given imperfect information. There are many methods for how this estimation can proceed - the implementation of calibration and triangulation we use in FreeMoCap uses the Direct Linear Transform (DLT) method @AniposeToolkitRobust2021.  So instead of a clean intersection, we look for the single point in 3D space that comes closest to all rays simultaneously. The DLT method sets this up as a linear system and solves it using singular value decomposition (SVD).
+All of this to say, there's a lot of steps in this process that can introduce error, and by the time each ray from a camera is cast, each one has been nudged slightly by calibration error and detection noise, which means that every camera may not neatly intersect at one clean point. That means once again, we need to estimate the best answer given imperfect information. There are many methods for how this estimation can proceed - the implementation of calibration and triangulation pipeline we use in FreeMoCap uses the Direct Linear Transform (DLT) method @AniposeToolkitRobust2021.  So instead of a clean intersection, we look for the single point in 3D space that comes closest to all rays simultaneously. The DLT method sets this up as a linear system and solves it using singular value decomposition (SVD).
 
 It is worth stepping back to appreciate what is happening here. Everything we just described - casting rays, triangulating, estimating a 3D position - happens for every tracked landmark, on every frame, across every camera. A single frame of human pose estimation might track 30 or more joints, and a typical recording might run for thousands of frames. The full reconstruction is this entire pipeline running at scale: 2D detections in, 3D skeleton out.
 
