@@ -34,7 +34,7 @@ Markerless and marker-based joint trajectories were filtered using a zero-lag, 4
 
 *Center of mass (COM) calculation*
 
-For the reference system and each pose estimation backend, body segments were defined with segment mass fractions and COM locations according to the anthropometric tables reported by Winter @winterBiomechanicsMotorControl2009. Anthropometric data was used to calculate segment COM position. Total-body COM was calculated as the mass-weighted average of all segment COM coordinates. 
+For the reference system and each pose estimation backend, body segments were defined with segment mass fractions and COM locations according to the anthropometric tables reported by Winter @winterBiomechanicsMotorControl2009. Anthropometric data were used to calculate segment COM position. Total-body COM was calculated as the mass-weighted average of all segment COM coordinates. 
 
 *Center of mass path length*
 

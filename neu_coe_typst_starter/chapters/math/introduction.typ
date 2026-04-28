@@ -39,7 +39,7 @@ caption: flex-caption([Illustration of the image and camera reference frames. Th
 
 Now we're left with the *world* reference frame. This one can be a little more tricky to describe, because unlike the image and camera reference frames where the origins and axes have standard definitions, the *world* frame is a bit more arbitrary. In some sense, we can imagine a 3D space, and put an origin anywhere with any orientation and call that a *world* reference frame. Why then, would that be useful for us in markerless motion capture? 
 
-The role of the *world* frame becomes a more intuitive when we remember that in a multi-camera system, there is, at minimum, a second camera also seeing Object A. 
+The role of the *world* frame becomes more intuitive when we remember that in a multi-camera system, there is, at minimum, a second camera also seeing Object A. 
 
 So, Camera 1 says "Object A is 2 feet in front of me a bit to the right", and Camera 2 says "Actually, Object A is actually 4 feet in front of _me_ and a bit to the left." 
 
@@ -51,7 +51,7 @@ Each camera can only describe where Object A is relative to itself, and so we ne
   [Construction of the world reference frame])
 )
 
-But the positioning the camera in this new *world* frame is only half the problem. There's also what I might call a 'language' conversion issue - how do we go from Object A being described separately by two *cameras* to being described in one standard way in the *world*?
+But finding the positioning the camera in this new *world* frame is only half the problem. There's also what I might call a 'language' conversion issue - how do we go from Object A being described separately by two *cameras* to being described in one standard way in the *world*?
 
 When Camera 1 says it sees something "2 feet in front of me and bit to the right", those directions (_in front of_ and _to the right_) are defined by Camera 1's orientation (i.e., the way it sees the world). However, the way Camera 1 sees the world (physically, the way the camera is pointed) won't match the way Camera 2 seems the world. So, "forward" in Camera 1's language might mean "left" in Camera 2's language. So we not only need to know _where_ each camera is, we also need to know _which way it's facing_ so we can convert each camera's local description ("in front of me, to the right") into the shared language of the world frame. ("2 units in the positive X direction, 3 units in positive Y direction of the world").
 
@@ -101,7 +101,7 @@ $ K = mat(
   0,   0,   1
 ) $ <eq:intrinsics>
 
-where $(f_x, f_y)$ are the focal length in pixels, $[c_x, c_y]$ is principal point where the optical axis of the camera intersects with the image plane, and $s$ is the skew coefficient, which accounts for any non-rectangular pixels. 
+where $(f_x, f_y)$ are the focal length in pixels, $[c_x, c_y]$ is the principal point where the optical axis of the camera intersects with the image plane, and $s$ is the skew coefficient, which accounts for any non-rectangular pixels. 
 
 * The camera matrix: combining intrinsics and extrinsics *
 

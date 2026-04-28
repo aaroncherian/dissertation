@@ -19,7 +19,7 @@ One transfemoral prosthesis user participated in this proof-of-concept validatio
 
 * Markerless motion capture *
 
-Video data was acquired using 6 generic USB-webcams (approximately \$20 each, 1280x720 pixels) recording at 30Hz. Cameras were connected to a single computer and arranged circularly around the Bertec split belt treadmill (Columbus, Ohio, USA). Multi-camera synchronized video acquisition was performed using the FreeMoCap software. Camera calibration data were collected prior to recording using a ChArUco calibration board printed on a rigid surface (board size: 40" x 27.5", square size: 126 mm). All recorded data, including calibration sequences, were then processed offline using FreeMoCap (v1.7.2) to estimate intrinsic and extrinsic camera parameters, perform 2D pose estimation, and reconstruct 3D kinematics. 
+Video data were acquired using 6 generic USB-webcams (approximately \$20 each, 1280x720 pixels) recording at 30Hz. Cameras were connected to a single computer and arranged circularly around the Bertec split belt treadmill (Columbus, Ohio, USA). Multi-camera synchronized video acquisition was performed using the FreeMoCap software. Camera calibration data were collected prior to recording using a ChArUco calibration board printed on a rigid surface (board size: 40" x 27.5", square size: 126 mm). All recorded data, including calibration sequences, were then processed offline using FreeMoCap (v1.7.2) to estimate intrinsic and extrinsic camera parameters, perform 2D pose estimation, and reconstruct 3D kinematics. 
 
 === Experimental design 
 
@@ -41,7 +41,7 @@ Leg length was altered using an adjustable height tube clamp adapter. Sagittal p
 
 * Marker-based motion capture* 
 
-Marker trajectories were labeled, gap-filled, and cleaned using Qualisys Track Manager (QTM). Processed marker data was exported as a TSV containing the system start time. Knee and ankle joint centers were defined as the midpoint of their respective medial and lateral markers. Shoulder joint centers were calculated as the midpoints of anterior and posterior markers. The hip joint centers were estimated using the methods described by Bell et al. @bellPredictionHipJoint1989. Kinematic data were interpolated and then filtered using a zero-lag, 4th order, 7Hz Butterworth filter.
+Marker trajectories were labeled, gap-filled, and cleaned using Qualisys Track Manager (QTM). Processed marker data were exported as a TSV containing the system start time. Knee and ankle joint centers were defined as the midpoint of their respective medial and lateral markers. Shoulder joint centers were calculated as the midpoints of anterior and posterior markers. The hip joint centers were estimated using the methods described by Bell et al. @bellPredictionHipJoint1989. Kinematic data were interpolated and then filtered using a zero-lag, 4th order, 7Hz Butterworth filter.
 
 *Markerless motion capture*
 
