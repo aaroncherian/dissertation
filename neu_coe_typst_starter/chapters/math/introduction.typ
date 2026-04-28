@@ -81,7 +81,7 @@ This is described by something called the _pinhole camera model_. While it seems
 
 *Camera extrinsics*
 
-Extrinsics, put simply, are the description of where exactly the camera is in the world and how it is oriented. If that sounds familiar, it' s because just a little ways up we walked exactly through that and called it the camera's _translation_ and _rotation_. Formally, the extrinsic parameters define the pose (position and orientation) of a given camera. The extrinsic parameters consist of a rotation matrix $R$ and a 
+Extrinsics, put simply, are the description of where exactly the camera is in the world and how it is oriented. If that sounds familiar, it's because just a little ways up we walked exactly through that and called it the camera's _translation_ and _rotation_. Formally, the extrinsic parameters define the pose (position and orientation) of a given camera. The extrinsic parameters consist of a rotation matrix $R$ and a 
 translation vector $t$:
 
 $ X_c = R X_w + t $ <eq:extrinsics>

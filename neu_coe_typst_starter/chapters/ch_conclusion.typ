@@ -1,5 +1,5 @@
 = Conclusion
-The work examined the development and use of a low-cost, markerless motion capture system using the FreeMoCap software, with the goal of evaluating its ability to meet three core design requirements: biomechanical utility, extensibility, and accessibility.
+This work examined the development and use of a low-cost, markerless motion capture system using the FreeMoCap software, with the goal of evaluating its ability to meet three core design requirements: biomechanical utility, extensibility, and accessibility.
 
 == Addressing biomechanical utility
 _Requirement: The system should produce measurements whose agreement with reference data is in line with prior markerless validation studies, while capturing biomechanically meaningful patterns across tasks._

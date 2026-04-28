@@ -26,7 +26,7 @@ Clothing should generally be form-fitting, although prior work suggests that clo
 
 2) How easily can different limbs be distinguished from one another?  
 
-To explain this further, in our early pilot testing for this study, participants wore full-black body suits with black shoes on a black treadmill. Here, we generally found poor results largely because we failed at both criteria. First, the participant was not easily distinguishable form the environment. Perhaps unsurprisingly, black pants and shoes do not provide much contrast on a black treadmill. Second, limbs that are all the same, dark color were difficult to differentiate from one another, particularly during dynamic movement where overlapping segments further reduced visual separability.
+To explain this further, in our early pilot testing for this study, participants wore full-black body suits with black shoes on a black treadmill. Here, we generally found poor results largely because we failed at both criteria. First, the participant was not easily distinguishable from the environment. Perhaps unsurprisingly, black pants and shoes do not provide much contrast on a black treadmill. Second, limbs that are all the same, dark color were difficult to differentiate from one another, particularly during dynamic movement where overlapping segments further reduced visual separability.
 
 We found much more success in modifying our participant attire to increase contrast. Participants wore sleeveless shirts and shorts, and shoes were spray-painted white to improve visibility. @fig-clothing below shows the difference between our participant attire during our pilot testing and the validation study proper. 
 
@@ -71,7 +71,7 @@ For example, I prefer to avoid fully sagittal views of a participant when possib
     caption: [Positioning of six cameras around a treadmill to capture data for our validation study]
 ) <fig-treadmill>
 
-Camera positioning is also highly task dependent, and that task is ultimately be the most important factor in where cameras are positioned. 
+Camera positioning is also highly task dependent, and that task is ultimately the most important factor in where cameras are positioned. 
 
 For tasks where the participant moves across a wide area, such as overground gait, the camera positioning strategy shifts. Rather than framing the participant tightly as one would around a treadmill, the goal becomes covering the space itself. One should consider the full area the participant might move through, identify the regions they care about most, and position the cameras so that at any given point within that area, at least two cameras have the participant in view for triangulation. @fig-overground shows a five-camera overground gait setup we tried as an example. Two cameras were placed at opposite ends of the walkway in portrait orientation, angled to look down the full length of the path - the reasoning being that as the participant moved far enough from one end camera to leave its field of view, they would be approaching the other. The remaining three cameras were positioned along the side of the walkway in landscape orientation to maximize lateral coverage. Between the five cameras, the goal was to ensure that no matter where the participant was on the walkway, at least two cameras could see them. Note in this case, the mixed use of portrait and landscape orientations to maximize ground coverage. 
 
