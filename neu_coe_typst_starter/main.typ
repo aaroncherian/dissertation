@@ -15,7 +15,7 @@
   dept: "Bioengineering",
   degree: "Doctor of Philosophy",
   field: "Bioengineering",
-  submit_date: "April 13th, 2026",
+  submit_date: "May 2025",
 )
 
 
@@ -45,11 +45,11 @@
 #include "abstract.typ"
 
 #pagebreak()
-#front-heading("Acknowledgements")
-I'll get to this. 
+#front-heading("ACKNOWLEDGMENTS")
+#include "chapters/acknowledgements.typ"
 
 #pagebreak()
-#front-heading("Preface")
+#front-heading("PREFACE")
 #include "preface.typ"
 
 #in-frontmatter.update(false)

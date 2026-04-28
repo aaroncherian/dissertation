@@ -70,18 +70,18 @@ Hold onto that thought, we'll get there.
 
 So to summarize (@fig-summary), now we have three reference frames - the *image*, the *camera*, and the *world* - and to reconstruct a point, we need to move a pixel from the *image* to a point in the *camera* frame, build a shared *world* reference frame, and move the point from the camera into the *world* reference frame (again, if this last step seems like a black box, we'll get there).
 
-To do that, we first need to understand the reverse - how does a 3D point in the world become a 2D pixel in an image? Or more simply, if you take a picture of a tree, how does that three dimensional tree become a two dimension image on your phone screen? 
+To do that, we first need to understand the reverse - how does a 3D point in the world become a 2D pixel in an image? Or more simply, if you take a picture of a tree, how does that three dimensional tree become a two dimensional image on your phone screen? 
 
 
 == The pinhole camera model: How an object becomes an image
 
 
 
-This is described by something called the _pinhole camera model_. While it seem counterintuitive to look at turning an object into a series of pixels when what we really want is to turn a series of pixels into an object, the logic is straightforward - we need to learn the forward process so we can invert it. The forward process describes two transformations we need to estimate, and we call them extrinsics and intrinsics. 
+This is described by something called the _pinhole camera model_. While it seems counterintuitive to look at turning an object into a series of pixels when what we really want is to turn a series of pixels into an object, the logic is straightforward - we need to learn the forward process so we can invert it. The forward process describes two transformations we need to estimate, and we call them extrinsics and intrinsics. 
 
 *Camera extrinsics*
 
-Extrinsics, put simply, is the description of where exactly the camera is in the world and how it is orientated. If that sounds familiar, it' s because just a little ways up we walked exactly through that and called it the camera's _translation_ and _rotation_. Formally, the extrinsic parameters define the pose (position and orientation) of a given camera. The extrinsic parameters consist of a rotation matrix $R$ and a 
+Extrinsics, put simply, are the description of where exactly the camera is in the world and how it is oriented. If that sounds familiar, it' s because just a little ways up we walked exactly through that and called it the camera's _translation_ and _rotation_. Formally, the extrinsic parameters define the pose (position and orientation) of a given camera. The extrinsic parameters consist of a rotation matrix $R$ and a 
 translation vector $t$:
 
 $ X_c = R X_w + t $ <eq:extrinsics>
@@ -91,7 +91,7 @@ the camera's orientation - it rotates the world's axes into the camera's axes (t
 
 * Camera intrinsics * 
 
-Camera intrinsics broadly put, is a description of how a given camera "sees" the world and these parameters describe how a point in the camera's local 3D space gets projected onto the 2D image plane.  More technically, intrinsics describe the internal properties of a camera. Core intrinsic properties include focal length, the principal point, and skew @heikkilaFourstepCameraCalibration1997. 
+Camera intrinsics broadly put, are a description of how a given camera "sees" the world and these parameters describe how a point in the camera's local 3D space gets projected onto the 2D image plane.  More technically, intrinsics describe the internal properties of a camera. Core intrinsic properties include focal length, the principal point, and skew @heikkilaFourstepCameraCalibration1997. 
 
 The intrinsics camera matrix $K$ is defined as:
 
@@ -135,7 +135,7 @@ caption: flex-caption([A ChArUco board being detected during a frame of calibrat
 
 Remember that the *world* reference frame needs an origin and axes placed somewhere - and that the choice is, in principle, arbitrary. The ChArUco board is where we make that choice. We place the world origin at a corner of the board, and align the axes with the board's edges.
 
-On the ChArUco board (@fig-charuco-math), each corner has a known position relative to every other corner. So, if each square is say 30 mm in length, and we decide that the world origin is the first corner of the board at $(0,0,0)$, and then the next corner of that row is $(30,0,0)$ and the next at $(60,0,0)$ and so in. These are our known 3D world points $X$. Each corner also has a unique ID that is detectable using computer vision, allowing us to find where each corner appears in the image as pixel coordinates $(u,v)$. These are our detected 2D points $x$. 
+On the ChArUco board (@fig-charuco-math), each corner has a known position relative to every other corner. So, if each square is say 30 mm in length, and we decide that the world origin is the first corner of the board at $(0,0,0)$, and then the next corner of that row is $(30,0,0)$ and the next at $(60,0,0)$ and so on. These are our known 3D world points $X$. Each corner also has a unique ID that is detectable using computer vision, allowing us to find where each corner appears in the image as pixel coordinates $(u,v)$. These are our detected 2D points $x$. 
 
 #figure(
   image("calibration_math.png", width:95%),

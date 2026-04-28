@@ -8,7 +8,7 @@ As such, synchronization can be one of the primary cost drivers of a markerless 
 
 === SkellyCam
 
-A core directive of `SkellyCam`, the synchronized video acquisition component of FreeMoCap, is to provide high quality synchronous recording methods that enable the usage of low-cost hardware - specifically consumer-grade, off-the-shelf webcams. The data presented in the later chapters of this work were all collected using six \~\$20 USB webcams (1280 x 720, 30 FPS) purchased from Amazon. 
+A core directive of `SkellyCam`, the synchronized video acquisition component of FreeMoCap, is to provide high quality synchronous recording methods that enable the use of low-cost hardware - specifically consumer-grade, off-the-shelf webcams. The data presented in the later chapters of this work were all collected using six \~\$20 USB webcams (1280 x 720, 30 FPS) purchased from Amazon. 
 
 However, these cameras may not be suitable for all research needs. For example, capturing athletic performance may necessitate higher frame rate cameras, while outdoor recordings may require non-USB cameras. The software accommodates these use cases in two ways: 1) Videos collected from a set of external cameras (e.g., GoPros or smartphone cameras) can be synchronized using light and audio-based methods; 2) A pre-synchronized set of videos can be directly imported into the software for processing. 
 
@@ -19,6 +19,6 @@ From a research standpoint, this means the system does not constrain users to lo
 
 === Single camera vs. multi-camera recording
 
-While it is possible to reconstruct 3D data from a single image, monocular 3D data tends to fall well-short of the accuracy that reconstructions from multiple cameras can provide @wadeApplicationsLimitationsCurrent2022 @nogueiraMarkerlessMultiview3D2025. Multi-camera viewpoints provide additional information about joint center locations that can improve accuracy of reconstruction while also mitigating the effect of occlusions, which are a significant barrier to single camera reconstruction. 
+While it is possible to reconstruct 3D data from a single image, monocular 3D data tends to fall well short of the accuracy that reconstructions from multiple cameras can provide @wadeApplicationsLimitationsCurrent2022 @nogueiraMarkerlessMultiview3D2025. Multi-camera viewpoints provide additional information about joint center locations that can improve accuracy of reconstruction while also mitigating the effect of occlusions, which are a significant barrier to single camera reconstruction. 
 
 The FreeMoCap software is capable of simple reconstruction from single camera data, but we highly recommend multi-camera setups for recording. 

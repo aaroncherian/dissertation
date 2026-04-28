@@ -6,7 +6,7 @@ Despite advances in markerless motion capture, the ability to measure human move
 
 FreeMoCap @queenFreeMoCapFreeOpen2024 is a fully open-source markerless motion capture framework that prioritizes accessibility at every level of the pipeline. It is built to work with consumer-grade webcams, requires no physical markers or specialized recording environment, and provides a complete processing pipeline from synchronized video acquisition through 3D kinematic reconstruction. The architecture is modular and tracker-agnostic, allowing users to swap between pose estimation backends depending on their needs. 
 
-It is perhaps easy to assume that accessibility must come at the cost of accuracy (and across the landscape we can see that trade-off is frequency observed). However, as this chapter will argue, design choices made in the service of accessibility can also directly improve the quality of the data a system produces. The following sections describe the core components of the FreeMoCap framework with that principle in mind.
+It is perhaps easy to assume that accessibility must come at the cost of accuracy (and across the landscape we can see that trade-off is frequently observed). However, as this chapter will argue, design choices made in the service of accessibility can also directly improve the quality of the data a system produces. The following sections describe the core components of the FreeMoCap framework with that principle in mind.
 
 
 

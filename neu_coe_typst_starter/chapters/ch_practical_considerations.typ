@@ -48,17 +48,17 @@ Returning to my earlier metaphor, lighting, as in photography, is fundamental. T
 
 == Framing 
 
-Framing of the participant fully in the camera views is important. Particularly if they will largely be staying in place through the recording, participants should take up as much of the camera view as possible, while still ensuring their whole body is still visible. Camera height and tilt should be optimized to the participant to keep them visible. When doing final touches on camera orientation, I may ask the participant to assume a T-pose where they outstretch their hands, or to go through the motions of the action they will perform to make sure that there is no camera view in which a limb moves out of frame. 
+Framing of the participant fully in the camera views is important. Particularly if they will largely be staying in place through the recording, participants should take up as much of the camera view as possible, while still ensuring their whole body is visible. Camera height and tilt should be optimized to the participant to keep them visible. When doing final touches on camera orientation, I may ask the participant to assume a T-pose where they outstretch their hands, or to go through the motions of the action they will perform to make sure that there is no camera view in which a limb moves out of frame. 
 
 
 == Background
 The background should, to the extent that is possible, be free of clutter. Primarily, this is because pose estimation algorithms are imperfect and sometimes prone to what we call the "ghost skeleton" problem - which is when the pose estimation software detects joint center keypoints on something that is, distinctly, not a human. These hauntings occur particularly in recordings where the participant is a bit distant from the camera. Keeping the area where you are recording free of as much clutter as possible can help mitigate this problem. Strong framing of the participant as discussed above also helps here, as the better a participant is framed, the less reason pose estimation algorithms have to hunt for a person elsewhere. 
 
-== Amount of cameras
+== Number of cameras
 
 Research describing the best number of cameras can be a little contradictory. Theia3D requires an absolute minimum of six cameras, but suggests at least eight. Uhlrich et al. found minimal benefits when moving from two to five cameras with OpenCap @uhlrichOpenCapHumanMovement2023, while Yang et al. found substantial decrease in error using an OpenPose-based motion capture system @yangEvaluationCameraConfigurations2025. 
 
-We used six cameras because, quite frankly, that is the maximum number of USB ports that were available on the lab computer to use. Generally, we recommend at least three cameras. But the exact number might change depending on the space available and the task at hand. For example, if you were trying to track overground gait, I would suggest using as more cameras to achieve visual coverage of the space. However, Darici et al., using FreeMoCap, still reported accurate metrics for overground gait over a 6 meter walkway using just 3 cameras @dariciLowCostMarkerlessMotion2025a.
+We used six cameras because, quite frankly, that is the maximum number of USB ports that were available on the lab computer to use. Generally, we recommend at least three cameras. But the exact number might change depending on the space available and the task at hand. For example, if you were trying to track overground gait, I would suggest using more cameras to achieve visual coverage of the space. However, Darici et al., using FreeMoCap, still reported accurate metrics for overground gait over a 6 meter walkway using just 3 cameras @dariciLowCostMarkerlessMotion2025a.
 
 == Positioning of cameras
 
