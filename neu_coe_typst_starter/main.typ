@@ -8,57 +8,10 @@
 
 #show: neu-coe-dissertation
 
-// --- Title page ---
-#title-page(
-  title: "Open-Source Development and Validation of a Low-Cost Markerless System for Quantitative Motion Analysis",
-  author: "Aaron T. Cherian",
-  dept: "Bioengineering",
-  degree: "Doctor of Philosophy",
-  field: "Bioengineering",
-  submit_date: "May 2026",
-)
 
 
 
-// --- Front matter (roman numerals) ---
-#pagebreak()
-#set page(numbering: "i")
-#counter(page).update(1)
-#in-frontmatter.update(true)
 
-// Manual heading so the TOC doesn't list itself
-#v(1.0cm)
-#align(center)[#text(14pt, weight: "bold")[TABLE OF CONTENTS]]
-#v(0.75cm)
-#outline(title: none)
-
-#pagebreak()
-#front-heading("List of Figures")
-
-#outline(
-  title: none,
-  target: figure.where(kind: image),
-)
-
-#pagebreak()
-#front-heading("Abstract")
-#include "abstract.typ"
-
-#pagebreak()
-#front-heading("Acknowledgments")
-#include "chapters/acknowledgements.typ"
-
-#pagebreak()
-#front-heading("Preface")
-#include "preface.typ"
-
-#in-frontmatter.update(false)
-
-// --- Main matter (arabic numerals) ---
-// --- Main matter ---
-#pagebreak()
-#set page(numbering: "1")
-#counter(page).update(1)
 
 #include "chapters/ch1_intro.typ"
 #include "chapters/ch2_freemocap.typ"
