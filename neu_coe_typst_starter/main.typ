@@ -14,13 +14,15 @@
 
 
 #include "chapters/ch1_intro.typ"
-#include "chapters/ch2_freemocap.typ"
-#include "chapters/ch_math.typ"
-#include "chapters/ch_gait.typ"
-#include "chapters/ch_balance.typ"
-#include "chapters/ch_prosthetics.typ"
-#include "chapters/ch_practical_considerations.typ"
-#include "chapters/ch_conclusion.typ"
+#include "chapters/ch_results.typ"
+
+// #include "chapters/ch2_freemocap.typ"
+// #include "chapters/ch_math.typ"
+// #include "chapters/ch_gait.typ"
+// #include "chapters/ch_balance.typ"
+// #include "chapters/ch_prosthetics.typ"
+// #include "chapters/ch_practical_considerations.typ"
+// #include "chapters/ch_conclusion.typ"
 
 #bibliography("references.bib", style: "nature")
 
