@@ -32,5 +32,4 @@
 // Example: include appendix files just like chapters
 // #include "chapters/appendix_a.typ"
 
-#include "chapters/appendix/appendix_a.typ"
-#include "chapters/appendix/appendix_b.typ"
+#include "chapters/appendix/appendix.typ"
