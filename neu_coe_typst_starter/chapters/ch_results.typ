@@ -25,7 +25,7 @@ SPM paired t-tests ($ alpha = 0.05$) revealed common suprathreshold clusters ($t
 ) <fig-joint-ang-spm>
 
 
-Sagittal joint angle error was below 5° across most conditions, with the primary exception being ViTPose-derived ankle angles at higher speeds (@tbl-joint-angle-rmse).  These errors increased with speed at the knee and ankle, while hip angle error remained relatively stable. Across trackers, ViTPose-derived angles exhibited the lowest error for hip and knee angles but displayed a consistent plantarflexion offset at the ankle (@fig-joint-ang-spm). RTMPose-derived ankle angles were most accurate.
+
 
 #include "results/tables/joint_angle_rmse_table.typ"
 
@@ -94,6 +94,7 @@ n
 == Posture: Markerless system agreement and sensitivity
 
 We examine the agreement of MediaPipe-derived center of mass path length to the reference, and examine differences using a Bland-Altman analysis and also examine the sensitivity of MediaPipe-derived postural sway to the different perturbations induced during the CTSIB-M ((@fig-sensitivity-and-agreement).
+
 MediaPipe-derived path length demonstrated strong agreement with the reference system  (ICC = 0.985). Systematic bias was small (1.25 mm) with limits of agreement at approximately ± 68 mm. A slope of 0.90 indicated a proportional underestimation of the path length with Bland-Altman analyses showing progressive underestimation in harder conditions. In contrast, RTMPose and ViTPose demonstrated poor agreement (ICC < 0.10), high positive bias (726 mm and 1052 mm respectively), and wide limits of agreement. Summary metrics for comparisons across systems are shown in @tbl-path-length-agreement, and identity and Bland-Altman plots for RTMPose and ViTPose derived data can be found in the Appendix( @fig-agreement-all).  
 
 MediaPipe-derived COM changes exhibited good-to-excellent sensitivity to different perturbations (_r_#super[2] = 0.83 - 0.96) with slope of the fitted regression line showing near one-to-one agreement (0.89 - 1.06), though slight underestimation of path length was observed under visual perturbation. ViTPose and RTMPose-derived COM changes demonstrated poor sensitivity (_r_#super[2] = 0.03 to 0.45), with proportional bias differing substantially (slope = -6.46 to 1.58) from the ideal. Identity plots per perturbation for RTMPose and ViTPose-derived data can be found in Appendix B (@fig-sensitivity-all).

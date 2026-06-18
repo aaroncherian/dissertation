@@ -25,6 +25,7 @@
 // ---- appendix counters ------------------------------------------------------
 #let _appendix-c = counter("elife-appendix")
 #let _appendix-fig-c = counter("elife-appendix-figure")
+#let _appendix-tab-c = counter("elife-appendix-table")
 
 
 // ----------------------------------------------------------------------------
@@ -73,8 +74,9 @@
   // Figure / table numbering + captions.
   set figure(numbering: "1")
   show figure.where(kind: table): set figure.caption(position: top)
+  show figure.where(kind: "appendixtab"): set figure.caption(position: top)
   show figure.caption: it => context {
-    let label = if it.kind in ("figsupp", "appendixfig") {
+    let label = if it.kind in ("figsupp", "appendixfig", "appendixtab") {
       it.supplement                                   // full label already built
     } else {
       [#it.supplement #it.counter.display(it.numbering)]   // "Figure N" / "Table N"
@@ -150,21 +152,36 @@
 // ----------------------------------------------------------------------------
 
 // FIGURE SUPPLEMENT — place right after its parent figure.
-//   #figsupp(short: [one-line note for main text],   // optional
+//   #figsupp(key: "rmse-x",                           // optional, for #suppref
+//            short: [one-line note for main text],     // optional
 //            caption: [full legend used at the end],
-//            data: ([Underlying values (CSV).],),     // optional, auto-numbered
-//            srccode: ([Analysis script.],))[         // optional, auto-numbered
+//            data: ([Underlying values (CSV).],),      // optional, auto-numbered
+//            srccode: ([Analysis script.],))[          // optional, auto-numbered
 //     #image("fig1-figsupp1.png")
 //   ]
-#let figsupp(short: none, caption: [], data: (), srccode: (), body) = context {
+#let figsupp(key: none, short: none, caption: [], data: (), srccode: (), body) = context {
   let parent = counter(figure.where(kind: image)).get().first()
   let n = query(selector(<efs>).before(here(), inclusive: false)).filter(m => m.value.parent == parent).len() + 1
-  [#metadata((parent: parent, n: n, caption: caption, body: body, data: data, srccode: srccode))<efs>]
+  [#metadata((parent: parent, n: n, key: key, caption: caption, body: body, data: data, srccode: srccode))<efs>]
   if short != none {
     block(width: 100%, above: 0.5em, below: 0.5em)[
       #set text(size: 9.5pt)
       #strong[Figure #parent#sym.dash.em#"figure supplement"~#n.]~#short
     ]
+  }
+}
+
+// Reference a figure supplement by the `key` you gave it:  #suppref("rmse-x")
+// Prints the live "Figure N—figure supplement M" and updates automatically if
+// supplements are added, removed, or reordered. Works before or after the
+// supplement is declared. Shows a red marker if the key is not found.
+#let suppref(key) = context {
+  let hits = query(<efs>).filter(m => m.value.at("key", default: none) == key)
+  if hits.len() > 0 {
+    let v = hits.first().value
+    [Figure #(v.parent)#sym.dash.em#"figure supplement"~#(v.n)]
+  } else {
+    text(fill: red)[#("[?suppref: " + key + "?]")]
   }
 }
 
@@ -252,13 +269,14 @@
 // ----------------------------------------------------------------------------
 //  APPENDICES  ("Appendix 1", ...; figures "Appendix 1—figure 1")
 //    #appendix(title: "Mathematics of reconstruction")[
-//      ...text...
-//      #appendix-figure(caption: [Triangulation geometry.])[ #image("a1f1.png") ]
+//      ...text...  see #appendixfigref("triangulation") ...
+//      #appendix-figure(key: "triangulation", caption: [Triangulation geometry.])[ #image("a1f1.png") ]
 //    ]
 // ----------------------------------------------------------------------------
 #let appendix(title: none, body) = {
   _appendix-c.step()
   _appendix-fig-c.update(0)
+  _appendix-tab-c.update(0)
   context {
     let n = _appendix-c.display("1")
     heading(level: 1)[Appendix #n#if title != none [ — #title]]
@@ -266,15 +284,56 @@
   body
 }
 
-#let appendix-figure(caption: [], body) = {
+#let appendix-figure(key: none, caption: [], body) = {
   _appendix-fig-c.step()
   context {
-    let a = _appendix-c.display("1")
-    let f = _appendix-fig-c.display("1")
+    let a = _appendix-c.get().first()
+    let f = _appendix-fig-c.get().first()
+    [#metadata((a: a, f: f, key: key))<eaf>]
     figure(
       body, caption: caption, kind: "appendixfig", numbering: none,
       supplement: [Appendix #a#sym.dash.em#"figure"~#f],
     )
+  }
+}
+
+// Reference an appendix figure by its `key`:  #appendixfigref("triangulation")
+// Prints the live "Appendix N—figure M" and updates if appendices or appendix
+// figures are reordered. Red marker if the key is not found.
+#let appendixfigref(key) = context {
+  let hits = query(<eaf>).filter(m => m.value.at("key", default: none) == key)
+  if hits.len() > 0 {
+    let v = hits.first().value
+    [Appendix #(v.a)#sym.dash.em#"figure"~#(v.f)]
+  } else {
+    text(fill: red)[#("[?appendixfigref: " + key + "?]")]
+  }
+}
+
+// APPENDIX TABLE — like appendix-figure, but labelled "Appendix N—table M".
+// eLife table legends sit ABOVE the table; the caption show rule already does
+// this for the `table` kind, and the position is set here for "appendixtab".
+//    #appendix-table(key: "rmse", caption: [Full RMSE table.])[ #table(...) ]
+#let appendix-table(key: none, caption: [], body) = {
+  _appendix-tab-c.step()
+  context {
+    let a = _appendix-c.get().first()
+    let t = _appendix-tab-c.get().first()
+    [#metadata((a: a, t: t, key: key))<eat>]
+    figure(
+      body, caption: caption, kind: "appendixtab", numbering: none,
+      supplement: [Appendix #a#sym.dash.em#"table"~#t],
+    )
+  }
+}
+
+#let appendixtableref(key) = context {
+  let hits = query(<eat>).filter(m => m.value.at("key", default: none) == key)
+  if hits.len() > 0 {
+    let v = hits.first().value
+    [Appendix #(v.a)#sym.dash.em#"table"~#(v.t)]
+  } else {
+    text(fill: red)[#("[?appendixtableref: " + key + "?]")]
   }
 }
 
