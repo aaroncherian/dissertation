@@ -11,14 +11,12 @@
 #import "elife.typ": *
 
 #show: elife.with(
-  title: "FreeMoCap: an extensible benchmarking framework for markerless motion capture across clinical movement paradigms",
+  title: "FreeMoCap",
   authors: (
-    (name: "Aaron [Surname]", affil: (1,), corresponding: true),
-    (name: "Jonathan Matthis", affil: (2,)),
+
   ),
   affiliations: (
-    "FreeMoCap Foundation, Providence, Rhode Island, United States",
-    "Department of Biology, Northeastern University, Boston, Massachusetts, United States",
+
   ),
   corresponding-email: "aaron@freemocap.org",
   abstract: [

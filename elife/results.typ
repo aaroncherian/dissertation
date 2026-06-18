@@ -47,7 +47,7 @@ vertical (#suppref("traj-z")) axes, with the corresponding RMSE values
 tabulated in #appendixtableref("rmse-x"), #appendixtableref("rmse-y"), and
 #appendixtableref("rmse-z").
 
-Reconstructed joint center position errors for each lower-limb joint across speed, axis, and pose estimation backend are summarized in @fig-rmse-grid. Joint center errors were generally under 30 mm, with the lowest error observed in the mediolateral (ML) direction. Across joints, the hip exhibited the largest overall RMSE, with approximately 20 mm of error in both the anteroposterior (AP)and vertical directions, although the magnitude of this error was largely unaffected by walking speed. 
+Joint center errors were generally under 30 mm, with the lowest error observed in the mediolateral (ML) direction. Across joints, the hip exhibited the largest overall RMSE, with approximately 20 mm of error in both the anteroposterior (AP)and vertical directions, although the magnitude of this error was largely unaffected by walking speed. 
 
 Error increased with walking speed at distal joints (particularly in the AP and vertical directions). However, this pattern was not uniform across joints and axes. For example, AP error at the knee decreased with speed for RTMPose and ViTPose-derived trajectories. Additionally, across all trackers, vertical error at the ankle remained relatively consistent.
 
@@ -80,7 +80,7 @@ Across trackers, RTMPose generally exhibited the lowest trajectory error, while 
 )[
   #image("figures/gait/trajectories_z.svg")
 ]
-)
+
 
 == Gait: Spatiotemporal parameter agreement
 
@@ -129,9 +129,9 @@ We assess the agreement of MediaPipe-derived center-of-mass path length against 
 ) <fig-sensitivity-and-agreement>
 
 
-MediaPipe-derived path length demonstrated strong agreement with the reference system  (ICC = 0.985). Systematic bias was small (1.25 mm) with limits of agreement at approximately ± 68 mm. A slope of 0.90 indicated a proportional underestimation of the path length with Bland-Altman analyses showing progressive underestimation in harder conditions. In contrast, RTMPose and ViTPose demonstrated poor agreement (ICC < 0.10), high positive bias (726 mm and 1052 mm respectively), and wide limits of agreement. Summary metrics for comparisons across systems are shown in #appendixtableref("pl-agreement"), and identity and Bland-Altman plots for RTMPose and ViTPose derived data can be found in #appendixfigref("agreement-all").
+MediaPipe-derived path length demonstrated strong agreement with the reference system  (ICC = 0.985). Systematic bias was small (1.25 mm) with limits of agreement at approximately ± 66 mm. A slope of 0.90 indicated a proportional underestimation of the path length with Bland-Altman analyses showing progressive underestimation in harder conditions. In contrast, VitPose and RTMPose demonstrated poor agreement (ICC < 0.10), high positive bias (726 mm and 1052 mm respectively), and wide limits of agreement. Summary metrics for comparisons across systems are shown in #appendixtableref("pl-agreement"), and identity and Bland-Altman plots for RTMPose and ViTPose derived data can be found in #appendixfigref("agreement-all").
 
-MediaPipe-derived COM changes exhibited good-to-excellent sensitivity to different perturbations (_r_#super[2] = 0.83 - 0.96) with slope of the fitted regression line showing near one-to-one agreement (0.89 - 1.06), though slight underestimation of path length was observed under visual perturbation. ViTPose and RTMPose-derived COM changes demonstrated poor sensitivity (_r_#super[2] = 0.03 to 0.45), with proportional bias differing substantially (slope = -5.48 to 1.45) from the ideal. Summary metrics for comparisons across systems are shown in #appendixtableref("pl-sensitivity"). Identity plots per perturbation for RTMPose and ViTPose-derived data can be found in #appendixfigref("sensitivity-all").
+MediaPipe-derived COM changes exhibited good-to-excellent sensitivity to different perturbations (_r_#super[2] = 0.83 - 0.96) with slope of the fitted regression line showing near one-to-one agreement (0.89 - 1.06), though slight underestimation of path length was observed under visual perturbation. ViTPose and RTMPose-derived COM changes demonstrated poor sensitivity (_r_#super[2] = 0.01 to 0.33, with proportional bias differing substantially (slope = -5.48 to 1.45) from the ideal. Summary metrics for comparisons across systems are shown in #appendixtableref("pl-sensitivity"). Identity plots per perturbation for RTMPose and ViTPose-derived data can be found in #appendixfigref("sensitivity-all").
 
 COM velocity distributions matched closely between MediaPipe and the reference in the mediolateral and anteroposterior directions, with a consistently longer tail in the MediaPipe data; vertical-direction differences were larger during solid-ground conditions (#suppref("com-velocity")). Because little true vertical COM movement is expected on solid ground, the across-trial SD of vertical velocity indexes per-system measurement noise: in the eyes-open/solid-ground condition it was 0.90 ± 0.26 mm/s (reference), 2.40 ± 0.42 mm/s (MediaPipe), 9.60 ± 1.94 mm/s (ViTPose), and 14.25 ± 1.99 mm/s (RTMPose).
 
