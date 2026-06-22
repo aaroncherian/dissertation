@@ -6,8 +6,11 @@
 = Results
 
 == Reconstruction and comparison of 3D motion capture data
-An overview of tasks and analyses are presented in @fig-overview. 
-During all tasks, participants were simultaneously recorded by the markerless and marker-based motion capture system, with synchronized videos from the markerless system processed and triangulated using three different pose estimation software: MediaPipe @lugaresiMediaPipeFrameworkBuilding2019, RTMPose @jiangRTMPoseRealTimeMultiPerson2023, and ViTPose @xuViTPoseSimpleVision2022, resulting in three sets of 3D markerless motion capture data per trial                                                                      .
+
+Participants completed both a gait and balance assessment while being simultaneously recorded by the markerless and marker-based motion capture systems (@fig-overview). 
+Joint centers calculated from the marker-based data served as the reference for comparison.
+
+The markerless data were produced using a single FreeMoCap pipeline in which 2D pose estimation (the detection of body keypoints within each camera view) was treated as an interchangeable module. Each trial was processed separately using three pose estimation backends: MediaPipe @lugaresiMediaPipeFrameworkBuilding2019, RTMPose @jiangRTMPoseRealTimeMultiPerson2023, and ViTPose @xuViTPoseSimpleVision2022. All other stages of the pipeline, including multi-camera synchronization, calibration, and triangulation, were held constant. Each trial therefore yielded three sets of 3D markerless data that differed only in the pose estimator used to generate the underlying 2D keypoints.
 
 #figure(
          image("figures/elife_methods.png", width:100%),
@@ -15,7 +18,7 @@ During all tasks, participants were simultaneously recorded by the markerless an
 ) <fig-overview>
 
 == Reconstructing dynamic motion with gait
-Participants completed two trials of walking on a treadmill at increasing speeds, recorded simultaneously by both the markerless and marker-based motion capture system. An example of reconstructed 3D data using each pose estimation backend is shown alongside the marker-based reference in @fig-gait-reconstruction.
+Participants completed two treadmill walking trials in which walking speed was progressively increased, with simultaneous recording by the markerless and marker-based motion capture systems. Representative 3D reconstructions from each pose estimation backend are shown alongside the marker-based reference in @fig-gait-reconstruction.
 
 #figure(
   image("figures/gait/example_gait.png", width: 100%),
@@ -23,9 +26,9 @@ Participants completed two trials of walking on a treadmill at increasing speeds
 ) <fig-gait-reconstruction>
 
 == Gait: Joint kinematics error 
-Sagittal-plane lower-body kinematics were calculated across gait cycle-normalized strides for each pose estimation backend and walking speed. Across the gait cycle, we identified regions of significant difference between the markerless and marker-based systems using statistical parametric mapping (SPM) two-tailed t-tests, displayed in @fig-joint-ang-spm We also calculated joint angle error across joint, pose estimation backend, and walking speed. 
+Sagittal-plane lower-body joint kinematics were calculated from gait cycle-normalized strides for each pose estimation backend and walking speed. Regions of significant difference between the markerless and marker-based joint-angle trajectories were identified using statistical parametric mapping (SPM) two-tailed t-tests and are shown in @fig-joint-ang-spm. We also quantified joint angle error across joints, pose estimation backends, and walking speed using RMSE. 
 
-SPM paired t-tests ($ alpha = 0.05$) revealed common suprathreshold clusters ($t\*$ = 3.41 - 4.56 across conditions and trackers) at all joints in early stance. At the ankle, ViTPose-derived angles exhibited widespread differences spanning much of the gait cycle. At the hip and knee, MediaPipe-derived angles exhibited suprathreshold clusters whose magnitude and duration decreased with speed. .
+SPM paired t-tests ($ alpha = 0.05$) revealed common suprathreshold clusters during early stance at all three joints, critical thresholds ranging from $t^* = 3.41$ to $4.56$ across conditions and pose estimation backends. At the ankle, ViTPose-derived angles exhibited widespread differences spanning much of the gait cycle. At the hip and knee, MediaPipe-derived angles exhibited suprathreshold clusters whose magnitude and duration decreased as walking speed increased.
  
 #figure(
   image("figures/gait/joint_angles_with_spm.svg", width: 100%),
@@ -33,27 +36,19 @@ SPM paired t-tests ($ alpha = 0.05$) revealed common suprathreshold clusters ($t
  <fig-joint-ang-spm>
 
 
-Sagittal joint angle error was below 5° across most conditions, with the primary exception being ViTPose-derived ankle angles at higher speeds (@tbl-joint-angle-rmse).  These errors increased with speed at the knee and ankle, while hip angle error remained relatively stable. Across trackers, ViTPose-derived angles exhibited the lowest error for hip and knee angles but displayed a consistent plantarflexion offset at the ankle. RTMPose-derived ankle angles were most accurate
+Sagittal-plane joint-angle RMSE remained below 5° for most conditions, with the primary exception of ViTPose-derived ankle angles at higher walking speeds (@tbl-joint-angle-rmse). These errors increased with speed at the knee and ankle, while hip angle error remained relatively stable. Error increased with speed at the knee and ankle but remained relatively stable at the hip. ViTPose produced the lowest hip and knee errors overall but showed a consistent plantarflexion offset at the ankle, whereas RTMPose produced the most accurate ankle angles.
 
 #include "tables/gait/joint_angle_rmse_table.typ"
 
 == Gait: Joint position error
 
-Reconstructed joint-center position errors for each lower-limb joint across
-speed, axis, and pose estimation backend are summarized in @fig-rmse-grid. Full
-trajectories - for every joint, backend, and walking speed -7 are shown along the
-mediolateral (#suppref("traj-x")), anteroposterior (#suppref("traj-y")), and
-vertical (#suppref("traj-z")) axes, with the corresponding RMSE values
-tabulated in #appendixtableref("rmse-x"), #appendixtableref("rmse-y"), and
-#appendixtableref("rmse-z").
+Reconstructed joint center position errors for each lower-limb joint, walking speed, axis, and pose estimation backend are summarized in @fig-rmse-grid. Full joint center trajectories for every joint, backend, and walking speed are shown along the mediolateral (#suppref("traj-x")), anteroposterior (#suppref("traj-y")), and vertical (#suppref("traj-z")) axes. Corresponding RMSE values are provided in #appendixtableref("rmse-x"), #appendixtableref("rmse-y"), and #appendixtableref("rmse-z").
 
-Joint center errors were generally under 30 mm, with the lowest error observed in the mediolateral (ML) direction. Across joints, the hip exhibited the largest overall RMSE, with approximately 20 mm of error in both the anteroposterior (AP)and vertical directions, although the magnitude of this error was largely unaffected by walking speed. 
+Joint-center RMSE was generally below 30 mm and was lowest in the mediolateral (ML) direction. Across joints, the hip exhibited the largest overall error, with RMSE of approximately 20 mm in both the anteroposterior (AP) and vertical directions. However, hip error was largely unaffected by walking speed.
 
-Error increased with walking speed at distal joints (particularly in the AP and vertical directions). However, this pattern was not uniform across joints and axes. For example, AP error at the knee decreased with speed for RTMPose and ViTPose-derived trajectories. Additionally, across all trackers, vertical error at the ankle remained relatively consistent.
+At more distal joints, error generally increased with walking speed, particularly in the AP and vertical directions, although this pattern varied across joints, axes, and pose estimation backends. For example, AP knee error decreased with speed for RTMPose- and ViTPose-derived trajectories, while vertical ankle error remained relatively stable across speeds for all three backends.
 
-Across trackers, RTMPose generally exhibited the lowest trajectory error, while ViTPose exhibited the highest, particularly in the vertical direction. These differences were most apparent at the ankle and toe, where ViTPose demonstrated a consistent vertical offset relative to the marker-based reference. 
-
-
+Across pose estimation backends, RTMPose generally produced the lowest joint center trajectory error, whereas ViTPose produced the highest, particularly in the vertical direction. These differences were most pronounced at the ankle and toe, where ViTPose-derived trajectories showed a consistent vertical offset relative to the marker-based reference.
 
 
 #figure(
@@ -84,15 +79,13 @@ Across trackers, RTMPose generally exhibited the lowest trajectory error, while 
 
 == Gait: Spatiotemporal parameter agreement
 
-We identified heel strike and toe off events and then calculated spatiotemporal gait parameters including: stance duration, swing duration, stride duration, stride length, and step length. For each gait parameter, we found Bland-Altman analyses with bais and 95% limits of agreement (LOA), and quantified agreement using intraclass correlation coefficients (ICC).  ICC values under 0.5 were interpreted as poor
-agreement, 0.5-0.75 interpreted as moderate agreement, 0.75-0.90 as good agreement, and
-greater than 0.90 as excellent agreement.
+Heel-strike and toe-off events were identified and used to calculate stance duration, swing duration, stride duration, stride length, and step length. Agreement with the marker-based reference was assessed for each parameter using Bland-Altman bias and 95% limits of agreement (LoA), together with intraclass correlation coefficients (ICC). ICC values below 0.50 were interpreted as poor agreement, values from 0.50 to 0.75 as moderate, values from 0.75 to 0.90 as good, and values above 0.90 as excellent.
 
-Spatiotemporal gait parameters, pooled across all walking speeds, showed minimal bias and excellent agreement (ICC > 0.90) with the marker-based reference (@tbl-ba-gait-pooled). Across trackers, ViTPose demonstrated near-zero bias across all parameters. RTMPose and ViTPose both exhibited tight limits of agreement (LoA), while MediaPipe showed larger deviations and wider LoA.
+When pooled across walking speeds, spatiotemporal gait parameters showed minimal bias and excellent agreement with the marker-based reference (ICC > 0.90; @tbl-ba-gait-pooled). Across pose estimation backends, ViTPose produced near-zero bias for all parameters. RTMPose and ViTPose both showed relatively narrow LoA, whereas MediaPipe showed larger deviations and wider LoA.
 
 #include "tables/gait/ba_gait_pooled.typ"
 
-Spatial parameters showed speed-dependent agreement, with limits of agreement widening markedly as walking speed increased (e.g., ViTPose step length: ±19 to ±88 mm). Step-length ICC decreased from strong agreement at slow speeds to moderate agreement at the fastest speed, whereas stride length remained strong across speeds (ICC > 0.90). Temporal parameters behaved differently: bias and limits of agreement remained relatively consistent across speeds, with differences clustering at multiples of the 33 ms frame interval (@fig-gait-ba), but ICC still declined at higher speeds, most sharply for stance duration. Across spatial and temporal outcomes, MediaPipe-derived parameters showed the widest limits of agreement and lowest agreement, consistent with the pooled results (@tbl-ba-gait-pooled). Full speed-stratified Bland-Altman and ICC values for spatial and temporal parameters are provided in #appendixtableref("ba-spatial") and #appendixtableref("ba-temporal") respectively. 
+Agreement for spatial parameters was speed dependent, with LoA widening markedly as walking speed increased (e.g., ViTPose step length: ±19 to ±88 mm). Step length ICC decreased from strong agreement at slow speeds to moderate agreement at the fastest speed, whereas stride length remained excellent across speeds (ICC > 0.90). Temporal parameters showed a different pattern: bias and limits of agreement remained relatively consistent across speeds, with differences clustering at multiples of the 33 ms frame interval (@fig-gait-ba), but ICC still declined at higher speeds, most sharply for stance duration. Across spatial and temporal parameters, MediaPipe-derived data produced the widest LoA and lowest ICC values, consistent with the pooled results (@tbl-ba-gait-pooled). . Full speed-stratified Bland–Altman and ICC results are provided for spatial parameters in #appendixtableref("ba-spatial") and temporal parameters in #appendixtableref("ba-temporal").
 
 #figure(
   image("figures/gait/ba_stride_both.png", width: 100%),
@@ -102,7 +95,7 @@ Spatial parameters showed speed-dependent agreement, with limits of agreement wi
 
 == Balance: Analyzing postural stability using center of mass
 
-Participants completed two trials of the Modified Clinical Test of Sensory Interaction on Balance (CTSIB-M), where they stood for sixty seconds in four different conditions, each of which varied visual and standing conditions. These included standing with/on: 1) Eyes Open/Solid Ground; 2) Eyes Closed/Solid Ground; 3) Eyes Open/Foam Pad; 4) Eyes Closed/Foam Pad. We calculated center of mass (COM) for each set of pose estimation-derived 3D data and the reference system and calculated metrics often relevant to posturography including: center of mass path length, the 95% confidence ellipse area, and mean 3D COM velocity. @fig-xy-plane shows a representative example of the COM movement during each CTSIB-M condition plotted on the ground plane. 
+We next evaluated whether the same markerless reconstructions captured differences in postural stability during standing balance tasks. Participants completed two trials of the Modified Clinical Test of Sensory Interaction on Balance (CTSIB-M). During each trial, participants stood for 60 seconds under four conditions that varied visual input and support-surface stability: 1) eyes open on a firm surface, 2) eyes closed on a firm surface, 3) eyes open on a foam surface, and 4) eyes closed on a foam surface. Center of mass (COM) trajectories were estimated from each pose estimation backend and from the marker-based reference. Postural stability was then quantified using COM path length, 95% confidence ellipse area, and mean three-dimensional COM velocity. Representative COM trajectories projected onto the ground plane for each mCTSIB condition are shown in @fig-xy-plane.
 
 #figure(
   image(
@@ -113,7 +106,9 @@ Participants completed two trials of the Modified Clinical Test of Sensory Inter
 
 == Balance: Comparing postural stability 
 
-@fig-posturography shows mean and trial postural metrics per condition, for each set of 3D data. Exact values can be found in the appendix in #appendixtableref("balance-metrics"). Although ellipse area across all trackers was comparable, path length and mean velocity exhibited tracker-dependent behavior. MediaPipe-derived COM path length closely matched the reference and preserved separation across progressively more challenging conditions. In contrast, RTMPose and ViTPose-derived data overestimated path length and failed to clearly differentiate between balance conditions. Similarly, MediaPipe-derived mean velocity (in the horizontal plane) was similar to the reference, though slight underestimation was observed, while RTMPose and ViTPose-derived velocity was substantially higher.
+Mean posturographic metrics and individual trial values for each balance condition and 3D dataset are shown in @fig-posturography. Exact values are provided in #appendixtableref("balance-metrics").
+
+Although 95% confidence ellipse area was comparable across pose estimation backends, COM path length and mean velocity showed clear backend-dependent differences. MediaPipe-derived path length closely matched the marker-based reference and preserved the expected separation among progressively more challenging balance conditions. In contrast, In contrast, RTMPose and ViTPose-derived data overestimated path length and failed to clearly differentiate between balance conditions. A similar pattern was observed for mean horizontal COM velocity: MediaPipe slightly underestimated the reference values, whereas RTMPose and ViTPose produced substantially higher estimates. 
 
 #figure(
   image("figures/balance/balance_sway_metrics.svg", width: 100%),
@@ -121,7 +116,7 @@ Participants completed two trials of the Modified Clinical Test of Sensory Inter
   [Center of mass path group-level and trial-level mean path length comparison]) <fig-posturography>
 
 == Balance: Agreement and sensitivity of MediaPipe-derived 3D data
-We assess the agreement of MediaPipe-derived center-of-mass path length against the reference using Bland–Altman analysis, and evaluate the sensitivity of MediaPipe-derived postural sway to the perturbations induced during the CTSIB-M (@fig-sensitivity-and-agreement).
+Because MediaPipe-derived COM metrics most closely reproduced the marker-based results, we examined its validity in greater detail. We evaluated two complementary properties: agreement, defined as the correspondence between absolute path-length values from the two systems, and sensitivity, defined as the ability to reproduce the change in path length caused by each sensory perturbation (@fig-sensitivity-and-agreement).
 
 #figure(
   image("figures/balance/com_agreement_and_sensitivity.svg", width: 100%),
@@ -129,11 +124,11 @@ We assess the agreement of MediaPipe-derived center-of-mass path length against 
 ) <fig-sensitivity-and-agreement>
 
 
-MediaPipe-derived path length demonstrated strong agreement with the reference system  (ICC = 0.985). Systematic bias was small (1.25 mm) with limits of agreement at approximately ± 66 mm. A slope of 0.90 indicated a proportional underestimation of the path length with Bland-Altman analyses showing progressive underestimation in harder conditions. In contrast, VitPose and RTMPose demonstrated poor agreement (ICC < 0.10), high positive bias (726 mm and 1052 mm respectively), and wide limits of agreement. Summary metrics for comparisons across systems are shown in #appendixtableref("pl-agreement"), and identity and Bland-Altman plots for RTMPose and ViTPose derived data can be found in #appendixfigref("agreement-all").
+MediaPipe-derived path length demonstrated excellent agreement with the reference system  (ICC = 0.985). Mean bias was small (1.25 mm) with 95% limits of agreement at approximately ±66 mm. A slope of 0.90 indicated proportional underestimation of the path length, and the condition-stratified Bland-Altman results showed that this underestimation became more apparent in the more challenging balance conditions. By comparison, ViTPose and RTMPose-derived data showed poor agreement (ICC < 0.10), large positive biases of 726 and 1052 mm, respectively, and wide limits of agreement. Agreement statistics for all three backends are provided in #appendixtableref("pl-agreement"), with identity and Bland–Altman plots for RTMPose and ViTPose shown in #appendixfigref("agreement-all").("agreement-all").
 
-MediaPipe-derived COM changes exhibited good-to-excellent sensitivity to different perturbations (_r_#super[2] = 0.83 - 0.96) with slope of the fitted regression line showing near one-to-one agreement (0.89 - 1.06), though slight underestimation of path length was observed under visual perturbation. ViTPose and RTMPose-derived COM changes demonstrated poor sensitivity (_r_#super[2] = 0.01 to 0.33, with proportional bias differing substantially (slope = -5.48 to 1.45) from the ideal. Summary metrics for comparisons across systems are shown in #appendixtableref("pl-sensitivity"). Identity plots per perturbation for RTMPose and ViTPose-derived data can be found in #appendixfigref("sensitivity-all").
+MediaPipe also reproduced the condition-induced changes in COM path length. Across sensory perturbations, changes derived from MediaPipe were strongly associated with changes in the reference (r#super[2] = 0.83-0.96), and regression slopes were close to the ideal value of one (0.89-1.06). This indicates that MediaPipe captured not only absolute differences among participants and trials, but also the magnitude of the postural response to altered visual and surface conditions. A slight underestimation was observed for the visual perturbation. In contrast, changes derived from ViTPose and RTMPose showed weak correspondence with the reference (r#super[2] = 0.01–0.33), with slopes ranging from −5.48 to 1.45. Sensitivity statistics for all backends are provided in #appendixtableref("pl-sensitivity"), and the corresponding RTMPose and ViTPose identity plots are shown in #appendixfigref("sensitivity-all").
 
-COM velocity distributions matched closely between MediaPipe and the reference in the mediolateral and anteroposterior directions, with a consistently longer tail in the MediaPipe data; vertical-direction differences were larger during solid-ground conditions (#suppref("com-velocity")). Because little true vertical COM movement is expected on solid ground, the across-trial SD of vertical velocity indexes per-system measurement noise: in the eyes-open/solid-ground condition it was 0.90 ± 0.26 mm/s (reference), 2.40 ± 0.42 mm/s (MediaPipe), 9.60 ± 1.94 mm/s (ViTPose), and 14.25 ± 1.99 mm/s (RTMPose).
+COM velocity provided an additional view of backend-specific measurement behavior. MediaPipe and the marker-based reference showed similar mediolateral and anteroposterior velocity distributions, although the MediaPipe distributions had consistently longer tails. Differences were larger in the vertical direction during solid-ground conditions (#suppref("com-velocity")). Because little true vertical COM movement is expected while standing on a firm surface, variability in vertical velocity provides an indication of measurement noise. In the eyes-open, solid-ground condition, the across-trial standard deviation was 0.90 ± 0.26 mm/s for the reference, 2.40 ± 0.42 mm/s for MediaPipe, 9.60 ± 1.94 mm/s for ViTPose, and 14.25 ± 1.99 mm/s for RTMPose.
 
 #figsupp(
   key: "com-velocity",
