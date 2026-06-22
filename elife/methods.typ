@@ -5,7 +5,8 @@
 == FreeMoCap Software
 FreeMoCap @queenFreeMoCapFreeOpen2024 is a fully open-source markerless motion capture framework that prioritizes accessibility at every level of the pipeline. It is built to work with consumer-grade webcams, requires no physical markers or specialized recording environment, and provides a complete processing pipeline from synchronized video acquisition through 3D kinematic reconstruction (@fig-fmc-pipeline). The architecture is modular and tracker-agnostic, allowing users to swap between pose estimation backends depending on their needs.
 
-We detail below the steps in the FreeMoCap pipeline, including synchronized video acquisition, camera calibration, 2D pose estimation, and 3D reconstruction. 
+FreeMoCap follows a polyrepo structure, where each component of the motion capture pipeline is handled by an independent repository. We detail below the steps in the FreeMoCap pipeline, including synchronized video acquisition, camera calibration, 2D pose estimation, and 3D reconstruction. 
+
 
 #figure(
   image("figures/methods/freemocap_pipeline.png", width: 110%),
@@ -18,7 +19,7 @@ streams. For accurate 3D reconstruction, each set of frames must correspond to t
 moment in time. Without proper synchronization, time lags between cameras can result in
 inaccurate 3D data.
 
-The synchronized video acquisition component of FreeMoCap is `SkellyCam`, software package to provide high quality synchronous recording methods that enable the use of lowcost hardware - specifically consumer-grade, off-the-shelf webcams. However, these cameras may not be suitable for all research needs. For example, capturing athletic performance may necessitate higher frame rate cameras, while outdoor recordings may require non-USB cameras. The software accommodates these use cases in two ways: 1) Videos collected from a set of external cameras (e.g., GoPros or smartphone cameras) can be synchronized using light and audio-based methods; 2) A pre-synchronized set of videos can be directly imported into the software for processing. We aim to reduces dependency on specific hardware configurations and allows data collection protocols to be adapted to the needs of the study, rather than constrained by the system itself.
+In FreeMoCap, synchronous recording is handled primarily by `SkellyCam`, a software package to provide high quality synchronous recording methods that enable the use of low-cost hardware - specifically consumer-grade, off-the-shelf webcams. However, these cameras may not be suitable for all research needs (e.g., capturing athletic performance which may necessitate higher frame rate cameras or outdoor recordings, which may require non-USB cameras). The software accommodates these use cases in two ways: 1) Videos collected from a set of external cameras (e.g., GoPros or smartphone cameras) can be synchronized using light and audio-based methods; 2) A pre-synchronized set of videos can be directly imported into the software for processing. We aim to reduce dependency on specific hardware configurations and allow data collection protocols to be adapted to the needs of the study, rather than constrained by the system itself.
 
 === *Camera Calibration*
 In order to reconstruct 3D data from the 2D camera images, it is necessary to determine how
@@ -43,26 +44,25 @@ board. For this reason we recommend printing on matte (non-glossy) material.
 
 At the start of the recording, the ChArUco board may be placed flat on the ground within
 the shared field of view of all cameras, in what we term ground plane calibration. In this
-configuration, the plane of the board defines the reference coordinate system for reconstruction (Figure 3.4). Reconstructed 3D data are expressed in a coordinate frame where the ground plane corresponds to $Z=0$ and the orientation of the axes is aligned with the board. This initialization ensures that reconstructed kinematic data are immediately situated within a physically meaningful coordinate system, reducing the need for post hoc alignment or rotation.
+configuration, the plane of the board defines the reference coordinate system for reconstruction. Reconstructed 3D data are expressed in a coordinate frame where the ground plane corresponds to $Z=0$ and the orientation of the axes is aligned with the board. This initialization ensures that reconstructed kinematic data are immediately situated within a physically meaningful coordinate system, reducing the need for post hoc alignment or rotation.
 
 === *Pose Estimation*
 
 Pose estimation is a computer vision task that identifies meaningful keypoints within an
 image. In human pose estimation, these keypoints typically correspond to joint centers.
 In practice, pose estimation produces 2D keypoint locations in pixel coordinates for each
-camera and frame of a recording.
+camera and frame of a recording. 
 
 #figure(
   image( "figures/methods/pose_estimation_examples.png", width: 100%),
   caption: [Examples of landmarks estimated on a human body from three different pose estimation algorithms. *Left*: MediaPipe; *Middle*: RTMPose; *Right*: ViTPose.],
 )
 
-
-First is accuracy. Errors in 2D keypoint localization propagate directly into 3D kinematic estimates, and accuracy differs between pose estimation algorithms  @needhamAccuracySeveralPose2021 @ceriolaComparativeAnalysisMarkerless2024 @washabaughComparingAccuracyOpensource2022. Many general-purpose algorithms are not optimized for movement science applications, as their underlying datasets may lack biomechanical relevance or sufficient representation of specific populations @seethapathiMovementScienceNeeds2019 @needhamAccuracySeveralPose2021.
+In modern markerless motion capture systems, pose estimation has become a critical aspect of the architecture. However, there are challenges to consider in the choice of pose estimation software. First is accuracy. Errors in 2D keypoint localization propagate directly into 3D kinematic estimates, and accuracy differs between pose estimation algorithms  @needhamAccuracySeveralPose2021 @ceriolaComparativeAnalysisMarkerless2024 @washabaughComparingAccuracyOpensource2022. Many general-purpose algorithms are not optimized for movement science applications, as their underlying datasets may lack biomechanical relevance or sufficient representation of specific populations @seethapathiMovementScienceNeeds2019 @needhamAccuracySeveralPose2021.
 
 This leads to the second challenge: integration. Even when suitable pose estimation models exist, integrating them into motion capture pipelines remains challenging. Many systems are tightly coupled to a single backend. Thus, researchers looking to implement a specific pose estimation model must often implement their own pipelines from the ground up. 
 
-`SkellyTracker`, the pose estimation manager for FreeMoCap, is a framework that decouples pose estimation from the rest of the processing pipeline. The software defines a standardized interface for pose estimation models, allowing new trackers to be integrated by implementing this interface. As a result, different pose estimation algorithms can be used interchangeably within the same pipeline without requiring changes to downstream processing steps. Similar to how our synchronization approach enables scalability in hardware, this architecture gives researchers more control over their processing pipeline. 
+`SkellyTracker`, the pose estimation manager for FreeMoCap, is a framework that decouples pose estimation from the rest of the processing pipeline. The software defines a standardized interface for pose estimation models, allowing new trackers to be integrated by implementing this interface. As a result, different pose estimation algorithms can be used interchangeably within the same pipeline without requiring changes to downstream processing steps. 
 
 The default FreeMoCap pipeline utilizes MediaPipe @lugaresiMediaPipeFrameworkBuilding2019, a free, open-source framework based on the CNN BlazePose @bazarevskyBlazePoseOndeviceRealtime2020. We selected MediaPipe on the basis of practicality and accessibility. MediaPipe is simple to install and interface with using Python scripts. It is also computationally lightweight, and can be run on a CPU-only computer. Thus, of many available options, MediaPipe makes our software the most accessible for the widest range of users.
 
@@ -81,7 +81,7 @@ for the 3D position of each keypoint via direct linear transformation (DLT), usi
 
 Data is post-processed using `SkellyForge`, a post-processing package that applies gap interpolation for frames where no acceptable triangulation solution was found, followed by low-pass Butterworth filtering to attenuate high-frequency noise in the coordinate time series
 
-== Validation
+== Validation Procedure
 
 === *Participants*
 
