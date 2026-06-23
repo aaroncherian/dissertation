@@ -48,40 +48,50 @@ At the start of a recording, the ChArUco board may be placed flat on the floor w
 
 === *Pose Estimation*
 
-Pose estimation is a computer vision task that identifies meaningful keypoints within an
-image. In human pose estimation, these keypoints typically correspond to joint centers.
-In practice, pose estimation produces 2D keypoint locations in pixel coordinates for each
-camera and frame of a recording. 
+
+Pose estimation converts each camera's video frames into 2D anatomical keypoints for subsequent 3D reconstruction (@fig-pose-examples). The default FreeMoCap pipeline uses MediaPipe @lugaresiMediaPipeFrameworkBuilding2019, a free and open-source framework incorporating the BlazePose convolutional neural network @bazarevskyBlazePoseOndeviceRealtime2020. MediaPipe was selected as the default backend primarily for its accessibility: it is straightforward to install and use through Python, is computationally lightweight, and can run without a dedicated GPU. These characteristics allow the complete FreeMoCap pipeline to operate on a broad range of consumer hardware.
 
 #figure(
   image( "figures/methods/pose_estimation_examples.png", width: 100%),
   caption: [Examples of landmarks estimated on a human body from three different pose estimation algorithms. *Left*: MediaPipe; *Middle*: RTMPose; *Right*: ViTPose.],
-)
+) <fig-pose-examples>
 
-In modern markerless motion capture systems, pose estimation has become a critical aspect of the architecture. However, there are challenges to consider in the choice of pose estimation software. First is accuracy. Errors in 2D keypoint localization propagate directly into 3D kinematic estimates, and accuracy differs between pose estimation algorithms  @needhamAccuracySeveralPose2021 @ceriolaComparativeAnalysisMarkerless2024 @washabaughComparingAccuracyOpensource2022. Many general-purpose algorithms are not optimized for movement science applications, as their underlying datasets may lack biomechanical relevance or sufficient representation of specific populations @seethapathiMovementScienceNeeds2019 @needhamAccuracySeveralPose2021.
 
-This leads to the second challenge: integration. Even when suitable pose estimation models exist, integrating them into motion capture pipelines remains challenging. Many systems are tightly coupled to a single backend. Thus, researchers looking to implement a specific pose estimation model must often implement their own pipelines from the ground up. 
+However, the choice of pose estimation model can substantially affect the resulting motion-capture data. Errors in 2D keypoint localization propagate into reconstructed 3D trajectories and derived kinematic measures, and performance varies across pose estimation algorithms @needhamAccuracySeveralPose2021 @ceriolaComparativeAnalysisMarkerless2024 @washabaughComparingAccuracyOpensource2022. Moreover, many general-purpose models are trained on datasets that were not designed specifically for movement-science applications and may provide limited representation of particular movements, environments, or populations @seethapathiMovementScienceNeeds2019 @needhamAccuracySeveralPose2021. No single pose estimation model is therefore likely to be optimal across all applications.
 
-`SkellyTracker`, the pose estimation manager for FreeMoCap, is a framework that decouples pose estimation from the rest of the processing pipeline. The software defines a standardized interface for pose estimation models, allowing new trackers to be integrated by implementing this interface. As a result, different pose estimation algorithms can be used interchangeably within the same pipeline without requiring changes to downstream processing steps. 
+To accommodate alternative models, FreeMoCap separates pose estimation from the remainder of the processing pipeline through SkellyTracker, its pose estimation management framework. SkellyTracker defines a standardized interface through which a model receives video frames and returns keypoint coordinates in a consistent format. New pose estimation backends can therefore be added by implementing this interface, without requiring corresponding changes to camera calibration, 3D reconstruction, post-processing, or data export. This avoids the need to construct a new motion-capture pipeline whenever a different pose estimation model is required.
 
-The default FreeMoCap pipeline utilizes MediaPipe @lugaresiMediaPipeFrameworkBuilding2019, a free, open-source framework based on the CNN BlazePose @bazarevskyBlazePoseOndeviceRealtime2020. We selected MediaPipe on the basis of practicality and accessibility. MediaPipe is simple to install and interface with using Python scripts. It is also computationally lightweight, and can be run on a CPU-only computer. Thus, of many available options, MediaPipe makes our software the most accessible for the widest range of users.
+This modular design also supports controlled comparisons among pose estimation algorithms. Different backends can be applied to the same synchronized videos while holding the camera configuration, calibration, reconstruction, and post-processing procedures constant. Differences in the resulting 3D estimates can therefore be more directly attributed to the pose estimation stage, supporting the systematic benchmarking of markerless pose estimation algorithms identified as a need within the movement-science community @needhamAccuracySeveralPose2021.
 
-As the software interface allows pose estimation backends to be swapped without any change to the rest of the pipeline, we can directly compare how different algorithms perform under identical conditions (i.e., using the same cameras, calibration, reconstruction and post-processing). These comparisons can aid in detailed benchmarking of pose estimation algorithms in markerless motion capture, a noted need by the research community @needhamAccuracySeveralPose2021.
+
+// In modern markerless motion capture systems, pose estimation has become a critical aspect of the architecture. However, there are challenges to consider in the choice of pose estimation software. First is accuracy. Errors in 2D keypoint localization propagate directly into 3D kinematic estimates, and accuracy differs between pose estimation algorithms  @needhamAccuracySeveralPose2021 @ceriolaComparativeAnalysisMarkerless2024 @washabaughComparingAccuracyOpensource2022. Many general-purpose algorithms are not optimized for movement science applications, as their underlying datasets may lack biomechanical relevance or sufficient representation of specific populations @seethapathiMovementScienceNeeds2019 @needhamAccuracySeveralPose2021.
+
+// This leads to the second challenge: integration. Even when suitable pose estimation models exist, integrating them into motion capture pipelines remains challenging. Many systems are tightly coupled to a single backend. Thus, researchers looking to implement a specific pose estimation model must often implement their own pipelines from the ground up. 
+
+// `SkellyTracker`, the pose estimation manager for FreeMoCap, is a framework that decouples pose estimation from the rest of the processing pipeline. The software defines a standardized interface for pose estimation models, allowing new trackers to be integrated by implementing this interface. As a result, different pose estimation algorithms can be used interchangeably within the same pipeline without requiring changes to downstream processing steps. 
+
+// The default FreeMoCap pipeline utilizes MediaPipe @lugaresiMediaPipeFrameworkBuilding2019, a free, open-source framework based on the CNN BlazePose @bazarevskyBlazePoseOndeviceRealtime2020. We selected MediaPipe on the basis of practicality and accessibility. MediaPipe is simple to install and interface with using Python scripts. It is also computationally lightweight, and can be run on a CPU-only computer. Thus, of many available options, MediaPipe makes our software the most accessible for the widest range of users.
+
+// As the software interface allows pose estimation backends to be swapped without any change to the rest of the pipeline, we can directly compare how different algorithms perform under identical conditions (i.e., using the same cameras, calibration, reconstruction and post-processing). These comparisons can aid in detailed benchmarking of pose estimation algorithms in markerless motion capture, a noted need by the research community @needhamAccuracySeveralPose2021.
 
 === *3D Reconstruction*
-
-The final key step in the markerless motion capture pipeline is triangulating 2D keypoint
-detections into 3D coordinates (@fig-reconstruction). For each frame, the camera projection matrices estimated
-during calibration and the 2D keypoint detections from each camera view are used to solve
-for the 3D position of each keypoint via direct linear transformation (DLT), using a modified implementation of the Anipose toolkit @AniposeToolkitRobust2021. 
+The 2D keypoints detected independently in each camera view are combined to reconstruct their positions in three dimensions (@fig-reconstruction). For each frame and keypoint, the detected pixel coordinate in each camera defines a line of sight extending from that camera into the calibrated capture volume. The corresponding 3D position is estimated by triangulating across these observations using the camera projection matrices obtained during calibration. FreeMoCap performs this reconstruction using direct linear transformation (DLT) through a modified implementation of the Anipose toolkit @AniposeToolkitRobust2021.
 
 #figure(
-  image("figures/methods/reconstruction.png", width: 100%),
-  caption: [3D reconstruction via triangulation. Each camera detects points P₁ and P₂ in its image as 2D pixel coordinates. Using each camera's intrinsic and extrinsic parameters, these pixel detections define rays extending from each camera into the world. The 3D position of each point is estimated where the corresponding rays from multiple cameras converge.]) <fig-reconstruction>
+image("figures/methods/reconstruction.png", width: 110%),
+caption: [3D reconstruction through multi-view triangulation. Each camera observes the same anatomical keypoints, shown here as $P_1$ and $P_2$, at different 2D pixel locations. Together with the calibrated camera projection matrices, each detection defines a line of sight from the camera into the shared 3D coordinate system. The position of each keypoint is estimated from the convergence of the corresponding lines of sight across camera views.]
+) <fig-reconstruction>
 
-Data is post-processed using `SkellyForge`, a post-processing package that applies gap interpolation for frames where no acceptable triangulation solution was found, followed by low-pass Butterworth filtering to attenuate high-frequency noise in the coordinate time series
+The reconstructed trajectories are subsequently processed using SkellyForge, FreeMoCap’s post-processing package. Short gaps are interpolated when no acceptable triangulation solution is available for a frame, after which the coordinate trajectories are low-pass filtered using a Butterworth filter to attenuate high-frequency noise. The resulting data consist of temporally continuous 3D keypoint trajectories expressed in the shared coordinate system established during calibration.
 
 == Validation Procedure
+
+A broad overview of the procedure is found in 
+
+#figure(
+  image("figures/methods/validation_procedure_elife.png", width:100%),
+  caption: [Overview of experimental design and data processing methods. *A.* Six generic USB webcams were placed circularly around the treadmill and connected to a single PC, with the FreeMoCap software used for video acquisition. The cameras were calibrated using a ChArUco board measuring 1016 x 698.5 mm (40 x 27.5 in), with a square size of 126 mm. *B.* Participants completed two trials each of the gait and balance assessments while being recorded simultaneously by the markerless and marker-based motion capture systems. *C.* Markerless video data were processed using three pose estimation backends: MediaPipe, RTMPose, and ViTPose. The resulting 2D keypoint detections were triangulated into 3D joint-center trajectories using the FreeMoCap pipeline. *D.* Marker-based trajectories were labeled and cleaned, and anatomical joint centers were calculated from the marker trajectories. *E.* Markerless and marker-based trajectories were temporally aligned using cross-correlation and transformed into a common spatial coordinate system. *F.* The aligned markerless and marker-based joint-center trajectories were used for task-specific comparisons and statistical analyses.]
+)
 
 === *Participants*
 
@@ -99,7 +109,7 @@ The markerless system consisted of six consumer-grade cameras (\$20 USB webcams,
 
 All cameras were connected to a single acquisition computer. Video capture was performed using the FreeMoCap software. Because both FreeMoCap and Qualisys recordings were acquired on the same computer, timestamps from each system were referenced to a shared system clock, enabling temporal alignment between datasets.
 
-Prior to recording, cameras were calibrated using a ChArUco calibration board (square size: 126 mm, board size: 40" x 27.5"). At the start of each recording, the board was placed flat on the floor within view of all cameras to define the reference frame of the reconstruction (ground plane alignment). The origin of the capture volume was set using the board, and the reconstructed 3D data were aligned such that the vertical axis corresponded to the Z-axis, with the horizontal plane defined as $Z = 0$.   
+Prior to recording, cameras were calibrated using a ChArUco calibration board (square size: 126 mm, board size: 1016 x 698.5 mm). At the start of each recording, the board was placed flat on the floor within view of all cameras to define the reference frame of the reconstruction (ground plane alignment). The origin of the capture volume was set using the board, and the reconstructed 3D data were aligned such that the vertical axis corresponded to the Z-axis, with the horizontal plane defined as $Z = 0$.   
 
 === *Data Collection
 *
