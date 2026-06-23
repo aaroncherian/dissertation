@@ -139,10 +139,19 @@ Synchronized videos were processed using the FreeMoCap pipeline (v1.7.4). Two-di
 
 The backends also differed in their temporal processing. RTMPose and ViTPose estimated poses independently in each frame, whereas MediaPipe was run in video mode (static_image_mode = false) with landmark smoothing enabled (smooth_landmarks = true). In the legacy MediaPipe Holistic solution, temporal landmark smoothing is conditional on both settings: it is disabled either when static-image mode is enabled or when landmark smoothing is turned off. Thus, settings that may appear to be minor implementation details can alter the temporal characteristics of the resulting trajectories and, consequently, their validation against a reference system. Complete model and inference configurations for all three pose-estimation backends are therefore reported in #appendixtableref("tracker-config").
 
-_Triangulation_
+_Triangulation and post-processing_
 
-Corresponding keypoints were triangulated into 3D space. 3D data were filtered using a zero-lag, fourth-order Butterworth filter with a 6 Hz cutoff frequency.
+Corresponding 2D keypoints from the synchronized camera views were triangulated into 3D coordinates using the calibrated camera projection matrices and direct linear transformation. 
 
+In multiview markerless motion capture, a camera view that is generally informative may nevertheless produce erroneous 2D detections during particular movements or periods of occlusion. These localized errors can substantially degrade the triangulated 3D trajectory. One approach is to exclude the affected camera from the entire recording; however, this also removes the many valid observations contributed by that camera at other frames and keypoints. To retain these usable observations, we implemented an optional progressive outlier-rejection procedure that excluded individual camera observations locally during triangulation rather than removing a camera view globally.
+
+For each keypoint and frame, an initial 3D position was estimated using all available camera views, and the mean reprojection error was calculated. When this error exceeded a specified threshold, the keypoint was retriangulated using each possible subset formed by omitting one camera. The leave-one-camera-out solution with the lowest mean reprojection error was compared with the original all-camera solution. When excluding one camera produced a sufficiently large reduction in reprojection error, the refined estimate was used; for intermediate improvements, the original and refined estimates were blended to reduce abrupt transitions between reconstruction solutions.
+
+Outlier rejection was enabled only for recordings whose default reconstruction contained substantial 3D artifacts. Each recording's default (all-camera) reconstruction was visually inspected alongside the annotated 2D videos from each camera view. The procedure was enabled when artifacts in the 3D trajectories (e.g., abrupt spatial discontinuities or anatomically implausible excursions) could be traced to visibly erroneous 2D keypoint estimates in a specific camera view, rather than being attributed to 2D estimation failure by inference alone. This determination was based solely on the quality of the markerless reconstruction and was made independently of agreement with the marker-based reference.
+
+When enabled for a recording, the same procedure was applied to MediaPipe, RTMPose, and ViTPose reconstructions. In these cases, the procedure recovered usable reconstructions that would otherwise have required exclusion while preserving valid observations from the affected camera views.
+
+Following reconstruction, gaps in the 3D trajectories were interpolated, and the trajectories were low-pass filtered using a zero-phase, fourth-order Butterworth filter with a cutoff frequency of 6 Hz.
 ==== *Data synchronization and alignment*
 
 Joint center trajectories from marker-based and markerless systems were temporally aligned using recorded Unix timestamps from both systems, which were generated on the same acquisition computer. Marker-based data were resampled to match the markerless sampling rate (30 Hz). Residual temporal offsets were further refined using cross-correlation of joint trajectories, followed by manual inspection. 
