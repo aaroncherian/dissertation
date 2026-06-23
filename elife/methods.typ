@@ -3,9 +3,9 @@
 = Materials and Methods
 
 == FreeMoCap Software
-FreeMoCap @queenFreeMoCapFreeOpen2024 is a fully open-source markerless motion capture framework that prioritizes accessibility at every level of the pipeline. It is built to work with consumer-grade webcams, requires no physical markers or specialized recording environment, and provides a complete processing pipeline from synchronized video acquisition through 3D kinematic reconstruction (@fig-fmc-pipeline). The architecture is modular and tracker-agnostic, allowing users to swap between pose estimation backends depending on their needs.
+FreeMoCap @queenFreeMoCapFreeOpen2024 is a fully open-source markerless motion capture framework designed to maximize accessibility across the entire workflow. It operates with consumer-grade webcams, requires neither physical markers nor a specialized recording environment, and supports the full process from synchronized video acquisition to 3D kinematic reconstruction (@fig-fmc-pipeline). Its modular, tracker-agnostic architecture allows different pose estimation backends to be incorporated according to the needs of a given application.
 
-FreeMoCap follows a polyrepo structure, where each component of the motion capture pipeline is handled by an independent repository. We detail below the steps in the FreeMoCap pipeline, including synchronized video acquisition, camera calibration, 2D pose estimation, and 3D reconstruction. 
+FreeMoCap is organized as a polyrepo, with major components of the motion capture workflow maintained in separate repositories. The following sections describe the principal stages of the system: synchronized video acquisition, camera calibration, 2D pose estimation, and 3D reconstruction.
 
 
 #figure(
@@ -22,29 +22,29 @@ inaccurate 3D data.
 In FreeMoCap, synchronous recording is handled primarily by `SkellyCam`, a software package to provide high quality synchronous recording methods that enable the use of low-cost hardware - specifically consumer-grade, off-the-shelf webcams. However, these cameras may not be suitable for all research needs (e.g., capturing athletic performance which may necessitate higher frame rate cameras or outdoor recordings, which may require non-USB cameras). The software accommodates these use cases in two ways: 1) Videos collected from a set of external cameras (e.g., GoPros or smartphone cameras) can be synchronized using light and audio-based methods; 2) A pre-synchronized set of videos can be directly imported into the software for processing. We aim to reduce dependency on specific hardware configurations and allow data collection protocols to be adapted to the needs of the study, rather than constrained by the system itself.
 
 === *Camera Calibration*
-In order to reconstruct 3D data from the 2D camera images, it is necessary to determine how
-each camera observes the world and where it is positioned within it. The former describes
-intrinsic parameters (i.e., how each camera maps light onto its image sensor). The latter
-describes extrinsic parameters (i.e., the position and orientation of each camera relative to a common world reference frame). Camera calibration is the process of calculating the intrinsic and extrinsic parameters of a set of cameras, establishing the geometric relationships required to project 2D image features into a shared 3D coordinate system.
-
-Calibration and 3D reconstruction are implemented in FreeMoCap using a modified implementation of the Anipose toolkit @AniposeToolkitRobust2021. The calibration tool is a ChArUco board, a hybrid calibration target consisting of a checkerboard pattern overlaid with uniquely identifiable ArUco markers (Figure 3.2). This board can be printed on standard paper and mounted to a rigid surface, or printed directly onto a rigid board.
+In order to reconstruct 3D data from the 2D camera images, it is necessary to determine how each camera observes the world and where it is positioned within it. The former describes
+intrinsic parameters (i.e., how each camera maps light onto its image sensor). The latter describes extrinsic parameters (i.e., the position and orientation of each camera relative to a common world reference frame). Camera calibration is the process of calculating the intrinsic and extrinsic parameters of a set of cameras and establishing the geometric relationships required to project 2D image features into a shared 3D coordinate system (@fig-calibration-math).
 
 #figure(
-  image("figures/methods/calibration_methods.png", width: 100%),
-  caption: [*A.* A ChArUco board being  detected during a frame of calibration. Each marker on the board (known as an ArUco marker) has a unique ID that can be detected, and subsequently each corner between a pair of markers also has associated IDs. The detected corner IDs are annotated in blue on the image. *B.* Estimation of intrinsics and extrinsics from a calibration board. The world origin is defined as the first corner of the board, and using the known square size the 3D world coordinates of detected points can be found.]
-)
+  image("figures/methods/calibration_math_elife.png", width: 110%),
+  caption: [*A.* Estimation of camera intrinsic and extrinsic parameters using a ChArUco calibration board. Each ArUco marker has a unique identifier, allowing the intervening chessboard corners to be detected and assigned known locations within the board coordinate system. The board origin is defined at the first ChArUco corner, and the 3D coordinates of the remaining corners are determined from the known printed square size. Across multiple views of the board, correspondences between these known 3D corner locations, ($X_i$), and their detected 2D pixel coordinates, ($x_i$), are used to estimate the camera intrinsics, ($K$), and the board-to-camera extrinsics, ($[R|t]$). Together, these form the camera projection matrix ($P=K[R|t]$). *B.* Estimation of each camera's position and orientation, collectively referred to as its pose, within a shared coordinate system. The extrinsic parameters estimated for each camera are first written as homogeneous transformation matrices, $T_i$. Camera 1 is then selected as the reference frame, and the pose of Camera 2 relative to Camera 1 is obtained by composing the two transforms: $T_(2 -> 1) = T_1 T_2^(-1)$. Repeating this process for the remaining cameras establishes the geometric relationships among all cameras in the system.]
+) <fig-calibration-math>
 
-During calibration, the ChArUco board is moved throughout the capture volume while
-ensuring visibility to multiple cameras simultaneously. Varying the board’s position and
-orientation, particularly introducing changes in depth and tilt, improves the robustness
-of intrinsic and extrinsic parameter estimation. The board should be mounted on a rigid
-surface, as flexing of the board can cause errors in parameter estimation. Additionally,
-during calibration, care should be taken to avoid bright lights that may cause glare on the
-board. For this reason we recommend printing on matte (non-glossy) material.
 
-At the start of the recording, the ChArUco board may be placed flat on the ground within
-the shared field of view of all cameras, in what we term ground plane calibration. In this
-configuration, the plane of the board defines the reference coordinate system for reconstruction. Reconstructed 3D data are expressed in a coordinate frame where the ground plane corresponds to $Z=0$ and the orientation of the axes is aligned with the board. This initialization ensures that reconstructed kinematic data are immediately situated within a physically meaningful coordinate system, reducing the need for post hoc alignment or rotation.
+Calibration and 3D reconstruction are implemented in FreeMoCap using a modified implementation of the Anipose toolkit @AniposeToolkitRobust2021. The calibration tool is a ChArUco board, a hybrid calibration target consisting of a checkerboard pattern overlaid with uniquely identifiable ArUco markers. This board can be printed on standard paper and mounted to a rigid surface, or printed directly onto a rigid board. 
+
+During calibration, the ChArUco board is moved throughout the intended capture volume and presented to multiple cameras simultaneously. Each shared observation establishes a geometric relationship between the cameras that can see the board. By moving the board through different regions of the capture space, additional overlapping camera pairs are linked together, forming a connected calibration network (@fig-calibration-method). Consequently, two cameras that never observe the board at the same time can still be related through one or more intermediate cameras. As long as all cameras belong to the same connected network, their poses can be expressed within a common 3D coordinate system.
+
+#figure(
+  image("figures/methods/calibration_methods_elife.png", width: 100%),
+  caption: [*A.* A ChArUco calibration board detected in a single video frame. Each ArUco marker has a unique identifier, allowing the intervening ChArUco corners to be detected and matched across images. The detected corner IDs are shown in blue. *B.* Establishing a shared 3D capture volume. When two or more cameras simultaneously observe the calibration board, their relative poses can be estimated. Moving and rotating the board through the capture space creates additional pairwise calibration links, progressively connecting all cameras into a common 3D reference frame, including camera pairs that do not directly observe the board at the same time.]
+) <fig-calibration-method>
+
+
+
+The board should be observed across a range of positions and orientations. In particular, variation in depth and tilt provides stronger constraints for estimating camera intrinsic and extrinsic parameters than observations confined to a single plane or orientation. The board must remain rigid, as bending or flexing changes the assumed geometry of the calibration target and can introduce parameter-estimation errors. Glare should also be minimized because reflections can obscure markers and corners; we therefore recommend printing the target on matte, non-glossy material.
+
+At the start of a recording, the ChArUco board may be placed flat on the floor within the shared field of view of the cameras, a procedure we refer to as ground-plane calibration. The detected board pose is then used to define the reconstruction coordinate system: the plane of the board is assigned to $Z = 0$, and the coordinate axes are aligned with the board orientation. As a result, reconstructed 3D kinematic data are expressed directly in a physically meaningful, ground-aligned reference frame, reducing the need for post hoc translation or rotation.
 
 === *Pose Estimation*
 
