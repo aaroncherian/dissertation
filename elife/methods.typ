@@ -133,7 +133,15 @@ Marker-based data were tracked, labeled and processed in QTM. Missing trajectori
 
 ==== *Markerless motion capture data*
 
-Synchronized videos were processed using the FreeMoCap pipeline (v1.7.4). 2D body keypoints were detected using MediaPipe @lugaresiMediaPipeFrameworkBuilding2019 (`mediapipe`: v0.10.14),  RTMPose @jiangRTMPoseRealTimeMultiPerson2023 (`rtmposelib`: v0.0.14), and ViTPose @xuViTPoseSimpleVision2022 (implemented using the `easy_ViTPose` Github repository) pose estimation software. Corresponding keypoints were triangulated into 3D space. 3D data were filtered using a zero-lag, fourth-order Butterworth filter with a 6 Hz cutoff frequency.
+_Pose estimation_
+
+Synchronized videos were processed using the FreeMoCap pipeline (v1.7.4). Two-dimensional keypoints were estimated using MediaPipe @lugaresiMediaPipeFrameworkBuilding2019 (mediapipe v0.10.14), RTMPose @jiangRTMPoseRealTimeMultiPerson2023 (rtmlib v0.0.14), and ViTPose @xuViTPoseSimpleVision2022, implemented using the easy_ViTPose repository. RTMPose was run using its WholeBody configuration (mode = `performance`), with RTMDet used for person detection. ViTPose used the ViTPose-H WholeBody model (vitpose-h-wholebody.pth), with YOLOv8 medium (yolov8m.pt) used to detect person bounding boxes in every frame. Both models produced the COCO-WholeBody 133-keypoint topology. MediaPipe was implemented using the Holistic solution with the heavy pose model. MediaPipe Holistic jointly estimated body, hand, and facial landmarks. Although all three backends produced keypoints beyond those required for the present study, only body keypoints were retained for subsequent reconstruction and analysis.
+
+The backends also differed in their temporal processing. RTMPose and ViTPose estimated poses independently in each frame, whereas MediaPipe was run in video mode (static_image_mode = false) with landmark smoothing enabled (smooth_landmarks = true). In the legacy MediaPipe Holistic solution, temporal landmark smoothing is conditional on both settings: it is disabled either when static-image mode is enabled or when landmark smoothing is turned off. Thus, settings that may appear to be minor implementation details can alter the temporal characteristics of the resulting trajectories and, consequently, their validation against a reference system. Complete model and inference configurations for all three pose-estimation backends are therefore reported in #appendixtableref("tracker-config").
+
+_Triangulation_
+
+Corresponding keypoints were triangulated into 3D space. 3D data were filtered using a zero-lag, fourth-order Butterworth filter with a 6 Hz cutoff frequency.
 
 ==== *Data synchronization and alignment*
 

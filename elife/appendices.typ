@@ -74,6 +74,112 @@
   )
 ]
 
+#appendix(title: "Pose estimation backend configurations")[
+All three pose estimation backends were executed within FreeMoCap through the `SkellyTracker` interface. The specific settings for each pose estimation in the `SkellyTracker` interface are detailed below. 
+
+
+  *ViTPose.* 
+  
+  Implemented via the `easy_ViTPose` repository on GitHub - with a wrapper implemented in `SkellyTracker` to handle download of necessary models for ViTPose and YOLOv8 (as the person detector) from HuggingFace.
+
+  ```python
+  HF_VIT_REPO  = "JunkyByte/easy_ViTPose"
+  HF_YOLO_REPO = "ultralytics/YOLOv8"
+
+  confidence_threshold: float = 0.5
+  vit_model:  str      = "huge"    # -> torch/wholebody/vitpose-h-wholebody.pth
+  yolo_model: str      = "medium"  # -> yolov8m.pt
+  yolo_size:  int      = 640       
+  yolo_step:  int      = 1         
+  device:     str|None = None       
+  ```
+
+  *RTMPose.* 
+  
+  Implemented via `rtmlib` v0.0.14, using the Wholebody model
+  (COCO-WholeBody 133).
+
+  ```python
+  # rtmlib v0.0.14 — Wholebody (COCO-WholeBody 133)
+  class RTMPoseDetectorConfig(BaseDetectorConfig):
+      mode: str    = "performance"
+      backend: str = "onnxruntime"
+      device: str  = "cuda"
+  ```
+
+  *MediaPipe.* 
+  
+  Using MediaPipe Holistic from v0.10.14. This is the legacy Holistic
+  solution, deprecated by Google in favor of the Tasks API; we remained on the
+  legacy version because Holistic's integrated single-pass body + face + hand
+  topology is the basis of the FreeMoCap processing pipeline and is what these data
+  were processed with.
+
+  ```python
+  # MediaPipe Holistic v0.10.14 (legacy solution)
+  MEDIAPIPE_TRACKER_POSTHOC_PRESET = MediapipeDetectorConfig(
+      model_complexity=MediapipeModelComplexity.HEAVY,  # = 2
+      min_detection_confidence=0.5,
+      min_tracking_confidence=0.5,
+      static_image_mode=False,
+      smooth_landmarks=True,        
+      enable_segmentation=True,     
+      smooth_segmentation=True,
+      refine_face_landmarks=True,  
+  )
+  ```
+    One main setting warrants emphasis. The MediaPipe configuration is the only one applying temporal smoothing: with `smooth_landmarks = True`, MediaPipe Holistic applies a One Euro filter to the output landmarks, whereas RTMPose and ViTPose were run per-frame with no temporal filtering. The One Euro parameters are internal to the MediaPipe graph; setting either `static_image_mode = True`or `smooth_landmarks = False` disables the filter. These configurations are summarized in the table below.
+
+
+  #appendix-table(
+    key: "tracker-config",
+    caption: [Pose-estimation backend configurations. Detectors, keypoint formats, temporal processing; these differences bear on the agreement and signal-quality results reported in the main text.],
+  )[
+    #table(
+      columns: (1.15fr, 1fr, 1fr, 1fr),
+      align: (left, left, left, left),
+      stroke: none,
+      table.hline(),
+      table.header(
+        [], [*MediaPipe*], [*RTMPose*], [*ViTPose*],
+      ),
+      table.hline(stroke: 0.5pt),
+
+      [Library / version],
+        [MediaPipe Holistic v0.10.14 (legacy)],
+        [rtmlib v0.0.14],
+        [easy_ViTPose (HuggingFace)],
+
+      [Person detector],
+        [Internal (MediaPipe)],
+        [RTMDet (bundled in rtmlib)],
+        [YOLOv8m (`yolov8m.pt`)],
+
+      [Pose model / checkpoint],
+        [Holistic, complexity HEAVY (= 2)],
+        [Wholebody, `mode = "performance"`],
+        [ViTPose-H, `vitpose-h-wholebody.pth`],
+
+      [Native keypoint set],
+        [33 pose + 468 face + 21$times$2 hand],
+        [COCO-WholeBody (133)],
+        [COCO-WholeBody (133)],
+
+      [Temporal processing],
+        [One Euro filter (via `smooth_landmarks`)],
+        [none (per-frame)],
+        [none (per-frame)],
+
+      [Compute backend],
+        [TensorFlow Lite (internal)],
+        [ONNX Runtime],
+        [PyTorch],
+      table.hline(),
+    )
+  ]
+]
+
+
 
 #appendix(title: "Mathematics of reconstruction")[
   Derivation of the triangulation and reprojection geometry. The camera
@@ -95,3 +201,5 @@
     #placeholder(h: 6cm, label: "Appendix 2—figure 1")
   ]
 ]
+
+
