@@ -152,6 +152,7 @@ Outlier rejection was enabled only for recordings whose default reconstruction c
 When enabled for a recording, the same procedure was applied to MediaPipe, RTMPose, and ViTPose reconstructions. In these cases, the procedure recovered usable reconstructions that would otherwise have required exclusion while preserving valid observations from the affected camera views.
 
 Following reconstruction, gaps in the 3D trajectories were interpolated, and the trajectories were low-pass filtered using a zero-phase, fourth-order Butterworth filter with a cutoff frequency of 6 Hz.
+
 ==== *Data synchronization and alignment*
 
 Joint center trajectories from marker-based and markerless systems were temporally aligned using recorded Unix timestamps from both systems, which were generated on the same acquisition computer. Marker-based data were resampled to match the markerless sampling rate (30 Hz). Residual temporal offsets were further refined using cross-correlation of joint trajectories, followed by manual inspection. 
@@ -161,7 +162,6 @@ Markerless data were spatially aligned to the marker-based reference frame using
 To identify a transformation that was consistent over the full recording, candidate transformations were estimated from randomly sampled subsets of frames  and evaluated across the entire dataset. The transformation that minimized the global joint center error across all frames was selected for each trial.
 
 === *Data Analysis: Gait*
-
 ==== *Joint angles*
 
 Joint angles were calculated as the Cardan XYZ decomposition of the relative rotation between adjacent segments. Sagittal-plane lower-body kinematics were extracted and analyzed across gait cycle-normalized strides. Joint angles were offset-corrected by subtracting the mean angle measured during the neutral A-pose stance at the start of each trial.
@@ -188,7 +188,7 @@ Spatiotemporal parameters were calculated for each system using their respective
 
 Statistical analyses were performed using Python `v3.11`. Root mean squared error (RMSE) was calculated across all gait cycle-normalized joint center trajectories and joint angles. Per-trial RMSE was obtained by averaging across strides within a trial, and mean ± SD were then computed across all trials.
 
-To identify regions of significant difference between the marker-based reference and each pose estimation backend, statistical parametric mapping (SPM) two-tailed t-tests were performed on gait cycle-normalized joint angles using the `spm1d` package. SPM extends hypothesis testing to an entire timeseries, identifying continuous regions where differences exceed a critical threshold. SPM{t} statistics were computed across the gait cycle, and statistical significance was assessed at $alpha = 0.05$. 
+To identify regions of significant difference between the marker-based reference and each pose estimation backend, statistical parametric mapping (SPM) two-tailed paired t-tests were performed on gait cycle-normalized joint angles using the `spm1d` package. SPM extends hypothesis testing to an entire timeseries, identifying continuous regions where differences exceed a critical threshold. SPM{t} statistics were computed across the gait cycle, and statistical significance was assessed at $alpha = 0.05$. 
 
 For each gait parameter, Bland-Altman plots with bias and 95% limits of agreement (LOA) were created @blandStatisticalMethodsAssessing1986. Intraclass correlation coefficients (ICC(2,1)) were calculated using the `pingouin` package to assess agreement @shroutIntraclassCorrelationsUses1979. ICC values under 0.5 were interpreted as poor agreement, 0.5-0.75 interpreted as moderate agreement, 0.75-0.90 as good agreement, and greater than 0.90 as excellent agreement @kooGuidelineSelectingReporting2016. Bland-Altman and ICC values were calculated across all speeds as well as per walking speed.
 
