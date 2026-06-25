@@ -7,7 +7,7 @@
       stroke: none,
       table.hline(stroke: 1pt),
       table.header(
-        [*Metric*], [*Tracker*], [*Bias*], [*Lower LoA*], [*Upper LoA*], [*ICC (95% CI)*],
+        [*Metric*], [*Backend*], [*Bias*], [*Lower LoA*], [*Upper LoA*], [*ICC (95% CI)*],
       ),
       table.hline(stroke: 0.5pt),
       [Stride Length (mm)], [MediaPipe], [-0.29], [-68.98], [+68.41], [0.993 (0.990, 0.990)],
