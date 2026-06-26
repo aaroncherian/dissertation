@@ -179,27 +179,3 @@ All three pose estimation backends were executed within FreeMoCap through the `S
   ]
 ]
 
-
-
-#appendix(title: "Mathematics of reconstruction")[
-  Derivation of the triangulation and reprojection geometry. The camera
-  geometry is shown in #appendixfigref("triangulation").
-
-  #appendix-figure(key: "triangulation", caption: [Multi-camera triangulation geometry.])[
-    #placeholder(h: 6cm, label: "Appendix 1—figure 1")
-  ]
-
-  #appendix-figure(caption: [Reprojection error vs. calibration quality.])[
-    #placeholder(h: 6cm, label: "Appendix 1—figure 2")
-  ]
-]
-
-#appendix(title: "Practical considerations")[
-  Notes on capture setup and failure modes.
-
-  #appendix-figure(caption: [Recommended camera placement.])[
-    #placeholder(h: 6cm, label: "Appendix 2—figure 1")
-  ]
-]
-
-
