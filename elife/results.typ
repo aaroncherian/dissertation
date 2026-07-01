@@ -33,8 +33,7 @@ SPM paired t-tests ($ alpha = 0.05$) revealed common suprathreshold clusters dur
  <fig-joint-ang-spm>
 
 
-
-Sagittal-plane joint angle RMSE was below 5° for 41 of the 45 joint, backend, and walking-speed combinations, with values exceeding 5° limited to MediaPipe and ViTPose at the highest walking speeds (@tbl-joint-angle-rmse). Hip error remained relatively stable across speeds, whereas knee and ankle error generally increased with walking speed. ViTPose produced the lowest hip and knee RMSE across all speeds but the highest ankle RMSE, while RTMPose consistently produced the lowest ankle RMSE.
+Sagittal-plane joint angle RMSE remained below 5° for most conditions, with the primary exception of ViTPose-derived ankle angles at higher walking speeds (@tbl-joint-angle-rmse). These errors increased with speed at the knee and ankle, while hip angle error remained relatively stable. ViTPose produced the lowest hip and knee errors overall but showed a consistent plantarflexion offset at the ankle, whereas RTMPose produced the most accurate ankle angles.
 
 #include "tables/gait/joint_angle_rmse_table.typ"
 
