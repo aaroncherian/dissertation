@@ -22,6 +22,8 @@ Participants completed two treadmill walking trials in which walking speed was p
   caption: [Example of markerless motion capture data using each pose estimation backend. *Left*: MediaPipe (blue); *Middle*: RTMPose (orange); *Right*: ViTPose (green). The marker-based reference skeleton is displayed in black on each panel.]
 ) <fig-gait-reconstruction>
 
+[*PLACEHOLDER: Video of multiple skeletons walking, maybe with the joint angles and gait events overlaid*]
+
 == Gait: Joint kinematics error 
 Sagittal-plane lower-body joint kinematics were calculated from gait cycle-normalized strides for each pose estimation backend and walking speed. Regions of significant difference between the markerless and marker-based joint angle trajectories were identified using statistical parametric mapping (SPM) two-tailed t-tests and are shown in @fig-joint-ang-spm. We also quantified joint angle error across joints, pose estimation backends, and walking speed using RMSE. 
 
@@ -101,17 +103,20 @@ We next evaluated whether the same markerless reconstructions captured differenc
     Center-of-mass trajectories in the horizontal plane for a representative trial across the four CTSIB-M conditions. Rows show trajectories derived from the marker-based reference and each pose estimation backend; columns show the eyes open/solid, eyes closed/solid, eyes open/foam, and eyes closed/foam conditions. Dashed lines indicate the 95% confidence ellipse for each trajectory. Although the overall spatial extent of sway was broadly similar across systems, RTMPose and ViTPose-derived trajectories exhibited greater frame-to-frame variability than the reference and MediaPipe-derived trajectories. AP = anteroposterior; ML = mediolateral; EO = eyes open; EC = eyes closed.
     ]) <fig-xy-plane>
 
+[*PLACEHOLDER: Video of skeletons doing balance assessment - maybe 1 per tracker? hard to fit all 4 onto one video*]
+
 == Balance: Comparing postural stability 
 
 Mean posturographic metrics and individual trial values for each balance condition and 3D dataset are shown in @fig-posturography. Exact values are provided in #appendixtableref("balance-metrics").
 
 Although 95% confidence ellipse area was comparable across pose-estimation backends and the marker-based reference, only MediaPipe-derived COM path length and mean horizontal velocity closely matched the reference and preserved the expected separation across progressively more challenging balance conditions. In contrast, RTMPose- and ViTPose-derived path length and velocity overestimated the reference and did not clearly differentiate among conditions.
 
-
 #figure(
   image("figures/balance/balance_sway_metrics.svg", width: 100%),
   caption:
   [Center-of-mass balance metrics across CTSIB-M conditions for the marker-based reference and each pose-estimation backend. Rows show path length, 95% confidence ellipse area, and mean horizontal COM velocity; columns show the reference, MediaPipe, RTMPose, and ViTPose-derived results. Gray lines represent individual trials, and colored lines with error bars represent the group mean and variability. MediaPipe-derived path length and mean horizontal velocity closely followed the reference and preserved the progressive separation among balance conditions, whereas RTMPose and ViTPose produced elevated estimates with less distinct condition separation. Ellipse area was comparatively similar across systems.]) <fig-posturography>
+
+[*PLACEHOLDER: Potentially the video comparison of pose estimation software on quiet standing to show how shaky rtmpose/vitpose are*]
 
 == Balance: Agreement and sensitivity of MediaPipe-derived 3D data
 We further examined the validity of MediaPipe-derived COM path length by evaluating two complementary properties: agreement, defined as the correspondence between absolute path-length values from the two systems, and sensitivity, defined as the ability to reproduce the change in path length associated with three sensory perturbations. These comprised removal of visual information (Eyes Closed/Solid Ground minus Eyes Open/Solid Ground), altered proprioceptive information (Eyes Open/Foam minus Eyes Open/Solid Ground), and combined visual and proprioceptive perturbation (Eyes Closed/Foam minus Eyes Open/Solid Ground) (@fig-sensitivity-and-agreement).
@@ -151,17 +156,4 @@ To evaluate global differences in reconstructed body size, we examined the unifo
   in reconstructed size.],)
  <fig-scaling>
 
-
-// Auto-detects parent = Figure 1 and self-numbers, even though this file is
-// separate from paper.typ.
-// #figsupp(
-//   short: [Per-backend RMSE broken out by joint and task.],
-//   caption: [Per-backend RMSE by joint and task, disaggregated.],
-//   data: ([Per-joint RMSE values underlying this panel (CSV).],),
-// )[
-//   #placeholder(h: 6cm, label: "Figure 1—figure supplement 1")
-// ]
-
-// #figdata[Reconstructed keypoint and marker trajectories (CSV).]
-
-// #tabledata[Trial-level values underlying Table 1 (CSV).]
+[*PLACEHOLDER: Maybe a video of all 3 fmc skeletons in their original alignment conditions? makes it very obvious where ViTPose is scaled larger*]

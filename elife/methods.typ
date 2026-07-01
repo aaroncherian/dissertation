@@ -10,7 +10,7 @@ FreeMoCap is organized as a polyrepo, with major components of the motion captur
 
 #figure(
   image("figures/methods/freemocap_pipeline.png", width: 110%),
-  caption: [PLACEHOLDER]
+  caption: [*PLACEHOLDER* - Figure needs adjustment, get rid of puzzle pieces, find a suitable icon for pose estimation, and maybe reference the repos? Also replace the text with something more scientific/educational and less tech/advertisement-esque]
 ) <fig-fmc-pipeline>
 
 === *Synchronized Video Acquisition*
@@ -40,14 +40,13 @@ During calibration, the ChArUco board is moved throughout the intended capture v
   caption: [*A.* A ChArUco calibration board detected in a single video frame. Each ArUco marker has a unique identifier, allowing the intervening ChArUco corners to be detected and matched across images. The detected corner IDs are shown in blue. *B.* Establishing a shared 3D capture volume. When two or more cameras simultaneously observe the calibration board, their relative poses can be estimated. Moving and rotating the board through the capture space creates additional pairwise calibration links, progressively connecting all cameras into a common 3D reference frame, including camera pairs that do not directly observe the board at the same time.]
 ) <fig-calibration-method>
 
-
+[*PLACEHOLDER: Maybe link a video of an example calibration here from the data collection?*]
 
 The board should be observed across a range of positions and orientations. In particular, variation in depth and tilt provides stronger constraints for estimating camera intrinsic and extrinsic parameters than observations confined to a single plane or orientation. The board must remain rigid, as bending or flexing changes the assumed geometry of the calibration target and can introduce parameter-estimation errors. Glare should also be minimized because reflections can obscure markers and corners; we therefore recommend printing the target on matte, non-glossy material.
 
 At the start of a recording, the ChArUco board may be placed flat on the floor within the shared field of view of the cameras, a procedure we refer to as ground-plane calibration. The detected board pose is then used to define the reconstruction coordinate system: the plane of the board is assigned to $Z = 0$, and the coordinate axes are aligned with the board orientation. As a result, reconstructed 3D kinematic data are expressed directly in a physically meaningful, ground-aligned reference frame, reducing the need for post hoc translation or rotation.
 
 === *Pose Estimation*
-
 
 Pose estimation converts each camera's video frames into 2D anatomical keypoints for subsequent 3D reconstruction (@fig-pose-examples). The default FreeMoCap pipeline uses MediaPipe @lugaresiMediaPipeFrameworkBuilding2019, a free and open-source framework incorporating the BlazePose convolutional neural network @bazarevskyBlazePoseOndeviceRealtime2020. MediaPipe was selected as the default backend primarily for its accessibility: it is straightforward to install and use through Python, is computationally lightweight, and can run without a dedicated GPU. These characteristics allow the complete FreeMoCap pipeline to operate on a broad range of consumer hardware.
 
