@@ -1,3 +1,4 @@
 = Introduction
 
-#include "introduction/paper_intro.typ"
+#include "introduction/introduction.typ"
+#include "introduction/introduction_b.typ"
