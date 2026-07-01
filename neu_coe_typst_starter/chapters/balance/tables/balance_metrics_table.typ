@@ -1,15 +1,18 @@
-#figure(
+#let balance-metrics = {
+  set text(size: 9pt)
   table(
     columns: (auto, auto, auto, auto, auto),
     align: (left, left, center, center, center),
     stroke: none,
-
     table.hline(stroke: 1pt),
     table.header(
-      [*Condition*], [*Backend*], [*Path Length* \ (mm)], [*Ellipse Area* \ (mm#super[2])], [*Mean Velocity* \ (mm/s)],
+      [*Condition*],
+      [*Backend*],
+      [*Path Length* \ (mm)],
+      [*Ellipse Area* \ (mm#super[2])],
+      [*Mean Velocity* \ (mm/s)],
     ),
     table.hline(stroke: 0.5pt),
-
     [EO / Solid], [Reference], [201.1 $plus.minus$ 38.7], [256.8 $plus.minus$ 111.7], [3.63 $plus.minus$ 0.75],
     [], [MediaPipe], [228.9 $plus.minus$ 39.3], [242.4 $plus.minus$ 111.1], [3.54 $plus.minus$ 0.73],
     [], [RTMPose], [1299.2 $plus.minus$ 383.0], [274.4 $plus.minus$ 118.5], [19.52 $plus.minus$ 8.09],
@@ -30,6 +33,5 @@
     [], [RTMPose], [1673.8 $plus.minus$ 428.3], [897.2 $plus.minus$ 380.2], [26.14 $plus.minus$ 7.46],
     [], [ViTPose], [1250.1 $plus.minus$ 300.7], [858.7 $plus.minus$ 373.0], [20.54 $plus.minus$ 5.30],
     table.hline(stroke: 1pt),
-  ),
-  caption: [Center-of-mass postural sway metrics (path length, 95% prediction ellipse area, and 2D mean velocity in the horizontal plane) across balance conditions for each tracker. Values are reported as group mean $plus.minus$ SD. EO = eyes open, EC = eyes closed. ],) <tbl-postural-metrics>
-
+  )
+}

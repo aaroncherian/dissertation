@@ -1,8 +1,3 @@
-// Table body only — #appendix-table supplies figure/caption/label.
-// Full caption:
-// Summary of COM path length sensitivity metrics across FreeMoCap pose
-// estimation backends. Each cell reports the regression slope and coefficient
-// of determination (r^2) for the condition contrast relative to Qualisys.
 #let path-length-sensitivity = {
   set text(size: 9pt)
   table(

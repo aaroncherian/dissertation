@@ -1,7 +1,3 @@
-// Table body only — #appendix-table supplies figure/caption/label.
-// Full caption:
-// Summary of COM path length agreement metrics across FreeMoCap pose estimation
-// backends compared to Qualisys.
 #let path-length-agreement = {
   set text(size: 9pt)
   table(
@@ -18,19 +14,19 @@
     ),
     table.hline(stroke: 0.5pt),
     [MediaPipe],
-    [0.985 (0.970-0.990)],
+    [0.985 (0.970, 0.990)],
     [1.25],
     [(-64.63, 67.13)],
     [0.90],
     table.hline(stroke: 0.5pt),
     [ViTPose],
-    [0.083 (-0.060-0.290)],
+    [0.083 (-0.060, 0.290)],
     [726.19],
     [(97.82, 1354.56)],
     [0.71],
     table.hline(stroke: 0.5pt),
     [RTMPose],
-    [0.057 (-0.040-0.220)],
+    [0.057 (-0.040, 0.220)],
     [1052.02],
     [(257.06, 1846.98)],
     [0.97],
