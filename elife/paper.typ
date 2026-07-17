@@ -20,14 +20,7 @@
   ),
   corresponding-email: "aaron@freemocap.org",
   abstract: [
-    Markerless motion capture from consumer cameras promises to broaden access
-    to quantitative movement analysis, but its accuracy depends on choices that
-    are rarely evaluated head-to-head. We present FreeMoCap as an extensible
-    benchmarking framework and compare three pose-estimation backends
-    (MediaPipe, RTMPose, ViTPose) against a marker-based reference (Qualisys)
-    across treadmill gait and clinical balance paradigms. Backend choice
-    interacts with task type. Framing the system as a forward-facing benchmark
-    rather than a single validation makes these trade-offs explicit.
+
   ],
 )
 

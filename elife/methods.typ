@@ -10,7 +10,7 @@ FreeMoCap is organized as a polyrepo, with major components of the motion captur
 
 #figure(
   image("figures/methods/freemocap_pipeline.png", width: 110%),
-  caption: [*PLACEHOLDER* - Figure needs adjustment, get rid of puzzle pieces, find a suitable icon for pose estimation, and maybe reference the repos? Also replace the text with something more scientific/educational and less tech/advertisement-esque]
+  caption: [*PLACEHOLDER* - Figure needs adjustment. Maybe add some text to it? seems a bit empty. ]
 ) <fig-fmc-pipeline>
 
 === *Synchronized Video Acquisition*
