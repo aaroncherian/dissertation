@@ -15,11 +15,11 @@ Participants completed both a gait and balance assessment while being simultaneo
 ) <fig-overview>
 
 == Reconstructing dynamic motion with gait
-Participants completed two treadmill walking trials in which walking speed was progressively increased (from 0.5 to 2.5 m/s at 0.5 m/s increments), with simultaneous recording by the markerless and marker-based motion capture systems. Representative 3D reconstructions from each pose estimation backend are shown alongside the marker-based reference in @fig-gait-reconstruction.
+Participants completed two treadmill walking trials in which walking speed was progressively increased (from 0.5 to 2.5 m/s at 0.5 m/s increments), while simultaneously recorded by the markerless and marker-based motion capture systems. Representative 3D reconstructions from each pose estimation backend are shown alongside joint centers calculated from the marker-based reference in @fig-gait-reconstruction.
 
 #figure(
   image("figures/gait/example_gait.png", width: 100%),
-  caption: [Example of markerless motion capture data using each pose estimation backend. *Left*: MediaPipe (blue); *Middle*: RTMPose (orange); *Right*: ViTPose (green). The marker-based reference skeleton is displayed in black on each panel.]
+  caption: [Example of markerless motion capture data using each pose estimation backend. *Left*: MediaPipe (blue); *Middle*: RTMPose (orange); *Right*: ViTPose (green). Joint centers calculated from the marker-based reference skeleton are displayed in black on each panel.]
 ) <fig-gait-reconstruction>
 
 [*PLACEHOLDER: Video of multiple skeletons walking, maybe with the joint angles and gait events overlaid*]
