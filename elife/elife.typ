@@ -185,6 +185,35 @@
   }
 }
 
+// FIGURE VIDEO — place right after its parent figure.
+//   #figvideo(key: "gait-walk",                         // optional, for #videoref
+//             short: [one-line pointer for main text],  // optional
+//             file: "Figure2-video1.mp4",               // optional, shown in legend
+//             caption: [full legend used at the end])
+// The video file itself is NOT embedded: upload it separately as "Rich Media".
+#let figvideo(key: none, short: none, file: none, caption: []) = context {
+  let parent = counter(figure.where(kind: image)).get().first()
+  let n = query(selector(<efv>).before(here(), inclusive: false)).filter(m => m.value.parent == parent).len() + 1
+  [#metadata((parent: parent, n: n, key: key, caption: caption, file: file))<efv>]
+  if short != none {
+    block(width: 100%, above: 0.5em, below: 0.5em)[
+      #set text(size: 9.5pt)
+      #strong[Figure #parent#sym.dash.em#"video"~#n.]~#short
+    ]
+  }
+}
+
+// Reference a figure video by its `key`:  #videoref("gait-walk")
+#let videoref(key) = context {
+  let hits = query(<efv>).filter(m => m.value.at("key", default: none) == key)
+  if hits.len() > 0 {
+    let v = hits.first().value
+    [Figure #(v.parent)#sym.dash.em#"video"~#(v.n)]
+  } else {
+    text(fill: red)[#("[?videoref: " + key + "?]")]
+  }
+}
+
 // FIGURE source data / source code — place right after the parent figure.
 #let figdata(body) = context {
   let parent = counter(figure.where(kind: image)).get().first()
@@ -217,18 +246,19 @@
 
 #let supplementary-material(title: "Figure supplements, source data and source code") = context {
   let supps = query(<efs>).map(m => m.value)
+  let vids = query(<efv>).map(m => m.value)
   let fdata = query(<efd>).map(m => m.value)
   let fcode = query(<efsc>).map(m => m.value)
   let tdata = query(<etd>).map(m => m.value)
   let tcode = query(<etsc>).map(m => m.value)
-  let total = supps.len() + fdata.len() + fcode.len() + tdata.len() + tcode.len()
+  let total = supps.len() + vids.len() + fdata.len() + fcode.len() + tdata.len() + tcode.len()
 
   if total > 0 {
     heading(level: 1)[#title]
 
     // ---- grouped by parent FIGURE ----
     let fparents = ()
-    for e in (supps + fdata + fcode) { if e.parent not in fparents { fparents.push(e.parent) } }
+    for e in (supps + vids + fdata + fcode) { if e.parent not in fparents { fparents.push(e.parent) } }
     for p in fparents.sorted() {
       for e in supps.filter(x => x.parent == p).sorted(key: x => x.n) {
         figure(
@@ -242,6 +272,12 @@
           _srcline([Figure #p#sym.dash.em#"figure supplement"~#(e.n)#sym.dash.em#"source code"~#(i + 1)], c)
         }
         v(0.6em)
+      }
+      for e in vids.filter(x => x.parent == p).sorted(key: x => x.n) {
+        _srcline(
+          [Figure #p#sym.dash.em#"video"~#(e.n)],
+          if e.file != none [#e.caption #emph[File: #e.file]] else { e.caption },
+        )
       }
       for e in fdata.filter(x => x.parent == p).sorted(key: x => x.n) {
         _srcline([Figure #p#sym.dash.em#"source data"~#(e.n)], e.body)

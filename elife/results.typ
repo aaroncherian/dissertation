@@ -22,7 +22,15 @@ Participants completed two treadmill walking trials in which walking speed was p
   caption: [Example of markerless motion capture data using each pose estimation backend. *Left*: MediaPipe (blue); *Middle*: RTMPose (orange); *Right*: ViTPose (green). Joint centers calculated from the marker-based reference skeleton are displayed in black on each panel.]
 ) <fig-gait-reconstruction>
 
-[*PLACEHOLDER: Video of multiple skeletons walking, maybe with the joint angles and gait events overlaid*]
+#figvideo(
+  key: "gait-walk",
+  file: "Figure2-video1.mp4",
+  short: [Reconstructed gait from each pose estimation backend alongside the marker-based reference.],
+  caption: [Reconstructed gait from each pose estimation backend alongside the marker-based reference. Markerless reconstructions from MediaPipe (blue), RTMPose (orange), and ViTPose (green) are alongside joint centers calculated from maker-based data (black) for a representative trial at 2.5 m/s speed.],
+)
+
+
+
 
 == Gait: Joint kinematics error 
 Sagittal-plane lower-body joint kinematics were calculated from gait cycle-normalized strides for each pose estimation backend and walking speed. Regions of significant difference between the markerless and marker-based joint angle trajectories were identified using statistical parametric mapping (SPM) two-tailed t-tests and are shown in @fig-joint-ang-spm. We also quantified joint angle error across joints, pose estimation backends, and walking speed using RMSE. 
@@ -130,7 +138,7 @@ MediaPipe-derived path length demonstrated excellent agreement with the referenc
 
 MediaPipe also reproduced the condition-induced changes in COM path length. Across sensory perturbations, changes derived from MediaPipe were strongly associated with changes in the reference (r#super[2] = 0.83-0.96), and regression slopes were close to the ideal value of one (0.89-1.06). This indicates that MediaPipe captured not only absolute differences among participants and trials, but also the magnitude of the postural response to altered visual and surface conditions. A slight underestimation was observed for the visual perturbation. In contrast, changes derived from ViTPose and RTMPose showed weak correspondence with the reference (r#super[2] = 0.01–0.33), with slopes ranging from −5.48 to 1.45. Sensitivity statistics for all backends are provided in #appendixtableref("pl-sensitivity"), and the corresponding RTMPose and ViTPose identity plots are shown in #appendixfigref("sensitivity-all").
 
-COM velocity distributions provides an additional view of backend-specific measurement behavior (#suppref("com-velocity")). MediaPipe and the marker-based reference showed similar mediolateral and anteroposterior velocity distributions, although the MediaPipe distributions had consistently longer tails. Differences were larger in the vertical direction during solid-ground conditions. Because little true vertical COM movement is expected while standing on a firm surface, variability in vertical velocity provides an indication of measurement noise. In the eyes-open, solid-ground condition, the across-trial standard deviation was 0.90 ± 0.26 mm/s for the reference, 2.40 ± 0.42 mm/s for MediaPipe, 9.60 ± 1.94 mm/s for ViTPose, and 14.25 ± 1.99 mm/s for RTMPose.
+COM velocity distributions provides an additional view of backend-specific measurement behavior (#suppref("com-velocity")). MediaPipe and the marker-based reference showed similar mediolateral and anteroposterior velocity distributions, although the MediaPipe distributions had consistently longer tails. Differences were larger in the vertical direction during solid-ground conditions. Because little true vertical COM movement is expected while standing on a firm surface, variability in vertical velocity provides an indication of measurement noise. In the Eyes Open/Solid Ground condition, the across-trial standard deviation was 0.90 ± 0.26 mm/s for the reference, 2.40 ± 0.42 mm/s for MediaPipe, 9.60 ± 1.94 mm/s for ViTPose, and 14.25 ± 1.99 mm/s for RTMPose.
 
 #figsupp(
   key: "com-velocity",
