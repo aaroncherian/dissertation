@@ -53,7 +53,11 @@ This work was supported by [funder / grant number].
 All data underlying the figures are available at [repository + DOI].
 
 = Code availability
-FreeMoCap is open source at https://github.com/freemocap.
+FreeMoCap is open-source and freely available at https://github.com/freemocap.
+
+The pipelines used for validation processes and to make all figures are available at https://github.com/freemocap/validation
+
+The video annotation and center-of-mass path length calculation code used for balance analyses is available at https://github.com/aaroncherian/nih_balance_analyses
 
 // ---- references, collected supplements, appendices -------------------------
 #bibliography("references.bib", style: "harvard-cite-them-right", title: "References")

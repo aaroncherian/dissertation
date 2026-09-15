@@ -3,14 +3,14 @@
 = Materials and Methods
 
 == FreeMoCap Software
-FreeMoCap @queenFreeMoCapFreeOpen2024 is a fully open-source markerless motion capture framework designed to maximize accessibility across the entire workflow. It operates with consumer-grade webcams, requires neither physical markers nor a specialized recording environment, and supports the full process from synchronized video acquisition to 3D kinematic reconstruction (@fig-fmc-pipeline). Its modular, tracker-agnostic architecture allows different pose estimation backends to be incorporated according to the needs of a given application.
+FreeMoCap @matthisFreeMoCapFreeOpen2026 is a fully open-source markerless motion capture framework designed to maximize accessibility across the entire workflow. It operates with consumer-grade cameras, such as USB webcams, requires neither physical markers nor a specialized recording environment, and supports the full process from synchronized video acquisition to 3D kinematic reconstruction (@fig-fmc-pipeline). Its modular, tracker-agnostic architecture allows different pose estimation backends to be incorporated according to the needs of a given application.
 
 FreeMoCap is organized as a polyrepo, with major components of the motion capture workflow maintained in separate repositories. The following sections describe the principal stages of the system: synchronized video acquisition, camera calibration, 2D pose estimation, and 3D reconstruction.
 
 
 #figure(
-  image("figures/methods/freemocap_pipeline.png", width: 110%),
-  caption: [*PLACEHOLDER* - Figure needs adjustment. Maybe add some text to it? seems a bit empty. ]
+  image("figures/methods/freemocap_pipeline.png", width: 100%),
+  caption: [Overview of the FreeMoCap polyrepo architecture. Synchronized video is acquired through SkellyCam and passed to separate calibration and pose-estimation stages. SkellyForge estimates per-camera intrinsic and extrinsic parameters, while SkellyTracker produces 2D keypoint coordinates using interchangeable pose-estimation backends. These outputs are combined in SkellyForge for 3D reconstruction, producing motion trajectories that can then be used for downstream analysis or exported for animation workflows such as Blender. The modular organization allows individual components of the pipeline to be updated or exchanged while preserving a common end-to-end workflow. ]
 ) <fig-fmc-pipeline>
 
 === *Synchronized Video Acquisition*
@@ -19,7 +19,7 @@ streams. For accurate 3D reconstruction, each set of frames must correspond to t
 moment in time. Without proper synchronization, time lags between cameras can result in
 inaccurate 3D data.
 
-In FreeMoCap, synchronous recording is handled primarily by `SkellyCam`, a software package to provide high quality synchronous recording methods that enable the use of low-cost hardware - specifically consumer-grade, off-the-shelf webcams. However, these cameras may not be suitable for all research needs (e.g., capturing athletic performance which may necessitate higher frame rate cameras or outdoor recordings, which may require non-USB cameras). The software accommodates these use cases in two ways: 1) Videos collected from a set of external cameras (e.g., GoPros or smartphone cameras) can be synchronized within the main software using light and audio-based synchronization methods; 2) A pre-synchronized set of videos can be directly imported into the software for processing. We aim to reduce dependency on specific hardware configurations and allow data collection protocols to be adapted to the needs of the study, rather than constrained by the system itself. 
+In FreeMoCap, synchronous recording is handled primarily by `SkellyCam`, a software package to provide high quality synchronous recording methods that enable the use of low-cost cameras. However, such cameras may not be suitable for all research needs (e.g., capturing athletic performance which may necessitate higher frame rate cameras recording outdoors). The software accommodates these use cases in two ways: 1) Videos collected from a set of external cameras (e.g., GoPros or smartphone cameras) can be synchronized within the main software using light and audio-based synchronization methods; 2) A pre-synchronized set of videos can be directly imported into the software for processing. We aim to reduce dependency on specific hardware configurations and allow data collection protocols to be adapted to the needs of the study, rather than constrained by the system itself. 
 
 === *Camera Calibration*
 In order to reconstruct 3D data from the 2D camera images, it is necessary to determine how each camera observes the world and where it is positioned within it. The former describes
@@ -27,11 +27,11 @@ intrinsic parameters (i.e., how each camera maps light onto its image sensor). T
 
 #figure(
   image("figures/methods/calibration_math_elife.png", width: 110%),
-  caption: [*A.* Estimation of camera intrinsic and extrinsic parameters using a ChArUco calibration board. Each ArUco marker has a unique identifier, allowing the intervening chessboard corners to be detected and assigned known locations within the board coordinate system. The board origin is defined at the first ChArUco corner, and the 3D coordinates of the remaining corners are determined from the known printed square size. Across multiple views of the board, correspondences between these known 3D corner locations, ($X_i$), and their detected 2D pixel coordinates, ($x_i$), are used to estimate the camera intrinsics, ($K$), and the board-to-camera extrinsics, ($[R|t]$). Together, these form the camera projection matrix ($P=K[R|t]$). *B.* Estimation of each camera's position and orientation, collectively referred to as its pose, within a shared coordinate system. The extrinsic parameters estimated for each camera are first written as homogeneous transformation matrices, $T_i$. Camera 1 is then selected as the reference frame, and the pose of Camera 2 relative to Camera 1 is obtained by composing the two transforms: $T_(2 -> 1) = T_1 T_2^(-1)$. Repeating this process for the remaining cameras establishes the geometric relationships among all cameras in the system.]
+  caption: [*A.* Estimation of camera intrinsic and extrinsic parameters using a ChArUco calibration board. Each ArUco marker on the board has a unique identifier, allowing the intervening chessboard corners to be detected and assigned known locations within the board coordinate system. The board origin is defined at the first ChArUco corner, and the 3D coordinates of the remaining corners are determined from the known printed square size. Across multiple views of the board, correspondences between these known 3D corner locations, ($X_i$), and their detected 2D pixel coordinates, ($x_i$), are used to estimate the camera intrinsics, ($K$), and the board-to-camera extrinsics, ($[R|t]$). Together, these form the camera projection matrix ($P=K[R|t]$). *B.* Estimation of each camera's position and orientation, collectively referred to as its pose, within a shared coordinate system. The extrinsic parameters estimated for each camera are first written as homogeneous transformation matrices, $T_i$. Camera 1 is then selected as the reference frame, and the pose of Camera 2 relative to Camera 1 is obtained by composing the two transforms: $T_(2 -> 1) = T_1 T_2^(-1)$. Repeating this process for the remaining cameras establishes the geometric relationships among all cameras in the system.]
 ) <fig-calibration-math>
 
 
-Calibration and 3D reconstruction are implemented in FreeMoCap using a modified implementation of the Anipose toolkit @karashchukAniposeToolkitRobust2021. The calibration tool is a ChArUco board, a hybrid calibration target consisting of a checkerboard pattern overlaid with uniquely identifiable ArUco markers. This board can be printed on standard paper and mounted to a rigid surface, or printed directly onto a rigid board.
+Calibration and 3D reconstruction are implemented in the version of FreeMoCap used in this study using a modified implementation of the Anipose toolkit @karashchukAniposeToolkitRobust2021. The calibration tool is a ChArUco board, a hybrid calibration target consisting of a checkerboard pattern overlaid with uniquely identifiable ArUco markers. This board can be printed on standard paper and mounted to a rigid surface, or printed directly onto a rigid board.
 
 During calibration, the ChArUco board is moved throughout the intended capture volume and presented to multiple cameras simultaneously. Each shared observation establishes a geometric relationship between the cameras that can see the board. By moving the board through different regions of the capture space, additional overlapping camera pairs are linked together, forming a connected calibration network (@fig-calibration-method). Consequently, two cameras that never observe the board at the same time can still be related through one or more intermediate cameras. As long as all cameras belong to the same connected network, their poses can be expressed within a common 3D coordinate system.
 
@@ -40,8 +40,12 @@ During calibration, the ChArUco board is moved throughout the intended capture v
   caption: [*A.* A ChArUco calibration board detected in a single video frame. Each ArUco marker has a unique identifier, allowing the intervening ChArUco corners to be detected and matched across images. The detected corner IDs are shown in blue. *B.* Establishing a shared 3D capture volume. When two or more cameras simultaneously observe the calibration board, their relative poses can be estimated. Moving and rotating the board through the capture space creates additional pairwise calibration links, progressively connecting all cameras into a common 3D reference frame, including camera pairs that do not directly observe the board at the same time.]
 ) <fig-calibration-method>
 
-[*PLACEHOLDER: Maybe link a video of an example calibration here from the data collection?*]
-
+#figvideo(
+  key: "calibration-recording",
+  file: "videos\calibration.mp4",
+  short: [ChArUco board detections across all six camera views during a calibration recording, with the resulting camera poses reconstructed in three dimensions.],
+  caption: [Example calibration recording. Left: synchronized views from the six cameras, with detected ChArUco corners (red) and corner IDs (blue). The board is moved through the capture volume across a range of positions, depths, and orientations, so that different subsets of cameras observe it simultaneously. Right: the calibration geometry recovered from these observations, showing the estimated position and orientation of each camera together with the board within the shared coordinate system. Camera numbering corresponds between the video panels and the reconstructed geometry.],
+)
 The board should be observed across a range of positions and orientations. In particular, variation in depth and tilt provides stronger constraints for estimating camera intrinsic and extrinsic parameters than observations confined to a single plane or orientation. The board must remain rigid, as bending or flexing changes the assumed geometry of the calibration target and can introduce parameter-estimation errors. Glare should also be minimized because reflections can obscure markers and corners; we therefore recommend printing the target on matte, non-glossy material.
 
 At the start of a recording, the ChArUco board may be placed flat on the floor within the shared field of view of the cameras, a procedure we refer to as ground-plane calibration. The detected board pose is then used to define the reconstruction coordinate system: the plane of the board is assigned to $Z = 0$, and the coordinate axes are aligned with the board orientation. As a result, reconstructed 3D kinematic data are expressed directly in a physically meaningful, ground-aligned reference frame, reducing the need for post hoc translation or rotation.
@@ -58,7 +62,7 @@ Pose estimation converts each camera's video frames into 2D anatomical keypoints
 
 However, the choice of pose estimation model can substantially affect the resulting motion-capture data. Errors in 2D keypoint localization propagate into reconstructed 3D trajectories and derived kinematic measures, and performance varies across pose estimation algorithms @needhamAccuracySeveralPose2021 @ceriolaComparativeAnalysisMarkerless2024 @washabaughComparingAccuracyOpensource2022. Moreover, many general-purpose models are trained on datasets that were not designed specifically for movement-science applications and may provide limited representation of particular movements, environments, or populations @seethapathiMovementScienceNeeds2019 @needhamAccuracySeveralPose2021. No single pose estimation model is therefore likely to be optimal across all applications.
 
-To accommodate alternative models, FreeMoCap separates pose estimation from the remainder of the processing pipeline through SkellyTracker, its pose estimation management framework. SkellyTracker defines a standardized interface through which a model receives video frames and returns keypoint coordinates in a consistent format. New pose estimation backends can therefore be added by implementing this interface, without requiring corresponding changes to camera calibration, 3D reconstruction, post-processing, or data export. This avoids the need to construct a new motion-capture pipeline whenever a different pose estimation model is required.
+To accommodate alternative models, FreeMoCap separates pose estimation from the remainder of the processing pipeline through `SkellyTracker`, its pose estimation management framework. SkellyTracker defines a standardized interface through which a model receives video frames and returns keypoint coordinates in a consistent format. New pose estimation backends can therefore be added by implementing this interface, without requiring corresponding changes to camera calibration, 3D reconstruction, post-processing, or data export. This avoids the need to construct a new motion-capture pipeline whenever a different pose estimation model is required.
 
 This modular design also supports controlled comparisons among pose estimation algorithms. Different backends can be applied to the same synchronized videos while holding the camera configuration, calibration, reconstruction, and post-processing procedures constant. Differences in the resulting 3D estimates can therefore be more directly attributed to the pose estimation stage, supporting the systematic benchmarking of markerless pose estimation algorithms identified as a need within the movement-science community @needhamAccuracySeveralPose2021.
 
@@ -71,21 +75,13 @@ caption: [3D reconstruction through multi-view triangulation. Each camera observ
 ) <fig-reconstruction>
 
 
-Corresponding 2D keypoints from the synchronized camera views were triangulated into 3D coordinates using the calibrated camera projection matrices and direct linear transformation. 
-
-In multiview markerless motion capture, a camera view that is generally informative may nevertheless produce erroneous 2D detections during particular movements or periods of occlusion. These localized errors can substantially degrade the triangulated 3D trajectory. One approach is to exclude the affected camera from the entire recording; however, this also removes the many valid observations contributed by that camera at other frames and keypoints. To retain these usable observations, we implemented an optional progressive outlier-rejection procedure that excluded individual camera observations locally during triangulation rather than removing a camera view globally.
-
-For each keypoint and frame, an initial 3D position was estimated using all available camera views, and the mean reprojection error was calculated. When this error exceeded a specified threshold, the keypoint was retriangulated using each possible subset formed by omitting one camera. The leave-one-camera-out solution with the lowest mean reprojection error was compared with the original all-camera solution. When excluding one camera produced a sufficiently large reduction in reprojection error, the refined estimate was used; for intermediate improvements, the original and refined estimates were blended to reduce abrupt transitions between reconstruction solutions.
-
-Outlier rejection was enabled only for recordings in which the default reconstruction contained substantial artifacts attributable to a camera view. Each recording's default (all-camera) reconstruction was visually inspected alongside the annotated 2D videos from each camera view. The procedure was enabled when artifacts in the 3D trajectories (e.g., abrupt spatial discontinuities or anatomically implausible excursions) could be traced to visibly erroneous 2D keypoint estimates in a specific camera view, rather than being attributed to 2D estimation failure by inference alone. This determination was based solely on the quality of the markerless reconstruction and was made independently of agreement with the marker-based reference.
-
-When enabled for a recording, the same procedure was applied to MediaPipe, RTMPose, and ViTPose reconstructions. In these cases, the procedure recovered usable reconstructions that would otherwise have required exclusion while preserving valid observations from the affected camera views.
+Corresponding 2D keypoints from the synchronized camera views were triangulated into 3D coordinates using the calibrated camera projection matrices and direct linear transformation.  FreeMoCap also supports optional reprojection error-based outlier rejection during triangulation, allowing erroneous observations from individual camera views to be excluded locally without discarding the camera for the full recording. The implementation and criteria used in the present study are described below.
 
 The reconstructed trajectories were subsequently processed using SkellyForge, FreeMoCap's post-processing package. Short gaps are interpolated when no acceptable triangulation solution is available for a frame, after which the coordinate trajectories are low-pass filtered using a Butterworth filter to attenuate high-frequency noise. The resulting data consist of temporally continuous 3D keypoint trajectories expressed in the shared coordinate system established during calibration.
 
 == Validation Procedure
 
-A broad overview of the procedure is found in @fig-methods-overview.
+A broad overview of the experiment design and data processing procedure is found in @fig-methods-overview.
 
 #figure(
   image("figures/methods/validation_procedure_elife.png", width:100%),
@@ -104,7 +100,7 @@ The marker-based system consisted of 9 Miqus M3 and 2 Oqus 700+ cameras (300 Hz)
 
 ==== *Markerless motion capture*
 
-The markerless system consisted of six consumer-grade cameras (\$20 USB webcams,  1280x720 resolution, 30Hz) arranged in a circle around the capture volume. Cameras were positioned to maximize multi-view coverage of the participant. Two cameras were aligned with the frontal plane, positioned anterior and posterior to the participant. The remaining four cameras were placed at approximately 45° oblique angles relative to the sagittal plane. Camera positions were standardized across participants using floor markers, while camera height and orientation were adjusted for each participant to optimize visibility and reduce occlusion. 
+The markerless system consisted of six consumer-grade cameras (USB webcams,  1280x720 resolution, 30Hz) arranged in a circle around the capture volume. Cameras were positioned to maximize multi-view coverage of the participant. Two cameras were aligned with the frontal plane, positioned anterior and posterior to the participant. The remaining four cameras were placed at approximately 45° oblique angles relative to the sagittal plane. Camera positions were standardized across participants using floor markers, while camera height and orientation were adjusted for each participant to optimize visibility and reduce occlusion. 
 
 All cameras were connected to a single acquisition computer. Video capture was performed using the FreeMoCap software. Because both FreeMoCap and Qualisys recordings were acquired on the same computer, timestamps from each system were referenced to a shared system clock, enabling temporal alignment between datasets.
 
@@ -112,7 +108,7 @@ Prior to recording, cameras were calibrated using a ChArUco calibration board (s
 
 === *Data Collection
 *
-Each participant completed two trials of both the gat and balance tasks. At the start of each trial, participants assumed an "A-pose", a neutral position with feet slightly apart, head up, and arms angled downward at roughly 45 degrees for a few seconds. 
+Each participant completed two trials of both the gait and balance tasks. At the start of each trial, participants assumed an "A-pose", a neutral position with feet slightly apart, head up, and arms angled downward at roughly 45 degrees for a few seconds. 
 
 ==== *Gait*
 Participants walked on a treadmill at progressively increasing speeds. The treadmill increased in 0.50 m/s increments every 30 seconds, starting from rest until 2.50 m/s. Prior to data collection, participants were given time to familiarize themselves with the treadmill and each speed condition.
@@ -146,9 +142,7 @@ In multiview markerless motion capture, a camera view that is generally informat
 
 For each keypoint and frame, an initial 3D position was estimated using all available camera views, and the mean reprojection error was calculated. When this error exceeded a specified threshold, the keypoint was retriangulated using each possible subset formed by omitting one camera. The leave-one-camera-out solution with the lowest mean reprojection error was compared with the original all-camera solution. When excluding one camera produced a sufficiently large reduction in reprojection error, the refined estimate was used; for intermediate improvements, the original and refined estimates were blended to reduce abrupt transitions between reconstruction solutions.
 
-Outlier rejection was enabled only for recordings whose default reconstruction contained substantial 3D artifacts. Each recording's default (all-camera) reconstruction was visually inspected alongside the annotated 2D videos from each camera view. The procedure was enabled when artifacts in the 3D trajectories (e.g., abrupt spatial discontinuities or anatomically implausible excursions) could be traced to visibly erroneous 2D keypoint estimates in a specific camera view, rather than being attributed to 2D estimation failure by inference alone. This determination was based solely on the quality of the markerless reconstruction and was made independently of agreement with the marker-based reference.
-
-When enabled for a recording, the same procedure was applied to MediaPipe, RTMPose, and ViTPose reconstructions. In these cases, the procedure recovered usable reconstructions that would otherwise have required exclusion while preserving valid observations from the affected camera views.
+Outlier rejection was enabled only for recordings whose default reconstruction contained substantial 3D artifacts. Each all-camera reconstruction was visually inspected alongside the annotated 2D videos from each camera view. When abrupt spatial discontinuities or anatomically implausible excursions in the 3D trajectories could be linked to visibly erroneous 2D keypoint estimates in a specific view, the outlier-rejection procedure was applied and the refined reconstruction was visually compared with the default solution. This decision was made using the markerless data alone and without reference to agreement with the marker-based system. When enabled for a recording, the same procedure was applied to MediaPipe, RTMPose, and ViTPose reconstructions.
 
 Following reconstruction, gaps in the 3D trajectories were interpolated, and the trajectories were low-pass filtered using a zero-phase, fourth-order Butterworth filter with a cutoff frequency of 6 Hz.
 
@@ -156,11 +150,9 @@ Following reconstruction, gaps in the 3D trajectories were interpolated, and the
 
 Joint center trajectories from marker-based and markerless systems were temporally aligned using recorded Unix timestamps from both systems, which were generated on the same acquisition computer. Marker-based data were resampled to match the markerless sampling rate (30 Hz). Residual temporal offsets were further refined using cross-correlation of joint trajectories, followed by manual inspection. 
 
-Markerless data were spatially aligned to the marker-based reference frame using a least-squares optimized rigid transformation that minimized joint center errors between systems. The transformation consisted of three rotational $(r_x, r_y, r_z)$ and three translation $(t_x, t_y, t_z)$ parameters. 
+Markerless data were spatially aligned to the marker-based reference frame using a least-squares optimized rigid transformation that minimized joint center errors between systems. The transformation consisted of three rotational $(r_x, r_y, r_z)$ and three translation $(t_x, t_y, t_z)$ parameters. For each trial, candidate transformations were estimated from subsets of 20 sampled frames across up to 100 RANSAC iterations using an inlier threshold of 40 mm, and evaluated over the full recording. The transformation that minimized global joint-center error across all frames was selected and applied to the complete markerless dataset. No scaling was applied during the primary validation analyses.
 
-To identify a transformation that was consistent over the full recording, candidate transformations were estimated from randomly sampled subsets of frames  and evaluated across the entire dataset. The transformation that minimized the global joint center error across all frames was selected for each trial.
-
-=== *Data Analysis: Gait*
+== *Data Analysis: Gait*
 ==== *Joint angles*
 
 Joint angles were calculated as the Cardan XYZ decomposition of the relative rotation between adjacent segments. Sagittal-plane lower-body kinematics were extracted and analyzed across gait cycle-normalized strides. Joint angles were offset-corrected by subtracting the mean angle measured during the neutral A-pose stance at the start of each trial.
@@ -191,7 +183,7 @@ To identify regions of significant difference between the marker-based reference
 
 For each gait parameter, Bland-Altman plots with bias and 95% limits of agreement (LOA) were created @blandStatisticalMethodsAssessing1986. Intraclass correlation coefficients (ICC(2,1)) were calculated using the `pingouin` package to assess agreement @shroutIntraclassCorrelationsUses1979. ICC values under 0.5 were interpreted as poor agreement, 0.5-0.75 interpreted as moderate agreement, 0.75-0.90 as good agreement, and greater than 0.90 as excellent agreement @kooGuidelineSelectingReporting2016. Bland-Altman and ICC values were calculated across all speeds as well as per walking speed.
 
-=== *Data Analysis: Balance*
+== *Data Analysis: Balance*
 
 ==== *Center of mass (COM) calculation*
 
@@ -199,7 +191,7 @@ For the reference system and each pose estimation backend, body segments were de
 
 ==== *Center of mass path length*
 
-Using a custom-built viewer (available at: https://github.com/aaroncherian/nih_balance_analyses), each trial was annotated with the start and stop frame numbers for each of the four conditions. 1600 frames were analyzed per standing condition within a trial. Within each condition, COM path length was calculated as the cumulative sum of the Euclidean distance between consecutive 3D COM positions. 
+Using a custom-built viewer, each trial was annotated with the start and stop frame numbers for each of the four conditions. 1600 frames were analyzed per standing condition within a trial. Within each condition, COM path length was calculated as the cumulative sum of the Euclidean distance between consecutive 3D COM positions. 
 
 
 ==== 
