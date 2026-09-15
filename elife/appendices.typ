@@ -110,10 +110,7 @@ All three pose estimation backends were executed within FreeMoCap through the `S
   *MediaPipe.* 
   
   Using MediaPipe Holistic from v0.10.14. This is the legacy Holistic
-  solution, deprecated by Google in favor of the Tasks API; we remained on the
-  legacy version because Holistic's integrated single-pass body + face + hand
-  topology is the basis of the FreeMoCap processing pipeline and is what these data
-  were processed with.
+  solution, deprecated by Google in favor of the Tasks API;
 
   ```python
   # MediaPipe Holistic v0.10.14 (legacy solution)
@@ -179,3 +176,4 @@ All three pose estimation backends were executed within FreeMoCap through the `S
   ]
 ]
 
+#include "appendix_practical.typ"
