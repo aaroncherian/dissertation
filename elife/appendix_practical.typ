@@ -11,14 +11,13 @@ A key limitation of characterizing and validating a markerless motion capture sy
 
 Consider, for example, our laboratory environment. The data in this work were collected in a space that is optimized for motion analysis: a wide, open room with sufficient space for multi-camera setups, controllable window shades to fix lighting conditions, minimal visual clutter, and clean backgrounds. These conditions are not representative of many real-world environments, particularly in-home or clinical settings, and should not be assumed as a baseline expectation.
 
-
-An important point to understand is that markerless motion capture is not just a tool, but a technique. While these systems can be used out-of-the-box to produce usable data, collecting research-quality data requires iteration and experimentation. A good way to consider it is that good markerless motion capture is akin to good videography or photography. Producing high quality images requires more than just a capable camera, it requires attention to lighting, consideration of framing, the background, and also, experience. Markerless motion capture operates on the same principles. The raw data are the recorded videos, and the quality of those videos directly constrains the quality of the reconstructed motion.
+Markerless motion capture is perhaps better understood then not simply as a tool, but as a measurement technique. While these systems can be used out-of-the-box to produce usable data, collecting research-quality data requires iteration and experimentation. A good way to consider it is that good markerless motion capture is akin to good videography or photography: producing high quality images requires more than just a capable camera, it requires attention to lighting, consideration of framing, the background, and experience. Markerless motion capture operates on the same principles. The raw data are the recorded videos, and the quality of those videos directly constrains the quality of the reconstructed motion.
 
 The following sections outline the key factors that we found important in the collection of our validation datasets. 
 
 == Clothing
 
-Clothing should generally be form-fitting, although prior work suggests that clothing alone may not have a major impact on tracking accuracy @horsakRepeatabilityMinimalDetectable2024 @augustineEffectsTightLoosefitting2023. However, we found that an equally important factor to consider is contrast, and the particular consideration of these two questions: 
+Clothing should generally be form-fitting, although prior work suggests that clothing alone may not have a major impact on tracking accuracy @horsakRepeatabilityMinimalDetectable2024 @augustineEffectsTightLoosefitting2023. However, we found that an important factor to consider is contrast, and the particular consideration of these two questions: 
 
 1) How easily can the participant be distinguished from the environment? 
 
@@ -38,55 +37,48 @@ We also recommend that participants with longer hair should tie it back during a
 
 == Lighting
 
-We found that lighting is a critical aspect to consider. Thomas et al. found that room lighting conditions could impact frontal and transverse plane kinematics @thomasLightsCamerasAction2026. The subject should be be well-lit, and this matters particularly because minimizing motion blur often means keeping exposure settings low, which inherently darkens the camera view. Participant skin color is also a factor here, as darker skin tones against a dark environment compound the contrast challenges. The goal is even, sufficient illumination across the full body, with particular attention to whatever body regions are most relevant to the analysis.
+We found lighting to be a critical consideration. Similar effects have been reported elsewhere; Thomas et al. found that room lighting conditions could influence frontal- and transverse-plane kinematics @thomasLightsCamerasAction2026. Participants should therefore be well lit, particularly because reducing motion blur often requires shorter exposure times, which in turn darken the recorded image. Participant skin color is also a factor here, as darker skin tones against a dark environment compound the contrast challenges. The goal is even, sufficient illumination across the full body, with particular attention to whatever body regions are most relevant to the analysis.
 
-@fig-clothing illustrates this as well. In our initial pilot testing, we used a single spotlight resting on the ground and aiming _up_ at the participants' upper bodies. However, in gait, the limbs of primary interest are the lower ones - and the ground-level light left the treadmill belt and lower limbs underlit. In our final validation setup, we used three stage lights aimed downward toward the treadmill surface to improve lower-limb illumination. This arrangement approximated the three-point lighting approach common in film and photography, which helped minimize shadows cast by the participant onto the treadmill belt.
+@fig-clothing illustrates this point. During initial pilot testing, we used a single spotlight placed at ground level and directed upward toward the participant’s upper body. For gait analysis, however, the lower limbs are the primary region of interest, and this configuration left both the treadmill belt and lower extremities comparatively underlit. In the final validation setup, we instead used three stage lights directed downward toward the treadmill surface to improve lower-limb illumination. This arrangement approximated the three-point lighting approach commonly used in film and photography and helped reduce shadows cast by the participant onto the treadmill belt.
 
 == Framing 
 
-Framing of the participant fully in the camera views is important. Particularly if they will largely be staying in place through the recording, participants should take up as much of the camera view as possible, while still ensuring their whole body is visible. Camera height and tilt should be optimized to the participant to keep them visible. While adjusting camera orientation, we often asked participants to assume a T-pose where they outstretch their hands, or to go through the motions of the action they will perform to make sure that there is no camera view in which a limb moves out of frame. 
+Framing the participant fully within each camera view is important. When participants remain largely in place during a recording, they should occupy as much of the image as possible while still remaining fully visible throughout the movement. Camera height and tilt should therefore be adjusted for each participant. During setup, we often asked participants to assume a T-pose with the arms outstretched, or to rehearse the movement to be recorded, to verify that no limb moved outside the field of view in any camera.
 
 == Background
-The background should, to the extent that is possible, be free of clutter. Primarily, this is because pose estimation algorithms are imperfect and sometimes prone to what we colloquially term the "ghost skeleton" problem - which is when the pose estimation software detects joint center keypoints on something that is distinctly not a human. We find this issue to especially be prevalent when the participant is further from a given camera. Keeping the recording area free of as much clutter as possible can help mitigate this problem. Strong framing of the participant as discussed above can also help here. 
+
+The recording background should be kept as free of visual clutter as possible. Pose estimation algorithms are imperfect and can occasionally produce what we colloquially refer to as “ghost skeletons,” in which keypoints are detected on objects or regions that are clearly not part of the participant. We have found this issue to be more common when the participant occupies a smaller portion of the camera view or is farther from a given camera. Keeping the recording area visually simple can help reduce these false detections. Careful participant framing, as discussed above, can also help by ensuring that the person remains the dominant human-like feature in the image.
 
 == Number of cameras
 
-Research describing the best number of cameras can be a little contradictory. Theia3D requires an absolute minimum of six cameras, but suggests at least eight. Uhlrich et al. found minimal benefits when moving from two to five cameras with OpenCap @uhlrichOpenCapHumanMovement2023, while Yang et al. found substantial decrease in error using an OpenPose-based motion capture system @yangEvaluationCameraConfigurations2025. 
+Recommendations for the number of cameras required for markerless motion capture vary across systems and applications. Theia3D requires a minimum of six cameras and recommends at least eight, whereas Uhlrich et al. reported relatively little improvement when increasing OpenCap from two to five cameras @uhlrichOpenCapHumanMovement2023. In contrast, Yang et al. found a substantial reduction in error as camera number increased in an OpenPose-based motion-capture system @yangEvaluationCameraConfigurations2025.
 
-The number of cameras used for our data collection (six cameras) was based on the maximum number of USB ports available to use. Generally, we recommend at least three cameras for data collection. However, this is also dependant on the space available and task given to the participant. Overground gait, for example, might require using more cameras to achieve visual coverage of the space, though Darici et al. still reported accurate metrics for overground gait over a 6 meter walkway using a 3 camera FreeMoCap setup @dariciLowCostMarkerlessMotion2025. 
+Our data collection used six cameras, corresponding to the maximum number of USB cameras that could be connected to the acquisition computer. As a general practical recommendation, we suggest using at least three cameras, although the appropriate number depends on the available space and the movement being recorded. Tasks that span a larger capture volume, such as overground gait, may require additional cameras to maintain sufficient multi-view coverage. However, Darici et al. reported accurate overground gait metrics across a 6 m walkway using a three-camera FreeMoCap setup @dariciLowCostMarkerlessMotion2025, illustrating that useful performance can still be achieved with relatively few cameras when coverage is adequate.
 
 == Positioning of cameras
 
-We found camera positioning to be a critical part of gathering good data. Recently, Thomas et al. found changing camera configuration (including camera placement and camera count) altered Theia3D kinematic estimates @thomasLightsCamerasAction2026. An example of the camera viewpoints in our setup can be seen in @fig-treadmill. We chose two cameras to cover planar views from the front and back, while for the other four we chose to use oblique views such that each camera, even though primarily focused on one side of the body, was still able to provide data on the opposing side. 
-
-
+Camera positioning is a critical component of markerless motion capture. Thomas et al. recently showed that changes in camera configuration, including both camera placement and camera count, can alter Theia3D kinematic estimates @thomasLightsCamerasAction2026. An example of the camera viewpoints used in our validation setup is shown in @fig-treadmill. We positioned two cameras approximately in the frontal plane, one anterior and one posterior to the participant, while the remaining four cameras were placed at oblique angles. This allowed each oblique camera to emphasize one side of the body while still maintaining visibility of the contralateral side.
 
 #figure(
     image("practicals/treadmill.png", width:80%),
-    caption: [Positioning of six cameras around a treadmill to capture data for our validation study]
+    caption: [Positioning of six cameras around a treadmill to capture data for our validation study.]
 ) <fig-treadmill>
 
+Camera positioning is highly task dependent, and the movement being recorded should ultimately determine the arrangement. For tasks in which the participant moves through a larger capture volume, such as overground gait, the objective shifts from tightly framing the participant to maintaining sufficient coverage of the space itself. The full region through which the participant may move should be considered, with cameras positioned so that the participant remains visible to at least two cameras throughout the portions of the capture volume required for triangulation.
 
-Camera positioning is also highly task dependent, and that task is ultimately the most important factor in where cameras are positioned. 
-
-For tasks where the participant moves across a wide area, such as overground gait, the camera positioning strategy shifts. Rather than framing the participant tightly as one would around a treadmill, the goal becomes covering the space itself. One should consider the full area the participant might move through, identify the regions they care about most, and position the cameras so that at any given point within that area, at least two cameras have the participant in view for triangulation. @fig-overground shows a five-camera overground gait setup we tried as an example. Two cameras were placed at opposite ends of the walkway in portrait orientation, angled to look down the full length of the path - the reasoning being that as the participant moved far enough from one end camera to leave its field of view, they would be approaching the other. The remaining three cameras were positioned along the side of the walkway in landscape orientation to maximize lateral coverage. Between the five cameras, the goal was to ensure that no matter where the participant was on the walkway, at least two cameras could see them. Note in this case, the mixed use of portrait and landscape orientations to maximize ground coverage. 
+@fig-overground shows a five-camera overground gait setup that we tested as one example. Two cameras were placed at opposite ends of the walkway in portrait orientation and angled along its length. As the participant moved farther from one end camera and toward the limits of its field of view, they approached the opposite camera. Three additional cameras were positioned along the side of the walkway in landscape orientation to maximize lateral coverage. The combination of portrait and landscape orientations was used to extend coverage of the capture volume while maintaining overlapping views.
 
 #figure(
     image("practicals/overground.png"),
-    caption: [Five camera setup for overground gait capture. Two cameras at opposite ends of the walkway are oriented in portrait mode to view the full length of the path, providing overlapping coverage as the participant moves between them. Three cameras along the side are oriented in landscape mode to maximize lateral coverage. ]
-    
+    caption: [Five-camera setup for overground gait capture. Two cameras at opposite ends of the walkway are oriented in portrait mode to view the full length of the path, providing overlapping coverage as the participant moves between them. Three cameras along the side are oriented in landscape mode to maximize lateral coverage.]
 ) <fig-overground>
 
-
-To provide another example, when once recorded participants on a stationary row machine, and due to the occlusions from the machine that purely frontal planes would cause, we used purely sagittal views instead (@fig-bike).
+The optimal arrangement can change substantially when the task introduces occlusions. For example, when recording participants on a stationary rowing machine, frontal views were frequently obstructed by the equipment. We therefore prioritized sagittal viewpoints instead (@fig-bike).
 
 #figure(
     image("practicals/stationary_row.png"),
-    caption: [Camera views to record participants on a stationary row machine]
+    caption: [Camera views used to record participants on a stationary rowing machine.]
 ) <fig-bike>
 
-We have found that ultimately, camera positioning will be limited by the environment, and to the extent possible should be configured according to the task involved. A given task (e.g., squatting, jumping, one-leg balance) may have its own optimal camera setup, requiring testing and iteration in order to produce the best results. 
-
-As you may now surmise, the ultimate answer is that there
-is no exact answer as to where the cameras should be positioned. Each activity (e.g., squatting, jumping, one-leg balance) will require its own necessary camera setup. What it requires is a bit of patience, tinkering, and iteration to find what results in the best data - hence, markerless motion capture is a technique.  
-
+In practice, camera placement is constrained by both the environment and the task. Activities such as squatting, jumping, balance, treadmill gait, and overground gait may each benefit from different arrangements. There is therefore no single camera configuration that is optimal for all markerless motion capture applications. Instead, positioning should be treated as part of the measurement technique itself, with testing and iteration used to identify a configuration that provides adequate visibility and multi-view coverage for the movement of interest.
+]

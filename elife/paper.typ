@@ -37,20 +37,22 @@ We thank ...
 
 = Author contributions
 #text(size: 10pt)[
-*Aaron [Surname]:* Conceptualization, Methodology, Software, Formal analysis,
-Investigation, Data curation, Writing – original draft, Visualization. \
-*Jonathan Matthis:* Conceptualization, Software, Supervision, Writing – review
-and editing.
+*Author One:*  \
+*Author Two:* 
+etc.
 ]
 
 = Competing interests
-The authors declare that no competing interests exist.
+[draft freemocap competing interests statement]
+
+ATC and JSM are affiliated with the FreeMoCap Foundation, a nonprofit organization that supports the development and maintenance of the FreeMoCap software used in this study. The FreeMoCap software is freely available as open-source software. No other competing interests are declared.
+
 
 = Funding
 This work was supported by [funder / grant number].
 
 = Data availability
-All data underlying the figures are available at [repository + DOI].
+All data underlying the figures are available at [insert figshare or release link here]
 
 = Code availability
 FreeMoCap is open-source and freely available at https://github.com/freemocap.
@@ -58,6 +60,7 @@ FreeMoCap is open-source and freely available at https://github.com/freemocap.
 The pipelines used for validation processes and to make all figures are available at https://github.com/freemocap/validation
 
 The video annotation and center-of-mass path length calculation code used for balance analyses is available at https://github.com/aaroncherian/nih_balance_analyses
+
 
 // ---- references, collected supplements, appendices -------------------------
 #bibliography("references.bib", style: "harvard-cite-them-right", title: "References")

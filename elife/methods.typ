@@ -3,9 +3,9 @@
 = Materials and Methods
 
 == FreeMoCap Software
-FreeMoCap @matthisFreeMoCapFreeOpen2026 is a fully open-source markerless motion capture framework designed to maximize accessibility across the entire workflow. It operates with consumer-grade cameras, such as USB webcams, requires neither physical markers nor a specialized recording environment, and supports the full process from synchronized video acquisition to 3D kinematic reconstruction (@fig-fmc-pipeline). Its modular, tracker-agnostic architecture allows different pose estimation backends to be incorporated according to the needs of a given application.
+FreeMoCap @matthisFreeMoCapFreeOpen2026 is a fully open-source markerless motion capture framework designed to maximize accessibility across the entire workflow. It operates with consumer-grade cameras, such as USB webcams, requires neither physical markers nor a specialized recording environment, and supports the full process from synchronized video acquisition to 3D kinematic reconstruction. Its modular, tracker-agnostic architecture allows different pose estimation backends to be incorporated according to the needs of a given application.
 
-FreeMoCap is organized as a polyrepo, with major components of the motion capture workflow maintained in separate repositories. The following sections describe the principal stages of the system: synchronized video acquisition, camera calibration, 2D pose estimation, and 3D reconstruction.
+FreeMoCap is organized as a polyrepo, with major components of the motion capture workflow maintained in separate repositories (@fig-fmc-pipeline). The following sections describe the principal stages of the system: synchronized video acquisition, camera calibration, 2D pose estimation, and 3D reconstruction.
 
 
 #figure(
@@ -19,7 +19,7 @@ streams. For accurate 3D reconstruction, each set of frames must correspond to t
 moment in time. Without proper synchronization, time lags between cameras can result in
 inaccurate 3D data.
 
-In FreeMoCap, synchronous recording is handled primarily by `SkellyCam`, a software package to provide high quality synchronous recording methods that enable the use of low-cost cameras. However, such cameras may not be suitable for all research needs (e.g., capturing athletic performance which may necessitate higher frame rate cameras recording outdoors). The software accommodates these use cases in two ways: 1) Videos collected from a set of external cameras (e.g., GoPros or smartphone cameras) can be synchronized within the main software using light and audio-based synchronization methods; 2) A pre-synchronized set of videos can be directly imported into the software for processing. We aim to reduce dependency on specific hardware configurations and allow data collection protocols to be adapted to the needs of the study, rather than constrained by the system itself. 
+In FreeMoCap, synchronous recording is handled primarily by `SkellyCam`, a software package to provide high quality synchronous recording methods that enable the use of low-cost cameras. However, USB cameras may not be suitable for all research needs (e.g., capturing athletic performance, which may necessitate outdoor recordings using higher framerate cameras). The software accommodates these use cases in two ways: 1) Videos collected from a set of external cameras (e.g., GoPros or smartphone cameras) can be synchronized within the main software using light and audio-based synchronization methods; 2) A pre-synchronized set of videos can be directly imported into the software for processing. We aim to reduce dependency on specific hardware configurations and allow data collection protocols to be adapted to the needs of the study, rather than constrained by the system itself. 
 
 === *Camera Calibration*
 In order to reconstruct 3D data from the 2D camera images, it is necessary to determine how each camera observes the world and where it is positioned within it. The former describes
@@ -37,14 +37,14 @@ During calibration, the ChArUco board is moved throughout the intended capture v
 
 #figure(
   image("figures/methods/calibration_methods_elife.png", width: 100%),
-  caption: [*A.* A ChArUco calibration board detected in a single video frame. Each ArUco marker has a unique identifier, allowing the intervening ChArUco corners to be detected and matched across images. The detected corner IDs are shown in blue. *B.* Establishing a shared 3D capture volume. When two or more cameras simultaneously observe the calibration board, their relative poses can be estimated. Moving and rotating the board through the capture space creates additional pairwise calibration links, progressively connecting all cameras into a common 3D reference frame, including camera pairs that do not directly observe the board at the same time.]
+  caption: [*A.* A ChArUco calibration board detected in a single video frame. Each ArUco marker has a unique identifier (blue), allowing the intervening ChArUco corners (red) to be detected and matched across images.  *B.* Establishing a shared 3D capture volume. When two or more cameras simultaneously observe the calibration board, their relative poses can be estimated. Moving and rotating the board through the capture space creates additional pairwise calibration links, progressively connecting all cameras into a common 3D reference frame, including camera pairs that do not directly observe the board at the same time.]
 ) <fig-calibration-method>
 
 #figvideo(
   key: "calibration-recording",
   file: "videos\calibration.mp4",
   short: [ChArUco board detections across all six camera views during a calibration recording, with the resulting camera poses reconstructed in three dimensions.],
-  caption: [Example calibration recording. Left: synchronized views from the six cameras, with detected ChArUco corners (red) and corner IDs (blue). The board is moved through the capture volume across a range of positions, depths, and orientations, so that different subsets of cameras observe it simultaneously. Right: the calibration geometry recovered from these observations, showing the estimated position and orientation of each camera together with the board within the shared coordinate system. Camera numbering corresponds between the video panels and the reconstructed geometry.],
+  caption: [Example calibration recording. Left: synchronized views from the six cameras, with detected ChArUco corners (red) and corner IDs (blue). The board is moved throughout the capture volume across a range of positions, depths, and orientations so that different subsets of cameras observe it simultaneously. Right: the recovered calibration geometry, showing the estimated position and orientation of each camera together with the board in the shared coordinate system. Cameras are highlighted when at least four ChArUco corners are detected in the corresponding video frame, providing a dynamic indication of which cameras are contributing observations of the board at each moment. Camera numbering corresponds between the video panels and the reconstructed geometry.],
 )
 The board should be observed across a range of positions and orientations. In particular, variation in depth and tilt provides stronger constraints for estimating camera intrinsic and extrinsic parameters than observations confined to a single plane or orientation. The board must remain rigid, as bending or flexing changes the assumed geometry of the calibration target and can introduce parameter-estimation errors. Glare should also be minimized because reflections can obscure markers and corners; we therefore recommend printing the target on matte, non-glossy material.
 
@@ -52,7 +52,7 @@ At the start of a recording, the ChArUco board may be placed flat on the floor w
 
 === *Pose Estimation*
 
-Pose estimation converts each camera's video frames into 2D anatomical keypoints for subsequent 3D reconstruction (@fig-pose-examples). The default FreeMoCap pipeline uses MediaPipe @lugaresiMediaPipeFrameworkBuilding2019, a free and open-source framework incorporating the BlazePose convolutional neural network @bazarevskyBlazePoseOndeviceRealtime2020. MediaPipe was selected as the default backend primarily for its accessibility: it is straightforward to install and use through Python, is computationally lightweight, and can run without a dedicated GPU. These characteristics allow the complete FreeMoCap pipeline to operate on a broad range of consumer hardware.
+Pose estimation identifies 2D anatomical keypoints within each camera’s video frames for subsequent 3D reconstruction (@fig-pose-examples). The default FreeMoCap pipeline uses MediaPipe @lugaresiMediaPipeFrameworkBuilding2019, a free and open-source framework incorporating the BlazePose convolutional neural network @bazarevskyBlazePoseOndeviceRealtime2020. MediaPipe was selected as the default backend primarily for its accessibility: it is straightforward to install and use through Python, is computationally lightweight, and can run without a dedicated GPU. These characteristics allow the complete FreeMoCap pipeline to operate on a broad range of consumer hardware.
 
 #figure(
   image( "figures/methods/pose_estimation_examples.png", width: 100%),
@@ -60,9 +60,9 @@ Pose estimation converts each camera's video frames into 2D anatomical keypoints
 ) <fig-pose-examples>
 
 
-However, the choice of pose estimation model can substantially affect the resulting motion-capture data. Errors in 2D keypoint localization propagate into reconstructed 3D trajectories and derived kinematic measures, and performance varies across pose estimation algorithms @needhamAccuracySeveralPose2021 @ceriolaComparativeAnalysisMarkerless2024 @washabaughComparingAccuracyOpensource2022. Moreover, many general-purpose models are trained on datasets that were not designed specifically for movement-science applications and may provide limited representation of particular movements, environments, or populations @seethapathiMovementScienceNeeds2019 @needhamAccuracySeveralPose2021. No single pose estimation model is therefore likely to be optimal across all applications.
+However, the choice of pose estimation model can substantially affect the resulting motion capture data. Errors in 2D keypoint localization propagate into reconstructed 3D trajectories and derived kinematic measures, and performance varies across pose estimation algorithms @needhamAccuracySeveralPose2021 @ceriolaComparativeAnalysisMarkerless2024 @washabaughComparingAccuracyOpensource2022. Moreover, many general-purpose models are trained on datasets that were not designed specifically for movement-science applications and may provide limited representation of particular movements, environments, or populations @seethapathiMovementScienceNeeds2019 @needhamAccuracySeveralPose2021. No single pose estimation model is therefore likely to be optimal across all applications.
 
-To accommodate alternative models, FreeMoCap separates pose estimation from the remainder of the processing pipeline through `SkellyTracker`, its pose estimation management framework. SkellyTracker defines a standardized interface through which a model receives video frames and returns keypoint coordinates in a consistent format. New pose estimation backends can therefore be added by implementing this interface, without requiring corresponding changes to camera calibration, 3D reconstruction, post-processing, or data export. This avoids the need to construct a new motion-capture pipeline whenever a different pose estimation model is required.
+To accommodate alternative models, FreeMoCap separates pose estimation from the remainder of the processing pipeline through `SkellyTracker`, its pose estimation management framework. SkellyTracker defines a standardized interface through which a model receives video frames and returns keypoint coordinates in a consistent format. New pose estimation backends can therefore be added by implementing this interface, without requiring corresponding changes to camera calibration, 3D reconstruction, post-processing, or data export. This avoids the need to construct a new motion capture pipeline whenever a different pose estimation model is required.
 
 This modular design also supports controlled comparisons among pose estimation algorithms. Different backends can be applied to the same synchronized videos while holding the camera configuration, calibration, reconstruction, and post-processing procedures constant. Differences in the resulting 3D estimates can therefore be more directly attributed to the pose estimation stage, supporting the systematic benchmarking of markerless pose estimation algorithms identified as a need within the movement-science community @needhamAccuracySeveralPose2021.
 
@@ -75,7 +75,7 @@ caption: [3D reconstruction through multi-view triangulation. Each camera observ
 ) <fig-reconstruction>
 
 
-Corresponding 2D keypoints from the synchronized camera views were triangulated into 3D coordinates using the calibrated camera projection matrices and direct linear transformation.  FreeMoCap also supports optional reprojection error-based outlier rejection during triangulation, allowing erroneous observations from individual camera views to be excluded locally without discarding the camera for the full recording. The implementation and criteria used in the present study are described below.
+Corresponding 2D keypoints from the synchronized camera views are triangulated into 3D coordinates using the calibrated camera projection matrices and direct linear transformation.  FreeMoCap also supports optional reprojection error-based outlier rejection during triangulation, allowing erroneous observations from individual camera views to be excluded locally without discarding the camera for the full recording. The implementation and criteria used in the present study are described below.
 
 The reconstructed trajectories were subsequently processed using SkellyForge, FreeMoCap's post-processing package. Short gaps are interpolated when no acceptable triangulation solution is available for a frame, after which the coordinate trajectories are low-pass filtered using a Butterworth filter to attenuate high-frequency noise. The resulting data consist of temporally continuous 3D keypoint trajectories expressed in the shared coordinate system established during calibration.
 
@@ -150,20 +150,20 @@ Following reconstruction, gaps in the 3D trajectories were interpolated, and the
 
 Joint center trajectories from marker-based and markerless systems were temporally aligned using recorded Unix timestamps from both systems, which were generated on the same acquisition computer. Marker-based data were resampled to match the markerless sampling rate (30 Hz). Residual temporal offsets were further refined using cross-correlation of joint trajectories, followed by manual inspection. 
 
-Markerless data were spatially aligned to the marker-based reference frame using a least-squares optimized rigid transformation that minimized joint center errors between systems. The transformation consisted of three rotational $(r_x, r_y, r_z)$ and three translation $(t_x, t_y, t_z)$ parameters. For each trial, candidate transformations were estimated from subsets of 20 sampled frames across up to 100 RANSAC iterations using an inlier threshold of 40 mm, and evaluated over the full recording. The transformation that minimized global joint-center error across all frames was selected and applied to the complete markerless dataset. No scaling was applied during the primary validation analyses.
+Markerless data were spatially aligned to the marker-based reference frame using a least-squares optimized rigid transformation that minimized joint center errors between systems. The transformation consisted of three rotational $(r_x, r_y, r_z)$ and three translation $(t_x, t_y, t_z)$ parameters. For each trial, candidate transformations were estimated from subsets of 20 sampled frames across up to 100 RANSAC iterations using an inlier threshold of 40 mm, and evaluated over the full recording. The transformation that minimized global joint center error across all frames was selected and applied to the complete markerless dataset. No scaling was applied during the primary validation analyses.
 
 == *Data Analysis: Gait*
 ==== *Joint angles*
 
-Joint angles were calculated as the Cardan XYZ decomposition of the relative rotation between adjacent segments. Sagittal-plane lower-body kinematics were extracted and analyzed across gait cycle-normalized strides. Joint angles were offset-corrected by subtracting the mean angle measured during the neutral A-pose stance at the start of each trial.
+Joint angles were calculated as the Cardan XYZ decomposition of the relative rotation between adjacent segments. Sagittal-plane lower body kinematics were extracted and analyzed across gait cycle-normalized strides. Joint angles were offset-corrected by subtracting the mean angle measured during the neutral A-pose stance at the start of each trial.
 
 ==== *Gait event detection*
 
-Heel strike and toe off events were identified based on anteroposterior velocity zero-crossings of the foot, using the methods described by Zeni et al. @zeniTwoSimpleMethods2008a. Marker-based gait events were used as the reference for time-normalizing to 0-100% of the gait cycle for all pose-estimated derived trajectories and joint angles.
+Heel strike and toe off events were identified based on anteroposterior velocity zero-crossings of the foot, using the methods described by Zeni et al. @zeniTwoSimpleMethods2008a. Marker-based gait events were used as the reference for time-normalizing to 0-100% of the gait cycle for all pose estimation-derived trajectories and joint angles.
 
 ==== *Gait parameters*
 
-Spatiotemporal parameters were calculated for each system using their respective gait events. The following gait parameters were calculated: [UPDATE]
+Spatiotemporal parameters were calculated for each system using their respective gait events. The following gait parameters were calculated:
 
 1) *Stance duration:* The time from *heel strike to subsequent toe off* of the same foot in milliseconds (ms).
 
@@ -179,9 +179,9 @@ Spatiotemporal parameters were calculated for each system using their respective
 
 Statistical analyses were performed using Python `v3.11`. Root mean squared error (RMSE) was calculated across all gait cycle-normalized joint center trajectories and joint angles. Per-trial RMSE was obtained by averaging across strides within a trial, and mean ± SD were then computed across all trials.
 
-To identify regions of significant difference between the marker-based reference and each pose estimation backend, statistical parametric mapping (SPM) two-tailed paired t-tests were performed on gait cycle-normalized joint angles using the `spm1d` package. SPM extends hypothesis testing to an entire timeseries, identifying continuous regions where differences exceed a critical threshold. SPM{t} statistics were computed across the gait cycle, and statistical significance was assessed at $alpha = 0.05$. 
+To identify regions of significant difference between the marker-based reference and each pose estimation backend, statistical parametric mapping (SPM) two-tailed paired t-tests were performed on gait cycle-normalized joint angles using the `spm1d` package @patakyOnedimensionalStatisticalParametric2012. SPM extends hypothesis testing to an entire timeseries, identifying continuous regions where differences exceed a critical threshold. SPM{t} statistics were computed across the gait cycle, and statistical significance was assessed at $alpha = 0.05$. 
 
-For each gait parameter, Bland-Altman plots with bias and 95% limits of agreement (LOA) were created @blandStatisticalMethodsAssessing1986. Intraclass correlation coefficients (ICC(2,1)) were calculated using the `pingouin` package to assess agreement @shroutIntraclassCorrelationsUses1979. ICC values under 0.5 were interpreted as poor agreement, 0.5-0.75 interpreted as moderate agreement, 0.75-0.90 as good agreement, and greater than 0.90 as excellent agreement @kooGuidelineSelectingReporting2016. Bland-Altman and ICC values were calculated across all speeds as well as per walking speed.
+For each gait parameter, Bland-Altman plots with bias and 95% limits of agreement (LOA) were created @blandStatisticalMethodsAssessing1986. Intraclass correlation coefficients (ICC(2,1)) were calculated using the `pingouin` package @vallatPingouinStatisticsPython2018 to assess agreement @shroutIntraclassCorrelationsUses1979. ICC values under 0.5 were interpreted as poor agreement, 0.5-0.75 interpreted as moderate agreement, 0.75-0.90 as good agreement, and greater than 0.90 as excellent agreement @kooGuidelineSelectingReporting2016. Bland-Altman and ICC values were calculated across all speeds as well as per walking speed.
 
 == *Data Analysis: Balance*
 
