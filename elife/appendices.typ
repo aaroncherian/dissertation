@@ -125,7 +125,7 @@ All three pose estimation backends were executed within FreeMoCap through the `S
       refine_face_landmarks=True,  
   )
   ```
-    One main setting warrants emphasis. The MediaPipe configuration is the only one applying temporal smoothing: with `smooth_landmarks = True`, MediaPipe Holistic applies a One Euro filter to the output landmarks, whereas RTMPose and ViTPose were run per-frame with no temporal filtering. The One Euro parameters are internal to the MediaPipe graph; setting either `static_image_mode = True`or `smooth_landmarks = False` disables the filter. These configurations are summarized in the table below.
+    The MediaPipe configuration applies temporal smoothing when `smooth_landmarks = True`. A One-Euro filter is applied to the output landmarks, whereas RTMPose and ViTPose were run per-frame with no temporal filtering. The One-Euro parameters are internal to the MediaPipe graph; setting either `static_image_mode = True`or `smooth_landmarks = False` disables the filter. These configurations are summarized in the table below.
 
 
   #appendix-table(
