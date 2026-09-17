@@ -1,0 +1,70 @@
+// =============================================================================
+//  paper.typ — MAIN FILE.  Compile this one:  typst compile paper.typ
+//  ---------------------------------------------------------------------------
+//  The template lives in elife.typ (definitions only). This file applies the
+//  document style once and pulls the body in from part files with #include.
+//  Counters, the figure-supplement auto-numbering, labels, and cross-references
+//  all work across #include boundaries because the whole thing compiles into a
+//  single document.
+// =============================================================================
+
+#import "elife.typ": *
+
+#show: elife.with(
+  title: "FreeMoCap",
+  authors: (
+
+  ),
+  affiliations: (
+
+  ),
+  corresponding-email: "aaron@freemocap.org",
+  abstract: [
+
+  ],
+)
+
+
+// ---- body: each section can be its own file --------------------------------
+#include "introduction.typ"
+#include "results.typ"
+#include "discussion.typ"
+#include "methods.typ"
+
+// ---- end-matter declarations (inline here, or include a declarations.typ) --
+= Acknowledgements
+We thank ...
+
+= Author contributions
+#text(size: 10pt)[
+*Author One:*  \
+*Author Two:* 
+etc.
+]
+
+= Competing interests
+[draft freemocap competing interests statement]
+
+ATC and JSM are affiliated with the FreeMoCap Foundation, a nonprofit organization that supports the development and maintenance of the FreeMoCap software used in this study. The FreeMoCap software is freely available as open-source software. No other competing interests are declared.
+
+
+= Funding
+This work was supported by [funder / grant number].
+
+= Data availability
+All data underlying the figures are available at [insert figshare or release link here]
+
+= Code availability
+FreeMoCap is open-source and freely available at https://github.com/freemocap.
+
+The pipelines used for validation processes and to make all figures are available at https://github.com/freemocap/validation
+
+The video annotation and center-of-mass path length calculation code used for balance analyses is available at https://github.com/aaroncherian/nih_balance_analyses
+
+
+// ---- references, collected supplements, appendices -------------------------
+#bibliography("references.bib", style: "harvard-cite-them-right", title: "References")
+
+#supplementary-material()
+
+#include "appendices.typ"
