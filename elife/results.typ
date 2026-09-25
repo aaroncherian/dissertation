@@ -7,7 +7,7 @@
 
 == Reconstruction and comparison of 3D motion capture data
 
-Participants completed both a gait and balance assessment while being simultaneously recorded by the markerless and marker-based motion capture systems to characterize the ability of the markerless system to capture both dynamic and subtle movements (@fig-overview). Joint centers calculated from the marker-based data served as the reference for comparison. The markerless data were produced using a single FreeMoCap pipeline in which 2D pose estimation (the detection of body keypoints within each camera view) was treated as an interchangeable module. Each trial was processed separately using three pose estimation backends: MediaPipe @lugaresiMediaPipeFrameworkBuilding2019, RTMPose @jiangRTMPoseRealTimeMultiPerson2023, and ViTPose @xuViTPoseSimpleVision2022. All other stages of the pipeline, including multi-camera synchronization, calibration, and triangulation, were held constant. Each trial therefore yielded three sets of 3D markerless data that differed only in the pose estimator used to generate the underlying 2D keypoints.
+Participants completed both a gait and balance assessment while being simultaneously recorded by the markerless and marker-based motion capture systems to characterize the ability of the markerless system to capture both dynamic and subtle movements (@fig-overview). Joint centers calculated from the marker-based data served as the reference for comparison. The markerless data were produced using a single FreeMoCap pipeline in which 2D pose estimation (the detection of body keypoints within each camera view) was treated as an interchangeable module. Each trial was processed separately using three pose estimation backends: MediaPipe @lugaresiMediaPipeFrameworkBuilding2019, RTMPose @jiangRTMPoseRealTimeMultiPerson2023, and ViTPose @xuViTPoseSimpleVision2022. All three reconstructions used the same synchronized camera recordings, camera calibration, and 3D reconstruction procedure; the pose estimation backend used to generate the underlying 2D keypoints was varied.
 
 #figure(
          image("figures/elife_methods_2.png", width:100%),
@@ -32,7 +32,7 @@ Participants completed two treadmill walking trials in which walking speed was p
 == Gait: Joint kinematics error 
 Sagittal-plane lower-body joint kinematics were calculated from gait cycle-normalized strides for each pose estimation backend and walking speed. Regions of significant difference between the markerless and marker-based joint angle trajectories were identified using statistical parametric mapping (SPM) two-tailed t-tests (@fig-joint-ang-spm). We also quantified joint angle error across joints, pose estimation backends, and walking speed using RMSE. 
 
-SPM paired t-tests ($ alpha = 0.05$) revealed common suprathreshold clusters during early stance at all three joints, with on backends. At the ankle, ViTPose-derived angles exhibited widespread differences spanning much of the gait cycle. At the hip and knee, MediaPipe-derived angles exhibited suprathreshold clusters whose magnitude and duration decreased as walking speed increased.
+SPM paired t-tests ($ alpha = 0.05$) identified significant differences between markerless and marker-based joint-angle trajectories across joints, pose-estimation backends, and walking speeds (Figure 3). MediaPipe-derived hip and knee angles exhibited recurring suprathreshold clusters, although their timing and magnitude varied with walking speed. At the ankle, ViTPose-derived angles showed particularly widespread suprathreshold differences across the gait cycle, consistent with the persistent plantarflexed offset observed in the joint angle trajectories.
  
 #figure(
   image("figures/gait/joint_angles_with_spm.svg", width: 100%),
@@ -40,17 +40,16 @@ SPM paired t-tests ($ alpha = 0.05$) revealed common suprathreshold clusters dur
  <fig-joint-ang-spm>
 
 
-Sagittal-plane joint angle RMSE remained below 5° for most conditions, with the primary exception of ViTPose-derived ankle angles at higher walking speeds (@tbl-joint-angle-rmse). These errors increased with speed at the knee and ankle, while hip angle error remained relatively stable. ViTPose produced the lowest hip and knee errors overall but showed a consistent plantarflexed offset at the ankle, whereas RTMPose produced the most accurate ankle angles.
-
+Sagittal-plane joint angle RMSE remained below 5° for most conditions, with larger errors occurring primarily at the ankle at higher walking speeds (@tbl-joint-angle-rmse). ViTPose ankle error exceeded 5° at 2.0 and 2.5 m/s, while MediaPipe knee and ankle errors exceeded 5° at 2.5 m/s. Errors generally increased with speed at the knee and ankle, while hip angle error remained relatively stable. ViTPose produced the lowest hip and knee errors overall but showed a consistent plantarflexed offset at the ankle, whereas RTMPose produced the lowest ankle angle errors.
 #include "tables/gait/joint_angle_rmse_table.typ"
 
 == Gait: Joint position error
 
 Reconstructed joint center position errors for each lower-limb joint, walking speed, axis, and pose estimation backend are summarized in @fig-rmse-grid. Full joint center trajectories for every joint, backend, and walking speed are shown along the mediolateral (#suppref("traj-x")), anteroposterior (#suppref("traj-y")), and vertical (#suppref("traj-z")) axes. Corresponding RMSE values are provided in #appendixtableref("rmse-x"), #appendixtableref("rmse-y"), and #appendixtableref("rmse-z").
 
-Joint-center RMSE was generally below 30 mm and was lowest in the mediolateral (ML) direction. Across joints, the hip exhibited the largest overall error, with an RMSE of approximately 20 mm in both the anteroposterior (AP) and vertical directions. However, hip error was largely unaffected by walking speed.
+Joint center RMSE was generally below 30 mm, although MediaPipe-derived AP errors at the ankle and toe exceeded 30 mm at the highest walking speeds. Error was lowest overall in the mediolateral (ML) direction. Across joints, the hip exhibited the largest overall error, with an RMSE of approximately 20 mm in both the anteroposterior (AP) and vertical directions. However, hip error was largely unaffected by walking speed.
 
-At more distal joints, error generally increased with walking speed, particularly in the AP and vertical directions, although this pattern varied across joints, axes, and pose estimation backends. For example, AP knee error decreased with speed for RTMPose and ViTPose-derived trajectories, while vertical ankle error remained relatively stable across speeds for all three backends.
+At more distal joints, error generally increased with walking speed, particularly in the AP and vertical directions, although this pattern varied across joints, axes, and pose estimation backends. The strongest speed dependence was observed for MediaPipe in the AP direction, where ankle and toe RMSE increased from 11.2 and 16.4 mm at 0.5 m/s to 37.5 and 40.2 mm at 2.5 m/s, respectively. In contrast, AP knee error decreased with speed for RTMPose and ViTPose-derived trajectories.
 
 Across pose estimation backends, RTMPose generally produced the lowest joint center trajectory error, whereas ViTPose produced the highest, particularly in the vertical direction. These differences were most pronounced at the ankle and toe, where ViTPose-derived trajectories showed a consistent vertical offset relative to the marker-based reference.
 
@@ -85,7 +84,7 @@ Across pose estimation backends, RTMPose generally produced the lowest joint cen
 
 Heel-strike and toe-off events were identified and used to calculate stance duration, swing duration, stride duration, stride length, and step length. Agreement with the marker-based reference was assessed for each parameter using Bland-Altman bias and 95% limits of agreement (LoA), together with intraclass correlation coefficients (ICC). ICC values below 0.50 were interpreted as poor agreement, values from 0.50 to 0.75 as moderate, values from 0.75 to 0.90 as good, and values above 0.90 as excellent.
 
-When pooled across walking speeds, spatiotemporal gait parameters showed minimal bias and excellent agreement with the marker-based reference (ICC > 0.90; @tbl-ba-gait-pooled). Across pose estimation backends, ViTPose-derived data produced near-zero bias for all parameters. RTMPose and ViTPose-derived data both showed relatively narrow LoA, whereas MediaPipe-derived data showed larger deviations and wider LoA.
+When pooled across walking speeds, spatiotemporal gait parameters showed minimal bias and generally excellent agreement with the marker-based reference (@tbl-ba-gait-pooled). Across pose estimation backends, ViTPose-derived data produced near-zero bias for all parameters. RTMPose and ViTPose-derived data both showed relatively narrow LoA, whereas MediaPipe-derived data showed larger deviations and wider LoA.
 
 #include "tables/gait/ba_gait_pooled.typ"
 
